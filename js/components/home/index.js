@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Image, View, StatusBar } from "react-native";
 
+import I18n from '../../../i18n/i18n';
+
 import { Container, Button, H3, Text, Header, Title, Body, Left, Right } from "native-base";
 
 import styles from "./styles";
@@ -11,7 +13,11 @@ const launchscreenLogo = require("../../../img/logo-kitchen-sink.png");
 class Home extends Component {
 	// eslint-disable-line
 
+    componentWillMount(){
+        I18n.initAsync();
+    }
 	render() {
+
 		return (
 			<Container>
 				<StatusBar barStyle="light-content" />
@@ -26,7 +32,7 @@ class Home extends Component {
 							backgroundColor: "transparent",
 						}}
 					>
-						<H3 style={styles.text}>App to showcase</H3>
+						<H3 style={styles.text}>{I18n.t('greeting')}</H3>
 						<View style={{ marginTop: 8 }} />
 						<H3 style={styles.text}>NativeBase components</H3>
 						<View style={{ marginTop: 8 }} />
@@ -44,5 +50,6 @@ class Home extends Component {
 		);
 	}
 }
+
 
 export default Home;

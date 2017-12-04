@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "color": "1.0.3",
+    "ex-react-native-i18n": "0.0.3",
     "expo": "19.0.1",
     "lodash": "4.13.1",
     "moment": "2.13.0",
