@@ -4,48 +4,37 @@ import { Image, View, StatusBar } from "react-native";
 import I18n from '../../../i18n/i18n';
 
 import { Container, Button, H3, Text, Header, Title, Body, Left, Right } from "native-base";
-
+import Login from "./login";
 import styles from "./styles";
 
-const launchscreenBg = require("../../../img/launchscreen-bg.png");
-const launchscreenLogo = require("../../../img/logo-kitchen-sink.png");
+// const launchscreenBg = require("../../../img/login_logo.png");
+const launchscreenLogo = require("../../../img/login_logo.png");
 
 class Home extends Component {
 	// eslint-disable-line
 
-    componentWillMount(){
-        I18n.initAsync();
-    }
+
 	render() {
 
 		return (
-			<Container>
+			<Container style={styles.loginContainer}>
 				<StatusBar barStyle="light-content" />
-				<Image source={launchscreenBg} style={styles.imageContainer}>
+				<View style={styles.imageContainer}>
+					<Image source={launchscreenLogo} style={styles.logo}></Image>
+				</View>
 					<View style={styles.logoContainer}>
-						<Image source={launchscreenLogo} style={styles.logo} />
+						<Login navigation={this.props.navigation}></Login>
 					</View>
-					<View
-						style={{
-							alignItems: "center",
-							marginBottom: 50,
-							backgroundColor: "transparent",
-						}}
-					>
-						<H3 style={styles.text}>{I18n.t('greeting')}</H3>
-						<View style={{ marginTop: 8 }} />
-						<H3 style={styles.text}>NativeBase components</H3>
-						<View style={{ marginTop: 8 }} />
-					</View>
-					<View style={{ marginBottom: 80 }}>
-						<Button
-							style={{ backgroundColor: "#6FAF98", alignSelf: "center" }}
-							onPress={() => this.props.navigation.navigate("DrawerOpen")}
-						>
-							<Text>Lets Go!</Text>
-						</Button>
-					</View>
-				</Image>
+
+					{/*<View style={{ marginBottom: 80 }}>*/}
+						{/*<Button*/}
+							{/*style={{ backgroundColor: "#6FAF98", alignSelf: "center" }}*/}
+							{/*onPress={() => this.props.navigation.navigate("DrawerOpen")}*/}
+						{/*>*/}
+							{/*<Text>Lets Go!</Text>*/}
+						{/*</Button>*/}
+					{/*</View>*/}
+
 			</Container>
 		);
 	}

@@ -6,6 +6,7 @@ import { DrawerNavigator } from "react-navigation";
 import Home from "./components/home/";
 import Header from "./components/Header/";
 import Anatomy from "./components/anatomy/";
+import MyAccount from "./components/myaccount/";
 import Footer from "./components/footer/";
 import NHBadge from "./components/badge/";
 import NHButton from "./components/button/";
@@ -39,6 +40,7 @@ import Actionsheet from "./components/actionsheet";
 const DrawerExample = DrawerNavigator(
   {
     Home: { screen: Home },
+    MyAccount: { screen: MyAccount },
     Anatomy: { screen: Anatomy },
     Header: { screen: Header },
     Footer: { screen: Footer },
