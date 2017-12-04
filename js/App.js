@@ -3,7 +3,7 @@
 import React from "react";
 
 import { Platform } from "react-native";
-import { Root } from "native-base";
+import { StyleProvider,Root } from "native-base";
 import { StackNavigator } from "react-navigation";
 
 import Drawer from "./Drawer";
@@ -78,6 +78,9 @@ import IconActionSheet from "./components/actionsheet/icon";
 import AdvSegment from "./components/segment/segmentTab";
 import SimpleDeck from "./components/deckswiper/simple";
 import AdvancedDeck from "./components/deckswiper/advanced";
+
+import getTheme from '../native-base-theme/components';
+import material from '../native-base-theme/variables/material';
 
 const AppNavigator = StackNavigator(
     {
@@ -175,5 +178,7 @@ const AppNavigator = StackNavigator(
 
 export default () =>
     <Root>
-        <AppNavigator />
+        <StyleProvider style={getTheme(material)}>
+                    <AppNavigator />
+        </StyleProvider>
     </Root>;

@@ -14,12 +14,8 @@ import {
     Right,
     Icon,
     Form,
-    StyleProvider,
     Text
 } from "native-base";
-
-import getTheme from '../../../native-base-theme/components';
-import material from '../../../native-base-theme/variables/material';
 
 import styles from "./styles";
 
@@ -27,7 +23,6 @@ class Login extends React.Component {
 
     render() {
         return (
-            <StyleProvider style={getTheme(material)}>
                 <Content>
                     <Form>
                         <Item>
@@ -42,7 +37,6 @@ class Login extends React.Component {
                         <Text>{I18n.t('login').toUpperCase()}</Text>
                     </Button>
                 </Content>
-            </StyleProvider>
         );
     }
 }
