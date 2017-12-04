@@ -13,10 +13,10 @@
         "ttf"
       ]
     },
-    "androidStatusBarColor": "#334393",
+    "androidStatusBarColor": "#d34b0c",
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#334393"
+      "backgroundColor": "#fce0d4"
     }
   }
 }
