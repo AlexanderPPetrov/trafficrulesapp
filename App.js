@@ -6,7 +6,8 @@ export default class App1 extends React.Component {
   constructor() {
     super();
     this.state = {
-      isReady: false
+      isReady: false,
+        data
     };
   }
 
@@ -17,8 +18,22 @@ export default class App1 extends React.Component {
       Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
     });
 
-    this.setState({ isReady: true });
+
+    this.getData()
   }
+
+  getData(){
+    return fetch('translations.json')
+        .then((response) => response.json())
+        .then((responseJson) => {
+            this.setState({data:})
+            this.setState({ isReady: true });
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+  }
+
   render() {
     if (!this.state.isReady) {
       return <Expo.AppLoading />;
