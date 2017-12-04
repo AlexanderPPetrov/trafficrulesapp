@@ -17,6 +17,7 @@ import {
     Text
 } from "native-base";
 
+import I18n from '/i18n/i18n';
 import styles from "./styles";
 
 class Login extends Component {
@@ -26,16 +27,16 @@ class Login extends Component {
                 <Content>
                     <Form>
                         <Item floatingLabel>
-                            <Label>Username</Label>
+                            <Label>{I18n.t('username')}</Label>
                             <Input />
                         </Item>
                         <Item floatingLabel last>
-                            <Label>Password</Label>
+                            <Label>{I18n.t('password')}</Label>
                             <Input />
                         </Item>
                     </Form>
                     <Button block style={{ margin: 15, marginTop: 50 }}>
-                        <Text>Sign In</Text>
+                        <Text>{I18n.t('login').toUpperCase()}</Text>
                     </Button>
                 </Content>
             </Container>
