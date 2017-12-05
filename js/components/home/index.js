@@ -9,6 +9,7 @@ import styles from "./styles";
 
 // const launchscreenBg = require("../../../img/login_logo.png");
 const launchscreenLogo = require("../../../img/login_logo.png");
+const avatar = require("../../../img/avatar.png");
 
 class Home extends Component {
 	// eslint-disable-line
@@ -21,10 +22,10 @@ class Home extends Component {
 				<StatusBar barStyle="light-content" />
 				<View style={styles.imageContainer}>
 					<Image source={launchscreenLogo} style={styles.logo}></Image>
+					<Image source={avatar} style={styles.avatar}></Image>
+					<Text style={styles.helloMessage}>Hello John!</Text>
 				</View>
-					<View style={styles.logoContainer}>
-						<Login navigation={this.props.navigation}></Login>
-					</View>
+					<Login navigation={this.props.navigation}></Login>
 
 					{/*<View style={{ marginBottom: 80 }}>*/}
 						{/*<Button*/}

@@ -1,6 +1,26 @@
 export default {
-    greeting: 'Halleluyah!',
     username: 'Username',
     password: 'Password',
-    login: 'Log in'
+    login: 'Log in',
+    myAccount: 'My Account',
+    accounts: 'Accounts',
+    brokerage: 'Brokerage',
+    deposit: 'Deposit',
+    withdraw: 'Withdraw',
+    fundsTransfer: 'Funds Transfer',
+    transactions: 'Transactions',
+    sendMoney: 'Send Money',
+    safeBalance: 'Safe Balance',
+    balances: 'Balances',
+    cashBalance: 'Cash Balance',
+    moneyInAccounts: 'Money In Accounts',
+    brokerageBalance: 'Brokerage Balance',
+    account: 'account',
+    previousBalances: 'previousBalances',
+    site: 'Site',
+    currency: 'Currency',
+    credit: 'Credit',
+    balance: 'Balance',
+    lastStatus: 'Last Status'
+
 };

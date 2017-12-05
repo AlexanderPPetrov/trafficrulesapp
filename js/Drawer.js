@@ -4,9 +4,15 @@ import React from "react";
 import { DrawerNavigator } from "react-navigation";
 
 import Home from "./components/home/";
+import MyAccount from "./components/myaccount/";
+import Accounts from "./components/accounts/";
+
+
+
+
+
 import Header from "./components/Header/";
 import Anatomy from "./components/anatomy/";
-import MyAccount from "./components/myaccount/";
 import Footer from "./components/footer/";
 import NHBadge from "./components/badge/";
 import NHButton from "./components/button/";
@@ -41,6 +47,7 @@ const DrawerExample = DrawerNavigator(
   {
     Home: { screen: Home },
     MyAccount: { screen: MyAccount },
+    Accounts: { screen: Accounts },
     Anatomy: { screen: Anatomy },
     Header: { screen: Header },
     Footer: { screen: Footer },

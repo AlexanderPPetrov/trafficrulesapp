@@ -19,169 +19,66 @@ import {
 } from "native-base";
 
 import styles from "./style";
+import I18n from '../../../i18n/i18n';
 
-const drawerCover = require("../../../img/drawer-cover.png");
+const drawerCover = require("../../../img/menu_cover.png");
 
-const drawerImage = require("../../../img/logo-kitchen-sink.png");
+const drawerImage = require("../../../img/menu_logo.png");
 
 const datas = [
 	{
-		name: "Anatomy",
-		route: "Anatomy",
+		name:  I18n.t('myAccount'),
+		route: "MyAccount",
 		icon: "phone-portrait",
 		bg: "#C5F442",
+        types: "8",
 	},
 	{
-		name: "Actionsheet",
-		route: "Actionsheet",
+		name: I18n.t('accounts'),
+		route: "Accounts",
 		icon: "easel",
 		bg: "#C5F442",
 	},
 	{
-		name: "Header",
-		route: "Header",
+		name: I18n.t('brokerage'),
+		route: "Brokerage",
 		icon: "phone-portrait",
 		bg: "#477EEA",
 		types: "8",
 	},
 	{
-		name: "Footer",
-		route: "Footer",
+		name: I18n.t('deposit'),
+		route: "Deposit",
 		icon: "phone-portrait",
 		bg: "#DA4437",
 		types: "4",
 	},
 	{
-		name: "Badge",
-		route: "NHBadge",
+		name: I18n.t('withdraw'),
+		route: "Withdraw",
 		icon: "notifications",
 		bg: "#4DCAE0",
 	},
 	{
-		name: "Button",
-		route: "NHButton",
+		name: I18n.t('fundsTransfer'),
+		route: "FundsTransfer",
 		icon: "radio-button-off",
 		bg: "#1EBC7C",
 		types: "9",
 	},
 	{
-		name: "Card",
-		route: "NHCard",
+		name: I18n.t('transactions'),
+		route: "Transactions",
 		icon: "keypad",
 		bg: "#B89EF5",
 		types: "5",
 	},
 	{
-		name: "Check Box",
-		route: "NHCheckbox",
+		name: I18n.t('sendMoney'),
+		route: "SendMoney",
 		icon: "checkmark-circle",
 		bg: "#EB6B23",
-	},
-	{
-		name: "Deck Swiper",
-		route: "NHDeckSwiper",
-		icon: "swap",
-		bg: "#3591FA",
-		types: "2",
-	},
-	{
-		name: "Fab",
-		route: "NHFab",
-		icon: "help-buoy",
-		bg: "#EF6092",
-		types: "2",
-	},
-	{
-		name: "Form & Inputs",
-		route: "NHForm",
-		icon: "call",
-		bg: "#EFB406",
-		types: "12",
-	},
-	{
-		name: "Icon",
-		route: "NHIcon",
-		icon: "information-circle",
-		bg: "#EF6092",
-	},
-	{
-		name: "Layout",
-		route: "NHLayout",
-		icon: "grid",
-		bg: "#9F897C",
-		types: "5",
-	},
-	{
-		name: "List",
-		route: "NHList",
-		icon: "lock",
-		bg: "#5DCEE2",
-		types: "7",
-	},
-	{
-		name: "ListSwipe",
-		route: "ListSwipe",
-		icon: "swap",
-		bg: "#C5F442",
-		types: "2",
-	},
-	{
-		name: "Picker",
-		route: "NHPicker",
-		icon: "arrow-dropdown",
-		bg: "#F50C75",
-	},
-	{
-		name: "Radio",
-		route: "NHRadio",
-		icon: "radio-button-on",
-		bg: "#6FEA90",
-	},
-	{
-		name: "SearchBar",
-		route: "NHSearchbar",
-		icon: "search",
-		bg: "#29783B",
-	},
-	{
-		name: "Segment",
-		route: "Segment",
-		icon: "menu",
-		bg: "#0A2C6B",
-		types: "2",
-	},
-	{
-		name: "Spinner",
-		route: "NHSpinner",
-		icon: "navigate",
-		bg: "#BE6F50",
-	},
-	{
-		name: "Tabs",
-		route: "NHTab",
-		icon: "home",
-		bg: "#AB6AED",
-		types: "3",
-	},
-	{
-		name: "Thumbnail",
-		route: "NHThumbnail",
-		icon: "image",
-		bg: "#cc0000",
-		types: "2",
-	},
-	{
-		name: "Toast",
-		route: "Toast",
-		icon: "albums",
-		bg: "#C5F442",
-	},
-	{
-		name: "Typography",
-		route: "NHTypography",
-		icon: "paper",
-		bg: "#48525D",
-	},
+	}
 ];
 
 class SideBar extends Component {

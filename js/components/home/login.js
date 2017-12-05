@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import I18n from '../../../i18n/i18n';
+import { View } from "react-native";
 import {
     Container,
     Header,
@@ -23,20 +24,20 @@ class Login extends React.Component {
 
     render() {
         return (
-                <Content>
-                    <Form>
-                        <Item>
-                            <Input placeholder={I18n.t('username')} style={styles.inputField}/>
+                <View>
+                    <Form >
+                        <Item style={styles.inputField}>
+                            <Input placeholder={I18n.t('username')} />
                         </Item>
-                        <Item last>
-                            <Input placeholder={I18n.t('password')} style={styles.inputField} />
+                        <Item style={styles.inputField}>
+                            <Input placeholder={I18n.t('password')} />
                         </Item>
                     </Form>
 
                     <Button block style={styles.loginButton} onPress={() => this.props.navigation.navigate("MyAccount")}>
                         <Text>{I18n.t('login').toUpperCase()}</Text>
                     </Button>
-                </Content>
+                </View>
         );
     }
 }

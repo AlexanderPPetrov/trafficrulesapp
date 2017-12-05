@@ -1,6 +1,6 @@
 {
-  "name": "NativebaseKitchenSink",
-  "version": "2.3.1",
+  "name": "PremiumTradings",
+  "version": "1.0.0",
   "private": true,
   "devDependencies": {
     "jest-expo": "19.0.5",

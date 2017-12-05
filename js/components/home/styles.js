@@ -14,10 +14,12 @@ export default {
     },
 
     inputField: {
-        backgroundColor:'#ffffff'
+        backgroundColor:'#ffffff',
+        marginRight:15
     },
-    logoContainer: {
+    formContainer: {
         flex: 1,
+        margin: 15,
         marginTop: deviceHeight / 8,
         marginBottom: 30
     },
@@ -27,14 +29,23 @@ export default {
         // top: Platform.OS === "android" ? 35 : 60,
         // width: 247,
         // height: 67
+        marginTop:30
     },
-    text: {
-        color: "#D8D8D8",
-        bottom: 6,
-        marginTop: 5
+    helloMessage: {
+        fontSize:20,
+        fontWeight:'bold',
+        marginBottom:30
     },
+
+    avatar: {
+        width:85,
+        height:85,
+        marginTop:15,
+        marginBottom:15
+    },
+
     loginButton:{
         margin: 15,
-        marginTop: 50
+        marginTop: 45
     }
 };

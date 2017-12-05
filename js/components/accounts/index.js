@@ -17,14 +17,12 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 
-import SafeBalance from "./safebalance";
-import Balance from "./balance";
-import BrokerageBalance from "./brokeragebalance";
+import SportAccount from "./sportaccount";
 import styles from "./styles";
 
-class MyAccount extends Component {
+class Accounts extends Component {
+
     render() {
-        console.log('my account')
         return (
             <Container style={styles.container}>
                 <Header>
@@ -37,18 +35,16 @@ class MyAccount extends Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Title>{I18n.t('myAccount')}</Title>
+                    <Title>{I18n.t('accounts')}</Title>
                     </Body>
                     <Right/>
 
                 </Header>
-                <SafeBalance></SafeBalance>
-                <Balance></Balance>
-                <BrokerageBalance></BrokerageBalance>
+                <SportAccount></SportAccount>
 
             </Container>
         );
     }
 }
 
-export default MyAccount;
+export default Accounts;
