@@ -17,7 +17,7 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 
-import SportAccount from "./sportaccount";
+import SportAccount from "./accountslist";
 import styles from "./styles";
 
 class Accounts extends Component {
@@ -40,7 +40,7 @@ class Accounts extends Component {
                     <Right/>
 
                 </Header>
-                <SportAccount></SportAccount>
+                <SportAccount navigation={this.props.navigation} ></SportAccount>
 
             </Container>
         );

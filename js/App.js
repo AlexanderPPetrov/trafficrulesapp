@@ -7,6 +7,13 @@ import { StyleProvider,Root } from "native-base";
 import { StackNavigator } from "react-navigation";
 
 import Drawer from "./Drawer";
+import Home from "./components/home/";
+import MyAccount from "./components/myaccount/";
+import Accounts from "./components/accounts/";
+import PreviousBalance from "./components/previousbalance/";
+
+
+
 import Header from "./components/Header/";
 import Header1 from "./components/Header/1";
 import Header2 from "./components/Header/2";
@@ -85,6 +92,12 @@ import material from '../native-base-theme/variables/material';
 const AppNavigator = StackNavigator(
     {
         Drawer: { screen: Drawer },
+        Home: {screen: Home},
+        MyAccount: {screen: MyAccount},
+        Accounts: {screen: Accounts},
+        PreviousBalance: {screen: PreviousBalance},
+
+
 
         Header1: { screen: Header1 },
         Header2: { screen: Header2 },
@@ -179,6 +192,6 @@ const AppNavigator = StackNavigator(
 export default () =>
     <Root>
         <StyleProvider style={getTheme(material)}>
-                    <AppNavigator />
+            <AppNavigator />
         </StyleProvider>
     </Root>;

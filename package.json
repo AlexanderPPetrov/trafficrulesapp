@@ -19,6 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^6.2.1",
     "color": "1.0.3",
     "ex-react-native-i18n": "0.0.3",
     "expo": "19.0.1",

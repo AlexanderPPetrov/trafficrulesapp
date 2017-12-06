@@ -16,11 +16,14 @@ export default {
     moneyInAccounts: 'Money In Accounts',
     brokerageBalance: 'Brokerage Balance',
     account: 'account',
-    previousBalances: 'previousBalances',
+    previousBalances: 'Previous Balances',
     site: 'Site',
+    username: 'Username',
     currency: 'Currency',
     credit: 'Credit',
     balance: 'Balance',
+    change: 'Change',
+    for: 'for',
     lastStatus: 'Last Status'
 
 };
