@@ -20,13 +20,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 
 import Balance from "./balance";
 import styles from "./styles";
-const resetAction = NavigationActions.reset({
-    index: 1,
-    actions: [
-        NavigationActions.navigate({ routeName: 'PreviousBalance'}),
-        NavigationActions.navigate({ routeName: 'Accounts'})
-    ]
-})
+
 const balanceData = {
     "_status": "success",
     "payload": {
@@ -47,12 +41,12 @@ class PreviousBalance extends Component {
             <Container style={styles.container}>
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => this.props.navigation.dispatch(resetAction)}>
+                        <Button transparent onPress={() => this.props.navigation.navigate('Accounts')}>
                             <Icon name="arrow-back" />
                         </Button>
                     </Left>
                     <Body>
-                    {/*<Title>{I18n.t('balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>*/}
+                    <Title>{I18n.t('balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>
                     </Body>
                     <Right/>
 

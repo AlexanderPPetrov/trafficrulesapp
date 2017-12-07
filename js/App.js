@@ -18,8 +18,8 @@ import material from '../native-base-theme/variables/material';
 
 const AppNavigator = StackNavigator(
     {
-        Drawer: { screen: Drawer },
         Home: {screen: Home},
+        Drawer: { screen: Drawer },
         MyAccount: {screen: MyAccount},
         Accounts: {screen: Accounts},
         PreviousBalance: {screen: PreviousBalance},
