@@ -38,10 +38,9 @@ export default {
     },
 
     avatar: {
-        width:85,
-        height:85,
         marginTop:15,
-        marginBottom:15
+        marginBottom:5,
+        color:'#f36523'
     },
 
     loginButton:{
