@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {View} from "react-native";
-import es6promise from 'es6-promise';
 import {
     Container,
     Header,
@@ -16,44 +15,42 @@ import {
     Right,
     Icon,
     Form,
-    Text
+    Text,
+    Toast
 } from "native-base";
 
 import styles from "./styles";
 import Api from "../../../Api";
-
-let loginData = {
-    username: 'test9070',
-    password: 'test9070'
-};
 
 class Login extends React.Component {
 
     constructor(props){
         super(props);
         this.state={
-            username:'',
-            password:''
+            username:'test9070',
+            password:'test9070',
+            showToast: false
         }
     }
 
-    error = (response) => {
-        console.log(response)
-    };
+
     login = () => {
         let loginData = {
             username: this.state.username,
             password: this.state.password,
         }
         console.log(loginData)
-        Api.req('login', loginData, this.loginSuccess, this.loginError)
-    };
 
-    loginError = (response) => {
-        console.log(response)
+        Api.post({
+            url:'login',
+            data: loginData,
+            success: this.loginSuccess
+        })
+
     };
 
     loginSuccess = (response) => {
+        console.log(response)
         this.props.navigation.navigate("MyAccount")
     };
     render() {
@@ -61,10 +58,10 @@ class Login extends React.Component {
             <View>
                 <Form>
                     <Item style={styles.inputContainer}>
-                        <Input placeholder={I18n.t('username')} onChangeText = {(newValue) => this.setState({username:newValue})}/>
+                        <Input placeholder={I18n.t('username')} value={this.state.username} onChangeText = {(newValue) => this.setState({username:newValue})}/>
                     </Item>
                     <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('password')} onChangeText = {(newValue) => this.setState({password:newValue})}/>
+                        <Input secureTextEntry={true} placeholder={I18n.t('password')} value={this.state.password} onChangeText = {(newValue) => this.setState({password:newValue})}/>
                     </Item>
                 </Form>
                 <Button block style={styles.loginButton} onPress={() =>

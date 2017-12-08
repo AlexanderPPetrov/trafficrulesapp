@@ -30,15 +30,6 @@ class Home extends Component {
 				</View>
 					<Login navigation={this.props.navigation}></Login>
 
-					{/*<View style={{ marginBottom: 80 }}>*/}
-						{/*<Button*/}
-							{/*style={{ backgroundColor: "#6FAF98", alignSelf: "center" }}*/}
-							{/*onPress={() => this.props.navigation.navigate("DrawerOpen")}*/}
-						{/*>*/}
-							{/*<Text>Lets Go!</Text>*/}
-						{/*</Button>*/}
-					{/*</View>*/}
-
 			</Container>
 		);
 	}

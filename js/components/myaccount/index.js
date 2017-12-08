@@ -21,10 +21,36 @@ import SafeBalance from "./safebalance";
 import Balance from "./balance";
 import BrokerageBalance from "./brokeragebalance";
 import styles from "./styles";
+import Api from "../../../Api";
 
 class MyAccount extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            _safe_balance: '',
+            _pending_balance: '',
+            _currency: ''
+        }
+    }
+
+    componentDidMount() {
+        Api.get({
+            url: 'get-member-details',
+            success: this.dataLoaded
+        })
+    }
+
+    dataLoaded = (response) => {
+        console.log('########################', this)
+        this.setState({
+            _safe_balance: response._safe_balance,
+            _currency: response._currency
+        })
+        console.log(response)
+    }
+
     render() {
-        console.log('my account')
         return (
             <Container style={styles.container}>
                 <Header>
@@ -42,7 +68,7 @@ class MyAccount extends Component {
                     <Right/>
 
                 </Header>
-                <SafeBalance></SafeBalance>
+                <SafeBalance data={this.state}></SafeBalance>
                 <Balance></Balance>
                 <BrokerageBalance></BrokerageBalance>
 
