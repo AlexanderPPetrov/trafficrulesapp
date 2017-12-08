@@ -13,9 +13,16 @@ export default {
         alignItems: 'center'
     },
 
-    inputField: {
+    inputContainer: {
         backgroundColor:'#ffffff',
         marginRight:15
+    },
+
+    inputField: {
+        flex:1,
+        borderWidth: 0,
+        fontSize:18,
+        lineHeight: 24,
     },
     formContainer: {
         flex: 1,

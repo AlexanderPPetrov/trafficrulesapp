@@ -20,7 +20,7 @@ const DrawerExample = DrawerNavigator(
         PreviousBalance: {screen: PreviousBalance},
     },
     {
-        initialRouteName: "MyAccount",
+        initialRouteName: "Home",
         contentOptions: {
             activeTintColor: "#e91e63"
         },

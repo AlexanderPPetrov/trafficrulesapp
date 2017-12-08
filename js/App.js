@@ -12,21 +12,17 @@ import MyAccount from "./components/myaccount/";
 import Accounts from "./components/accounts/";
 import PreviousBalance from "./components/previousbalance/";
 
-
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
 const AppNavigator = StackNavigator(
     {
         Home: {screen: Home},
-        Drawer: { screen: Drawer },
-        MyAccount: {screen: MyAccount},
-        Accounts: {screen: Accounts},
-        PreviousBalance: {screen: PreviousBalance},
+        Drawer: { screen: Drawer }
 
     },
     {
-        initialRouteName: "Drawer",
+        initialRouteName: "Home",
         headerMode: "none",
     }
 );

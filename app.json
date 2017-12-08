@@ -13,6 +13,7 @@
         "ttf"
       ]
     },
+    "privacy": "unlisted",
     "androidStatusBarColor": "#d34b0c",
     "androidStatusBar": {
       "barStyle": "light-content",
