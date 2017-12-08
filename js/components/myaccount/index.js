@@ -27,6 +27,7 @@ class MyAccount extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             _safe_balance: '',
             _pending_balance: '',
@@ -34,20 +35,17 @@ class MyAccount extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         Api.get({
             url: 'get-member-details',
             success: this.dataLoaded
         })
     }
 
-    dataLoaded = (response) => {
-        console.log('########################', this)
+    dataLoaded = (response) =>{
         this.setState({
-            _safe_balance: response._safe_balance,
-            _currency: response._currency
+            _safe_balance:response._safe_balance
         })
-        console.log(response)
     }
 
     render() {
@@ -68,7 +66,8 @@ class MyAccount extends Component {
                     <Right/>
 
                 </Header>
-                <SafeBalance data={this.state}></SafeBalance>
+                <Text>{this.state._safe_balance}</Text>
+                <SafeBalance _safe_balance={this.state._safe_balance} _currency={this.state._currency}></SafeBalance>
                 <Balance></Balance>
                 <BrokerageBalance></BrokerageBalance>
 

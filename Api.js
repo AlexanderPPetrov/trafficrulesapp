@@ -7,17 +7,17 @@ let auth = '';
 import { Toast } from "native-base";
 import I18n from './i18n/i18n';
 
-export default {
+let Api = {
 
-    post(opts = {}) {
-        this.executeRequest(opts, 'POST')
+    post: (opts = {}) => {
+        Api.executeRequest(opts, 'POST')
     },
 
-    get(opts = {}){
-        this.executeRequest(opts, 'GET')
+    get: (opts = {}) => {
+        Api.executeRequest(opts, 'GET')
     },
 
-    executeRequest(opts, type){
+    executeRequest: (opts, type) => {
         console.log(opts, type);
 
         if (!opts.url) {
@@ -28,7 +28,7 @@ export default {
             ...opts.data
         };
 
-        var _data = this.prepareData(data, type);
+        var _data = Api.prepareData(data, type);
 
         var _url = baseUrl + opts.url;
 
@@ -58,7 +58,7 @@ export default {
             });
     },
 
-    prepareData(data, type) {
+    prepareData: (data, type) => {
 
         let bodyData = null;
 
@@ -87,6 +87,7 @@ export default {
     }
 
 
-
-
 }
+
+
+export default Api;

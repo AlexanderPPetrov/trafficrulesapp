@@ -20,8 +20,7 @@ import {
 } from "native-base";
 
 import styles from "./styles";
-import Api from "../../../Api";
-
+import Api from '../../../Api';
 class Login extends React.Component {
 
     constructor(props){

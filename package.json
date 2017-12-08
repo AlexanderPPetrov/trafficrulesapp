@@ -28,6 +28,7 @@
     "moment": "2.13.0",
     "native-base": "2.3.1",
     "react": "16.0.0-alpha.12",
+    "react-autobind": "^1.0.6",
     "react-native": "0.46.4",
     "react-native-modalbox": "1.4.2",
     "react-native-scrollable-tab-view": "0.6.7",

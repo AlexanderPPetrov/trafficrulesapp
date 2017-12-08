@@ -9,6 +9,10 @@ import styles from "./styles";
 
 class SafeBalance extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     render() {
 
         return (
