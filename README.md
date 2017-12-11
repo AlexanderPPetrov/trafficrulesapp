@@ -17,9 +17,8 @@ Dev Api: [http://api-prmts.dev.cc/index.php/v1/](http://api-prmts.dev.cc/index.p
 
 Test User:
 
-username:`test9070`,
-
-password:`test9070`,
+username:`test9070`
+password:`test9070`
 
 ```
 npm install
