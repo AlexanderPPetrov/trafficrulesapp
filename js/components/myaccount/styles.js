@@ -33,14 +33,18 @@ export default {
     balanceLabel: {
         flex: 2,
         flexDirection: 'row',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        paddingTop:7,
+        paddingBottom:7
     },
 
     balanceValue: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        textAlign:'right'
+        textAlign:'right',
+        paddingTop:7,
+        paddingBottom:7
     },
 
     brokerageBalanceContainer: {

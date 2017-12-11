@@ -9,7 +9,7 @@ class ListItem extends Component {
             <Text style={styles.balanceLabel}>
                 {I18n.t(this.props.label)}
             </Text>
-            <Text style={styles.balanceValue}>
+            <Text style={[styles.balanceValue, styles[this.props.color]]}>
                 {this.props.value}
             </Text>
         </View>

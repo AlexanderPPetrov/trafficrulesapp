@@ -20,6 +20,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 
 import Balance from "./balance";
 import styles from "./styles";
+import Api from "../../../Api";
 
 const balanceData = {
     "_status": "success",
@@ -35,10 +36,39 @@ const balanceData = {
 };
 
 class PreviousBalance extends Component {
+   // get-account-balances
+   //  _id
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            _payload: {
+                balances:[]
+            }
+
+        }
+    }
+
+    componentDidMount = () => {
+        Api.get({
+            url: 'get-account-balances',
+            data:{
+                account_id: this.props.navigation.state.params._id
+            },
+            success: this.dataLoaded
+        })
+    }
+
+    dataLoaded = (response) =>{
+        this.setState({
+            _payload:response
+        })
+    }
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container>
                 <Header>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.navigate('Accounts')}>
@@ -51,7 +81,7 @@ class PreviousBalance extends Component {
                     <Right/>
 
                 </Header>
-                <Balance navigation={this.props.navigation} balance={balanceData.payload.balances} currency={balanceData.payload._currency}></Balance>
+                <Balance navigation={this.props.navigation} balance={this.state._payload.balances} currency={this.props.navigation.state.params._currency}></Balance>
             </Container>
         );
     }

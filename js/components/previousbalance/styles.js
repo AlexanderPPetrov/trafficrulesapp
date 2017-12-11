@@ -3,69 +3,58 @@ const React = require("react-native");
 const {StyleSheet} = React;
 
 export default {
-    balancePadding: {
-        paddingLeft:15,
-        paddingRight:15,
-        paddingTop:20,
-        paddingBottom:20
-    },
-    safeBalanceContainer: {
-        backgroundColor: "#fff",
-    },
-    balancesContainer: {
-        backgroundColor: "#fce0d4",
-    },
-
-    balanceView: {
-        borderBottomColor: '#fff',
-        borderBottomWidth: 1
+    container: {
+        backgroundColor:"#fff",
+        padding:20
     },
 
     headerContainer: {
-        backgroundColor:"#808080",
-        height:50,
+        paddingBottom:15,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    headerIcon: {
-        color:"#fff",
-        marginLeft:15
-    },
+
     headerLabel: {
-        color:"#fff",
-        fontSize:18,
-        marginLeft:7
+        color: "#222",
+        fontSize: 18,
     },
-    headerButton: {
-        height:30
+
+    balanceView: {
+        borderBottomColor: '#e4e4e4',
+        borderBottomWidth: 1,
+        paddingBottom:15,
+        marginBottom:15
     },
+
     balanceItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:15,
-        paddingRight:15,
-        paddingTop:7,
-        paddingBottom:7
+        paddingTop: 7,
+        paddingBottom: 7
     },
 
     balanceLabel: {
         flex: 5,
+        fontSize: 16,
         flexDirection: 'row',
-        fontWeight:'bold',
+        fontWeight: 'bold',
         justifyContent: 'flex-start'
     },
 
     balanceValue: {
         flex: 4,
+        fontSize: 16,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        textAlign:'left'
+        textAlign: 'left'
     },
 
-    brokerageBalanceContainer: {
-        backgroundColor: "#f36523",
+    balanceRed: {
+        color:'#f22f31'
     },
-    brokerageText: {
-        color:"#fff"
+    balanceGreen: {
+        color:'#0caf43'
     }
+
+
 };

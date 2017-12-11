@@ -29,9 +29,10 @@ class MyAccount extends Component {
         super(props);
 
         this.state = {
-            _safe_balance: '',
-            _pending_balance: '',
-            _currency: ''
+            _payload: {
+                balances:[]
+            }
+
         }
     }
 
@@ -44,7 +45,7 @@ class MyAccount extends Component {
 
     dataLoaded = (response) =>{
         this.setState({
-            _safe_balance:response._safe_balance
+            _payload:response
         })
     }
 
@@ -67,9 +68,9 @@ class MyAccount extends Component {
 
                 </Header>
                 <Text>{this.state._safe_balance}</Text>
-                <SafeBalance _safe_balance={this.state._safe_balance} _currency={this.state._currency}></SafeBalance>
-                <Balance></Balance>
-                <BrokerageBalance></BrokerageBalance>
+                <SafeBalance _safe_balance={this.state._payload._safe_balance} _currency={this.state._payload._currency}></SafeBalance>
+                <Balance balances={ this.state._payload.balances }></Balance>
+                <BrokerageBalance _brokerage_balance={this.state._payload._brokerage_balance} _currency={this.state._payload._brokerage_currency}></BrokerageBalance>
 
             </Container>
         );

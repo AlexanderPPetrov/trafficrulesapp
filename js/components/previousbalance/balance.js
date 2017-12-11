@@ -15,9 +15,21 @@ class Balance extends Component {
         let sectionsData = [];
         data.map((value) => {
             let section = {
-                _date: value._date,
+                _date_created: value._date_created,
+                balanceColor:'',
                 data: [value]
             };
+
+            if(value._change > 0.00){
+                section.balanceColor = 'balanceGreen'
+            }
+            if(value._change < 0.00){
+                section.balanceColor = 'balanceRed'
+            }
+
+
+            console.log(value._date_created)
+
             sectionsData.push(section)
         });
         return sectionsData;
@@ -25,19 +37,19 @@ class Balance extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={styles.container} >
                 <SectionList
                     sections={this.prepareData(this.props.balance)}
                     renderSectionHeader={({section}) =>
                         <View style={styles.headerContainer}>
-                            <Text style={styles.headerLabel}>{section._date}</Text>
+                            <Text style={styles.headerLabel}>{section._date_created}</Text>
                         </View>
                     }
 
                     renderItem={({item, section}) =>
                         <View key={section._id} style={styles.balanceView}>
                             <ListItem label={'balance'} value={item._balance + ' ' + this.props.currency}></ListItem>
-                            <ListItem label={'change'} value={item._change}></ListItem>
+                            <ListItem label={'change'} value={item._change} color={section.balanceColor}></ListItem>
                         </View>
                     }
 

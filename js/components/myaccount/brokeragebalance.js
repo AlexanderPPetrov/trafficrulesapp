@@ -15,7 +15,7 @@ class BrokerageBalance extends Component {
                     {I18n.t('brokerageBalance')}
                 </Text>
                 <Text style={styles.brokerageText}>
-                    12378.70 EUR
+                    {this.props._brokerage_balance} {this.props._currency}
                 </Text>
 
             </View>

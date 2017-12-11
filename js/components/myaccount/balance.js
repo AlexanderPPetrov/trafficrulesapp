@@ -3,15 +3,11 @@ import I18n from '../../../i18n/i18n';
 import {AppRegistry, SectionList, StyleSheet, Text, View} from 'react-native';
 
 import styles from "./styles";
+import ListItem from "./listitem";
 
-
-//TODO replace with real service data
-const balances = [
-    {_currency: 'EUR', _cash_balance: '625.00', _money_in_accounts: '1234'},
-    {_currency: 'USD', _cash_balance: '625.00', _money_in_accounts: '1234'},
-];
 
 class Balance extends Component {
+
 
     prepareData = (data) => {
         let sectionsData = [];
@@ -33,31 +29,14 @@ class Balance extends Component {
                 </Text>
 
                     <SectionList
-                        sections= {this.prepareData(balances)}
+                        sections= {this.prepareData(this.props.balances)}
 
                         renderSectionHeader={({section}) =>
                             <Text style={styles.balanceHeader}>{section.title}</Text>
 
                         }
                         renderItem={({item}) =>
-                            <View style={styles.balanceView}>
-                                <View style={styles.balanceItem}>
-                                    <Text style={styles.balanceLabel}>
-                                        {I18n.t('cashBalance')}
-                                    </Text>
-                                    <Text style={styles.balanceValue}>
-                                        {item._cash_balance}
-                                    </Text>
-                                </View>
-                                <View style={styles.balanceItem}>
-                                    <Text style={styles.balanceLabel}>
-                                        {I18n.t('moneyInAccounts')}
-                                    </Text>
-                                    <Text style={styles.balanceValue}>
-                                        {item._money_in_accounts}
-                                    </Text>
-                                </View>
-                            </View>
+                            <ListItem _cash_balance={item._cash_balance} _money_in_accounts={item._money_in_accounts}></ListItem>
                         }
 
                         keyExtractor={(item, index) => index}

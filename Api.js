@@ -35,6 +35,12 @@ let Api = {
 
         var _url = baseUrl + opts.url;
 
+        if (type == 'GET') {
+            _url = _url + '?' + Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
+        }
+
+        console.log(_url)
+
         return fetch(_url, _data)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -103,6 +109,7 @@ let Api = {
 
             requestData.body = bodyData;
         }
+
 
         return requestData
     }

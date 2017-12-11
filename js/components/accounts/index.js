@@ -19,8 +19,33 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 
 import SportAccount from "./accountslist";
 import styles from "./styles";
+import Api from "../../../Api";
+
 
 class Accounts extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            _payload: {
+                accounts:[]
+            }
+        }
+    }
+
+    componentDidMount = () => {
+        Api.get({
+            url: 'get-member-accounts',
+            success: this.dataLoaded
+        })
+    }
+
+    dataLoaded = (response) =>{
+        this.setState({
+            _payload:response
+        })
+    }
 
     render() {
         return (
@@ -40,7 +65,7 @@ class Accounts extends Component {
                     <Right/>
 
                 </Header>
-                <SportAccount navigation={this.props.navigation} ></SportAccount>
+                <SportAccount navigation={this.props.navigation} accounts={this.state._payload.accounts}></SportAccount>
 
             </Container>
         );
