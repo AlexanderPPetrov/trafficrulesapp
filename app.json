@@ -1,7 +1,7 @@
 {
   "expo": {
     "sdkVersion": "19.0.0",
-    "icon": "http://nativebase.io/assets/img/front-page-icon.png",
+    "icon": "./img/app_icon.png",
     "loading": {
       "hideExponentText": false,
       "backgroundImage": "./img/splashscreen.png"
@@ -13,10 +13,11 @@
         "ttf"
       ]
     },
+    "privacy": "unlisted",
     "androidStatusBarColor": "#d34b0c",
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#fce0d4"
+      "backgroundColor": "#d34b0c"
     }
   }
 }

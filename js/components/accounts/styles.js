@@ -21,26 +21,45 @@ export default {
         borderBottomWidth: 1
     },
 
+    headerContainer: {
+        backgroundColor:"#808080",
+        height:50,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    headerIcon: {
+        color:"#fff",
+        marginLeft:15
+    },
+    headerLabel: {
+        color:"#fff",
+        fontSize:18,
+        marginLeft:7
+    },
+    headerButton: {
+        height:30
+    },
     balanceItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-
-    balanceHeader: {
-        color:"#888"
+        paddingLeft:15,
+        paddingRight:15,
+        paddingTop:7,
+        paddingBottom:7
     },
 
     balanceLabel: {
-        flex: 2,
+        flex: 5,
         flexDirection: 'row',
+        fontWeight:'bold',
         justifyContent: 'flex-start'
     },
 
     balanceValue: {
-        flex: 1,
+        flex: 4,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        textAlign:'right'
+        textAlign:'left'
     },
 
     brokerageBalanceContainer: {

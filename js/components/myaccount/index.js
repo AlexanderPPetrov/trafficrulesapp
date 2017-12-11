@@ -1,59 +1,79 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
+import I18n from '../../../i18n/i18n';
 import {
-  Container,
-  Header,
-  Title,
-  Content,
-  Text,
-  H3,
-  Button,
-  Icon,
-  Footer,
-  FooterTab,
-  Left,
-  Right,
-  Body
+    Container,
+    Header,
+    Title,
+    Content,
+    Text,
+    H3,
+    Button,
+    Icon,
+    Footer,
+    FooterTab,
+    Left,
+    Right,
+    Body
 } from "native-base";
+import {Grid, Row, Col} from "react-native-easy-grid";
 
+import SafeBalance from "./safebalance";
+import Balance from "./balance";
+import BrokerageBalance from "./brokeragebalance";
 import styles from "./styles";
+import Api from "../../../Api";
 
 class MyAccount extends Component {
-  render() {
-    return (
-      <Container style={styles.container}>
-        <Header>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate("DrawerOpen")}
-            >
-              <Icon name="ios-menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right />
 
-        </Header>
+    constructor(props) {
+        super(props);
 
-        <Content padder>
-          <Text>
-            Content goes here
-          </Text>
+        this.state = {
+            _safe_balance: '',
+            _pending_balance: '',
+            _currency: ''
+        }
+    }
 
-        </Content>
+    componentDidMount = () => {
+        Api.get({
+            url: 'get-member-details',
+            success: this.dataLoaded
+        })
+    }
 
-        <Footer>
-          <FooterTab>
-            <Button active full>
-              <Text>Footer</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
-    );
-  }
+    dataLoaded = (response) =>{
+        this.setState({
+            _safe_balance:response._safe_balance
+        })
+    }
+
+    render() {
+        return (
+            <Container style={styles.container}>
+                <Header>
+                    <Left>
+                        <Button
+                            transparent
+                            onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                        >
+                            <Icon name="ios-menu"/>
+                        </Button>
+                    </Left>
+                    <Body>
+                    <Title>{I18n.t('myAccount')}</Title>
+                    </Body>
+                    <Right/>
+
+                </Header>
+                <Text>{this.state._safe_balance}</Text>
+                <SafeBalance _safe_balance={this.state._safe_balance} _currency={this.state._currency}></SafeBalance>
+                <Balance></Balance>
+                <BrokerageBalance></BrokerageBalance>
+
+            </Container>
+        );
+    }
 }
 
 export default MyAccount;

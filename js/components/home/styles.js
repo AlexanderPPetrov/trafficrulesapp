@@ -13,11 +13,20 @@ export default {
         alignItems: 'center'
     },
 
-    inputField: {
-        backgroundColor:'#ffffff'
+    inputContainer: {
+        backgroundColor:'#ffffff',
+        marginRight:15
     },
-    logoContainer: {
+
+    inputField: {
+        flex:1,
+        borderWidth: 0,
+        fontSize:18,
+        lineHeight: 24,
+    },
+    formContainer: {
         flex: 1,
+        margin: 15,
         marginTop: deviceHeight / 8,
         marginBottom: 30
     },
@@ -27,14 +36,22 @@ export default {
         // top: Platform.OS === "android" ? 35 : 60,
         // width: 247,
         // height: 67
+        marginTop:30
     },
-    text: {
-        color: "#D8D8D8",
-        bottom: 6,
-        marginTop: 5
+    helloMessage: {
+        fontSize:20,
+        fontWeight:'bold',
+        marginBottom:30
     },
+
+    avatar: {
+        marginTop:15,
+        marginBottom:5,
+        color:'#f36523'
+    },
+
     loginButton:{
         margin: 15,
-        marginTop: 50
+        marginTop: 45
     }
 };

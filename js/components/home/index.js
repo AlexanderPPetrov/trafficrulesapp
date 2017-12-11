@@ -7,8 +7,11 @@ import { Container, Button, H3, Text, Header, Title, Body, Left, Right } from "n
 import Login from "./login";
 import styles from "./styles";
 
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+
 // const launchscreenBg = require("../../../img/login_logo.png");
 const launchscreenLogo = require("../../../img/login_logo.png");
+
 
 class Home extends Component {
 	// eslint-disable-line
@@ -21,19 +24,11 @@ class Home extends Component {
 				<StatusBar barStyle="light-content" />
 				<View style={styles.imageContainer}>
 					<Image source={launchscreenLogo} style={styles.logo}></Image>
-				</View>
-					<View style={styles.logoContainer}>
-						<Login navigation={this.props.navigation}></Login>
-					</View>
+					<MaterialCommunityIcons name="account-box" size={100} style={styles.avatar}></MaterialCommunityIcons>
 
-					{/*<View style={{ marginBottom: 80 }}>*/}
-						{/*<Button*/}
-							{/*style={{ backgroundColor: "#6FAF98", alignSelf: "center" }}*/}
-							{/*onPress={() => this.props.navigation.navigate("DrawerOpen")}*/}
-						{/*>*/}
-							{/*<Text>Lets Go!</Text>*/}
-						{/*</Button>*/}
-					{/*</View>*/}
+					<Text style={styles.helloMessage}>Hello John!</Text>
+				</View>
+					<Login navigation={this.props.navigation}></Login>
 
 			</Container>
 		);

@@ -1,234 +1,152 @@
-import React, { Component } from "react";
-import { Image } from "react-native";
+import React, {Component} from "react";
+import {Image} from "react-native";
 
 import {
-	Content,
-	Text,
-	List,
-	ListItem,
-	Icon,
-	Container,
-	Left,
-	Right,
-	Badge,
-	Button,
-	View,
-	StyleProvider,
-	getTheme,
-	variables,
+    Content,
+    Text,
+    List,
+    ListItem,
+    Icon,
+    Container,
+    Left,
+    Right,
+    Badge,
+    Button,
+    View,
+    StyleProvider,
+    getTheme,
+    variables,
 } from "native-base";
 
 import styles from "./style";
+import I18n from '../../../i18n/i18n';
 
-const drawerCover = require("../../../img/drawer-cover.png");
+const drawerCover = require("../../../img/menu_cover.png");
 
-const drawerImage = require("../../../img/logo-kitchen-sink.png");
+const drawerImage = require("../../../img/menu_logo.png");
 
 const datas = [
-	{
-		name: "Anatomy",
-		route: "Anatomy",
-		icon: "phone-portrait",
-		bg: "#C5F442",
-	},
-	{
-		name: "Actionsheet",
-		route: "Actionsheet",
-		icon: "easel",
-		bg: "#C5F442",
-	},
-	{
-		name: "Header",
-		route: "Header",
-		icon: "phone-portrait",
-		bg: "#477EEA",
-		types: "8",
-	},
-	{
-		name: "Footer",
-		route: "Footer",
-		icon: "phone-portrait",
-		bg: "#DA4437",
-		types: "4",
-	},
-	{
-		name: "Badge",
-		route: "NHBadge",
-		icon: "notifications",
-		bg: "#4DCAE0",
-	},
-	{
-		name: "Button",
-		route: "NHButton",
-		icon: "radio-button-off",
-		bg: "#1EBC7C",
-		types: "9",
-	},
-	{
-		name: "Card",
-		route: "NHCard",
-		icon: "keypad",
-		bg: "#B89EF5",
-		types: "5",
-	},
-	{
-		name: "Check Box",
-		route: "NHCheckbox",
-		icon: "checkmark-circle",
-		bg: "#EB6B23",
-	},
-	{
-		name: "Deck Swiper",
-		route: "NHDeckSwiper",
-		icon: "swap",
-		bg: "#3591FA",
-		types: "2",
-	},
-	{
-		name: "Fab",
-		route: "NHFab",
-		icon: "help-buoy",
-		bg: "#EF6092",
-		types: "2",
-	},
-	{
-		name: "Form & Inputs",
-		route: "NHForm",
-		icon: "call",
-		bg: "#EFB406",
-		types: "12",
-	},
-	{
-		name: "Icon",
-		route: "NHIcon",
-		icon: "information-circle",
-		bg: "#EF6092",
-	},
-	{
-		name: "Layout",
-		route: "NHLayout",
-		icon: "grid",
-		bg: "#9F897C",
-		types: "5",
-	},
-	{
-		name: "List",
-		route: "NHList",
-		icon: "lock",
-		bg: "#5DCEE2",
-		types: "7",
-	},
-	{
-		name: "ListSwipe",
-		route: "ListSwipe",
-		icon: "swap",
-		bg: "#C5F442",
-		types: "2",
-	},
-	{
-		name: "Picker",
-		route: "NHPicker",
-		icon: "arrow-dropdown",
-		bg: "#F50C75",
-	},
-	{
-		name: "Radio",
-		route: "NHRadio",
-		icon: "radio-button-on",
-		bg: "#6FEA90",
-	},
-	{
-		name: "SearchBar",
-		route: "NHSearchbar",
-		icon: "search",
-		bg: "#29783B",
-	},
-	{
-		name: "Segment",
-		route: "Segment",
-		icon: "menu",
-		bg: "#0A2C6B",
-		types: "2",
-	},
-	{
-		name: "Spinner",
-		route: "NHSpinner",
-		icon: "navigate",
-		bg: "#BE6F50",
-	},
-	{
-		name: "Tabs",
-		route: "NHTab",
-		icon: "home",
-		bg: "#AB6AED",
-		types: "3",
-	},
-	{
-		name: "Thumbnail",
-		route: "NHThumbnail",
-		icon: "image",
-		bg: "#cc0000",
-		types: "2",
-	},
-	{
-		name: "Toast",
-		route: "Toast",
-		icon: "albums",
-		bg: "#C5F442",
-	},
-	{
-		name: "Typography",
-		route: "NHTypography",
-		icon: "paper",
-		bg: "#48525D",
-	},
+    {
+        name: I18n.t('myAccount'),
+        route: "MyAccount",
+        icon: "ios-person",
+        bg: "#C5F442"
+    },
+    {
+        name: I18n.t('accounts'),
+        route: "Accounts",
+        icon: "ios-people",
+        bg: "#C5F442",
+    },
+    {
+        name: I18n.t('brokerage'),
+        route: "Brokerage",
+        icon: "ios-briefcase-outline",
+        bg: "#477EEA",
+    },
+    {
+        name: I18n.t('deposit'),
+        route: "Deposit",
+        icon: "ios-card",
+        bg: "#DA4437",
+    },
+    {
+        name: I18n.t('withdraw'),
+        route: "Withdraw",
+        icon: "ios-cash-outline",
+        bg: "#4DCAE0",
+    },
+    {
+        name: I18n.t('fundsTransfer'),
+        route: "FundsTransfer",
+        icon: "ios-swap",
+        bg: "#1EBC7C",
+    },
+    {
+        name: I18n.t('transactions'),
+        route: "Transactions",
+        icon: "ios-list-box-outline",
+        bg: "#B89EF5",
+    },
+    {
+        name: I18n.t('sendMoney'),
+        route: "SendMoney",
+        icon: "ios-share-alt-outline",
+        bg: "#EB6B23",
+    }
 ];
 
-class SideBar extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			shadowOffsetWidth: 1,
-			shadowRadius: 4,
-		};
-	}
 
-	render() {
-		return (
-			<Container>
-				<Content bounces={false} style={{ flex: 1, backgroundColor: "#fff", top: -1 }}>
-					<Image source={drawerCover} style={styles.drawerCover}>
-						<Image square style={styles.drawerImage} source={drawerImage} />
-					</Image>
-					<List
-						dataArray={datas}
-						renderRow={data =>
-							<ListItem button noBorder onPress={() => this.props.navigation.navigate(data.route)}>
-								<Left>
-									<Icon active name={data.icon} style={{ color: "#777", fontSize: 26, width: 30 }} />
-									<Text style={styles.text}>
-										{data.name}
-									</Text>
-								</Left>
-								{data.types &&
-									<Right style={{ flex: 1 }}>
-										<Badge
-											style={{
-												borderRadius: 3,
-												height: 25,
-												width: 72,
-												backgroundColor: data.bg,
-											}}
-										>
-											<Text style={styles.badgeText}>{`${data.types} Types`}</Text>
-										</Badge>
-									</Right>}
-							</ListItem>}
-					/>
-				</Content>
-			</Container>
-		);
-	}
+// {
+//     name: I18n.t('transactions'),
+//         route: "Transactions",
+//     icon: "ios-list-box-outline",
+//     bg: "#B89EF5",
+//     types: "5",
+// },
+
+class SideBar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            shadowOffsetWidth: 1,
+            shadowRadius: 4,
+        };
+    }
+
+    iconStyle = (icon) => {
+        console.log(icon)
+        let marginLeft = 0,
+            marginRight = 0
+        if(icon == 'ios-person'){
+            marginLeft = 4,
+            marginRight = -4
+        }
+        return {
+            color: "#777",
+            fontSize: 26,
+            width: 30,
+            marginLeft: marginLeft,
+            marginRight: marginRight
+        }
+    };
+
+    render() {
+        return (
+            <Container>
+                <Content bounces={false} style={{flex: 1, backgroundColor: "#fff", top: -1}}>
+                    <Image source={drawerCover} style={styles.drawerCover}>
+                        <Image square style={styles.drawerImage} source={drawerImage}/>
+                    </Image>
+                    <List
+                        dataArray={datas}
+                        renderRow={data =>
+                            <ListItem button noBorder onPress={() => this.props.navigation.navigate(data.route)}>
+                                <Left>
+                                    <Icon active name={data.icon} style={this.iconStyle(data.icon)}/>
+                                    <Text style={styles.text}>
+                                        {data.name}
+                                    </Text>
+                                </Left>
+                                {data.types &&
+                                <Right style={{flex: 1}}>
+                                    <Badge
+                                        style={{
+                                            borderRadius: 3,
+                                            height: 25,
+                                            width: 72,
+                                            backgroundColor: data.bg,
+                                        }}
+                                    >
+                                        <Text style={styles.badgeText}>{`${data.types} Types`}</Text>
+                                    </Badge>
+                                </Right>}
+                            </ListItem>}
+                    />
+                </Content>
+            </Container>
+        );
+    }
 }
 
 export default SideBar;
