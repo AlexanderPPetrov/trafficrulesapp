@@ -2,9 +2,12 @@ import FormData from 'FormData';
 
 const baseUrl = 'http://api-prmts.dev.cc/index.php/v1/';
 const appKey = '122$sads1CCssa@$%AScccaas552112';
+import fetch from 'react-native-fetch-polyfill';
+import {Alert} from 'react-native';
+
 let auth = '';
 
-import { Toast } from "native-base";
+import {Toast} from "native-base";
 import I18n from './i18n/i18n';
 
 let Api = {
@@ -36,27 +39,45 @@ let Api = {
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson)
-                if(opts.success && responseJson._status == 'success'){
-                    if(opts.url == 'login'){
-                        auth =  responseJson._payload._userLoginHash;
+                if (opts.success && responseJson._status == 'success') {
+                    if (opts.url == 'login') {
+                        auth = responseJson._payload._userLoginHash;
                     }
                     opts.success(responseJson._payload)
-                }else{
+                } else {
+
+                    let message = I18n.t(responseJson._payload._message)
+                    if (responseJson._payload._code == 404) {
+                        message = responseJson._payload._message
+                    }
                     Toast.show({
-                        text: I18n.t(responseJson._payload._message),
+                        text: message,
                         buttonText: I18n.t('ok')
                     })
                 }
-                if(responseJson._status == 'error' && opts.error){
+                if (responseJson._status == 'error' && opts.error) {
                     opts.error(responseJson._payload._message)
 
                 }
             })
             .catch((error) => {
-                console.error(error);
+
+                let message = error.message;
+                if (message == 'Network request failed') {
+                    message = I18n.t('error_timeout')
+                }
+
+                Alert.alert(
+                    I18n.t('error_title'),
+                    message,
+                    [
+                        {text: 'OK'},
+                    ]
+                )
 
             });
     },
+
 
     prepareData: (data, type) => {
 
@@ -70,10 +91,11 @@ let Api = {
                 'App-Key': appKey,
                 'Accept-Language': 'en-US,en;q=0.5',
                 'Authorization': auth
-            }
+            },
+            timeout: 20 * 1000
         };
 
-        if(type == 'POST'){
+        if (type == 'POST') {
             bodyData = new FormData();
             Object.keys(data).map(function (key) {
                 bodyData.append(key, data[key]);
