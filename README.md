@@ -7,8 +7,6 @@ A mobile application for premium tradings
 >2. Deployment with - **[Expo](https://expo.io/)**
 >3. UI Library Components in project from **[NativeBase](http://docs.nativebase.io/Components.html#Components)**
 
->Find the installation guide in `ReadMe` of appropriate branches
-
 Preview App at:
 ![Dev Deployment](https://expo.io/@alexppetrov/0213e570e52148c67cde8af51fef384d61456121)
 
