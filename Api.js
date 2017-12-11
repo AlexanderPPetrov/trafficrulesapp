@@ -82,7 +82,6 @@ let Api = {
             requestData.body = bodyData;
         }
 
-
         return requestData
     }
 
