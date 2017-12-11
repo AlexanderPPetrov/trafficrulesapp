@@ -8,7 +8,7 @@ A mobile application for premium tradings
 >3. UI Library Components in project from **[NativeBase](http://docs.nativebase.io/Components.html#Components)**
 
 Preview App at:
-![Dev Deployment](https://expo.io/@alexppetrov/0213e570e52148c67cde8af51fef384d61456121)
+[Dev Deployment](https://expo.io/@alexppetrov/0213e570e52148c67cde8af51fef384d61456121)
 
 Download [Expo tools](https://docs.expo.io/versions/latest/introduction/installation.html).
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
