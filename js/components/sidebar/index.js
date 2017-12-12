@@ -52,7 +52,7 @@ const datas = [
     },
     {
         name: I18n.t('withdraw'),
-        route: "Withdraw",
+        route: "WithdrawOne",
         icon: "ios-cash-outline",
         bg: "#4DCAE0",
     },

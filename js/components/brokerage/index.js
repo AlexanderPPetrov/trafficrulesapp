@@ -15,22 +15,18 @@ import {
     Right,
     Body
 } from "native-base";
-import {Grid, Row, Col} from "react-native-easy-grid";
 
-import SafeBalance from "./safebalance";
-import Balance from "./balance";
-import BrokerageBalance from "./brokeragebalance";
 import styles from "./styles";
 import Api from "../../../Api";
 
-class MyAccount extends Component {
+class Brokerage extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             _payload: {
-                balances:[]
+                transactions:[]
             }
 
         }
@@ -38,7 +34,7 @@ class MyAccount extends Component {
 
     componentDidMount = () => {
         Api.get({
-            url: 'get-member-details',
+            url: 'get-member-transactions',
             success: this.dataLoaded
         })
     }
@@ -62,21 +58,15 @@ class MyAccount extends Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Title>{I18n.t('myAccount')}</Title>
+                    <Title>{I18n.t('brokerage')}</Title>
                     </Body>
                     <Right/>
 
                 </Header>
-                <Text>{this.state._safe_balance}</Text>
-                <SafeBalance _safe_balance={this.state._payload._safe_balance} _currency={this.state._payload._currency}></SafeBalance>
-                <Balance balances={ this.state._payload.balances }></Balance>
 
-                <Footer>
-                    <BrokerageBalance _brokerage_balance={this.state._payload._brokerage_balance} _currency={this.state._payload._brokerage_currency}></BrokerageBalance>
-                </Footer>
             </Container>
         );
     }
 }
 
-export default MyAccount;
+export default Brokerage;

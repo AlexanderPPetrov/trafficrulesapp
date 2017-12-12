@@ -15,22 +15,23 @@ import {
     Right,
     Body
 } from "native-base";
-import {Grid, Row, Col} from "react-native-easy-grid";
 
-import SafeBalance from "./safebalance";
-import Balance from "./balance";
-import BrokerageBalance from "./brokeragebalance";
+import { Form,
+    Separator,InputField, LinkField,
+    SwitchField, PickerField,DatePickerField,TimePickerField
+} from 'react-native-form-generator';
+
 import styles from "./styles";
 import Api from "../../../Api";
 
-class MyAccount extends Component {
+class WithdrawFive extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             _payload: {
-                balances:[]
+                paymentMethods:[]
             }
 
         }
@@ -38,7 +39,7 @@ class MyAccount extends Component {
 
     componentDidMount = () => {
         Api.get({
-            url: 'get-member-details',
+            url: 'get-member-payment-options',
             success: this.dataLoaded
         })
     }
@@ -48,6 +49,15 @@ class MyAccount extends Component {
             _payload:response
         })
     }
+
+    prepareData = (data) => {
+        let selectData = {
+        };
+        data.map((value) => {
+            selectData[value._key] = value._caption
+        });
+        return selectData;
+    };
 
     render() {
         return (
@@ -62,21 +72,20 @@ class MyAccount extends Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Title>{I18n.t('myAccount')}</Title>
+                    <Title>{I18n.t('withdraw')}</Title>
                     </Body>
                     <Right/>
 
                 </Header>
-                <Text>{this.state._safe_balance}</Text>
-                <SafeBalance _safe_balance={this.state._payload._safe_balance} _currency={this.state._payload._currency}></SafeBalance>
-                <Balance balances={ this.state._payload.balances }></Balance>
+                <Content>
+                    <Text>{I18n.t('confirmation')}</Text>
 
-                <Footer>
-                    <BrokerageBalance _brokerage_balance={this.state._payload._brokerage_balance} _currency={this.state._payload._brokerage_currency}></BrokerageBalance>
-                </Footer>
+                </Content>
+
+
             </Container>
         );
     }
 }
 
-export default MyAccount;
+export default WithdrawFive;

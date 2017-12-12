@@ -1,6 +1,6 @@
 import FormData from 'FormData';
 
-const baseUrl = 'http://api-prmts.dev.cc/index.php/v1/';
+const baseUrl = 'http://api-prmts.dev.cc/v1/';
 const appKey = '122$sads1CCssa@$%AScccaas552112';
 import fetch from 'react-native-fetch-polyfill';
 import {Alert} from 'react-native';
@@ -35,7 +35,7 @@ let Api = {
 
         var _url = baseUrl + opts.url;
 
-        if (type == 'GET') {
+        if (type == 'GET' && Object.keys(data).length > 0) {
             _url = _url + '?' + Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
         }
 
