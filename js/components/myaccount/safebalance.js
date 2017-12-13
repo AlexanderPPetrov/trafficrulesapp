@@ -4,6 +4,7 @@ import {View} from "react-native";
 import {
     Text
 } from "native-base";
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 import styles from "./styles";
 
@@ -16,14 +17,20 @@ class SafeBalance extends Component {
     render() {
 
         return (
-            <View style={[styles.balancePadding, styles.safeBalanceContainer]}>
+            <View style={[styles.mainBalance, styles.safeBalance]}>
 
-                <Text>
-                    {I18n.t('safeBalance')}
-                </Text>
-                <Text>
-                    {this.props._safe_balance} {this.props._currency}
-                </Text>
+                <Grid>
+                    <Row>
+                        <Text style={styles.mainBalanceLabel}>
+                            {I18n.t('safeBalance')}
+                        </Text>
+                    </Row>
+                    <Row>
+                        <Text style={styles.mainBalanceValue}>
+                            {this.props._safe_balance} {this.props._currency}
+                        </Text>
+                    </Row>
+                </Grid>
 
             </View>
         );

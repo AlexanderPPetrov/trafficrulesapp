@@ -28,6 +28,7 @@ export default {
     transactions: 'Transactions',
     sendMoney: 'Send Money',
     to: 'To',
+    mainBalance:'Main Balance',
     safeBalance: 'Safe Balance',
     balances: 'Balances',
     cashBalance: 'Cash Balance',
@@ -35,13 +36,13 @@ export default {
     brokerageBalance: 'Brokerage Balance',
     account: 'account',
     previousBalances: 'Previous Balances',
-    site: 'Site',
-    username: 'Username',
-    currency: 'Currency',
-    credit: 'Credit',
-    balance: 'Balance',
+    _site: 'Site',
+    _username: 'Username',
+    _currency: 'Currency',
+    _credit: 'Credit',
+    _balance: 'Balance',
+    _last_status: 'Last Status',
     change: 'Change',
     for: 'for',
-    lastStatus: 'Last Status'
 
 };

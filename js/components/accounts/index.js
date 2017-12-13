@@ -66,7 +66,6 @@ class Accounts extends Component {
 
                 </Header>
                 <SportAccount navigation={this.props.navigation} accounts={this.state._payload.accounts}></SportAccount>
-
             </Container>
         );
     }

@@ -13,7 +13,6 @@ export default {
         backgroundColor: "#fff",
     },
     balancesContainer: {
-        backgroundColor: "#fce0d4",
         paddingBottom:100
     },
 

@@ -9,11 +9,42 @@ export default {
         paddingTop:20,
         paddingBottom:20
     },
-    safeBalanceContainer: {
+    mainBalanceContainer: {
         backgroundColor: "#fff",
     },
+
+    cardHeader: {
+        paddingLeft: 10,
+        paddingTop:5
+    },
+    cardBody: {
+        flexDirection: 'row',
+        flex: 1,
+        padding:5
+    },
+    mainBalanceLabel: {
+        color:"#fff",
+    },
+    mainBalanceValue: {
+        color:"#fff",
+        fontWeight:'bold',
+        fontSize:22
+    },
+    mainBalance: {
+        padding:10,
+        margin: 5,
+        flex: 1,
+        flexDirection: 'row',
+        borderRadius: 3
+    },
+    safeBalance:{
+        backgroundColor: "#1baf63",
+    },
+    brokerageBalance: {
+        backgroundColor: "#fd9a2c"
+    },
+
     balancesContainer: {
-        backgroundColor: "#fce0d4",
         paddingBottom:100
     },
 
@@ -22,18 +53,13 @@ export default {
         borderBottomWidth: 1
     },
 
-
-
     balanceHeader: {
         color:"#888"
     },
 
     listItem: {
-        backgroundColor:'red',
         flex:1,
         flexDirection: 'row',
-        // alignSelf: 'stretch',
-        // justifyContent: 'space-between',
     },
 
     balanceItem: {
@@ -51,18 +77,9 @@ export default {
     },
 
     balanceValue: {
-        flex: 1,
-        flexDirection: 'row',
         justifyContent: 'flex-end',
-        textAlign:'right',
-        paddingTop:7,
-        paddingBottom:7
     },
 
-    brokerageBalanceContainer: {
-        backgroundColor: "#f36523",
-    },
-    brokerageText: {
-        color:"#fff"
-    }
+
+
 };

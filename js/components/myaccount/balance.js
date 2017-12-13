@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import {AppRegistry, SectionList, StyleSheet,  View, ScrollView} from 'react-native';
+import {AppRegistry, SectionList, StyleSheet, View, ScrollView} from 'react-native';
 
 import styles from "./styles";
-import ListItem from "./listitem";
-import {Container, Header, Content, Card, CardItem, Text, Icon, Right} from 'native-base';
+import BalanceItem from "./balanceitem";
+import {Container, Header, Content, Card, CardItem, Text, Icon, Right, List} from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 class Balance extends Component {
 
@@ -23,50 +24,29 @@ class Balance extends Component {
 
 
     getListItem = (balance, i) => {
-        return <ListItem key={i} _cash_balance={balance._cash_balance} _money_in_accounts={balance._money_in_accounts} _currency={balance._currency}></ListItem>;
+        return <BalanceItem key={i} _cash_balance={balance._cash_balance} _money_in_accounts={balance._money_in_accounts}
+                         _currency={balance._currency}></BalanceItem>;
     };
 
     balanceList = () => {
         const listItems = this.props.balances.map((balance, i) =>
             // Correct! Key should be specified inside the array.
             this.getListItem(balance, i)
-
         );
         return (
-            <View>
-                {listItems}
-            </View>
+                <List>{listItems}</List>
         );
     };
 
     render() {
         return (
+            <Card>
+                <CardItem header>
+                    <Text>{I18n.t('balances')}</Text>
+                </CardItem>
 
-
-            <ScrollView style={[styles.balancePadding, styles.balancesContainer]}>
-                <Card>
-                    <View header>
-                        <Text>{I18n.t('balances')}</Text>
-                    </View>
-                    {this.balanceList()}
-                </Card>
-
-
-                {/*<SectionList*/}
-                {/*sections= {this.prepareData(this.props.balances)}*/}
-
-                {/*// renderSectionHeader={({section}) =>*/}
-                {/*//     <Text style={styles.balanceHeader}></Text>*/}
-                {/*//*/}
-                {/*// }*/}
-                {/*renderItem={({item}) =>*/}
-
-                {/*}*/}
-
-                {/*keyExtractor={(item, index) => index}*/}
-                {/*/>*/}
-
-            </ScrollView>
+                {this.balanceList()}
+            </Card>
 
         );
     }

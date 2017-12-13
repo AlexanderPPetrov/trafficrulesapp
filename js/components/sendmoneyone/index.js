@@ -33,10 +33,10 @@ class SendMoneyOne extends Component {
     }
 
     componentDidMount = () => {
-        Api.get({
-            url: 'get-member-transactions',
-            success: this.dataLoaded
-        })
+        // Api.get({
+        //     url: 'get-member-transactions',
+        //     success: this.dataLoaded
+        // })
     }
 
     dataLoaded = (response) =>{
