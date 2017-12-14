@@ -54,7 +54,7 @@ export default {
     },
 
     balanceHeader: {
-        color:"#888"
+        color:"#617d8a"
     },
 
     listItem: {
@@ -77,8 +77,16 @@ export default {
     },
 
     balanceValue: {
-        justifyContent: 'flex-end',
+        textAlign: 'right',
+        alignSelf: 'stretch'
     },
+
+    balanceCurrency: {
+        textAlign: 'left',
+        alignSelf: 'stretch',
+        color:'#f36523',
+        paddingLeft:5
+    }
 
 
 

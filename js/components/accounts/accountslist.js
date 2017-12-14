@@ -18,7 +18,7 @@ class AccountsList extends Component {
                 <Text>{I18n.t(property)}</Text>
             </Col>
             <Col size={3}>
-                <Text style={{textAlign:'right'}}>{account[property]}</Text>
+                <Text style={{textAlign:'right', color:'#617d8a'}}>{account[property]}</Text>
             </Col>
         </ListItem>
     }
@@ -29,22 +29,40 @@ class AccountsList extends Component {
         );
         return <Card key={i}>
             <List>
-            <Separator bordered>
-                    {account._type == '0' ? <FontAwesome name="soccer-ball-o" size={22} style={styles.headerIcon}/> :
-                        <SimpleLineIcons name="user" size={22} style={styles.headerIcon}/>}
-                    <Text>{I18n.t(accountTypes[account._type]) + ' ' + I18n.t('account')}</Text>
+            <ListItem itemDivider style={{height:50, paddingLeft:10}}>
+                <Grid>
+                    <Col style={{width:35, justifyContent: 'center' }}>
+                        <View
+                            style={{
+                                borderWidth: 1,
+                                borderColor: 'rgba(0,0,0,0.2)',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: 34,
+                                height: 34,
+                                backgroundColor: '#f36523',
+                                borderRadius: 34
+                            }}
+                        >
+                        {account._type == '0' ? <FontAwesome name="soccer-ball-o" size={22} style={styles.headerIcon}/> :
+                            <SimpleLineIcons name="user" size={22} style={styles.headerIcon}/>}
+                        </View>
+                    </Col>
+                    <Col style={{justifyContent: 'center'}}>
+                        <Text style={styles.headerLabel}>{(I18n.t(accountTypes[account._type]) + ' ' + I18n.t('account')).toUpperCase()}</Text>
+                    </Col>
+                    <Col style={{justifyContent: 'flex-end', flexDirection: 'row'}}>
+                        <Button style={styles.headerButton} onPress={() => this.props.navigation.navigate("PreviousBalance", {
+                            _id: account._id,
+                            _username: account._username,
+                            _currency: account._currency
+                        })}>
+                            <Text style={{color:'#fff'}}>{I18n.t('previousBalances')}</Text>
+                        </Button>
+                    </Col>
+                </Grid>
 
-                <Right>
-                    <Button onPress={() => this.props.navigation.navigate("PreviousBalance", {
-                                _id: account._id,
-                                _username: account._username,
-                                _currency: account._currency
-                            })}>
-                        <Text>{I18n.t('previousBalances')}</Text>
-                    </Button>
-                </Right>
-
-            </Separator>
+            </ListItem>
            {cardListItems}
             </List>
         </Card>;

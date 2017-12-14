@@ -29,11 +29,10 @@ export default {
     },
     headerIcon: {
         color:"#fff",
-        marginLeft:15
     },
     headerLabel: {
-        color:"#fff",
-        fontSize:18,
+        color:"#999",
+        fontSize:16,
         marginLeft:7
     },
     headerButton: {

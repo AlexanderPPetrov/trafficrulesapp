@@ -20,7 +20,7 @@ class BalanceItem extends Component {
     }
 
     render() {
-        return <ListItem style={{ marginLeft:0, paddingLeft:15}}>
+        return <ListItem style={{marginLeft: 0, paddingLeft: 15}}>
 
             <Col style={{width: 66}}>
                 <View
@@ -41,15 +41,25 @@ class BalanceItem extends Component {
             </Col>
             <Col size={3}>
                 <Row><Text style={{fontSize: 16}}>{I18n.t('cashBalance')}</Text></Row>
-                <Row><Text style={{color: '#888', fontSize: 14}}>{I18n.t('moneyInAccounts')}</Text></Row>
+                <Row><Text style={{color: '#617d8a', fontSize: 14}}>{I18n.t('moneyInAccounts')}</Text></Row>
             </Col>
             <Col size={2}>
-                <Row style={styles.balanceValue}>
-                    <Text>{this.props._cash_balance}</Text>
-                    <Text style={{color: '#f36523', marginLeft: 5}}>{this.props._currency}</Text></Row>
-                <Row style={styles.balanceValue}>
-                    <Text>{this.props._money_in_accounts}</Text>
-                    <Text style={{color: '#f36523', marginLeft: 5}}>{this.props._currency}</Text>
+                <Row>
+                    <Col size={4}>
+                        <Text style={styles.balanceValue}>{this.props._cash_balance}</Text>
+                    </Col>
+                    <Col size={2}>
+                        <Text style={styles.balanceCurrency}>{this.props._currency}</Text>
+                    </Col>
+
+                </Row>
+                <Row>
+                    <Col size={4}>
+                        <Text style={styles.balanceValue}>{this.props._money_in_accounts}</Text>
+                    </Col>
+                    <Col size={2}>
+                        <Text style={styles.balanceCurrency}>{this.props._currency}</Text>
+                    </Col>
                 </Row>
             </Col>
 
