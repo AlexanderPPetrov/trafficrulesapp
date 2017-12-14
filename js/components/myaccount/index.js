@@ -72,9 +72,6 @@ class MyAccount extends Component {
                 </Header>
                 <Content padder>
                     <Card>
-                        {/*<CardItem header>*/}
-                            {/*<Text>{I18n.t('mainBalance')}</Text>*/}
-                        {/*</CardItem>*/}
                         <View style={styles.cardBody}>
                             <SafeBalance _safe_balance={this.state._payload._safe_balance} _currency={this.state._payload._currency}></SafeBalance>
                             <BrokerageBalance _brokerage_balance={this.state._payload._brokerage_balance} _currency={this.state._payload._brokerage_currency}></BrokerageBalance>

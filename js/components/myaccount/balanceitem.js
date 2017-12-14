@@ -23,19 +23,7 @@ class BalanceItem extends Component {
         return <ListItem style={{marginLeft: 0, paddingLeft: 15}}>
 
             <Col style={{width: 66}}>
-                <View
-                    style={{
-                        borderWidth: 1,
-                        borderColor: 'rgba(0,0,0,0.2)',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: 46,
-                        height: 46,
-                        backgroundColor: '#f36523',
-                        borderRadius: 46,
-                        marginRight: 5
-                    }}
-                >
+                <View style={styles.iconContainer}>
                     {this.getCurrencyIcon()}
                 </View>
             </Col>

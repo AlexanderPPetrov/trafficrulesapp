@@ -18,7 +18,7 @@ class AccountsList extends Component {
                 <Text>{I18n.t(property)}</Text>
             </Col>
             <Col size={3}>
-                <Text style={{textAlign:'right', color:'#617d8a'}}>{account[property]}</Text>
+                <Text style={styles.accountValue}>{account[property]}</Text>
             </Col>
         </ListItem>
     }
@@ -29,21 +29,10 @@ class AccountsList extends Component {
         );
         return <Card key={i}>
             <List>
-            <ListItem itemDivider style={{height:50, paddingLeft:10}}>
+            <ListItem itemDivider style={styles.headerItem}>
                 <Grid>
                     <Col style={{width:35, justifyContent: 'center' }}>
-                        <View
-                            style={{
-                                borderWidth: 1,
-                                borderColor: 'rgba(0,0,0,0.2)',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                width: 34,
-                                height: 34,
-                                backgroundColor: '#f36523',
-                                borderRadius: 34
-                            }}
-                        >
+                        <View style={styles.headerIconContainer}>
                         {account._type == '0' ? <FontAwesome name="soccer-ball-o" size={22} style={styles.headerIcon}/> :
                             <SimpleLineIcons name="user" size={22} style={styles.headerIcon}/>}
                         </View>
@@ -82,59 +71,6 @@ class AccountsList extends Component {
     render() {
         return (
             this.getAccountCards(this.props.accounts)
-
-
-            // <ScrollView>
-            //     <SectionList
-            //         sections={this.prepareData(this.props.accounts)}
-            //         renderSectionHeader={({section}) =>
-            //             <View style={styles.headerContainer}>
-            //                 <Grid>
-            //                     <Row style={{
-            //                         backgroundColor: "#808080",
-            //                         height: 50,
-            //                         justifyContent: 'center',
-            //                         alignItems: 'center'
-            //                     }}>
-            //                         <Col size={1}>
-            //                             {section._type == 'sport' ?
-            //                                 <FontAwesome name="soccer-ball-o" size={22} style={styles.headerIcon}/> :
-            //                                 <SimpleLineIcons name="user" size={22} style={styles.headerIcon}/>}
-            //                         </Col>
-            //                         <Col size={4}>
-            //                             <Text style={styles.headerLabel}>{section.title}</Text>
-            //                         </Col>
-            //                         <Col size={4} style={{marginRight: 5}}>
-            //                             <Button block light style={styles.headerButton}
-            //                                     onPress={() => this.props.navigation.navigate("PreviousBalance", {
-            //                                         _id: section._id,
-            //                                         _username: section._username,
-            //                                         _currency: section._currency
-            //                                     })}>
-            //                                 <Text>{I18n.t('previousBalances')}</Text>
-            //                             </Button>
-            //                         </Col>
-            //                     </Row>
-            //                 </Grid>
-            //             </View>
-            //         }
-            //
-            //         renderItem={({item, section}) =>
-            //             <View key={section._id} style={styles.balanceView}>
-            //                 <ListItem label={'site'} value={item._site}></ListItem>
-            //                 <ListItem label={'username'} value={item._username}></ListItem>
-            //                 <ListItem label={'currency'} value={item._currency}></ListItem>
-            //                 <ListItem label={'credit'} value={item._credit}></ListItem>
-            //                 <ListItem label={'balance'} value={item._balance}></ListItem>
-            //                 <ListItem label={'lastStatus'} value={item._last_status}></ListItem>
-            //             </View>
-            //         }
-            //
-            //         keyExtractor={(item, index) => index}
-            //     />
-            //
-            // </ScrollView>
-
         );
     }
 }

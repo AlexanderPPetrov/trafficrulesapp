@@ -21,50 +21,35 @@ export default {
         borderBottomWidth: 1
     },
 
-    headerContainer: {
-        backgroundColor:"#808080",
+    headerItem: {
         height:50,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+        paddingLeft:10
+    },
+    headerIconContainer: {
+        borderWidth: 1,
+        borderColor: 'rgba(0,0,0,0.2)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 34,
+        height: 34,
+        backgroundColor: '#ff8600',
+        borderRadius: 34
     },
     headerIcon: {
         color:"#fff",
     },
     headerLabel: {
-        color:"#999",
+        color:"#617d8a",
         fontSize:16,
         marginLeft:7
     },
     headerButton: {
         height:30
     },
-    balanceItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingLeft:15,
-        paddingRight:15,
-        paddingTop:7,
-        paddingBottom:7
-    },
 
-    balanceLabel: {
-        flex: 5,
-        flexDirection: 'row',
-        fontWeight:'bold',
-        justifyContent: 'flex-start'
-    },
-
-    balanceValue: {
-        flex: 4,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        textAlign:'left'
-    },
-
-    brokerageBalanceContainer: {
-        backgroundColor: "#f36523",
-    },
-    brokerageText: {
-        color:"#fff"
+    accountValue: {
+        textAlign:'right',
+        color:'#617d8a'
     }
+
 };

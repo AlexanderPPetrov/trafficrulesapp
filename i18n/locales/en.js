@@ -36,6 +36,7 @@ export default {
     brokerageBalance: 'Brokerage Balance',
     account: 'account',
     previousBalances: 'Previous Balances',
+    date: 'Date',
     _site: 'Site',
     _username: 'Username',
     _currency: 'Currency',

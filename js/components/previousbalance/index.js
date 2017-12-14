@@ -22,22 +22,7 @@ import Balance from "./balance";
 import styles from "./styles";
 import Api from "../../../Api";
 
-const balanceData = {
-    "_status": "success",
-    "payload": {
-        "_account_id":123123,
-        "_currency":"EUR",
-        "balances":[{
-            "_balance":4000,
-            "_change":309,
-            "_date":"2016-02-24"
-        }]
-    }
-};
-
 class PreviousBalance extends Component {
-   // get-account-balances
-   //  _id
 
     constructor(props) {
         super(props);
@@ -76,12 +61,14 @@ class PreviousBalance extends Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Title>{I18n.t('balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>
+                    <Title>{I18n.t('_balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>
                     </Body>
                     <Right/>
 
                 </Header>
-                <Balance navigation={this.props.navigation} balance={this.state._payload.balances} currency={this.props.navigation.state.params._currency}></Balance>
+                <Content padder>
+                    <Balance navigation={this.props.navigation} balances={this.state._payload.balances} currency={this.props.navigation.state.params._currency}></Balance>
+                </Content>
             </Container>
         );
     }
