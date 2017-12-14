@@ -36,7 +36,7 @@ class BalanceItem extends Component {
                     <Col size={4}>
                         <Text style={styles.balanceValue}>{this.props._cash_balance}</Text>
                     </Col>
-                    <Col size={2}>
+                    <Col style={{width:40}}>
                         <Text style={styles.balanceCurrency}>{this.props._currency}</Text>
                     </Col>
 
@@ -45,7 +45,7 @@ class BalanceItem extends Component {
                     <Col size={4}>
                         <Text style={styles.balanceValue}>{this.props._money_in_accounts}</Text>
                     </Col>
-                    <Col size={2}>
+                    <Col style={{width:40}}>
                         <Text style={styles.balanceCurrency}>{this.props._currency}</Text>
                     </Col>
                 </Row>

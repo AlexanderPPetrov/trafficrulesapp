@@ -70,7 +70,7 @@ let Api = {
 
                 let message = error.message;
                 if (message == 'Network request failed') {
-                    message = I18n.t('error_timeout')
+                    message = I18n.t('network_request_failed')
                 }
 
                 Alert.alert(

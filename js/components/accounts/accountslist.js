@@ -31,16 +31,16 @@ class AccountsList extends Component {
             <List>
             <ListItem itemDivider style={styles.headerItem}>
                 <Grid>
-                    <Col style={{width:35, justifyContent: 'center' }}>
+                    <Col style={{width:30, justifyContent: 'center' }}>
                         <View style={styles.headerIconContainer}>
-                        {account._type == '0' ? <FontAwesome name="soccer-ball-o" size={22} style={styles.headerIcon}/> :
-                            <SimpleLineIcons name="user" size={22} style={styles.headerIcon}/>}
+                        {account._type == '0' ? <FontAwesome name="soccer-ball-o" size={18} style={styles.headerIcon}/> :
+                            <SimpleLineIcons name="user" size={18} style={styles.headerIcon}/>}
                         </View>
                     </Col>
                     <Col style={{justifyContent: 'center'}}>
                         <Text style={styles.headerLabel}>{(I18n.t(accountTypes[account._type]) + ' ' + I18n.t('account')).toUpperCase()}</Text>
                     </Col>
-                    <Col style={{justifyContent: 'flex-end', flexDirection: 'row'}}>
+                    <Col style={{justifyContent: 'flex-end', flexDirection: 'row', width: 155}}>
                         <Button style={styles.headerButton} onPress={() => this.props.navigation.navigate("PreviousBalance", {
                             _id: account._id,
                             _username: account._username,

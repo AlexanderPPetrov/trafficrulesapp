@@ -13,7 +13,9 @@ import {
     FooterTab,
     Left,
     Right,
-    Body
+    Body,
+    Card,
+    CardItem
 } from "native-base";
 
 import { Form,
@@ -23,6 +25,9 @@ import { Form,
 
 import styles from "./styles";
 import Api from "../../../Api";
+import Steps from '../../common/steps/index';
+import Chat from '../../common/chat/index';
+import {View, ScrollView} from 'react-native';
 
 class WithdrawTwo extends Component {
 
@@ -62,7 +67,7 @@ class WithdrawTwo extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header>
+                <Header hasTabs>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.navigate('WithdrawOne')}>
                             <Icon name="arrow-back" />
@@ -71,18 +76,41 @@ class WithdrawTwo extends Component {
                     <Body>
                     <Title>{I18n.t('withdraw')}</Title>
                     </Body>
-                    <Right/>
+                    <Right>
+                        <Button transparent small>
+                            <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
+                        </Button>
+                    </Right>
 
                 </Header>
-                <Content>
-                    <Text>{I18n.t('accountSettings')}</Text>
+                <Content padder>
+                    <Steps currentPosition={1} stepCount={5}></Steps>
+                    <Card style={{minHeight: 200}}>
+
+                        <CardItem header>
+                            <Text>{I18n.t('selectPaymentMethod')}</Text>
+                        </CardItem>
+                        <View style={{paddingLeft: 15, paddingRight: 15}}>
+                            <Form style={{borderWidth: 1, borderColor: '#d6d7da'}}>
+
+
+                            </Form>
+                        </View>
+
+                    </Card>
+
+                    <Chat></Chat>
 
                 </Content>
                 <Footer>
                     <FooterTab>
-                        <Button onPress={() => this.props.navigation.navigate("WithdrawThree")}>
+                        <Button onPress={() => this.props.navigation.navigate("WithdrawThree", {
+                            methodSelected: this.props.selected,
+
+                        })}>
                             <Text>{I18n.t('continue')}</Text>
                         </Button>
+
                     </FooterTab>
                 </Footer>
 

@@ -63,5 +63,10 @@ export default {
     },
     brokerageText: {
         color:"#fff"
+    },
+    alignRight: {
+        marginTop:7,
+        position:'absolute',
+        right:10
     }
 };

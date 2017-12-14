@@ -30,17 +30,17 @@ export default {
         borderColor: 'rgba(0,0,0,0.2)',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 34,
-        height: 34,
+        width: 30,
+        height: 30,
         backgroundColor: '#ff8600',
-        borderRadius: 34
+        borderRadius: 30
     },
     headerIcon: {
         color:"#fff",
     },
     headerLabel: {
         color:"#617d8a",
-        fontSize:16,
+        fontSize:14,
         marginLeft:7
     },
     headerButton: {

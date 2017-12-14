@@ -10,19 +10,6 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 class Balance extends Component {
 
 
-    prepareData = (data) => {
-        let sectionsData = [];
-        for (var value of data) {
-            let section = {
-                title: value._currency,
-                data: [value]
-            };
-            sectionsData.push(section)
-        }
-        return sectionsData;
-    };
-
-
     getListItem = (balance, i) => {
         return <BalanceItem key={i} _cash_balance={balance._cash_balance} _money_in_accounts={balance._money_in_accounts}
                          _currency={balance._currency}></BalanceItem>;
@@ -30,7 +17,6 @@ class Balance extends Component {
 
     balanceList = () => {
         const listItems = this.props.balances.map((balance, i) =>
-            // Correct! Key should be specified inside the array.
             this.getListItem(balance, i)
         );
         return (

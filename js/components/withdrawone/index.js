@@ -1,11 +1,17 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
+import Steps from '../../common/steps/index';
+import Chat from '../../common/chat/index';
 import {
     Container,
     Card,
+    CardItem,
     Header,
     Title,
     Content,
+    Form,
+    Picker,
+    Item as FormItem,
     Text,
     H3,
     Button,
@@ -14,46 +20,17 @@ import {
     FooterTab,
     Left,
     Right,
-    Body
+    Body,
 } from "native-base";
 
-import { Form,
-    Separator,InputField, LinkField,
-    SwitchField, PickerField,DatePickerField,TimePickerField
-} from 'react-native-form-generator';
 
 import {View, ScrollView} from 'react-native';
 
 
-import StepIndicator from 'react-native-step-indicator';
-
 import styles from "./styles";
 import Api from "../../../Api";
 
-const labels = ["","","","",""];
-const customStyles = {
-    stepIndicatorSize: 25,
-    currentStepIndicatorSize:30,
-    separatorStrokeWidth: 2,
-    currentStepStrokeWidth: 3,
-    stepStrokeCurrentColor: '#fe7013',
-    stepStrokeWidth: 3,
-    stepStrokeFinishedColor: '#fe7013',
-    stepStrokeUnFinishedColor: '#aaaaaa',
-    separatorFinishedColor: '#fe7013',
-    separatorUnFinishedColor: '#aaaaaa',
-    stepIndicatorFinishedColor: '#fe7013',
-    stepIndicatorUnFinishedColor: '#ffffff',
-    stepIndicatorCurrentColor: '#ffffff',
-    stepIndicatorLabelFontSize: 13,
-    currentStepIndicatorLabelFontSize: 13,
-    stepIndicatorLabelCurrentColor: '#fe7013',
-    stepIndicatorLabelFinishedColor: '#ffffff',
-    stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-    labelColor: '#999999',
-    labelSize: 13,
-    currentStepLabelColor: '#fe7013'
-}
+const Item = Picker.Item;
 
 class WithdrawOne extends Component {
 
@@ -61,10 +38,9 @@ class WithdrawOne extends Component {
         super(props);
 
         this.state = {
-            _payload: {
-                paymentMethods:[],
-                currentPosition: 0
-            }
+            paymentMethods: []
+            ,
+            selected: undefined
 
         }
     }
@@ -76,20 +52,39 @@ class WithdrawOne extends Component {
         })
     }
 
-    dataLoaded = (response) =>{
+    dataLoaded = (response) => {
         this.setState({
-            _payload:response
+            paymentMethods: response.paymentMethods
         })
+        console.log(this.state.paymentMethods)
+    }
+    onValueChange = (value: string) => {
+        console.log(value)
+        this.setState({
+            selected: value
+        });
     }
 
-    prepareData = (data) => {
-        let selectData = {
-        };
-        data.map((value) => {
-            selectData[value._key] = value._caption
-        });
-        return selectData;
-    };
+
+    getPicker = () => {
+
+        let paymentMethods = this.state.paymentMethods;
+        const listItems = paymentMethods.map((method, i) =>
+            <Item key={i} value={method._key} label={method._caption}></Item>
+        );
+        return (
+            <Picker
+                mode="dropdown"
+                placeholder="Select One"
+                selectedValue={this.state.selected}
+                onValueChange={this.onValueChange}
+                note={false}
+            >
+            {listItems}
+            </Picker>
+        );
+    }
+
 
     render() {
         return (
@@ -108,39 +103,40 @@ class WithdrawOne extends Component {
                     </Body>
                     <Right>
                         <Button transparent small>
-                            <Text style={{textAlign:'right'}}>{I18n.t('cancel')}</Text>
+                            <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
                         </Button>
                     </Right>
 
                 </Header>
-                <Content>
+                <Content padder>
+                    <Steps currentPosition={0} stepCount={5}></Steps>
+                    <Card style={{minHeight: 200}}>
 
-                    <ScrollView style={[styles.balancePadding, styles.balancesContainer]}>
-                        <Text>{I18n.t('selectPaymentMethod')}</Text>
+                        <CardItem header>
+                            <Text>{I18n.t('selectPaymentMethod')}</Text>
+                        </CardItem>
+                        <View style={{paddingLeft: 15, paddingRight: 15}}>
+                            <Form style={{borderWidth: 1, borderColor: '#d6d7da'}}>
 
-                        <StepIndicator
-                            customStyles={customStyles}
-                            currentPosition={this.state.currentPosition}
-                            labels={labels}
-                        />
-                        <Card>
-                            <PickerField ref='selectMethod'
-                                         label={I18n.t('selectMethod')}
-                                         options={this.prepareData(this.state._payload.paymentMethods)}
+                                    {this.getPicker()}
 
-                            />
-                        </Card>
-                    </ScrollView>
+                            </Form>
+                        </View>
 
+                    </Card>
 
-
+                    <Chat></Chat>
 
                 </Content>
                 <Footer>
                     <FooterTab>
-                        <Button onPress={() => this.props.navigation.navigate("WithdrawTwo")}>
+                        <Button onPress={() => this.props.navigation.navigate("WithdrawTwo", {
+                            methodSelected: this.state.selected,
+
+                        })}>
                             <Text>{I18n.t('continue')}</Text>
                         </Button>
+
                     </FooterTab>
                 </Footer>
 
