@@ -7,6 +7,7 @@ export default {
     rate_limit_exceeds: 'Too many requests',
     user_not_authorized: 'User not authorized',
     missing_or_invalid_required_parameters: 'Missing or invalid required parameters',
+    authentication_server_error: 'Authentication server error',
     url_required: 'URL is required',
     error_title: 'Error',
     network_request_failed: 'Network request failed',
