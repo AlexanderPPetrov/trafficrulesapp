@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://w5-vwd.alexppetrov.premium-tradings-mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.w5-vwd.alexppetrov.premium-tradings-mobile.exp.direct",
-  "ngrokPid": 19880,
+  "expoServerNgrokUrl": "https://4h-cqz.alexppetrov.premium-tradings-mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.4h-cqz.alexppetrov.premium-tradings-mobile.exp.direct",
+  "ngrokPid": 25640,
   "packagerPort": 19001,
-  "packagerPid": 19900
+  "packagerPid": 28296
 }

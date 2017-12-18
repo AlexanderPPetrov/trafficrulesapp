@@ -17,33 +17,9 @@ import {
 } from "native-base";
 
 import styles from "./styles";
-import Api from "../../../Api";
+import Tabs from "./tabs";
 
 class Brokerage extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            _payload: {
-                transactions:[]
-            }
-
-        }
-    }
-
-    componentDidMount = () => {
-        // Api.get({
-        //     url: 'get-member-transactions',
-        //     success: this.dataLoaded
-        // })
-    }
-
-    dataLoaded = (response) =>{
-        this.setState({
-            _payload:response
-        })
-    }
 
     render() {
         return (
@@ -61,9 +37,9 @@ class Brokerage extends Component {
                     <Title>{I18n.t('brokerage')}</Title>
                     </Body>
                     <Right/>
-
                 </Header>
 
+                <Tabs></Tabs>
             </Container>
         );
     }

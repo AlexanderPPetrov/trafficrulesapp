@@ -4,7 +4,7 @@ const baseUrl = 'http://api-prmts.dev.cc/v1/';
 const appKey = '122$sads1CCssa@$%AScccaas552112';
 import fetch from 'react-native-fetch-polyfill';
 import {Alert} from 'react-native';
-
+import {ActivityIndicator} from 'react-native'
 let auth = '';
 
 import {Toast} from "native-base";
@@ -40,7 +40,6 @@ let Api = {
         }
 
         console.log(_url)
-
         return fetch(_url, _data)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -65,6 +64,10 @@ let Api = {
                     opts.error(responseJson._payload._message)
 
                 }
+                if(opts.always){
+                    opts.always()
+                }
+
             })
             .catch((error) => {
 
@@ -80,8 +83,11 @@ let Api = {
                         {text: 'OK'},
                     ]
                 )
+                if(opts.always){
+                    opts.always()
+                }
+            })
 
-            });
     },
 
 

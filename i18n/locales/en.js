@@ -48,5 +48,13 @@ export default {
     _last_status: 'Last Status',
     change: 'Change',
     for: 'for',
+    openBets: 'Open Bets',
+    betNumber: 'Bet No.',
+    stake: 'stake',
+    running: 'running',
+    turnOver: 'Turnover',
+    profit: 'Profit',
+    settledBets: 'Settled Bets',
+    from: 'From',
 
 };

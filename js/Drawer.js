@@ -9,11 +9,8 @@ import Accounts from "./components/accounts/";
 import PreviousBalance from "./components/previousbalance/";
 import Brokerage from "./components/brokerage/";
 import Deposit from "./components/deposit/";
-import WithdrawOne from "./components/withdrawone/";
-import WithdrawTwo from "./components/withdrawtwo/";
-import WithdrawThree from "./components/withdrawthree/";
-import WithdrawFour from "./components/withdrawfour/";
-import WithdrawFive from "./components/withdrawfive/";
+import Withdraw from "./components/withdraw/";
+
 import FundsTransfer from "./components/fundstransfer/";
 import Transactions from "./components/transactions/";
 import SendMoneyOne from "./components/sendmoneyone/";
@@ -29,11 +26,7 @@ const DrawerExample = DrawerNavigator(
         PreviousBalance: {screen: PreviousBalance},
         Brokerage: {screen: Brokerage},
         Deposit: {screen: Deposit},
-        WithdrawOne: {screen: WithdrawOne},
-        WithdrawTwo: {screen: WithdrawTwo},
-        WithdrawThree: {screen: WithdrawThree},
-        WithdrawFour: {screen: WithdrawFour},
-        WithdrawFive: {screen: WithdrawFive},
+        Withdraw: {screen: Withdraw},
         FundsTransfer: {screen: FundsTransfer},
         Transactions: {screen: Transactions},
         SendMoneyOne: {screen: SendMoneyOne},
