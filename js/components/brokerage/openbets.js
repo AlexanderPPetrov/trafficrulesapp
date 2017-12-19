@@ -94,8 +94,6 @@ class OpenBets extends Component {
                         </Col>
                     </Row>
             </Grid>
-
-
         </ListItem>
     }
 
@@ -103,6 +101,9 @@ class OpenBets extends Component {
         let betList = bets.map((bet, i) =>
             this.getListItem(bet, i)
         );
+        if (bets.length == 0) {
+            return <Text style={{textAlign:'center', padding:10, alignSelf: "stretch"}}>{I18n.t('noRunningBets')}</Text>;
+        }
         return (
             <List>
                 {betList}
@@ -113,7 +114,7 @@ class OpenBets extends Component {
 
     render() {
         return (
-            <ScrollView  refreshControl={
+            <ScrollView refreshControl={
                 <RefreshControl
                     refreshing={this.state.refreshing}
                     onRefresh={this._onRefresh.bind(this)}

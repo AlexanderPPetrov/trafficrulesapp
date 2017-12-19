@@ -55,6 +55,8 @@ export default {
     turnOver: 'Turnover',
     profit: 'Profit',
     settledBets: 'Settled Bets',
+    noSettledBets: 'There are no settled bets for that period',
+    noRunningBets: 'There are no running bets',
     from: 'From',
 
 };

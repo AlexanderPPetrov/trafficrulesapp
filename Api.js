@@ -5,6 +5,7 @@ const appKey = '122$sads1CCssa@$%AScccaas552112';
 import fetch from 'react-native-fetch-polyfill';
 import {Alert} from 'react-native';
 import {ActivityIndicator} from 'react-native'
+
 let auth = '';
 
 import {Toast} from "native-base";
@@ -39,7 +40,6 @@ let Api = {
             _url = _url + '?' + Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
         }
 
-        console.log(_url)
         return fetch(_url, _data)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -64,7 +64,7 @@ let Api = {
                     opts.error(responseJson._payload._message)
 
                 }
-                if(opts.always){
+                if (opts.always) {
                     opts.always()
                 }
 
@@ -83,13 +83,30 @@ let Api = {
                         {text: 'OK'},
                     ]
                 )
-                if(opts.always){
+                if (opts.always) {
                     opts.always()
                 }
             })
 
     },
 
+    formatDate: (date) => {
+
+        Number.prototype.padLeft = function (base, chr) {
+            var len = (String(base || 10).length - String(this).length) + 1;
+            return len > 0 ? new Array(len).join(chr || '0') + this : this;
+        }
+
+        date = [date.getFullYear(),
+                (date.getMonth() + 1).padLeft(),
+                date.getDate().padLeft()].join('-') +
+                ' ' +
+                [date.getHours().padLeft(),
+                date.getMinutes().padLeft(),
+                date.getSeconds().padLeft()].join(':');
+
+        return date;
+    },
 
     prepareData: (data, type) => {
 
@@ -115,7 +132,6 @@ let Api = {
 
             requestData.body = bodyData;
         }
-
 
         return requestData
     }

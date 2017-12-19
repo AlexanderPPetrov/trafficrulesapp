@@ -41,11 +41,9 @@ class SettledBets extends Component {
                 bets: []
             },
             refreshing: false,
-            formData: {
-                dateFrom: null,
-                dateTo: null
-            }
-
+            dateFrom: null,
+            dateTo: null,
+            initialized:false
         }
     }
 
@@ -55,9 +53,14 @@ class SettledBets extends Component {
     }
 
     loadData = () => {
+        this.setState({initialized: true})
         Api.get({
             url: 'get-brokerage-settled-bets',
             success: this.dataLoaded,
+            data: {
+                date_to: Api.formatDate(this.state.dateTo),
+                date_from: Api.formatDate(this.state.dateFrom),
+            },
             always: this.setRefreshing
         })
     }
@@ -87,26 +90,37 @@ class SettledBets extends Component {
         beforeSevenDays = new Date(res);
 
         this.setState({
-            formData: {
-                dateFrom: currentDate,
-                dateTo: beforeSevenDays
-            }
+            dateFrom: currentDate,
+            dateTo: beforeSevenDays
+
         }, function () {
 
-            this.refs.dateFrom.setDate(this.state.formData.dateFrom);
-            this.refs.dateTo.setDate(this.state.formData.dateTo);
+            this.refs.dateFrom.setDate(this.state.dateFrom);
+            this.refs.dateTo.setDate(this.state.dateTo);
             this.loadData()
-
         });
 
     }
 
     dateFromChange = (date) => {
-        //TODO finish fetch logic on date change
-        console.log('asdasd',date)
+
+        if(!this.state.initialized) return;
+
+        this.setState({
+            dateFrom: date,
+        }, function () {
+            this.loadData()
+        });
+
     }
     dateToChange = (date) => {
-        console.log('asdasd',date)
+        if(!this.state.initialized) return;
+
+        this.setState({
+            dateTo: date,
+        }, function () {
+            this.loadData()
+        });
     }
 
     getFilter = () => {
@@ -170,9 +184,14 @@ class SettledBets extends Component {
         let betList = bets.map((bet, i) =>
             this.getListItem(bet, i)
         );
+
+
+        if (bets.length == 0) {
+            return <Text
+                style={{textAlign: 'center', padding: 10, alignSelf: "stretch"}}>{I18n.t('noSettledBets')}</Text>;
+        }
         return (
             <View>
-
                 <List>
                     {betList}
                 </List>
