@@ -38,7 +38,7 @@ class OpenBets extends Component {
 
     componentDidMount = () => {
         this.loadData()
-    }
+    };
 
     loadData = () => {
         Api.get({
@@ -46,22 +46,23 @@ class OpenBets extends Component {
             success: this.dataLoaded,
             always: this.setRefreshing
         })
-    }
+    };
 
     setRefreshing = () => {
         this.setState({refreshing: false})
-    }
+    };
+
     dataLoaded = (response) => {
         this.setState({
             _payload: response
         })
 
-    }
+    };
 
-    _onRefresh() {
+    onRefresh = () => {
         this.setState({refreshing: true});
         this.loadData()
-    }
+    };
 
     getListItem = (bet, i) => {
         return <ListItem key={i}>
@@ -95,7 +96,7 @@ class OpenBets extends Component {
                     </Row>
             </Grid>
         </ListItem>
-    }
+    };
 
     getBetList = (bets) => {
         let betList = bets.map((bet, i) =>
@@ -117,7 +118,7 @@ class OpenBets extends Component {
             <ScrollView refreshControl={
                 <RefreshControl
                     refreshing={this.state.refreshing}
-                    onRefresh={this._onRefresh.bind(this)}
+                    onRefresh={this.onRefresh}
                 />
             }>
                 {this.getBetList(this.state._payload.bets)}

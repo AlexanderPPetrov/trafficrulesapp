@@ -1,4 +1,5 @@
 const React = require("react-native");
+import ColorScheme from "../../common/colorscheme";
 
 const {StyleSheet} = React;
 
@@ -9,7 +10,7 @@ export default {
     },
 
     secondaryLabel: {
-        color:"#617d8a"
+        color:ColorScheme.dark
     },
 
     balanceRed: {
@@ -27,7 +28,7 @@ export default {
     balanceCurrency: {
         textAlign: 'left',
         alignSelf: 'stretch',
-        color:'#ff8600',
+        color:ColorScheme.light,
         paddingLeft:5
     }
 

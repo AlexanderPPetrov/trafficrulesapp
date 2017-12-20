@@ -14,10 +14,10 @@
       ]
     },
     "privacy": "unlisted",
-    "androidStatusBarColor": "#d34b0c",
+    "androidStatusBarColor": "#222c34",
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#d34b0c"
+      "backgroundColor": "#222c34"
     }
   }
 }

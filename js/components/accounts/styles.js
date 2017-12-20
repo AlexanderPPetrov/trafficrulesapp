@@ -1,29 +1,27 @@
 const React = require("react-native");
 
 const {StyleSheet} = React;
+import ColorScheme from "../../common/colorscheme";
 
 export default {
     balancePadding: {
-        paddingLeft:15,
-        paddingRight:15,
-        paddingTop:20,
-        paddingBottom:20
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 20,
+        paddingBottom: 20
     },
     safeBalanceContainer: {
-        backgroundColor: "#fff",
-    },
-    balancesContainer: {
-        backgroundColor: "#fce0d4",
+        backgroundColor: ColorScheme.neutralLight,
     },
 
     balanceView: {
-        borderBottomColor: '#fff',
+        borderBottomColor: ColorScheme.neutralLight,
         borderBottomWidth: 1
     },
 
     headerItem: {
-        height:50,
-        paddingLeft:10
+        height: 50,
+        paddingLeft: 10
     },
     headerIconContainer: {
         borderWidth: 1,
@@ -32,24 +30,24 @@ export default {
         justifyContent: 'center',
         width: 30,
         height: 30,
-        backgroundColor: '#ff8600',
+        backgroundColor: ColorScheme.primary,
         borderRadius: 30
     },
     headerIcon: {
-        color:"#fff",
+        color: ColorScheme.neutralLight
     },
     headerLabel: {
-        color:"#617d8a",
-        fontSize:14,
-        marginLeft:7
+        color: ColorScheme.dark,
+        fontSize: 14,
+        marginLeft: 7
     },
     headerButton: {
-        height:30
+        height: 30
     },
 
     accountValue: {
-        textAlign:'right',
-        color:'#617d8a'
+        textAlign: 'right',
+        color: ColorScheme.light
     }
 
 };

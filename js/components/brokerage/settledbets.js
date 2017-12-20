@@ -63,22 +63,23 @@ class SettledBets extends Component {
             },
             always: this.setRefreshing
         })
-    }
+    };
 
     setRefreshing = () => {
         this.setState({refreshing: false})
-    }
+    };
+
     dataLoaded = (response) => {
         this.setState({
             _payload: response
         })
 
-    }
+    };
 
-    _onRefresh() {
+    onRefresh = () => {
         this.setState({refreshing: true});
         this.loadData()
-    }
+    };
 
     setDates = () => {
 
@@ -100,7 +101,7 @@ class SettledBets extends Component {
             this.loadData()
         });
 
-    }
+    };
 
     dateFromChange = (date) => {
 
@@ -112,7 +113,8 @@ class SettledBets extends Component {
             this.loadData()
         });
 
-    }
+    };
+
     dateToChange = (date) => {
         if(!this.state.initialized) return;
 
@@ -121,7 +123,7 @@ class SettledBets extends Component {
         }, function () {
             this.loadData()
         });
-    }
+    };
 
     getFilter = () => {
         return <Form style={{height: 40}} ref='dateForm'>
@@ -148,8 +150,7 @@ class SettledBets extends Component {
 
         </Form>
 
-
-    }
+    };
 
     getListItem = (bet, i) => {
         return <ListItem key={i}>
@@ -178,7 +179,7 @@ class SettledBets extends Component {
 
 
         </ListItem>
-    }
+    };
 
     getBetList = (bets) => {
         let betList = bets.map((bet, i) =>
@@ -208,7 +209,7 @@ class SettledBets extends Component {
                 <ScrollView refreshControl={
                     <RefreshControl
                         refreshing={this.state.refreshing}
-                        onRefresh={this._onRefresh.bind(this)}
+                        onRefresh={this.onRefresh}
                     />
                 }>
                     {this.getBetList(this.state._payload.bets)}

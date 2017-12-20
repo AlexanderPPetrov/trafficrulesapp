@@ -15,8 +15,9 @@ import {
     Right,
     Body
 } from "native-base";
-import { NavigationActions } from 'react-navigation';
 import {Grid, Row, Col} from "react-native-easy-grid";
+import { View, ScrollView, RefreshControl} from 'react-native';
+
 
 import Balance from "./balance";
 import styles from "./styles";
@@ -29,27 +30,44 @@ class PreviousBalance extends Component {
 
         this.state = {
             _payload: {
-                balances:[]
-            }
+                balances: []
+            },
+            refreshing: false
 
         }
     }
 
     componentDidMount = () => {
+
+        this.loadData()
+
+    };
+
+    loadData = () => {
         Api.get({
             url: 'get-account-balances',
-            data:{
+            data: {
                 account_id: this.props.navigation.state.params._id
             },
-            success: this.dataLoaded
+            success: this.dataLoaded,
+            always: this.setRefreshing
         })
-    }
+    };
 
-    dataLoaded = (response) =>{
+    dataLoaded = (response) => {
         this.setState({
-            _payload:response
+            _payload: response
         })
-    }
+    };
+
+    setRefreshing = () => {
+        this.setState({refreshing: false})
+    };
+
+    onRefresh = () => {
+        this.setState({refreshing: true});
+        this.loadData()
+    };
 
     render() {
         return (
@@ -57,7 +75,7 @@ class PreviousBalance extends Component {
                 <Header>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.navigate('Accounts')}>
-                            <Icon name="arrow-back" />
+                            <Icon name="arrow-back"/>
                         </Button>
                     </Left>
                     <Body>
@@ -67,7 +85,14 @@ class PreviousBalance extends Component {
 
                 </Header>
                 <Content padder>
-                    <Balance navigation={this.props.navigation} balances={this.state._payload.balances} currency={this.props.navigation.state.params._currency}></Balance>
+                    <ScrollView refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this.onRefresh}
+                        />
+                    }>
+                        <Balance navigation={this.props.navigation} balances={this.state._payload.balances} currency={this.props.navigation.state.params._currency}></Balance>
+                    </ScrollView>
                 </Content>
             </Container>
         );

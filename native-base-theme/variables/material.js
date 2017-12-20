@@ -1,6 +1,8 @@
 import color from "color";
 
 import { Platform, Dimensions, PixelRatio } from "react-native";
+import ColorScheme from "../../js/common/colorscheme";
+
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -40,12 +42,12 @@ export default {
   checkboxTickColor: "#fff",
 
   // Segment
-  segmentBackgroundColor: "#f36523",
+  segmentBackgroundColor: "#2c3c48",
   segmentActiveBackgroundColor: "#fff",
-  segmentTextColor: "#fff",
-  segmentActiveTextColor: "#f36523",
+  segmentTextColor: "#1ba98d",
+  segmentActiveTextColor: "#2c3c48",
   segmentBorderColor: "#fff",
-  segmentBorderColorMain: "#f36523",
+  segmentBorderColorMain: "#2c3c48",
 
   // New Variable
   get defaultTextColor() {
@@ -108,7 +110,7 @@ export default {
   cardDefaultBg: "#fff",
 
   // Color
-  brandPrimary: "#f36523",
+  brandPrimary: "#fd6b59",
   brandInfo: "#3F57D3",
   brandSuccess: "#5cb85c",
   brandDanger: "#d9534f",
@@ -131,7 +133,7 @@ export default {
 
   // Footer
   footerHeight: 55,
-  footerDefaultBg: "#f36523",
+  footerDefaultBg: "#2c3c48",
 
   // FooterTab
   tabBarTextColor: "#ffffff",
@@ -142,7 +144,7 @@ export default {
   tabActiveBgColor: undefined,
 
   // Tab
-  tabDefaultBg: "#f36523",
+  tabDefaultBg: "#2c3c48",
   topTabBarTextColor: "#b3c7f9",
   topTabBarActiveTextColor: "#fff",
   topTabActiveBgColor: undefined,
@@ -151,7 +153,7 @@ export default {
 
   // Header
   toolbarBtnColor: "#fff",
-  toolbarDefaultBg: "#f36523",
+  toolbarDefaultBg: "#2c3c48",
   toolbarHeight: platform === "ios" ? 76 : 56,
   toolbarIconSize: platform === "ios" ? 20 : 22,
   toolbarSearchIconSize: platform === "ios" ? 20 : 23,
@@ -159,7 +161,7 @@ export default {
   searchBarHeight: platform === "ios" ? 30 : 40,
   toolbarInverseBg: "#222",
   toolbarTextColor: "#fff",
-  toolbarDefaultBorder: "#f36523",
+  toolbarDefaultBorder: "#2c3c48",
   iosStatusbar: "light-content",
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hex();
@@ -178,10 +180,10 @@ export default {
   inputErrorBorderColor: "#ed2f2f",
 
   get inputColor() {
-    return this.textColor;
+    return this.inputTextColor;
   },
   get inputColorPlaceholder() {
-    return "#575757";
+    return ColorScheme.light;
   },
 
   inputGroupMarginBottom: 10,
@@ -242,7 +244,8 @@ export default {
   tabTextColor: "#222222",
 
   // Text
-  textColor: "#000",
+  textColor: "#222",
+  inputTextColor: "#cececf",
   inverseTextColor: "#fff",
   noteFontSize: 14,
 

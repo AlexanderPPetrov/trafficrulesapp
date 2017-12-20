@@ -33,6 +33,7 @@
     "react-native-exception-handler": "^2.6.0",
     "react-native-fetch-polyfill": "^1.1.2",
     "react-native-form-generator": "^0.9.9",
+    "react-native-linear-gradient": "^1.6.2",
     "react-native-material-dropdown": "^0.6.1",
     "react-native-modal-selector": "0.0.24",
     "react-native-modalbox": "1.4.2",

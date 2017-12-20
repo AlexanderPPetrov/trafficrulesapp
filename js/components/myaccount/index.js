@@ -19,7 +19,7 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 
-import {View} from "react-native"
+import {View, ScrollView, RefreshControl} from "react-native"
 import SafeBalance from "./safebalance";
 import Balance from "./balance";
 import BrokerageBalance from "./brokeragebalance";
@@ -34,23 +34,37 @@ class MyAccount extends Component {
         this.state = {
             _payload: {
                 balances:[]
-            }
-
+            },
+            refreshing: false
         }
     }
 
     componentDidMount = () => {
+        this.loadData()
+    };
+
+    loadData = () => {
         Api.get({
             url: 'get-member-details',
-            success: this.dataLoaded
+            success: this.dataLoaded,
+            always: this.setRefreshing
         })
-    }
+    };
+
+    setRefreshing = () => {
+        this.setState({refreshing: false})
+    };
+
+    onRefresh = () => {
+        this.setState({refreshing: true});
+        this.loadData()
+    };
 
     dataLoaded = (response) =>{
         this.setState({
             _payload:response
         })
-    }
+    };
 
     render() {
         return (
@@ -70,14 +84,21 @@ class MyAccount extends Component {
                     <Right/>
 
                 </Header>
-                <Content padder>
-                    <Card>
+                <Content>
+
+                    <ScrollView refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this.onRefresh}
+                        />
+                    }>
                         <View style={styles.cardBody}>
                             <SafeBalance _safe_balance={this.state._payload._safe_balance} _currency={this.state._payload._currency}></SafeBalance>
                             <BrokerageBalance _brokerage_balance={this.state._payload._brokerage_balance} _currency={this.state._payload._brokerage_currency}></BrokerageBalance>
                         </View>
-                    </Card>
-                    <Balance balances={ this.state._payload.balances }></Balance>
+                        <Balance balances={ this.state._payload.balances }></Balance>
+
+                    </ScrollView>
 
                 </Content>
 

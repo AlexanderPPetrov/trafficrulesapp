@@ -4,31 +4,50 @@ const {StyleSheet, Dimensions, Platform} = React;
 
 const deviceHeight = Dimensions.get("window").height;
 
+import ColorScheme from "../../common/colorscheme";
+
+
 export default {
     loginContainer: {
-        backgroundColor: '#fce0d4'
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     imageContainer: {
-        justifyContent: 'center',
-        alignItems: 'center'
+
+    },
+
+    inputMargin: {
+        marginBottom:20
     },
 
     inputContainer: {
-        backgroundColor:'#ffffff',
-        marginRight:15
+        backgroundColor: 'transparent',
+        borderColor: 'rgba(255,255,255,.2)',
+        marginLeft:0
+    },
+    inputIcon: {
+        color: ColorScheme.neutralDark,
+        opacity:0.8,
+        fontSize:30,
+        width:30
+    },
+
+    inputIconUser:{
+
     },
 
     inputField: {
         flex:1,
-        borderWidth: 0,
+        borderBottomWidth: 0,
         fontSize:18,
         lineHeight: 24,
+        color:ColorScheme.neutralLight
     },
     formContainer: {
-        flex: 1,
-        margin: 15,
-        marginTop: deviceHeight / 8,
-        marginBottom: 30
+        marginTop:45,
+        padding:35,
+        alignSelf: "stretch"
     },
     logo: {
         // position: "absolute",
@@ -41,17 +60,31 @@ export default {
     helloMessage: {
         fontSize:20,
         fontWeight:'bold',
-        marginBottom:30
+        marginBottom:30,
+        color:ColorScheme.neutralLight
     },
 
     avatar: {
         marginTop:15,
         marginBottom:5,
-        color:'#f36523'
+        color:ColorScheme.neutralDark
     },
 
     loginButton:{
-        margin: 15,
-        marginTop: 45
+        marginTop: 30,
+        backgroundColor:ColorScheme.action
+    },
+    linearGradient: {
+        flex: 1,
+        paddingLeft: 15,
+        paddingRight: 15,
+        borderRadius: 5
+    },
+    buttonText: {
+        fontSize: 18,
+        textAlign: 'center',
+        margin: 10,
+        color: '#ffffff',
+        backgroundColor: 'transparent',
     }
 };

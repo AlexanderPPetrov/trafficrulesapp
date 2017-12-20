@@ -20,20 +20,16 @@ class Balance extends Component {
             this.getListItem(balance, i)
         );
         return (
-                <List>{listItems}</List>
+                <List style={styles.mainBalanceContainer}>
+                    <Text style={styles.balanceHeader}>{I18n.t('balances').toUpperCase()}</Text>
+                    {listItems}
+                </List>
         );
     };
 
     render() {
         return (
-            <Card>
-                <CardItem header>
-                    <Text>{I18n.t('balances')}</Text>
-                </CardItem>
-
-                {this.balanceList()}
-            </Card>
-
+            this.balanceList()
         );
     }
 }

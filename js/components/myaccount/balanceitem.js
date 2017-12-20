@@ -13,9 +13,9 @@ class BalanceItem extends Component {
     getCurrencyIcon = () => {
         if (currencies.indexOf(this.props._currency.toLowerCase()) != -1) {
             let iconName = 'currency-' + this.props._currency.toLowerCase()
-            return <MaterialCommunityIcons name={iconName} size={30} color="#fff"/>
+            return <MaterialCommunityIcons name={iconName} size={30} color="#364b5a"/>
         } else {
-            return <Text style={{color: '#fff', fontSize: 26}}>{this.props._currency}</Text>
+            return <Text style={{color: '#364b5a', fontSize: 26}}>{this.props._currency}</Text>
         }
     }
 
@@ -29,7 +29,7 @@ class BalanceItem extends Component {
             </Col>
             <Col size={3}>
                 <Row><Text style={{fontSize: 16}}>{I18n.t('cashBalance')}</Text></Row>
-                <Row><Text style={{color: '#617d8a', fontSize: 14}}>{I18n.t('moneyInAccounts')}</Text></Row>
+                <Row><Text style={styles.moneyInAccounts}>{I18n.t('moneyInAccounts')}</Text></Row>
             </Col>
             <Col size={2}>
                 <Row>

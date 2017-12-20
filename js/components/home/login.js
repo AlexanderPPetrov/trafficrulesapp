@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {View} from "react-native";
+import ColorScheme from "../../common/colorscheme";
+
 import {
     Container,
     Header,
@@ -54,13 +56,15 @@ class Login extends React.Component {
     };
     render() {
         return (
-            <View>
-                <Form>
-                    <Item style={styles.inputContainer}>
-                        <Input placeholder={I18n.t('username')} value={this.state.username} onChangeText = {(newValue) => this.setState({username:newValue})}/>
+            <View style={styles.formContainer}>
+                <Form >
+                    <Item style={[styles.inputContainer, styles.inputMargin]} >
+                        <Icon active name='ios-person-outline' style={[styles.inputIcon, styles.inputIconUser]} />
+                        <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} placeholder={I18n.t('username')} value={this.state.username} onChangeText = {(newValue) => this.setState({username:newValue})}/>
                     </Item>
                     <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('password')} value={this.state.password} onChangeText = {(newValue) => this.setState({password:newValue})}/>
+                        <Icon active name='ios-lock-outline' style={styles.inputIcon} />
+                        <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} secureTextEntry={true} placeholder={I18n.t('password')} value={this.state.password} onChangeText = {(newValue) => this.setState({password:newValue})}/>
                     </Item>
                 </Form>
                 <Button block style={styles.loginButton} onPress={() =>

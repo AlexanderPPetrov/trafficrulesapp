@@ -16,7 +16,7 @@ import {
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-
+import {View, ScrollView, RefreshControl} from "react-native";
 import SportAccount from "./accountslist";
 import styles from "./styles";
 import Api from "../../../Api";
@@ -30,14 +30,21 @@ class Accounts extends Component {
         this.state = {
             _payload: {
                 accounts:[]
-            }
+            },
+            refreshing:false
         }
     }
 
     componentDidMount = () => {
+        this.loadData()
+    }
+
+    loadData = () => {
         Api.get({
             url: 'get-member-accounts',
-            success: this.dataLoaded
+            success: this.dataLoaded,
+            always: this.setRefreshing
+
         })
     }
 
@@ -45,6 +52,15 @@ class Accounts extends Component {
         this.setState({
             _payload:response
         })
+    }
+
+    setRefreshing = () => {
+        this.setState({refreshing: false})
+    }
+
+    onRefresh = () => {
+        this.setState({refreshing: true});
+        this.loadData()
     }
 
     render() {
@@ -65,7 +81,15 @@ class Accounts extends Component {
                     <Right/>
 
                 </Header>
-                <SportAccount navigation={this.props.navigation} accounts={this.state._payload.accounts}></SportAccount>
+                <ScrollView refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.onRefresh}
+                    />
+                }>
+                    <SportAccount navigation={this.props.navigation} accounts={this.state._payload.accounts}></SportAccount>
+
+                </ScrollView>
             </Container>
         );
     }

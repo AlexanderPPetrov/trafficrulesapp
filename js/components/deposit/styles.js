@@ -60,7 +60,7 @@ export default {
     },
 
     brokerageBalanceContainer: {
-        backgroundColor: "#f36523",
+        backgroundColor: "#2c3c48",
     },
     brokerageText: {
         color:"#fff"

@@ -13,7 +13,11 @@ class AccountsList extends Component {
 
 
     getListItem = (account, property, i) => {
-        return <ListItem key={i}>
+        let last = false
+        if(property == '_last_status'){
+            last = true
+        }
+        return <ListItem key={i} last={last}>
             <Col size={2}>
                 <Text>{I18n.t(property)}</Text>
             </Col>
@@ -22,7 +26,6 @@ class AccountsList extends Component {
             </Col>
         </ListItem>
     }
-
     getCard = (account, i) => {
         let cardListItems = listOrder.map((property, i) =>
             this.getListItem(account, property, i)

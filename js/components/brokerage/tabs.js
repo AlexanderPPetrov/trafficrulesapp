@@ -4,6 +4,7 @@ import {SimpleLineIcons, FontAwesome} from '@expo/vector-icons';
 import {TabNavigator} from "react-navigation";
 import OpenBets from "./openbets";
 import SettledBets from "./settledbets";
+import ColorScheme from "../../common/colorscheme";
 
 import {
     Image,
@@ -49,16 +50,16 @@ const Tabs = TabNavigator({
     tabBarPosition: 'top',
     animationEnabled: true,
     tabBarOptions: {
-        activeTintColor: '#fff',
-        inactiveTintColor : '#1baf91',
+        activeTintColor: ColorScheme.neutralLight,
+        inactiveTintColor : ColorScheme.neutralDark,
         labelStyle: {
             fontSize: 12,
         },
         style: {
-            backgroundColor: '#2c3c48',
+            backgroundColor: ColorScheme.dark,
         },
         indicatorStyle:{
-            backgroundColor:'#1baf91'
+            backgroundColor:ColorScheme.info
         }
     }
 })

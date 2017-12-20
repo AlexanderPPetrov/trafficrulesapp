@@ -2,6 +2,8 @@ const React = require("react-native");
 
 const {StyleSheet} = React;
 
+import ColorScheme from "../../common/colorscheme";
+
 export default {
     balancePadding: {
         paddingLeft: 15,
@@ -10,7 +12,7 @@ export default {
         paddingBottom: 20
     },
     mainBalanceContainer: {
-        backgroundColor: "#fff",
+        backgroundColor: ColorScheme.neutralLight,
     },
 
     cardHeader: {
@@ -20,28 +22,31 @@ export default {
     cardBody: {
         flexDirection: 'row',
         flex: 1,
-        padding: 5
+    },
+    moneyInAccounts: {
+        color: ColorScheme.light,
+        fontSize: 14
     },
     mainBalanceLabel: {
-        color: "#fff",
+        color: ColorScheme.neutralLight,
     },
     mainBalanceValue: {
-        color: "#fff",
+        color: ColorScheme.neutralLight,
         fontWeight: 'bold',
         fontSize: 22
     },
     mainBalance: {
         padding: 10,
-        margin: 5,
+        paddingLeft: 15,
+        paddingRight: 15,
         flex: 1,
         flexDirection: 'row',
-        borderRadius: 3
     },
     safeBalance: {
-        backgroundColor: "#1baf63",
+        backgroundColor: ColorScheme.info,
     },
     brokerageBalance: {
-        backgroundColor: "#ff8600"
+        backgroundColor: ColorScheme.primary
     },
 
     balancesContainer: {
@@ -49,12 +54,16 @@ export default {
     },
 
     balanceView: {
-        borderBottomColor: '#fff',
+        borderBottomColor: ColorScheme.neutralLight,
         borderBottomWidth: 1
     },
 
     balanceHeader: {
-        color: "#617d8a"
+        padding:15,
+        color: ColorScheme.light,
+        fontSize: 12,
+        borderBottomWidth:1,
+        borderBottomColor:ColorScheme.neutralDark
     },
 
     listItem: {
@@ -71,12 +80,12 @@ export default {
     iconContainer: {
 
         borderWidth: 1,
-        borderColor: 'rgba(0,0,0,0.2)',
+        borderColor: ColorScheme.dark,
         alignItems: 'center',
         justifyContent: 'center',
         width: 46,
         height: 46,
-        backgroundColor: '#ff8600',
+        backgroundColor: ColorScheme.neutralLight,
         borderRadius: 46,
         marginRight: 5,
         shadowColor: '#000000',
@@ -106,7 +115,7 @@ export default {
     balanceCurrency: {
         textAlign: 'left',
         alignSelf: 'stretch',
-        color: '#ff8600',
+        color: ColorScheme.dark,
         paddingLeft: 5
     }
 
