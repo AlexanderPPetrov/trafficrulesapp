@@ -17,7 +17,7 @@ import {
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-import { ScrollView, RefreshControl  } from "react-native";
+import { ScrollView, RefreshControl, View } from "react-native";
 
 import styles from "./styles";
 import Tabs from "./tabs";
@@ -65,7 +65,7 @@ class OpenBets extends Component {
     };
 
     getListItem = (bet, i) => {
-        return <ListItem key={i}>
+        return <Card key={i}>
             <Grid style={{height:170}}>
                     <Row>
                         <Text>{I18n.t('betNumber')} {bet._id}</Text>
@@ -95,7 +95,7 @@ class OpenBets extends Component {
                         </Col>
                     </Row>
             </Grid>
-        </ListItem>
+        </Card>
     };
 
     getBetList = (bets) => {
@@ -106,9 +106,9 @@ class OpenBets extends Component {
             return <Text style={{textAlign:'center', padding:10, alignSelf: "stretch"}}>{I18n.t('noRunningBets')}</Text>;
         }
         return (
-            <List>
+            <View>
                 {betList}
-            </List>
+            </View>
         );
     };
 

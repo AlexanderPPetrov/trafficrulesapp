@@ -5,7 +5,7 @@ import {View} from 'react-native';
 import {Container, Header, Content, Card, CardItem, Text, Right, ListItem} from 'native-base';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-
+import Ui from '../../common/ui';
 let currencies = ['usd', 'btc', 'eur', 'inr', 'gbp'];
 
 class BalanceItem extends Component {
@@ -20,33 +20,33 @@ class BalanceItem extends Component {
     }
 
     render() {
-        return <ListItem style={{marginLeft: 0, paddingLeft: 15}}>
+        return <ListItem style={Ui.listItem}>
 
-            <Col style={{width: 66}}>
+            <Col style={{width:66}}>
                 <View style={styles.iconContainer}>
                     {this.getCurrencyIcon()}
                 </View>
             </Col>
-            <Col size={3}>
-                <Row><Text style={{fontSize: 16}}>{I18n.t('cashBalance')}</Text></Row>
-                <Row><Text style={styles.moneyInAccounts}>{I18n.t('moneyInAccounts')}</Text></Row>
+            <Col >
+                <Row><Text style={styles.balanceLabel}>{I18n.t('cashBalance')}</Text></Row>
+                <Row><Text style={styles.balanceLabel}>{I18n.t('moneyInAccounts')}</Text></Row>
             </Col>
-            <Col size={2}>
+            <Col style={{minWidth:60}}>
                 <Row>
-                    <Col size={4}>
-                        <Text style={styles.balanceValue}>{this.props._cash_balance}</Text>
+                    <Col >
+                        <Text style={Ui.balanceValue}>{this.props._cash_balance}</Text>
                     </Col>
-                    <Col style={{width:40}}>
-                        <Text style={styles.balanceCurrency}>{this.props._currency}</Text>
+                    <Col style={{width:30}}>
+                        <Text style={Ui.balanceCurrency}>{this.props._currency}</Text>
                     </Col>
 
                 </Row>
                 <Row>
-                    <Col size={4}>
-                        <Text style={styles.balanceValue}>{this.props._money_in_accounts}</Text>
+                    <Col >
+                        <Text style={Ui.balanceValue}>{this.props._money_in_accounts}</Text>
                     </Col>
-                    <Col style={{width:40}}>
-                        <Text style={styles.balanceCurrency}>{this.props._currency}</Text>
+                    <Col style={{width:30}}>
+                        <Text style={Ui.balanceCurrency}>{this.props._currency}</Text>
                     </Col>
                 </Row>
             </Col>

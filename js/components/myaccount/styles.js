@@ -23,9 +23,10 @@ export default {
         flexDirection: 'row',
         flex: 1,
     },
-    moneyInAccounts: {
-        color: ColorScheme.light,
-        fontSize: 14
+
+    balanceLabel: {
+        color: ColorScheme.darker,
+        fontSize: 16
     },
     mainBalanceLabel: {
         color: ColorScheme.neutralLight,
@@ -66,58 +67,19 @@ export default {
         borderBottomColor:ColorScheme.neutralDark
     },
 
-    listItem: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-
-    balanceItem: {
-        backgroundColor: 'green',
-        flex: 6,
-        flexDirection: 'row'
-    },
-
     iconContainer: {
 
         borderWidth: 1,
         borderColor: ColorScheme.dark,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 46,
-        height: 46,
+        width: 50,
+        height: 50,
         backgroundColor: ColorScheme.neutralLight,
-        borderRadius: 46,
-        marginRight: 5,
-        shadowColor: '#000000',
-        shadowOffset: {
-            width: 0,
-            height: 5
-        },
-        shadowRadius: 5,
-        shadowOpacity: 1.0,
-        elevation: 5,
+        borderRadius: 50
 
     },
 
-    balanceLabel: {
-        flex: 2,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        paddingTop: 7,
-        paddingBottom: 7
-    },
-
-    balanceValue: {
-        textAlign: 'right',
-        alignSelf: 'stretch'
-    },
-
-    balanceCurrency: {
-        textAlign: 'left',
-        alignSelf: 'stretch',
-        color: ColorScheme.dark,
-        paddingLeft: 5
-    }
 
 
 };

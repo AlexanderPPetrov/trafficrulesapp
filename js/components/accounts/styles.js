@@ -19,10 +19,7 @@ export default {
         borderBottomWidth: 1
     },
 
-    headerItem: {
-        height: 50,
-        paddingLeft: 10
-    },
+
     headerIconContainer: {
         borderWidth: 1,
         borderColor: 'rgba(0,0,0,0.2)',

@@ -8,6 +8,7 @@ export default {
     primary:'#ff8625',
     action:'#ef5a48',
     neutralLight:'#fff',
-    neutralDark:'#e1e1e1',
-    neutralDarker:'#565f64',
+    neutralDark:'#f1f5f4',
+    neutralDarker:'#e0e2e1',
+    neutralDarkest:'#bdbfbe'
 };

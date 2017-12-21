@@ -19,11 +19,11 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, ScrollView, RefreshControl} from "react-native";
 
-import {
-    Form,
-    Separator, InputField, LinkField,
-    SwitchField, PickerField, DatePickerField, TimePickerField
-} from 'react-native-form-generator';
+// import {
+//     Form,
+//     InputField, LinkField,
+//     SwitchField, PickerField, DatePickerField, TimePickerField
+// } from 'react-native-form-generator';
 
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
@@ -128,24 +128,24 @@ class SettledBets extends Component {
     getFilter = () => {
         return <Form style={{height: 40}} ref='dateForm'>
             <Grid>
-                <Col>
-                    <DatePickerField ref='dateFrom'
-                                     minimumDate={new Date('1/1/2017')}
-                                     maximumDate={new Date()}
-                                     placeholder={I18n.t('from')}
-                                     onChange={this.dateFromChange}
-                                     onChangeRaw={this.props.onChange}
-                    />
-                </Col>
-                <Col>
-                    <DatePickerField ref='dateTo'
-                                     minimumDate={new Date('1/1/2017')}
-                                     maximumDate={new Date()}
-                                     placeholder={I18n.t('to')}
-                                     onChange={this.dateToChange}
-                                     onChangeRaw={this.props.onChange}
-                    />
-                </Col>
+                {/*<Col>*/}
+                    {/*<DatePickerField ref='dateFrom'*/}
+                                     {/*minimumDate={new Date('1/1/2017')}*/}
+                                     {/*maximumDate={new Date()}*/}
+                                     {/*placeholder={I18n.t('from')}*/}
+                                     {/*onChange={this.dateFromChange}*/}
+                                     {/*onChangeRaw={this.props.onChange}*/}
+                    {/*/>*/}
+                {/*</Col>*/}
+                {/*<Col>*/}
+                    {/*<DatePickerField ref='dateTo'*/}
+                                     {/*minimumDate={new Date('1/1/2017')}*/}
+                                     {/*maximumDate={new Date()}*/}
+                                     {/*placeholder={I18n.t('to')}*/}
+                                     {/*onChange={this.dateToChange}*/}
+                                     {/*onChangeRaw={this.props.onChange}*/}
+                    {/*/>*/}
+                {/*</Col>*/}
             </Grid>
 
         </Form>

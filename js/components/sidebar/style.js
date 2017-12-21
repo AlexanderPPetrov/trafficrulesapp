@@ -21,15 +21,7 @@ export default {
     },
     menuHeader: {
         padding: 20,
-        backgroundColor: ColorScheme.dark,
-        shadowColor: '#000000',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
-        shadowRadius: 3,
-        shadowOpacity: 1.0,
-        elevation: 3
+        backgroundColor: ColorScheme.dark
     },
     listItemContainer: {
         flexDirection: "row",

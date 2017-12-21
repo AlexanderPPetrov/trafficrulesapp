@@ -4,43 +4,47 @@ import {AppRegistry, SectionList, StyleSheet, Text, View, ScrollView} from 'reac
 import styles from "./styles";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {Button, List, ListItem, Card, Content} from "native-base";
+import Ui from '../../common/ui';
 
 
 class Balance extends Component {
 
 
     getBalanceItem = (balance, i) => {
-        return <List key={i}>
-            <ListItem itemDivider>
+        return <View key={i}>
+            <View style={Ui.listHeaderExtended}>
                 <Text style={styles.secondaryLabel}>{I18n.t('date')} {balance._date_created}</Text>
-            </ListItem>
-            <ListItem>
-                <Grid>
-                    <Col size={3}>
-                        <Text>{I18n.t('_balance')}</Text>
-                    </Col>
-                    <Col size={3}>
-                        <Text style={styles.balanceValue}>{balance._balance}</Text>
-                    </Col>
-                    <Col style={{width: 40}}>
-                        <Text style={styles.balanceCurrency}>{this.props.currency}</Text>
-                    </Col>
-                </Grid>
-            </ListItem>
-            <ListItem>
-                <Grid>
-                    <Col size={3}>
-                        <Text>{I18n.t('change')}</Text>
-                    </Col>
-                    <Col size={3}>
-                        <Text style={styles.balanceValue}>{balance._change}</Text>
-                    </Col>
-                    <Col style={{width: 40}}>
-                        <Text style={styles.balanceCurrency}>{this.props.currency}</Text>
-                    </Col>
-                </Grid>
-            </ListItem>
-        </List>
+            </View>
+            <List>
+                <ListItem style={Ui.listItem}>
+                    <Grid>
+                        <Col size={3}>
+                            <Text>{I18n.t('_balance')}</Text>
+                        </Col>
+                        <Col size={3}>
+                            <Text style={Ui.balanceValue}>{balance._balance}</Text>
+                        </Col>
+                        <Col style={{width: 40}}>
+                            <Text style={Ui.balanceCurrency}>{this.props.currency}</Text>
+                        </Col>
+                    </Grid>
+                </ListItem>
+                <ListItem>
+                    <Grid>
+                        <Col size={3}>
+                            <Text>{I18n.t('change')}</Text>
+                        </Col>
+                        <Col size={3}>
+                            <Text style={Ui.balanceValue}>{balance._change}</Text>
+                        </Col>
+                        <Col style={{width: 40}}>
+                            <Text style={Ui.balanceCurrency}>{this.props.currency}</Text>
+                        </Col>
+                    </Grid>
+                </ListItem>
+            </List>
+        </View>
+
     }
     getBalanceList = (balances) => {
         let opacity = 0;

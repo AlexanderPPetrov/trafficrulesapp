@@ -81,7 +81,7 @@ class Withdraw extends Component {
                     </Right>
 
                 </Header>
-                <Content padder>
+                <Content>
                     <Steps currentPosition={this.state.currentPage} stepCount={5}></Steps>
                     <Tabs onRef={ref => (this.tabs = ref)} {...this.props} onUpdatePage={this.changeHandler}></Tabs>
                     <Chat></Chat>

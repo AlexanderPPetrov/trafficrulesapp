@@ -84,7 +84,7 @@ class PreviousBalance extends Component {
                     <Right/>
 
                 </Header>
-                <Content padder>
+                <Content>
                     <ScrollView refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}

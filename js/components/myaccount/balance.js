@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
+import Ui from '../../common/ui';
 import {AppRegistry, SectionList, StyleSheet, View, ScrollView} from 'react-native';
 
 import styles from "./styles";
 import BalanceItem from "./balanceitem";
-import {Container, Header, Content, Card, CardItem, Text, Icon, Right, List} from 'native-base';
+import {Container, Header, Content, Card, CardItem, Text, Icon, Right, List, ListItem} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 class Balance extends Component {
@@ -20,10 +21,12 @@ class Balance extends Component {
             this.getListItem(balance, i)
         );
         return (
+            <View>
+                <View style={Ui.listHeader}><Text style={Ui.listHeaderLabel}>{I18n.t('balances').toUpperCase()}</Text></View>
                 <List style={styles.mainBalanceContainer}>
-                    <Text style={styles.balanceHeader}>{I18n.t('balances').toUpperCase()}</Text>
                     {listItems}
                 </List>
+            </View>
         );
     };
 
