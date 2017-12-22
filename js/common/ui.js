@@ -5,7 +5,7 @@ const {StyleSheet} = React;
 
 export default {
     listHeader: {
-        backgroundColor: ColorScheme.neutralLight,
+        backgroundColor: ColorScheme.neutralDark,
         height:45,
         justifyContent: 'center',
         paddingLeft:15,
@@ -13,26 +13,33 @@ export default {
         borderBottomColor: ColorScheme.neutralDarker
     },
     listHeaderExtended: {
-        backgroundColor: ColorScheme.neutralLight,
+        backgroundColor: ColorScheme.neutralDark                                                                                                                                                           ,
         height:50,
     },
     listHeaderLabel: {
-        fontSize:12,
+        fontSize:14,
         color: ColorScheme.neutralDarkest,
     },
-
     listItem: {
         paddingLeft: 15,
         paddingRight: 15,
         backgroundColor: ColorScheme.neutralLight,
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        maxHeight:78
+    },
+    balanceLabel: {
+        color: ColorScheme.darker,
+        fontSize: 16
     },
     balanceValue: {
         textAlign: 'right',
         alignSelf: 'stretch',
-        fontSize:22,
-        color:ColorScheme.dark
+        fontSize:20,
+        color:ColorScheme.light
+    },
+    balanceValueSmall: {
+        fontSize:16,
     },
     balanceCurrency: {
         textAlign: 'left',
@@ -41,5 +48,8 @@ export default {
         paddingTop:4,
         paddingLeft:5,
         fontSize:12
+    },
+    currencyWidth: {
+        width:30
     }
 };

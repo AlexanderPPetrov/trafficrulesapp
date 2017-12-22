@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
+import _ from "lodash";
+
 import {
     Container,
     Header,
@@ -23,6 +25,7 @@ import {View, ScrollView, RefreshControl} from "react-native"
 import SafeBalance from "./safebalance";
 import Balance from "./balance";
 import BrokerageBalance from "./brokeragebalance";
+import PieChartBalance from "./piechart";
 import styles from "./styles";
 import Api from "../../../Api";
 
@@ -33,8 +36,9 @@ class MyAccount extends Component {
 
         this.state = {
             _payload: {
-                balances:[]
+                balances: []
             },
+            pieChartData: [],
             refreshing: false
         }
     }
@@ -60,11 +64,19 @@ class MyAccount extends Component {
         this.loadData()
     };
 
-    dataLoaded = (response) =>{
+    dataLoaded = (response) => {
+
+        let pieChartData = _.reject(response.balances, {_total_in_eur:0})
+        console.log('pieChartData', pieChartData)
+        var result = pieChartData.map(balance => ({ x: balance._currency, y: balance._total_in_eur }));
         this.setState({
-            _payload:response
+            _payload: response,
+            pieChartData: result
         })
+
+
     };
+
 
     render() {
         return (
@@ -84,23 +96,25 @@ class MyAccount extends Component {
                     <Right/>
 
                 </Header>
-                <Content>
-
-                    <ScrollView refreshControl={
-                        <RefreshControl
-                            refreshing={this.state.refreshing}
-                            onRefresh={this.onRefresh}
-                        />
-                    }>
+                <ScrollView refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.onRefresh}
+                    />
+                }>
+                    <Content>
                         <View style={styles.cardBody}>
-                            <SafeBalance _safe_balance={this.state._payload._safe_balance} _currency={this.state._payload._currency}></SafeBalance>
-                            <BrokerageBalance _brokerage_balance={this.state._payload._brokerage_balance} _currency={this.state._payload._brokerage_currency}></BrokerageBalance>
+                            <SafeBalance _safe_balance={this.state._payload._safe_balance}
+                                         _currency={this.state._payload._currency}></SafeBalance>
+                            <BrokerageBalance _brokerage_balance={this.state._payload._brokerage_balance}
+                                              _currency={this.state._payload._brokerage_currency}></BrokerageBalance>
                         </View>
-                        <Balance balances={ this.state._payload.balances }></Balance>
+                        <Balance balances={this.state._payload.balances}></Balance>
+                        <PieChartBalance data={this.state.pieChartData}></PieChartBalance>
+                    </Content>
 
-                    </ScrollView>
+                </ScrollView>
 
-                </Content>
 
             </Container>
         );

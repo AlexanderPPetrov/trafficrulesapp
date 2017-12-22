@@ -96,8 +96,8 @@ class SettledBets extends Component {
 
         }, function () {
 
-            this.refs.dateFrom.setDate(this.state.dateFrom);
-            this.refs.dateTo.setDate(this.state.dateTo);
+            // this.refs.dateFrom.setDate(this.state.dateFrom);
+            // this.refs.dateTo.setDate(this.state.dateTo);
             this.loadData()
         });
 
@@ -126,7 +126,7 @@ class SettledBets extends Component {
     };
 
     getFilter = () => {
-        return <Form style={{height: 40}} ref='dateForm'>
+        return
             <Grid>
                 {/*<Col>*/}
                     {/*<DatePickerField ref='dateFrom'*/}
@@ -147,8 +147,8 @@ class SettledBets extends Component {
                     {/*/>*/}
                 {/*</Col>*/}
             </Grid>
-
-        </Form>
+        //     <Form style={{height: 40}} ref='dateForm'>
+        // </Form>
 
     };
 

@@ -34,6 +34,7 @@ export default {
     mainBalance:'Main Balance',
     safeBalance: 'Safe Balance',
     balances: 'Balances',
+    distribution: 'Distribution',
     cashBalance: 'Cash Balance',
     moneyInAccounts: 'In Accounts',
     brokerageBalance: 'Brokerage Balance',

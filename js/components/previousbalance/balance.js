@@ -9,35 +9,34 @@ import Ui from '../../common/ui';
 
 class Balance extends Component {
 
-
     getBalanceItem = (balance, i) => {
         return <View key={i}>
-            <View style={Ui.listHeaderExtended}>
-                <Text style={styles.secondaryLabel}>{I18n.t('date')} {balance._date_created}</Text>
+            <View style={Ui.listHeader}>
+                <Text style={Ui.listHeaderLabel}>{I18n.t('date')} {balance._date_created}</Text>
             </View>
             <List>
                 <ListItem style={Ui.listItem}>
                     <Grid>
                         <Col size={3}>
-                            <Text>{I18n.t('_balance')}</Text>
+                            <Text style={Ui.balanceLabel}>{I18n.t('_balance')}</Text>
                         </Col>
                         <Col size={3}>
                             <Text style={Ui.balanceValue}>{balance._balance}</Text>
                         </Col>
-                        <Col style={{width: 40}}>
+                        <Col style={Ui.currencyWidth}>
                             <Text style={Ui.balanceCurrency}>{this.props.currency}</Text>
                         </Col>
                     </Grid>
                 </ListItem>
-                <ListItem>
+                <ListItem style={Ui.listItem}>
                     <Grid>
                         <Col size={3}>
-                            <Text>{I18n.t('change')}</Text>
+                            <Text style={Ui.balanceLabel}>{I18n.t('change')}</Text>
                         </Col>
                         <Col size={3}>
                             <Text style={Ui.balanceValue}>{balance._change}</Text>
                         </Col>
-                        <Col style={{width: 40}}>
+                        <Col style={Ui.currencyWidth}>
                             <Text style={Ui.balanceCurrency}>{this.props.currency}</Text>
                         </Col>
                     </Grid>
@@ -55,10 +54,9 @@ class Balance extends Component {
             this.getBalanceItem(balance, i)
         );
         return (
-            <Card style={{opacity: opacity}}>{listItems}</Card>
+            <View style={{opacity: opacity}}>{listItems}</View>
         );
     };
-
 
     render() {
         return (

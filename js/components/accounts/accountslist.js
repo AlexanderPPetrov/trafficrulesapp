@@ -16,10 +16,10 @@ class AccountsList extends Component {
     getListItem = (account, property, i) => {
         return <ListItem key={i} style={Ui.listItem}>
             <Col size={2}>
-                <Text>{I18n.t(property)}</Text>
+                <Text style={Ui.balanceLabel}>{I18n.t(property)}</Text>
             </Col>
             <Col size={3}>
-                <Text style={styles.accountValue}>{account[property]}</Text>
+                <Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{account[property]}</Text>
             </Col>
         </ListItem>
     }
@@ -39,8 +39,7 @@ class AccountsList extends Component {
                             </View>
                         </Col>
                         <Col style={{justifyContent: 'center'}}>
-                            <Text
-                                style={styles.headerLabel}>{(I18n.t(accountTypes[account._type]) + ' ' + I18n.t('account')).toUpperCase()}</Text>
+                            <Text style={styles.headerLabel}>{(I18n.t(accountTypes[account._type]) + ' ' + I18n.t('account')).toUpperCase()}</Text>
                         </Col>
                         <Col style={{justifyContent: 'flex-end', flexDirection: 'row', width: 155}}>
                             <Button style={styles.headerButton}

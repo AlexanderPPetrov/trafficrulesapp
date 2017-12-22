@@ -16,7 +16,7 @@ import {
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-import { View, ScrollView, RefreshControl} from 'react-native';
+import {View, ScrollView, RefreshControl} from 'react-native';
 
 
 import Balance from "./balance";
@@ -84,16 +84,15 @@ class PreviousBalance extends Component {
                     <Right/>
 
                 </Header>
-                <Content>
-                    <ScrollView refreshControl={
-                        <RefreshControl
-                            refreshing={this.state.refreshing}
-                            onRefresh={this.onRefresh}
-                        />
-                    }>
-                        <Balance navigation={this.props.navigation} balances={this.state._payload.balances} currency={this.props.navigation.state.params._currency}></Balance>
-                    </ScrollView>
-                </Content>
+                <ScrollView refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.onRefresh}
+                    />
+                }>
+                    <Balance navigation={this.props.navigation} balances={this.state._payload.balances}
+                             currency={this.props.navigation.state.params._currency}></Balance>
+                </ScrollView>
             </Container>
         );
     }

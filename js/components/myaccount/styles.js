@@ -23,13 +23,9 @@ export default {
         flexDirection: 'row',
         flex: 1,
     },
-
-    balanceLabel: {
-        color: ColorScheme.darker,
-        fontSize: 16
-    },
     mainBalanceLabel: {
         color: ColorScheme.neutralLight,
+        paddingTop:15
     },
     mainBalanceValue: {
         color: ColorScheme.neutralLight,
@@ -37,11 +33,12 @@ export default {
         fontSize: 22
     },
     mainBalance: {
-        padding: 10,
         paddingLeft: 15,
         paddingRight: 15,
         flex: 1,
+        height:78,
         flexDirection: 'row',
+        justifyContent: 'center',
     },
     safeBalance: {
         backgroundColor: ColorScheme.info,
@@ -49,7 +46,6 @@ export default {
     brokerageBalance: {
         backgroundColor: ColorScheme.primary
     },
-
     balancesContainer: {
         paddingBottom: 100
     },
@@ -68,17 +64,19 @@ export default {
     },
 
     iconContainer: {
-
         borderWidth: 1,
         borderColor: ColorScheme.dark,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 50,
-        height: 50,
+        width: 42,
+        height: 42,
         backgroundColor: ColorScheme.neutralLight,
-        borderRadius: 50
-
+        borderRadius: 42
     },
+
+    pieChartContainer: {
+        backgroundColor: ColorScheme.neutralLight
+    }
 
 
 

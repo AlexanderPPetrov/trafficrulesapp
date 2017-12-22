@@ -13,30 +13,30 @@ class BalanceItem extends Component {
     getCurrencyIcon = () => {
         if (currencies.indexOf(this.props._currency.toLowerCase()) != -1) {
             let iconName = 'currency-' + this.props._currency.toLowerCase()
-            return <MaterialCommunityIcons name={iconName} size={30} color="#364b5a"/>
+            return <MaterialCommunityIcons name={iconName} size={26} color="#364b5a"/>
         } else {
-            return <Text style={{color: '#364b5a', fontSize: 26}}>{this.props._currency}</Text>
+            return <Text style={{color: '#364b5a', fontSize: 22}}>{this.props._currency}</Text>
         }
     }
 
     render() {
         return <ListItem style={Ui.listItem}>
 
-            <Col style={{width:66}}>
+            <Col style={{width:60}}>
                 <View style={styles.iconContainer}>
                     {this.getCurrencyIcon()}
                 </View>
             </Col>
             <Col >
-                <Row><Text style={styles.balanceLabel}>{I18n.t('cashBalance')}</Text></Row>
-                <Row><Text style={styles.balanceLabel}>{I18n.t('moneyInAccounts')}</Text></Row>
+                <Row><Text style={Ui.balanceLabel}>{I18n.t('cashBalance')}</Text></Row>
+                <Row><Text style={Ui.balanceLabel}>{I18n.t('moneyInAccounts')}</Text></Row>
             </Col>
             <Col style={{minWidth:60}}>
                 <Row>
                     <Col >
                         <Text style={Ui.balanceValue}>{this.props._cash_balance}</Text>
                     </Col>
-                    <Col style={{width:30}}>
+                    <Col style={Ui.currencyWidth}>
                         <Text style={Ui.balanceCurrency}>{this.props._currency}</Text>
                     </Col>
 
@@ -45,7 +45,7 @@ class BalanceItem extends Component {
                     <Col >
                         <Text style={Ui.balanceValue}>{this.props._money_in_accounts}</Text>
                     </Col>
-                    <Col style={{width:30}}>
+                    <Col style={Ui.currencyWidth}>
                         <Text style={Ui.balanceCurrency}>{this.props._currency}</Text>
                     </Col>
                 </Row>
