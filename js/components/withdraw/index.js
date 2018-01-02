@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Steps from '../../common/steps/index';
 import Chat from '../../common/chat/index';
-import Tabs from './tabs';
+import WithdrawSteps from './withdrawsteps';
 import {
     Container,
     Card,
@@ -37,15 +37,28 @@ class Withdraw extends Component {
         super(props);
 
         this.state = {
-            currentPage: 0
+            currentPage: 0,
+            buttonDisabled: true
         }
     }
 
+    setButtonState = (value) => {
+        this.setState({
+            buttonDisabled: value
+        })
+    }
+
     goBackward = () => {
+        this.setState({
+            currentPage:this.state.currentPage - 1
+        })
         this.tabs.goBackward()
     }
     goForward = () => {
         this.tabs.goForward()
+        this.setState({
+            currentPage:this.state.currentPage + 1
+        })
 
     }
     changeHandler = (page) => {
@@ -75,20 +88,19 @@ class Withdraw extends Component {
                     <Title>{I18n.t('withdraw')}</Title>
                     </Body>
                     <Right>
-                        <Button transparent small>
+                        <Button transparent small onPress={() => this.props.navigation.navigate("MyAccount")}>
                             <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
                         </Button>
                     </Right>
-
                 </Header>
                 <Content>
                     <Steps currentPosition={this.state.currentPage} stepCount={5}></Steps>
-                    <Tabs onRef={ref => (this.tabs = ref)} {...this.props} onUpdatePage={this.changeHandler}></Tabs>
+                    <WithdrawSteps onRef={ref => (this.tabs = ref)} {...this.props} onUpdatePage={this.changeHandler} disableButton={this.setButtonState}></WithdrawSteps>
                     <Chat></Chat>
                 </Content>
                 <Footer>
                     <FooterTab>
-                        <Button onPress={this.goForward}>
+                        <Button onPress={this.goForward} disabled={this.state.buttonDisabled}>
                             <Text>{I18n.t('continue')}</Text>
                         </Button>
 

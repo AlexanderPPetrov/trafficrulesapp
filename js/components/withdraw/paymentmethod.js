@@ -30,7 +30,7 @@ import Api from "../../../Api";
 
 const Item = Picker.Item;
 
-class Withdraw extends Component {
+class PaymentMethod extends Component {
 
     constructor(props) {
         super(props);
@@ -38,30 +38,32 @@ class Withdraw extends Component {
         this.state = {
             paymentMethods: []
             ,
-            selected: undefined
-
+            selected: undefined,
+            noPaymentMethods: false
         }
     }
 
     componentDidMount = () => {
-        // Api.get({
-        //     url: 'get-member-payment-options',
-        //     success: this.dataLoaded
-        // })
+        Api.get({
+            url: 'get-member-payment-options',
+            success: this.dataLoaded
+        })
     }
 
     dataLoaded = (response) => {
-        this.setState({
-            paymentMethods: response.paymentMethods
-        })
-        console.log(this.state.paymentMethods)
+        if(response.paymentMethods.length > 0){
+            this.setState({
+                paymentMethods: response.paymentMethods
+            }, function(){
+                this.props.onValueChange(response.paymentMethods[0]._key)
+            })
+        }else{
+            this.setState({
+                noPaymentMethods: true
+            })
+        }
     }
-    onValueChange = (value: string) => {
-        console.log(value)
-        this.setState({
-            selected: value
-        });
-    }
+
 
 
     getPicker = () => {
@@ -74,12 +76,13 @@ class Withdraw extends Component {
             <Picker
                 mode="dropdown"
                 placeholder="Select One"
-                selectedValue={this.state.selected}
-                onValueChange={this.onValueChange}
+                selectedValue={this.props.paymentMethod}
+                onValueChange={this.props.onValueChange}
                 note={false}
             >
                 {listItems}
             </Picker>
+
         );
     }
 
@@ -89,14 +92,12 @@ class Withdraw extends Component {
 
             <View >
 
-                <CardItem header>
-                    <Text>{I18n.t('selectPaymentMethod')}</Text>
-                </CardItem>
-                <View style={{paddingLeft: 15, paddingRight: 15}}>
-                    <Form style={{borderWidth: 1, borderColor: '#d6d7da'}}>
-
+                <View style={styles.withdrawHeader} >
+                    <Text style={{textAlign:'center'}}>{I18n.t('selectPaymentMethod')}</Text>
+                </View>
+                <View >
+                    <Form style={styles.formContainer}>
                         {this.getPicker()}
-
                     </Form>
                 </View>
 
@@ -107,4 +108,4 @@ class Withdraw extends Component {
     }
 }
 
-export default Withdraw;
+export default PaymentMethod;
