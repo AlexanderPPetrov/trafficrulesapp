@@ -33,19 +33,23 @@ const Item = Picker.Item;
 
 class Amount extends Component {
 
+    componentDidMount = () => {
+        if(this.props.amount == '' ){
+            this.props.disableButton(true)
+        }
+    }
+
     render() {
         return (
 
             <View >
-
                 <View style={styles.withdrawHeader} >
                     <Text style={{textAlign:'center'}}>{I18n.t('amount')}</Text>
                 </View>
                 <Form style={styles.formContainer}>
-                    <Input placeholder="0" value={this.props.amount} onChangeText={this.props.onValueChange} keyboardType='numeric'/>
+                    <Input placeholder="0" value={this.props.amount} onChangeText={(text) => this.props.onValueChange('amount', text)} keyboardType='numeric'/>
                 </Form>
             </View>
-
 
         );
     }

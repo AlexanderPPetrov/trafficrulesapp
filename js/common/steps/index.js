@@ -13,7 +13,7 @@ class Steps extends Component {
             <View style={styles.stepsContainer}>
                 <StepIndicator
                     customStyles={styles.customStyles}
-                    currentPosition={this.props.currentPosition}
+                    currentPosition={this.props.currentPage}
                     stepCount={this.props.stepCount}
                     labels={labels}
                 />

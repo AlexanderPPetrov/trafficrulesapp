@@ -42,10 +42,11 @@ class WithdrawSteps extends Component {
         super(props);
 
         this.state = {
-            currentPage: 0,
             paymentMethod: '',
             account:'',
-            amount:'',
+            amount:'0',
+            minAmount:0,
+            maxAmount:0,
             notes: '',
 
         }
@@ -54,43 +55,35 @@ class WithdrawSteps extends Component {
         this.props.onRef(this)
     }
 
-    changeHandler = (page) => {
+    setPayment = (paymentMethod) => {
         this.setState({
-            page:page
-        })
-        //this.props.onUpdatePage(page);
-    }
+            paymentMethod: paymentMethod._key,
+            maxAmount: paymentMethod._max_amount,
+            minAmount: paymentMethod._min_amount
+        }, function(){
+            if(Number.parseFloat(this.state.amount) < Number.parseFloat(this.state.minAmount)) {
+                this.setState({
+                    amount: this.state.minAmount
+                })
+            }
 
-    setPaymentMethod = (value: string) => {
-        this.setState({
-            paymentMethod: value
         });
-        this.checkValue(value);
+
+        this.props.disableButton(false)
     }
 
+    changeValue = (key, value) => {
 
-    setAccount = (value: string) => {
+        if(key == 'amount'){
+            value = value.replace(/[^0-9.]/g, '')
+            if(Number.parseFloat(value) < Number.parseFloat(this.state.minAmount)) {
+                value = this.state.minAmount
+            }
+        }
         this.setState({
-            account: value
+            [key]: value
         });
-        this.checkValue(value);
-    }
 
-    setAmount = (value: string) => {
-        this.setState({
-            amount: value
-        });
-        this.checkValue(value);
-    }
-
-    setNotes = (value: string) => {
-        this.setState({
-            notes: value
-        });
-        this.checkValue(value);
-    }
-
-    checkValue = (value) => {
         if(value != ''){
             this.props.disableButton(false)
         }else{
@@ -98,7 +91,6 @@ class WithdrawSteps extends Component {
         }
     }
 
-    //TODO refactor setting state
     withdrawMoney = () => {
         Api.post({
             url:'withdraw',
@@ -113,49 +105,47 @@ class WithdrawSteps extends Component {
     }
 
     withdrawSuccess = () => {
-       console.log('success')
-        this.setState({
-            currentPage: 5
-        })
+        this.props.onUpdatePage(5)
+        this.refs.view.fadeInRight(300);
     }
 
     renderStep = () => {
 
-        if (this.state.currentPage == 0) {
-            return <PaymentMethod onValueChange={this.setPaymentMethod} paymentMethod={this.state.paymentMethod}></PaymentMethod>
+        if (this.props.currentPage == 0) {
+            return <PaymentMethod setPayment={this.setPayment} disableButton={this.props.disableButton} paymentMethod={this.state.paymentMethod}></PaymentMethod>
         }
-        if (this.state.currentPage == 1) {
-            return <Account onValueChange={this.setAccount} account={this.state.account}></Account>
+        if (this.props.currentPage == 1) {
+            return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton} account={this.state.account}></Account>
         }
-        if (this.state.currentPage == 2) {
-            return <Amount onValueChange={this.setAmount} amount={this.state.amount}></Amount>
+        if (this.props.currentPage == 2) {
+            return <Amount onValueChange={this.changeValue} disableButton={this.props.disableButton} minAmount={this.state.minAmount} maxAmount={this.state.maxAmount} amount={this.state.amount}></Amount>
         }
-        if (this.state.currentPage == 3) {
-            return <Notes onValueChange={this.setNotes} notes={this.state.notes}></Notes>
+        if (this.props.currentPage == 3) {
+            return <Notes onValueChange={this.changeValue} disableButton={this.props.disableButton} notes={this.state.notes}></Notes>
         }
-        if (this.state.currentPage == 4) {
-            this.withdrawMoney()
+        if (this.props.currentPage == 4) {
         }
-        if (this.state.currentPage == 5) {
+        if (this.props.currentPage == 5) {
             return <Confirmation></Confirmation>
         }
-        return <View></View>
-
-
+        return null;
     }
 
     goForward = () => {
-        this.setState({currentPage: this.state.currentPage + 1})
-        this.refs.view.fadeInRight(300);
+        if(this.props.currentPage == 3){
+            this.withdrawMoney()
+
+        }else{
+            this.props.onUpdatePage(this.props.currentPage + 1)
+            this.refs.view.fadeInRight(300);
+        }
+
     }
     goBackward = () => {
-        this.setState({currentPage: this.state.currentPage - 1})
+        this.props.onUpdatePage(this.props.currentPage - 1)
         this.refs.view.fadeInLeft(300);
     }
     render() {
-        // Render an initial state
-
-        //onRef={ref => (this.tabs = ref)} {...this.props}
         return (
             <View style={styles.stepsContainer}>
                 <Animatable.View ref="view">

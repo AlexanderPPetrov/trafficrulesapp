@@ -20,6 +20,8 @@ export default {
     brokerage: 'Brokerage',
     deposit: 'Deposit',
     withdraw: 'Withdraw',
+    withdrawSuccess: 'The withdrawal request was executed successfully.',
+    withdrawSuccessTwo: 'You can continue and request your funds to be transferred.',
     cancel: 'Cancel',
     contactOperators: 'Contact our operators',
     selectPaymentMethod: 'Select Payment Method',

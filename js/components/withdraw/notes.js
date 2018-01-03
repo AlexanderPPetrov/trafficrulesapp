@@ -35,6 +35,9 @@ const Item = Picker.Item;
 class Notes extends Component {
 
 
+    componentDidMount = () => {
+        this.props.disableButton(false)
+    }
 
     render() {
         return (
@@ -45,9 +48,9 @@ class Notes extends Component {
                     <Text style={{textAlign:'center'}}>{I18n.t('notes')}</Text>
                 </View>
                 <Form style={styles.formContainer}>
-                    <Input multiline={true}
-                               numberOfLines={4}
-                               blurOnSubmit={false} placeholder={I18n.t('notes')} value={this.props.notes} onChangeText={this.props.onValueChange} />
+                    <Input multiline={true} numberOfLines={4} blurOnSubmit={false} placeholder={I18n.t('notes')}
+                           textAlignVertical="top"
+                           value={this.props.notes} onChangeText={(text) => this.props.onValueChange('notes', text)} />
                 </Form>
             </View>
 

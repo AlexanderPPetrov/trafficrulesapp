@@ -33,20 +33,25 @@ const Item = Picker.Item;
 
 class Account extends Component {
 
+    componentDidMount = () => {
+        if(this.props.account == '' ){
+            this.props.disableButton(true)
+        }else{
+            this.props.disableButton(false)
+        }
+    }
+
     render() {
         return (
 
             <View >
-
                 <View style={styles.withdrawHeader} >
                     <Text style={{textAlign:'center'}}>{I18n.t('accountSettings')}</Text>
                 </View>
                 <Form style={styles.formContainer}>
-                    <Input placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={this.props.onValueChange}/>
+                    <Input placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
                 </Form>
-
             </View>
-
 
         );
     }

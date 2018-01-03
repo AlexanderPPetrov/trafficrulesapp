@@ -49,18 +49,61 @@ class Withdraw extends Component {
     }
 
     goBackward = () => {
-        this.setState({
-            currentPage:this.state.currentPage - 1
-        })
         this.tabs.goBackward()
     }
     goForward = () => {
         this.tabs.goForward()
-        this.setState({
-            currentPage:this.state.currentPage + 1
-        })
-
     }
+
+    getChat = () => {
+        if (this.state.currentPage == 5) {
+            return null;
+        }
+        return (
+            <Chat></Chat>
+        )
+    }
+
+    getRightHeader = () => {
+        if (this.state.currentPage == 5) {
+            return null;
+        }
+        return (
+            <Button transparent small onPress={() => this.props.navigation.navigate("MyAccount")}>
+                <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
+            </Button>
+        )
+    }
+
+    getFooter = () => {
+        if (this.state.currentPage == 5) {
+            return null;
+        }
+        return (
+            <Footer>
+                <FooterTab>
+                    <Button onPress={this.goForward} disabled={this.state.buttonDisabled}>
+                        <Text>{I18n.t('continue')}</Text>
+                    </Button>
+
+                </FooterTab>
+            </Footer>
+        )
+    }
+
+    getBackButton = () => {
+
+        if (this.state.currentPage == 0 || this.state.currentPage == 5) {
+            return ( <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+                    <Icon name="ios-menu"/>
+                </Button>
+            )
+        }
+        return (<Button transparent onPress={this.goBackward}>
+            <Icon name="arrow-back"/>
+        </Button>)
+    }
+
     changeHandler = (page) => {
         this.setState({
             currentPage: page
@@ -68,45 +111,27 @@ class Withdraw extends Component {
     }
 
     render() {
-
-        let headerButton = <Button transparent onPress={this.goBackward}>
-            <Icon name="arrow-back"/>
-        </Button>
-        if (this.state.currentPage == 0) {
-            headerButton = <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-                <Icon name="ios-menu"/>
-            </Button>
-        }
-
         return (
             <Container style={styles.container}>
                 <Header hasTabs>
                     <Left>
-                        {headerButton}
+                        {this.getBackButton()}
                     </Left>
                     <Body>
                     <Title>{I18n.t('withdraw')}</Title>
                     </Body>
                     <Right>
-                        <Button transparent small onPress={() => this.props.navigation.navigate("MyAccount")}>
-                            <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
-                        </Button>
+                        {this.getRightHeader()}
                     </Right>
                 </Header>
                 <Content>
-                    <Steps currentPosition={this.state.currentPage} stepCount={5}></Steps>
-                    <WithdrawSteps onRef={ref => (this.tabs = ref)} {...this.props} onUpdatePage={this.changeHandler} disableButton={this.setButtonState}></WithdrawSteps>
-                    <Chat></Chat>
+                    <Steps currentPage={this.state.currentPage} stepCount={5}></Steps>
+                    <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
+                                   onUpdatePage={this.changeHandler}
+                                   disableButton={this.setButtonState}></WithdrawSteps>
+                    {this.getChat()}
                 </Content>
-                <Footer>
-                    <FooterTab>
-                        <Button onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                            <Text>{I18n.t('continue')}</Text>
-                        </Button>
-
-                    </FooterTab>
-                </Footer>
-
+                {this.getFooter()}
             </Container>
         );
     }

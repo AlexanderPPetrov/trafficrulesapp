@@ -36,14 +36,17 @@ class PaymentMethod extends Component {
         super(props);
 
         this.state = {
-            paymentMethods: []
-            ,
+            paymentMethods: [],
             selected: undefined,
             noPaymentMethods: false
         }
     }
 
     componentDidMount = () => {
+        if(this.props.paymentMethod == '' ){
+            this.props.disableButton(true)
+        }
+
         Api.get({
             url: 'get-member-payment-options',
             success: this.dataLoaded
@@ -55,7 +58,7 @@ class PaymentMethod extends Component {
             this.setState({
                 paymentMethods: response.paymentMethods
             }, function(){
-                this.props.onValueChange(response.paymentMethods[0]._key)
+                this.props.setPayment(response.paymentMethods[0])
             })
         }else{
             this.setState({
@@ -64,12 +67,9 @@ class PaymentMethod extends Component {
         }
     }
 
-
-
     getPicker = () => {
 
-        let paymentMethods = this.state.paymentMethods;
-        const listItems = paymentMethods.map((method, i) =>
+        const listItems = this.state.paymentMethods.map((method, i) =>
             <Item key={i} value={method._key} label={method._caption}></Item>
         );
         return (
@@ -77,7 +77,9 @@ class PaymentMethod extends Component {
                 mode="dropdown"
                 placeholder="Select One"
                 selectedValue={this.props.paymentMethod}
-                onValueChange={this.props.onValueChange}
+                onValueChange={(value) =>
+                    this.props.setPayment(this.state.paymentMethods.find(method => method._key === value))
+                }
                 note={false}
             >
                 {listItems}
@@ -86,12 +88,11 @@ class PaymentMethod extends Component {
         );
     }
 
-
     render() {
+
+
         return (
-
             <View >
-
                 <View style={styles.withdrawHeader} >
                     <Text style={{textAlign:'center'}}>{I18n.t('selectPaymentMethod')}</Text>
                 </View>
@@ -100,10 +101,7 @@ class PaymentMethod extends Component {
                         {this.getPicker()}
                     </Form>
                 </View>
-
             </View>
-
-
         );
     }
 }

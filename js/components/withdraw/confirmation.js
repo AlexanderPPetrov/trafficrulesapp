@@ -32,7 +32,6 @@ const Item = Picker.Item;
 
 class Confirmation extends Component {
 
-
     render() {
         return (
 
@@ -40,9 +39,14 @@ class Confirmation extends Component {
                 <View style={styles.withdrawHeader} >
                     <Text style={{textAlign:'center'}}>{I18n.t('confirmation')}</Text>
                 </View>
-                <Text>{this.props.confirmation}</Text>
-            </View>
+                <Text>
+                    {I18n.t('withdrawSuccess')}
+                </Text>
+                <Text>
+                    {I18n.t('withdrawSuccessTwo')}
+                </Text>
 
+            </View>
 
         );
     }

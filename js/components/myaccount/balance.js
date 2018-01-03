@@ -22,7 +22,7 @@ class Balance extends Component {
         );
         return (
             <View>
-                <View style={Ui.listHeader}><Text style={Ui.listHeaderLabel}>{I18n.t('balances')}</Text></View>
+                {/*<View style={Ui.listHeader}><Text style={Ui.listHeaderLabel}>{I18n.t('balances')}</Text></View>*/}
                 <List style={styles.mainBalanceContainer}>
                     {listItems}
                 </List>
