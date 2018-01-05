@@ -21,12 +21,8 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 
-import {View, ScrollView, RefreshControl} from "react-native"
-import SafeBalance from "./safebalance";
-import Balance from "./balance";
-import BrokerageBalance from "./brokeragebalance";
-import PieChartBalance from "./piechart";
-import styles from "./styles";
+import {AsyncStorage} from "react-native"
+import Tabs from "./tabs";
 import Api from "../../../Api";
 
 class MyAccount extends Component {
@@ -74,9 +70,12 @@ class MyAccount extends Component {
             pieChartData: result
         })
 
+        AsyncStorage.multiSet([
+            ["currency", response._currency],
+            ["skrillToken", response._skrill_1tap_token]
+        ])
 
     };
-
 
     render() {
         return (
@@ -96,24 +95,8 @@ class MyAccount extends Component {
                     <Right/>
 
                 </Header>
-                <ScrollView refreshControl={
-                    <RefreshControl
-                        refreshing={this.state.refreshing}
-                        onRefresh={this.onRefresh}
-                    />
-                }>
-                    <Content>
-                        <View style={styles.cardBody}>
-                            <SafeBalance _safe_balance={this.state._payload._safe_balance}
-                                         _currency={this.state._payload._currency}></SafeBalance>
-                            <BrokerageBalance _brokerage_balance={this.state._payload._brokerage_balance}
-                                              _currency={this.state._payload._brokerage_currency}></BrokerageBalance>
-                        </View>
-                        <Balance balances={this.state._payload.balances}></Balance>
-                        <PieChartBalance data={this.state.pieChartData}></PieChartBalance>
-                    </Content>
 
-                </ScrollView>
+                <Tabs balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>
 
 
             </Container>

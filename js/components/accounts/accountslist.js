@@ -27,7 +27,7 @@ class AccountsList extends Component {
         let cardListItems = listOrder.map((property, i) =>
             this.getListItem(account, property, i)
         );
-        return <View key={i}>
+        return <Card key={i}>
             <List >
                 <ListItem itemDivider style={[Ui.listHeader, Ui.listHeaderExtended]}>
                     <Grid>
@@ -46,7 +46,8 @@ class AccountsList extends Component {
                                     onPress={() => this.props.navigation.navigate("PreviousBalance", {
                                         _id: account._id,
                                         _username: account._username,
-                                        _currency: account._currency
+                                        _currency: account._currency,
+                                        _balance: account._balance
                                     })}>
                                 <Text style={{color: '#fff'}}>{I18n.t('previousBalances')}</Text>
                             </Button>
@@ -56,7 +57,7 @@ class AccountsList extends Component {
                 </ListItem>
                 {cardListItems}
             </List>
-        </View>;
+        </Card>;
     };
 
     getAccountCards = (accounts) => {

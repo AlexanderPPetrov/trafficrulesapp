@@ -7,6 +7,7 @@ import {
 
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import styles from "./styles";
+import Ui from '../../common/ui';
 
 class BrokerageBalance extends Component {
     render() {
@@ -14,14 +15,15 @@ class BrokerageBalance extends Component {
             <View style={[styles.mainBalance, styles.brokerageBalance]}>
                 <Grid>
                     <Row>
-                        <Text style={styles.mainBalanceLabel}>
+                        <Text style={Ui.cardHeader}>
                             {I18n.t('brokerageBalance')}
                         </Text>
                     </Row>
                     <Row>
                         <Text style={styles.mainBalanceValue}>
-                            {this.props._brokerage_balance} {this.props._currency}
+                            {this.props._brokerage_balance}
                         </Text>
+                        <Text style={styles.mainBalanceCurrency}>{this.props._currency}</Text>
                     </Row>
                 </Grid>
             </View>

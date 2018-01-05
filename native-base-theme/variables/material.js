@@ -203,7 +203,7 @@ export default {
   lineHeight: platform === "ios" ? 20 : 24,
 
   // List
-  listBorderColor: "#c9c9c9",
+  listBorderColor: "#dbdbdb",
   listDividerBg: "#e1e1e1",
   listItemHeight: 45,
   listBtnUnderlayColor: "#DDD",

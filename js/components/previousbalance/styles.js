@@ -30,6 +30,11 @@ export default {
         alignSelf: 'stretch',
         color:ColorScheme.light,
         paddingLeft:5
+    },
+    legendLabel: {
+        color: ColorScheme.light,
+        fontSize: 14,
+        fontFamily:'Roboto_light'
     }
 
 };

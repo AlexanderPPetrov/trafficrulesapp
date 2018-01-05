@@ -10,13 +10,14 @@ export default {
     neutralLight:'#fff',
     neutralDark:'#f1f5f4',
     neutralDarker:'#e0e2e1',
-    neutralDarkest:'#a1a3a2',
+    neutralDarkest:'#999999',
     BTC: '#67a7f7',
     USD: '#52dbb9',
     GBP: '#ffd862',
     EUR: '#fda349',
     P: '#ff775c',
     INR: '#d6bbf5',
-
+    chartBalance: '#54fc00',
+    chartChange: '#00a2ff'
 
 };

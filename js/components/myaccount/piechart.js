@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {VictoryPie,VictoryContainer, VictoryPortal, VictoryLabel} from 'victory-native';
 import {View, Text, Dimensions} from 'react-native';
-import Ui from '../../common/ui';
+import I18n from '../../../i18n/i18n';
 import styles from "./styles";
 import ColorScheme from "../../common/colorscheme";
+import Ui from '../../common/ui';
 
 
 class PieChartBalance extends Component {
@@ -17,7 +18,7 @@ class PieChartBalance extends Component {
         let padding = (width - chartWidth)*0.5;
         this.state = {
             width:width,
-            pieHeight:chartWidth + 60,
+            pieHeight:width,
             labelRadius:labelRadius,
             innerRadius:innerRadius,
             padding: padding
@@ -28,29 +29,34 @@ class PieChartBalance extends Component {
 
         return (
             <View style={styles.pieChartContainer}>
-                <VictoryPie
-                    style={{
-                        data: {
-                            // stroke: (data) => data.y > 75 ? ColorScheme.light : ColorScheme.darker
-                            // stroke: ColorScheme.darkest
-                        }
-                    }}
-                    padding={{left: this.state.padding, right: this.state.padding }}
-                    width={this.state.width}
-                    height={this.state.pieHeight}
-                    padAngle={1}
-                    startAngle={45}
-                    endAngle={405}
-                    renderInPortal={true}
-                    labelComponent={<VictoryPortal style={{
-                        fill:ColorScheme.dark,
-                        fontSize:"18",
-                        fontWeight:"bold"}}><VictoryLabel/></VictoryPortal>}
-                    innerRadius={this.state.innerRadius}
-                    colorScale={[ColorScheme.BTC, ColorScheme.USD, ColorScheme.GBP, ColorScheme.EUR, ColorScheme.P, ColorScheme.INR]}
-                    data={this.props.data}
-                />
-
+                <Text style={Ui.cardHeader}>
+                    {I18n.t('distributionIn')}
+                </Text>
+                <View style={{paddingTop:15}}>
+                    <VictoryPie
+                        style={{
+                            data: {
+                                // stroke: (data) => data.y > 75 ? ColorScheme.light : ColorScheme.darker
+                                // stroke: ColorScheme.darkest
+                            }
+                        }}
+                        padding={{left: this.state.padding, right: this.state.padding }}
+                        width={this.state.width}
+                        height={this.state.pieHeight}
+                        padAngle={1}
+                        startAngle={45}
+                        endAngle={405}
+                        renderInPortal={true}
+                        labelComponent={<VictoryPortal style={{
+                            fill:ColorScheme.dark,
+                            fontSize:"18",
+                            fontFamily:'Roboto_light'
+                            }}><VictoryLabel/></VictoryPortal>}
+                        innerRadius={this.state.innerRadius}
+                        colorScale={[ColorScheme.BTC, ColorScheme.USD, ColorScheme.GBP, ColorScheme.EUR, ColorScheme.P, ColorScheme.INR]}
+                        data={this.props.data}
+                    />
+                </View>
             </View>
 
         );

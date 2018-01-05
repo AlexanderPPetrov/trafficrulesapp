@@ -18,6 +18,7 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import { ScrollView, RefreshControl, View } from "react-native";
+import Ui from '../../common/ui';
 
 import styles from "./styles";
 import Tabs from "./tabs";
@@ -67,10 +68,11 @@ class OpenBets extends Component {
     getListItem = (bet, i) => {
         return <Card key={i}>
             <Grid style={{height:170}}>
-                    <Row>
-                        <Text>{I18n.t('betNumber')} {bet._id}</Text>
+                    <Row style={{marginBottom:10}}>
+                        <Text style={Ui.cardHeader}>{I18n.t('betNumber')}</Text>
+                        <Text style={[Ui.cardHeader, styles.betId]}>{bet._id}</Text>
                     </Row>
-                    <Row>
+                    <Row style={styles.selectionContainer}>
                         <Col size={3}>
                             <Text style={styles.betLabel}>{bet._selection}</Text>
                         </Col>
@@ -78,20 +80,20 @@ class OpenBets extends Component {
                             <Text style={styles.betValue}>{bet._score}</Text>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style={styles.matchContainer}>
                         <Col size={3} >
-                            <Text style={styles.betLabel}>{bet._event}</Text>
+                            <Text style={[styles.betLabel, styles.eventLabel]}>{bet._event}</Text>
                         </Col>
                         <Col size={2} >
-                            <Text style={styles.betValue}>{bet._event_date}</Text>
+                            <Text style={[styles.betValue, styles.dateLabel]}>{bet._event_date.split(' ')[0]}</Text>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style={styles.infoContainer}>
                         <Col size={3} >
                             <Text style={styles.betLabel}>{I18n.t('stake')}: {bet._stake} {bet._currency}</Text>
                         </Col>
                         <Col size={2} >
-                            <Text style={styles.betValue}>{I18n.t('running').toUpperCase()}</Text>
+                            <Text style={styles.statusLabel}>{I18n.t('running').toUpperCase()}</Text>
                         </Col>
                     </Row>
             </Grid>

@@ -12,11 +12,13 @@ import {
     Footer,
     FooterTab,
     Left,
+    Card,
     Right,
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, ScrollView, RefreshControl} from 'react-native';
+import PreviousBalanceChart from './previousbalancechart'
 
 
 import Balance from "./balance";
@@ -32,7 +34,9 @@ class PreviousBalance extends Component {
             _payload: {
                 balances: []
             },
-            refreshing: false
+            refreshing: false,
+            balance:[],
+            change:[]
 
         }
     }
@@ -58,7 +62,31 @@ class PreviousBalance extends Component {
         this.setState({
             _payload: response
         })
+
+        this.prepareChartData(response)
     };
+
+    prepareChartData = (response) => {
+        let balance = [],
+            change = [];
+
+        for (let i = 0; i < response.balances.length; i++) {
+
+            let value = response.balances[i]
+            balance.push({x: value._date_created,y: parseInt(value._balance)})
+            change.push({x: value._date_created,y: parseInt(value._change)})
+        }
+
+        balance.reverse();
+        change.reverse();
+
+        this.setState({
+            balance: balance,
+            change: change
+        }, function(){
+            this.chart.resetCounter()
+        })
+    }
 
     setRefreshing = () => {
         this.setState({refreshing: false})
@@ -68,6 +96,15 @@ class PreviousBalance extends Component {
         this.setState({refreshing: true});
         this.loadData()
     };
+
+    getChart = () => {
+        if(this.state.balance.length >= 2){
+            return <Card>
+            <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance} change={this.state.change} currency={this.props.navigation.state.params._currency} currentBalance={this.props.navigation.state.params._balance}/>
+            </Card>
+        }
+        return null
+    }
 
     render() {
         return (
@@ -90,8 +127,13 @@ class PreviousBalance extends Component {
                         onRefresh={this.onRefresh}
                     />
                 }>
-                    <Balance navigation={this.props.navigation} balances={this.state._payload.balances}
-                             currency={this.props.navigation.state.params._currency}></Balance>
+
+                        {this.getChart()}
+
+                    <Card>
+                        <Balance navigation={this.props.navigation} balances={this.state._payload.balances}
+                                 currency={this.props.navigation.state.params._currency}></Balance>
+                    </Card>
                 </ScrollView>
             </Container>
         );

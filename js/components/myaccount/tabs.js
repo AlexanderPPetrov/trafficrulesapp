@@ -1,26 +1,49 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import {SimpleLineIcons, FontAwesome} from '@expo/vector-icons';
 import {TabNavigator} from "react-navigation";
 import Balance from "./balance";
 import PieChartBalance from "./piechart";
+import SafeBalance from "./safebalance";
+import styles from "./styles";
+import BrokerageBalance from "./brokeragebalance";
 import ColorScheme from "../../common/colorscheme";
-
+import {View, ScrollView, RefreshControl} from "react-native"
 import {
-    Image,
-    Button,
-    StyleSheet
-} from "react-native";
+    Card
+
+} from "native-base";
 
 
 class BalanceTab extends React.Component {
     static navigationOptions = {
-        tabBarLabel: I18n.t('balances')
+        tabBarLabel: I18n.t('balance')
     };
 
     render() {
         return (
-            <Balance _payload={this.props._payload}></Balance>
+            <ScrollView refreshControl={
+                <RefreshControl
+                    refreshing={this.props.screenProps.refreshing}
+                    onRefresh={this.props.screenProps.onRefresh}
+                />
+            }>
+
+                <View style={styles.cardBody}>
+                    <Card style={styles.mainBalanceContainer}>
+                        <SafeBalance _safe_balance={this.props.screenProps._payload._safe_balance}
+                                     _currency={this.props.screenProps._payload._currency}></SafeBalance>
+                    </Card>
+                    <Card style={styles.mainBalanceContainer}>
+                        <BrokerageBalance _brokerage_balance={this.props.screenProps._payload._brokerage_balance}
+                                          _currency={this.props.screenProps._payload._brokerage_currency}></BrokerageBalance>
+                    </Card>
+                </View>
+                    <Card style={{flexDirection:'column', flex:1, alignItems: 'stretch', marginTop:1}}>
+                        <Balance balances={this.props.screenProps.balances}></Balance>
+                    </Card>
+
+            </ScrollView>
+
         );
     }
 }
@@ -32,22 +55,25 @@ class PieChartTab extends React.Component {
 
     render() {
         return (
-            <PieChartBalance pieChartData={this.props.pieChartData}></PieChartBalance>
+            <Card style={styles.cardBody}>
+                <PieChartBalance data={this.props.screenProps.data}></PieChartBalance>
+            </Card>
         );
     }
 }
 
 
 
-const Tabs = TabNavigator({
+const TabNavigation = TabNavigator({
     OpenBets: {
         screen: BalanceTab,
     },
     SettledBets: {
         screen: PieChartTab,
     },
+
 }, {
-    tabBarPosition: 'bottom',
+    tabBarPosition: 'top',
     animationEnabled: true,
     tabBarOptions: {
         activeTintColor: ColorScheme.neutralLight,
@@ -64,4 +90,11 @@ const Tabs = TabNavigator({
     }
 })
 
-export default () => <Tabs/>;
+class Tabs extends Component {
+    render() {
+        return (
+            <TabNavigation screenProps={this.props} />
+        )
+    }
+}
+export default Tabs;

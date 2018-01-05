@@ -7,10 +7,13 @@ import {Button, List, ListItem, Card, Content} from "native-base";
 import Ui from '../../common/ui';
 
 
+
 class Balance extends Component {
 
     getBalanceItem = (balance, i) => {
         return <View key={i}>
+
+
             <View style={Ui.listHeader}>
                 <Text style={Ui.listHeaderLabel}>{I18n.t('date')} {balance._date_created}</Text>
             </View>

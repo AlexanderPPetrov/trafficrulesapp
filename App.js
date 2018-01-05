@@ -16,7 +16,8 @@ export default class App1 extends React.Component {
         await Expo.Font.loadAsync({
             Roboto: require("native-base/Fonts/Roboto.ttf"),
             Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-            Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+            Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
+            Roboto_light: require('./fonts/Roboto-Light.ttf'),
         });
 
         this.setState({isReady: true});

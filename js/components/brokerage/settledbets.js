@@ -24,6 +24,7 @@ import {View, ScrollView, RefreshControl} from "react-native";
 //     InputField, LinkField,
 //     SwitchField, PickerField, DatePickerField, TimePickerField
 // } from 'react-native-form-generator';
+import DatePicker from 'react-native-datepicker'
 
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
@@ -43,7 +44,7 @@ class SettledBets extends Component {
             refreshing: false,
             dateFrom: null,
             dateTo: null,
-            initialized:false
+            initialized: false
         }
     }
 
@@ -53,6 +54,7 @@ class SettledBets extends Component {
     }
 
     loadData = () => {
+        //TODO finish date format ask why dateFrom and dateTo have different formats
         this.setState({initialized: true})
         Api.get({
             url: 'get-brokerage-settled-bets',
@@ -105,50 +107,83 @@ class SettledBets extends Component {
 
     dateFromChange = (date) => {
 
-        if(!this.state.initialized) return;
-
-        this.setState({
-            dateFrom: date,
-        }, function () {
-            this.loadData()
-        });
+        if (!this.state.initialized) return;
+        console.log(date)
+        // this.setState({
+        //     dateFrom: date,
+        // }, function () {
+        //     this.loadData()
+        // });
 
     };
 
     dateToChange = (date) => {
-        if(!this.state.initialized) return;
+        if (!this.state.initialized) return;
 
-        this.setState({
-            dateTo: date,
-        }, function () {
-            this.loadData()
-        });
+        console.log(date)
+        // this.setState({
+        //     dateTo: date,
+        // }, function () {
+        //     this.loadData()
+        // });
     };
 
     getFilter = () => {
-        return
-            <Grid>
-                {/*<Col>*/}
-                    {/*<DatePickerField ref='dateFrom'*/}
-                                     {/*minimumDate={new Date('1/1/2017')}*/}
-                                     {/*maximumDate={new Date()}*/}
-                                     {/*placeholder={I18n.t('from')}*/}
-                                     {/*onChange={this.dateFromChange}*/}
-                                     {/*onChangeRaw={this.props.onChange}*/}
-                    {/*/>*/}
-                {/*</Col>*/}
-                {/*<Col>*/}
-                    {/*<DatePickerField ref='dateTo'*/}
-                                     {/*minimumDate={new Date('1/1/2017')}*/}
-                                     {/*maximumDate={new Date()}*/}
-                                     {/*placeholder={I18n.t('to')}*/}
-                                     {/*onChange={this.dateToChange}*/}
-                                     {/*onChangeRaw={this.props.onChange}*/}
-                    {/*/>*/}
-                {/*</Col>*/}
-            </Grid>
-        //     <Form style={{height: 40}} ref='dateForm'>
-        // </Form>
+        return <Grid>
+            <Col>
+                <DatePicker
+                    style={{width: 200}}
+                    date={this.state.dateFrom}
+                    format="YYYY-MM-DD"
+                    mode="date"
+                    minimumDate={new Date('2017-1-1')}
+                    maximumDate={new Date()}
+                    placeholder={I18n.t('from')}
+                    onDateChange={(date) => {
+                        this.dateFromChange(date)
+                    }}
+                />
+
+
+            </Col>
+            <Col>
+                <DatePicker
+                    style={{width: 200}}
+                    date={this.state.dateTo}
+                    mode="date"
+                    minimumDate={new Date('2017-1-1')}
+                    maximumDate={new Date()}
+                    placeholder={I18n.t('to')}
+                    onDateChange={(date) => {
+                        this.dateToChange(date)
+                    }}
+                />
+                {/*<DatePicker*/}
+                    {/*style={{width: 200}}*/}
+                    {/*date={this.state.date}*/}
+                    {/*mode="date"*/}
+                    {/*placeholder="select date"*/}
+                    {/*format="YYYY-MM-DD"*/}
+                    {/*minDate="2016-05-01"*/}
+                    {/*maxDate="2016-06-01"*/}
+                    {/*confirmBtnText="Confirm"*/}
+                    {/*cancelBtnText="Cancel"*/}
+                    {/*customStyles={{*/}
+                        {/*dateIcon: {*/}
+                            {/*position: 'absolute',*/}
+                            {/*left: 0,*/}
+                            {/*top: 4,*/}
+                            {/*marginLeft: 0*/}
+                        {/*},*/}
+                        {/*dateInput: {*/}
+                            {/*marginLeft: 36*/}
+                        {/*}*/}
+                        {/*// ... You can check the source to find the other keys.*/}
+                    {/*}}*/}
+                    {/*onDateChange={(date) => {this.setState({date: date})}}*/}
+                {/*/>*/}
+            </Col>
+        </Grid>
 
     };
 
@@ -176,8 +211,6 @@ class SettledBets extends Component {
                 </Row>
 
             </Grid>
-
-
         </ListItem>
     };
 
@@ -185,7 +218,6 @@ class SettledBets extends Component {
         let betList = bets.map((bet, i) =>
             this.getListItem(bet, i)
         );
-
 
         if (bets.length == 0) {
             return <Text
@@ -200,7 +232,6 @@ class SettledBets extends Component {
 
         );
     };
-
 
     render() {
         return (

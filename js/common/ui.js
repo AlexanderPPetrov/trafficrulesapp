@@ -30,13 +30,15 @@ export default {
     },
     balanceLabel: {
         color: ColorScheme.darker,
-        fontSize: 16
+        fontSize: 16,
+        fontFamily:'Roboto_light'
     },
     balanceValue: {
         textAlign: 'right',
         alignSelf: 'stretch',
         fontSize:20,
-        color:ColorScheme.light
+        color:ColorScheme.darkest,
+        fontFamily:'Roboto_light'
     },
     balanceValueSmall: {
         fontSize:16,
@@ -44,12 +46,21 @@ export default {
     balanceCurrency: {
         textAlign: 'left',
         alignSelf: 'flex-start',
-        color: ColorScheme.light,
+        fontFamily:'Roboto_light',
+        color: ColorScheme.darker,
         paddingTop:4,
         paddingLeft:5,
         fontSize:12
     },
     currencyWidth: {
         width:30
+    },
+    cardHeader: {
+        color: ColorScheme.light,
+        fontFamily: 'Roboto_light',
+        fontSize: 15,
+        lineHeight: 15,
+        paddingTop: 15,
+        paddingLeft: 15
     }
 };

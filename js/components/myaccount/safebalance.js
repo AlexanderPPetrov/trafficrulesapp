@@ -5,6 +5,7 @@ import {
     Text
 } from "native-base";
 import { Col, Row, Grid } from 'react-native-easy-grid';
+import Ui from '../../common/ui';
 
 import styles from "./styles";
 
@@ -21,14 +22,15 @@ class SafeBalance extends Component {
 
                 <Grid>
                     <Row>
-                        <Text style={styles.mainBalanceLabel}>
+                        <Text style={Ui.cardHeader}>
                             {I18n.t('safeBalance')}
                         </Text>
                     </Row>
                     <Row>
                         <Text style={styles.mainBalanceValue}>
-                            {this.props._safe_balance} {this.props._currency}
+                            {this.props._safe_balance}
                         </Text>
+                        <Text style={styles.mainBalanceCurrency}>{this.props._currency}</Text>
                     </Row>
                 </Grid>
 
