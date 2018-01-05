@@ -66,18 +66,20 @@ class OpenBets extends Component {
     };
 
     getListItem = (bet, i) => {
-        return <Card key={i}>
-            <Grid style={{height:170}}>
-                    <Row style={{marginBottom:10}}>
-                        <Text style={Ui.cardHeader}>{I18n.t('betNumber')}</Text>
-                        <Text style={[Ui.cardHeader, styles.betId]}>{bet._id}</Text>
+        return <Card key={i} style={{marginBottom: 0}}>
+            <Grid >
+                    <Row style={{marginBottom:5}}>
+                        <Text style={[Ui.cardHeader, styles.betId]}>{I18n.t('betNumber')} {bet._id}</Text>
                     </Row>
                     <Row style={styles.selectionContainer}>
                         <Col size={3}>
-                            <Text style={styles.betLabel}>{bet._selection}</Text>
+                            <Text style={[styles.betLabel, styles.selectionLabel]}>{bet._selection}</Text>
                         </Col>
                         <Col size={2} >
-                            <Text style={styles.betValue}>{bet._score}</Text>
+                            <Row style={{justifyContent: 'flex-end'}}>
+                                <Text style={[styles.betValue, styles.selectionLabel]}>{bet._score}</Text>
+                                <Text style={styles.odds}>@ {bet._odds}</Text>
+                            </Row>
                         </Col>
                     </Row>
                     <Row style={styles.matchContainer}>
@@ -90,7 +92,11 @@ class OpenBets extends Component {
                     </Row>
                     <Row style={styles.infoContainer}>
                         <Col size={3} >
-                            <Text style={styles.betLabel}>{I18n.t('stake')}: {bet._stake} {bet._currency}</Text>
+                            <Row>
+                                <Text style={styles.stakeLabel}>{I18n.t('stake')}:</Text>
+                                <Text style={styles.betLabel}>{bet._stake}</Text>
+                                <Text style={styles.betLabel}>{bet._currency}</Text>
+                            </Row>
                         </Col>
                         <Col size={2} >
                             <Text style={styles.statusLabel}>{I18n.t('running').toUpperCase()}</Text>
