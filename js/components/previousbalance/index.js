@@ -83,8 +83,6 @@ class PreviousBalance extends Component {
         this.setState({
             balance: balance,
             change: change
-        }, function(){
-            this.chart.resetCounter()
         })
     }
 

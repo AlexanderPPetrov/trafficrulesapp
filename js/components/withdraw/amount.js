@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import Steps from '../../common/steps/index';
-import Chat from '../../common/chat/index';
 import {
     Container,
     Card,
@@ -11,7 +9,7 @@ import {
     Content,
     Form,
     Picker,
-    Item as FormItem,
+    Item,
     Text,
     H3,
     Button,
@@ -25,16 +23,16 @@ import {
 } from "native-base";
 
 import {View, ScrollView} from 'react-native';
+import ColorScheme from "../../common/colorscheme";
+
+import {Grid, Row, Col} from "react-native-easy-grid";
 
 import styles from "./styles";
-import Api from "../../../Api";
-
-const Item = Picker.Item;
 
 class Amount extends Component {
 
     componentDidMount = () => {
-        if(this.props.amount == '' ){
+        if (this.props.amount == '') {
             this.props.disableButton(true)
         }
     }
@@ -42,13 +40,18 @@ class Amount extends Component {
     render() {
         return (
 
-            <View >
-                <View style={styles.withdrawHeader} >
-                    <Text style={{textAlign:'center'}}>{I18n.t('amount')}</Text>
-                </View>
+            <View>
+                <Text style={styles.formLabel}>{I18n.t('amount')}</Text>
                 <Form style={styles.formContainer}>
-                    <Input placeholder="0" value={this.props.amount} onChangeText={(text) => this.props.onValueChange('amount', text)} keyboardType='numeric'/>
+                    <Item style={styles.inputContainer}>
+                        <Input style={styles.inputField} placeholder="0" value={this.props.amount}
+                               placeholderTextColor={ColorScheme.lighter}
+                               onChangeText={(text) => this.props.onValueChange('amount', text)}
+                               keyboardType='numeric'/>
+                        <Text>EUR</Text>
+                    </Item>
                 </Form>
+
             </View>
 
         );

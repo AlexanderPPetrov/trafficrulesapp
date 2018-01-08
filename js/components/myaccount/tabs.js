@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import {TabNavigator} from "react-navigation";
+import {TabNavigator, TabBarTop} from "react-navigation";
 import Balance from "./balance";
 import PieChartBalance from "./piechart";
 import SafeBalance from "./safebalance";
@@ -12,6 +12,11 @@ import {
     Card
 
 } from "native-base";
+
+const indicatorStyle = (props, alignSelf) => ({
+    backgroundColor: props.indicatorStyle.backgroundColor,
+    alignSelf: 'flex-end',
+});
 
 
 class BalanceTab extends React.Component {
@@ -75,6 +80,7 @@ const TabNavigation = TabNavigator({
 }, {
     tabBarPosition: 'top',
     animationEnabled: true,
+    tabBarComponent: (props)=> <TabBarTop {...props} indicatorStyle={indicatorStyle(props, 'flex-end')} />,
     tabBarOptions: {
         activeTintColor: ColorScheme.neutralLight,
         inactiveTintColor : ColorScheme.neutralDark,

@@ -33,9 +33,6 @@ const {
     Stop
 } = Svg;
 
-let count = 0;
-
-
 class PreviousBalanceChart extends Component {
 
     constructor(props) {
@@ -48,29 +45,22 @@ class PreviousBalanceChart extends Component {
     }
 
     componentDidMount = () => {
-        this.props.onRef(this)
+
     }
 
     handleZoom = (domain) => {
         this.setState({selectedDomain: domain});
     }
 
-    resetCounter = () => {
-        count = 0;
-    }
-
     handleBrush = (domain) => {
         this.setState({zoomDomain: domain});
     }
 
-    getDate = (x) => {
+    getDate = (x, index) => {
         var label = '';
-        if (count == 0 || count == (this.props.balance.length - 1) || count == this.props.balance.length || count == (this.props.balance.length * 2 - 1)) {
-            console.log(x, x.split(' ')[0])
-
+        if (index == 0 || index == (this.props.balance.length - 1) ) {
             label = x.split(' ')[0]
         }
-        count++;
         return label;
     }
 
@@ -148,7 +138,7 @@ class PreviousBalanceChart extends Component {
                                  tickFormat={(y) => parseFloat(y).toFixed(2)}
                     />
                     <VictoryAxis
-                        tickFormat={(x) => this.getDate(x)}
+                        tickFormat={(x, i) => this.getDate(x, i)}
                         style={{
                             axis: {
                                 stroke: ColorScheme.lighter

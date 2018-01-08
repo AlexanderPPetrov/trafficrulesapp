@@ -18,6 +18,9 @@ export default {
     P: '#ff775c',
     INR: '#d6bbf5',
     chartBalance: '#54fc00',
-    chartChange: '#00a2ff'
-
+    chartChange: '#00a2ff',
+    win:'#23a540',
+    loss:'#e66560',
+    stepActive:'#31a78e',
+    stepInactive:'#fff'
 };

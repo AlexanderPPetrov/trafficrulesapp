@@ -75,19 +75,14 @@ class Withdraw extends Component {
         )
     }
 
-    getFooter = () => {
+    getButton = () => {
         if (this.state.currentPage == 5) {
             return null;
         }
         return (
-            <Footer>
-                <FooterTab>
-                    <Button onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                        <Text>{I18n.t('continue')}</Text>
-                    </Button>
-
-                </FooterTab>
-            </Footer>
+                <Button style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
+                    <Text style={styles.continueButtonLabel}>{I18n.t('continue')}</Text>
+                </Button>
         )
     }
 
@@ -124,14 +119,20 @@ class Withdraw extends Component {
                         {this.getRightHeader()}
                     </Right>
                 </Header>
-                <Content>
-                    <Steps currentPage={this.state.currentPage} stepCount={5}></Steps>
-                    <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
-                                   onUpdatePage={this.changeHandler}
-                                   disableButton={this.setButtonState}></WithdrawSteps>
-                    {this.getChat()}
-                </Content>
-                {this.getFooter()}
+                <Steps currentPage={this.state.currentPage} stepCount={5}></Steps>
+
+                <View style={{flex: 1}}>
+                    <Card style={styles.cardContainer}>
+                        <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
+                                       onUpdatePage={this.changeHandler}
+                                       disableButton={this.setButtonState}></WithdrawSteps>
+                        {this.getButton()}
+                    </Card>
+                    <View style={{flex:1, justifyContent:'center'}}>
+                        {this.getChat()}
+                    </View>
+                </View>
+
             </Container>
         );
     }

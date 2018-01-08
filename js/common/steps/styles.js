@@ -5,19 +5,19 @@ import ColorScheme from "../colorscheme";
 
 export default {
     customStyles : {
-        stepIndicatorSize: 15,
+        stepIndicatorSize: 12,
         currentStepIndicatorSize: 20,
         separatorStrokeWidth: 2,
         currentStepStrokeWidth: 4,
-        stepStrokeCurrentColor: '#fe7013',
+        stepStrokeCurrentColor: ColorScheme.stepActive,
         stepStrokeWidth: 2,
-        stepStrokeFinishedColor: '#fe7013',
-        stepStrokeUnFinishedColor: ColorScheme.neutralDarker,
-        separatorFinishedColor: '#fe7013',
-        separatorUnFinishedColor: ColorScheme.neutralDarker,
-        stepIndicatorFinishedColor: '#fe7013',
-        stepIndicatorUnFinishedColor: '#ffffff',
-        stepIndicatorCurrentColor: '#ffffff',
+        stepStrokeFinishedColor: ColorScheme.stepActive,
+        stepStrokeUnFinishedColor: ColorScheme.stepInactive,
+        separatorFinishedColor: ColorScheme.stepActive,
+        separatorUnFinishedColor: ColorScheme.stepInactive,
+        stepIndicatorFinishedColor: ColorScheme.stepActive,
+        stepIndicatorUnFinishedColor: ColorScheme.stepInactive,
+        stepIndicatorCurrentColor: ColorScheme.stepActive,
         stepIndicatorLabelFontSize: 13,
         currentStepIndicatorLabelFontSize: 13,
         stepIndicatorLabelCurrentColor: 'transparent',
@@ -25,10 +25,12 @@ export default {
         stepIndicatorLabelUnFinishedColor: 'transparent',
         labelColor: '#999999',
         labelSize: 13,
-        currentStepLabelColor: '#fe7013'
+        currentStepLabelColor: '#fff'
     },
     stepsContainer: {
         paddingTop:30,
+        paddingLeft:45,
+        paddingRight:45,
         paddingBottom:15
     }
 

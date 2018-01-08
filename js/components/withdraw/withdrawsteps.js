@@ -43,14 +43,15 @@ class WithdrawSteps extends Component {
 
         this.state = {
             paymentMethod: '',
-            account:'',
-            amount:'0',
-            minAmount:0,
-            maxAmount:0,
+            account: '',
+            amount: '0',
+            minAmount: 0,
+            maxAmount: 0,
             notes: '',
 
         }
     }
+
     componentDidMount() {
         this.props.onRef(this)
     }
@@ -60,8 +61,8 @@ class WithdrawSteps extends Component {
             paymentMethod: paymentMethod._key,
             maxAmount: paymentMethod._max_amount,
             minAmount: paymentMethod._min_amount
-        }, function(){
-            if(Number.parseFloat(this.state.amount) < Number.parseFloat(this.state.minAmount)) {
+        }, function () {
+            if (Number.parseFloat(this.state.amount) < Number.parseFloat(this.state.minAmount)) {
                 this.setState({
                     amount: this.state.minAmount
                 })
@@ -74,9 +75,9 @@ class WithdrawSteps extends Component {
 
     changeValue = (key, value) => {
 
-        if(key == 'amount'){
+        if (key == 'amount') {
             value = value.replace(/[^0-9.]/g, '')
-            if(Number.parseFloat(value) < Number.parseFloat(this.state.minAmount)) {
+            if (Number.parseFloat(value) < Number.parseFloat(this.state.minAmount)) {
                 value = this.state.minAmount
             }
         }
@@ -84,16 +85,16 @@ class WithdrawSteps extends Component {
             [key]: value
         });
 
-        if(value != ''){
+        if (value != '') {
             this.props.disableButton(false)
-        }else{
+        } else {
             this.props.disableButton(true)
         }
     }
 
     withdrawMoney = () => {
         Api.post({
-            url:'withdraw',
+            url: 'withdraw',
             data: {
                 payment_method: this.state.paymentMethod,
                 account: this.state.account,
@@ -112,16 +113,21 @@ class WithdrawSteps extends Component {
     renderStep = () => {
 
         if (this.props.currentPage == 0) {
-            return <PaymentMethod setPayment={this.setPayment} disableButton={this.props.disableButton} paymentMethod={this.state.paymentMethod}></PaymentMethod>
+            return <PaymentMethod setPayment={this.setPayment} disableButton={this.props.disableButton}
+                                  paymentMethod={this.state.paymentMethod}></PaymentMethod>
         }
         if (this.props.currentPage == 1) {
-            return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton} account={this.state.account}></Account>
+            return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton}
+                            account={this.state.account}></Account>
         }
         if (this.props.currentPage == 2) {
-            return <Amount onValueChange={this.changeValue} disableButton={this.props.disableButton} minAmount={this.state.minAmount} maxAmount={this.state.maxAmount} amount={this.state.amount}></Amount>
+            return <Amount onValueChange={this.changeValue} disableButton={this.props.disableButton}
+                           minAmount={this.state.minAmount} maxAmount={this.state.maxAmount}
+                           amount={this.state.amount}></Amount>
         }
         if (this.props.currentPage == 3) {
-            return <Notes onValueChange={this.changeValue} disableButton={this.props.disableButton} notes={this.state.notes}></Notes>
+            return <Notes onValueChange={this.changeValue} disableButton={this.props.disableButton}
+                          notes={this.state.notes}></Notes>
         }
         if (this.props.currentPage == 4) {
         }
@@ -132,10 +138,10 @@ class WithdrawSteps extends Component {
     }
 
     goForward = () => {
-        if(this.props.currentPage == 3){
+        if (this.props.currentPage == 3) {
             this.withdrawMoney()
 
-        }else{
+        } else {
             this.props.onUpdatePage(this.props.currentPage + 1)
             this.refs.view.fadeInRight(300);
         }
@@ -145,15 +151,14 @@ class WithdrawSteps extends Component {
         this.props.onUpdatePage(this.props.currentPage - 1)
         this.refs.view.fadeInLeft(300);
     }
+
     render() {
         return (
-            <View style={styles.stepsContainer}>
-                <Animatable.View ref="view">
-                    {this.renderStep()}
-                </Animatable.View>
-            </View>
-
+            <Animatable.View ref="view">
+                {this.renderStep()}
+            </Animatable.View>
         );
     }
 }
+
 export default WithdrawSteps;

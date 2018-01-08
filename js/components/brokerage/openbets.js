@@ -33,7 +33,8 @@ class OpenBets extends Component {
             _payload: {
                 bets: []
             },
-            refreshing: false
+            refreshing: false,
+            loaded:false
         }
     }
 
@@ -50,12 +51,13 @@ class OpenBets extends Component {
     };
 
     setRefreshing = () => {
-        this.setState({refreshing: false})
+        this.setState({refreshing: false, loaded:false})
     };
 
     dataLoaded = (response) => {
         this.setState({
-            _payload: response
+            _payload: response,
+            loaded:true
         })
 
     };
@@ -68,6 +70,7 @@ class OpenBets extends Component {
     getListItem = (bet, i) => {
         return <Card key={i} style={{marginBottom: 0}}>
             <Grid >
+                <Col>
                     <Row style={{marginBottom:5}}>
                         <Text style={[Ui.cardHeader, styles.betId]}>{I18n.t('betNumber')} {bet._id}</Text>
                     </Row>
@@ -102,6 +105,7 @@ class OpenBets extends Component {
                             <Text style={styles.statusLabel}>{I18n.t('running').toUpperCase()}</Text>
                         </Col>
                     </Row>
+                </Col>
             </Grid>
         </Card>
     };
@@ -110,8 +114,8 @@ class OpenBets extends Component {
         let betList = bets.map((bet, i) =>
             this.getListItem(bet, i)
         );
-        if (bets.length == 0) {
-            return <Text style={{textAlign:'center', padding:10, alignSelf: "stretch"}}>{I18n.t('noRunningBets')}</Text>;
+        if (bets.length == 0 && this.state.loaded) {
+            return <Text style={styles.noBets}>{I18n.t('noRunningBets')}</Text>;
         }
         return (
             <View>

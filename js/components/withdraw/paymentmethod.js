@@ -27,7 +27,7 @@ import {View, ScrollView} from 'react-native';
 
 import styles from "./styles";
 import Api from "../../../Api";
-
+import Ui from '../../common/ui';
 const Item = Picker.Item;
 
 class PaymentMethod extends Component {
@@ -93,9 +93,7 @@ class PaymentMethod extends Component {
 
         return (
             <View >
-                <View style={styles.withdrawHeader} >
-                    <Text style={{textAlign:'center'}}>{I18n.t('selectPaymentMethod')}</Text>
-                </View>
+                <Text style={styles.formLabel}>{I18n.t('selectPaymentMethod')}</Text>
                 <View >
                     <Form style={styles.formContainer}>
                         {this.getPicker()}

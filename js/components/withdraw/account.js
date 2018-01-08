@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import Steps from '../../common/steps/index';
-import Chat from '../../common/chat/index';
+
 import {
     Container,
     Card,
@@ -11,7 +10,7 @@ import {
     Content,
     Form,
     Picker,
-    Item as FormItem,
+    Item,
     Text,
     H3,
     Button,
@@ -23,13 +22,9 @@ import {
     Body,
     Input
 } from "native-base";
-
 import {View, ScrollView} from 'react-native';
-
+import ColorScheme from "../../common/colorscheme";
 import styles from "./styles";
-import Api from "../../../Api";
-
-const Item = Picker.Item;
 
 class Account extends Component {
 
@@ -45,11 +40,11 @@ class Account extends Component {
         return (
 
             <View >
-                <View style={styles.withdrawHeader} >
-                    <Text style={{textAlign:'center'}}>{I18n.t('accountSettings')}</Text>
-                </View>
+                <Text style={styles.formLabel}>{I18n.t('accountSettings')}</Text>
                 <Form style={styles.formContainer}>
-                    <Input placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
+                    <Item style={styles.inputContainer}>
+                        <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
+                    </Item>
                 </Form>
             </View>
 

@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-import {TextInput } from 'react-native';
 import I18n from '../../../i18n/i18n';
-import Steps from '../../common/steps/index';
-import Chat from '../../common/chat/index';
+
 import {
     Container,
     Card,
@@ -12,7 +10,7 @@ import {
     Content,
     Form,
     Picker,
-    Item as FormItem,
+    Item,
     Text,
     H3,
     Button,
@@ -26,11 +24,8 @@ import {
 } from "native-base";
 
 import {View, ScrollView} from 'react-native';
-
+import ColorScheme from "../../common/colorscheme";
 import styles from "./styles";
-import Api from "../../../Api";
-
-const Item = Picker.Item;
 
 class Notes extends Component {
 
@@ -43,14 +38,13 @@ class Notes extends Component {
         return (
 
             <View >
-
-                <View style={styles.withdrawHeader} >
-                    <Text style={{textAlign:'center'}}>{I18n.t('notes')}</Text>
-                </View>
+                <Text style={styles.formLabel}>{I18n.t('notes')}</Text>
                 <Form style={styles.formContainer}>
-                    <Input multiline={true} numberOfLines={4} blurOnSubmit={false} placeholder={I18n.t('notes')}
+                    <Item style={styles.inputContainer}>
+                    <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={4} blurOnSubmit={false} placeholder={I18n.t('notes')}
                            textAlignVertical="top"
                            value={this.props.notes} onChangeText={(text) => this.props.onValueChange('notes', text)} />
+                    </Item>
                 </Form>
             </View>
 

@@ -35,7 +35,7 @@ export default {
     },
 
     odds: {
-        paddingTop:3,
+        paddingTop:2,
         backgroundColor: ColorScheme.neutralLight,
         color: ColorScheme.darkest,
         fontFamily:'Roboto_light'
@@ -65,6 +65,27 @@ export default {
         paddingRight:5
     },
 
+    settledBetStatus: {
+        color: ColorScheme.neutralLight,
+        alignSelf: 'flex-end',
+        fontSize:12,
+        paddingTop:2,
+        paddingBottom:2,
+        paddingLeft:5,
+        paddingRight:5,
+        minWidth:40,
+        textAlign:'center'
+    },
+
+    betWin: {
+        backgroundColor: ColorScheme.win
+    },
+    betLoss: {
+        backgroundColor: ColorScheme.loss
+    },
+    betTie: {
+        backgroundColor: ColorScheme.neutralDarkest
+    },
     eventLabel: {
         color: ColorScheme.darker,
         fontSize: 14,
@@ -82,5 +103,49 @@ export default {
         color: ColorScheme.dark,
         fontSize: 14,
         fontFamily:'Roboto_light'
+    },
+    datePickerContainer: {
+        padding:15,
+        paddingTop:10,
+        paddingBottom:0,
+        marginBottom:0
+    },
+    datePickerLabel: {
+        fontSize:13,
+        color: ColorScheme.light,
+        fontFamily:'Roboto_light'
+    },
+    datePickerStyles: {
+        dateIcon: {
+            // position: 'absolute',
+            // left: 0,
+            // top: 5,
+            marginLeft: 0
+        },
+        dateInput: {
+            marginRight: 0,
+            borderWidth:0
+        },
+        dateText: {
+            color:ColorScheme.dark
+        }
+    },
+    calendarIcon:{
+        color:ColorScheme.light
+    },
+    settledBetContainer:{
+        padding:15,
+        marginBottom:0
+    },
+    settledBetLabel: {
+        marginBottom:10
+    },
+    noBets: {
+        textAlign: 'center',
+        padding: 15,
+        alignSelf: "stretch",
+        fontFamily:'Roboto_light',
+        color: ColorScheme.darker
     }
+
 };

@@ -18,18 +18,13 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, ScrollView, RefreshControl} from "react-native";
+import Ui from '../../common/ui';
 
-// import {
-//     Form,
-//     InputField, LinkField,
-//     SwitchField, PickerField, DatePickerField, TimePickerField
-// } from 'react-native-form-generator';
 import DatePicker from 'react-native-datepicker'
 
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 import styles from "./styles";
-import Tabs from "./tabs";
 import Api from "../../../Api";
 
 
@@ -44,7 +39,7 @@ class SettledBets extends Component {
             refreshing: false,
             dateFrom: null,
             dateTo: null,
-            initialized: false
+            loaded: false
         }
     }
 
@@ -54,8 +49,6 @@ class SettledBets extends Component {
     }
 
     loadData = () => {
-        //TODO finish date format ask why dateFrom and dateTo have different formats
-        this.setState({initialized: true})
         Api.get({
             url: 'get-brokerage-settled-bets',
             success: this.dataLoaded,
@@ -73,13 +66,14 @@ class SettledBets extends Component {
 
     dataLoaded = (response) => {
         this.setState({
-            _payload: response
+            _payload: response,
+            loaded: true
         })
 
     };
 
     onRefresh = () => {
-        this.setState({refreshing: true});
+        this.setState({refreshing: true, loaded: false});
         this.loadData()
     };
 
@@ -93,8 +87,8 @@ class SettledBets extends Component {
         beforeSevenDays = new Date(res);
 
         this.setState({
-            dateFrom: currentDate,
-            dateTo: beforeSevenDays
+            dateFrom: beforeSevenDays,
+            dateTo: currentDate
 
         }, function () {
 
@@ -107,111 +101,125 @@ class SettledBets extends Component {
 
     dateFromChange = (date) => {
 
-        if (!this.state.initialized) return;
+        if (!this.state.loaded) return;
         console.log(date)
-        // this.setState({
-        //     dateFrom: date,
-        // }, function () {
-        //     this.loadData()
-        // });
+        this.setState({
+            dateFrom: new Date(date),
+        }, function () {
+            this.loadData()
+        });
 
     };
 
     dateToChange = (date) => {
-        if (!this.state.initialized) return;
+        if (!this.state.loaded) return;
 
         console.log(date)
-        // this.setState({
-        //     dateTo: date,
-        // }, function () {
-        //     this.loadData()
-        // });
+        this.setState({
+            dateTo: new Date(date),
+        }, function () {
+            this.loadData()
+        });
     };
 
     getFilter = () => {
         return <Grid>
             <Col>
-                <DatePicker
-                    style={{width: 200}}
-                    date={this.state.dateFrom}
-                    format="YYYY-MM-DD"
-                    mode="date"
-                    minimumDate={new Date('2017-1-1')}
-                    maximumDate={new Date()}
-                    placeholder={I18n.t('from')}
-                    onDateChange={(date) => {
-                        this.dateFromChange(date)
-                    }}
-                />
-
-
+                <Card style={styles.datePickerContainer}>
+                    <Text style={styles.datePickerLabel}>{I18n.t('from')}</Text>
+                    <DatePicker
+                        style={{alignSelf: 'flex-end'}}
+                        date={this.state.dateFrom}
+                        customStyles={styles.datePickerStyles}
+                        format="YYYY-MM-DD"
+                        mode="date"
+                        iconComponent={<Icon active name='ios-calendar-outline' style={styles.calendarIcon}/>}
+                        // minDate={new Date('2017-1-1')}
+                        maxDate={new Date()}
+                        placeholder={I18n.t('from')}
+                        onDateChange={(date) => {
+                            this.dateFromChange(date)
+                        }}
+                        btnTextConfirm={I18n.t('ok')}
+                        btnTextCancel={I18n.t('cancel')}
+                    />
+                </Card>
             </Col>
             <Col>
-                <DatePicker
-                    style={{width: 200}}
-                    date={this.state.dateTo}
-                    mode="date"
-                    minimumDate={new Date('2017-1-1')}
-                    maximumDate={new Date()}
-                    placeholder={I18n.t('to')}
-                    onDateChange={(date) => {
-                        this.dateToChange(date)
-                    }}
-                />
-                {/*<DatePicker*/}
-                    {/*style={{width: 200}}*/}
-                    {/*date={this.state.date}*/}
-                    {/*mode="date"*/}
-                    {/*placeholder="select date"*/}
-                    {/*format="YYYY-MM-DD"*/}
-                    {/*minDate="2016-05-01"*/}
-                    {/*maxDate="2016-06-01"*/}
-                    {/*confirmBtnText="Confirm"*/}
-                    {/*cancelBtnText="Cancel"*/}
-                    {/*customStyles={{*/}
-                        {/*dateIcon: {*/}
-                            {/*position: 'absolute',*/}
-                            {/*left: 0,*/}
-                            {/*top: 4,*/}
-                            {/*marginLeft: 0*/}
-                        {/*},*/}
-                        {/*dateInput: {*/}
-                            {/*marginLeft: 36*/}
-                        {/*}*/}
-                        {/*// ... You can check the source to find the other keys.*/}
-                    {/*}}*/}
-                    {/*onDateChange={(date) => {this.setState({date: date})}}*/}
-                {/*/>*/}
+                <Card style={styles.datePickerContainer}>
+                    <Text style={styles.datePickerLabel}>{I18n.t('to')}</Text>
+                    <DatePicker
+                        style={{alignSelf: 'flex-end'}}
+                        customStyles={styles.datePickerStyles}
+                        date={this.state.dateTo}
+                        mode="date"
+                        iconComponent={<Icon active name='ios-calendar-outline' style={styles.calendarIcon}/>}
+                        maxDate={new Date()}
+                        placeholder={I18n.t('to')}
+                        onDateChange={(date) => {
+                            this.dateToChange(date)
+                        }}
+                        btnTextConfirm={I18n.t('ok')}
+                        btnTextCancel={I18n.t('cancel')}
+
+                    />
+                </Card>
             </Col>
         </Grid>
 
     };
 
+    getStatus = (profit) => {
+        if(parseFloat(profit) < 0){
+            return <Text style={[styles.settledBetStatus, styles.betLoss]}>{I18n.t('loss').toUpperCase()}</Text>
+        }
+        if(parseFloat(profit) == 0){
+            return <Text style={[styles.settledBetStatus, styles.betTie]}>{I18n.t('tie').toUpperCase()}</Text>
+        }
+        return <Text style={[styles.settledBetStatus, styles.betWin]}>{I18n.t('win').toUpperCase()}</Text>
+    }
+
     getListItem = (bet, i) => {
-        return <ListItem key={i}>
-            <Grid style={{height: 100}}>
+        return <Card key={i} style={styles.settledBetContainer}>
+            <Grid>
                 <Row>
-                    <Text>{bet._date}</Text>
+                    <Col size={1}>
+                        <Text style={[styles.datePickerLabel, styles.settledBetLabel]}>{bet._date.split(' ')[0]}</Text>
+                    </Col>
+                    <Col size={1}>
+                        {this.getStatus(bet._profit)}
+                    </Col>
+
                 </Row>
                 <Row>
+
                     <Col size={3}>
-                        <Text style={styles.betLabel}>{I18n.t('turnOver')}</Text>
+                        <Text style={Ui.balanceLabel}>{I18n.t('turnOver')}</Text>
                     </Col>
-                    <Col size={2}>
-                        <Text style={styles.betValue}>{bet._turnover} {bet._currency}</Text>
+                    <Col size={3}>
+                        <Text style={Ui.balanceValue}>{bet._turnover}</Text>
                     </Col>
+                    <Col style={Ui.currencyWidth}>
+                        <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
+                    </Col>
+
                 </Row>
                 <Row>
+
                     <Col size={3}>
-                        <Text style={styles.betLabel}>{I18n.t('profit')}</Text>
+                        <Text style={Ui.balanceLabel}>{I18n.t('profit')}</Text>
                     </Col>
-                    <Col size={2}>
-                        <Text style={styles.betValue}>{bet._profit} {bet._currency}</Text>
+                    <Col size={3}>
+                        <Text style={Ui.balanceValue}>{bet._profit}</Text>
                     </Col>
+                    <Col style={Ui.currencyWidth}>
+                        <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
+                    </Col>
+
                 </Row>
 
             </Grid>
-        </ListItem>
+        </Card>
     };
 
     getBetList = (bets) => {
@@ -219,15 +227,12 @@ class SettledBets extends Component {
             this.getListItem(bet, i)
         );
 
-        if (bets.length == 0) {
-            return <Text
-                style={{textAlign: 'center', padding: 10, alignSelf: "stretch"}}>{I18n.t('noSettledBets')}</Text>;
+        if (bets.length == 0 && this.state.loaded) {
+            return <Text style={styles.noBets}>{I18n.t('noSettledBets')}</Text>;
         }
         return (
             <View>
-                <List>
-                    {betList}
-                </List>
+                {betList}
             </View>
 
         );
@@ -236,13 +241,13 @@ class SettledBets extends Component {
     render() {
         return (
             <View>
-                {this.getFilter()}
                 <ScrollView refreshControl={
                     <RefreshControl
                         refreshing={this.state.refreshing}
                         onRefresh={this.onRefresh}
                     />
                 }>
+                    {this.getFilter()}
                     {this.getBetList(this.state._payload.bets)}
                 </ScrollView>
             </View>
