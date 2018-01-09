@@ -4,7 +4,6 @@ import {View, Text} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import styles from "./styles";
 
-const labels = ["", "", "", ""];
 
 class Steps extends Component {
 
@@ -15,7 +14,7 @@ class Steps extends Component {
                     customStyles={styles.customStyles}
                     currentPosition={this.props.currentPage}
                     stepCount={this.props.stepCount}
-                    labels={labels}
+                    labels={this.props.labels}
                 />
             </View>
         );

@@ -2,6 +2,7 @@ const React = require("react-native");
 
 const {StyleSheet} = React;
 import ColorScheme from "../../common/colorscheme";
+import { normalize } from "../../common/ui";
 
 export default {
     balancePadding: {
@@ -35,7 +36,7 @@ export default {
     },
     headerLabel: {
         color: ColorScheme.dark,
-        fontSize: 14,
+        fontSize: normalize(13),
         marginLeft: 7
     },
     headerButton: {

@@ -13,11 +13,28 @@ export default {
         flex:1,
         marginBottom:15
     },
-    formContainer: {
-        borderWidth: 1,
-        borderColor: ColorScheme.neutralDark,
-        padding:0
+    centered: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
+    successIcon: {
+        color:ColorScheme.win,
+        fontSize:45,
+        marginBottom:10
+    },
+    formContainer: {
+        padding:20,
+        flex:1,
+        justifyContent: 'space-between'
+    },
+    form: {
+        // borderBottomWidth: 1,
+        // borderColor: ColorScheme.neutralDark,
+        // minHeight:50,
+        // padding:0
+    },
+
+
     formLabel:{
         color: ColorScheme.light,
         fontFamily: 'Roboto_light',
@@ -25,37 +42,54 @@ export default {
         fontSize: 14
     },
     cardContainer:{
-        padding:35,
-        minHeight:250,
-        flex:1.5
+        padding:15,
+        minHeight:300
     },
     continueButtonContainer: {
-        flex:1,
-        justifyContent:'flex-end',
+        alignSelf:'flex-end'
     },
     continueButton: {
-        position:'absolute',
-        bottom:35,
-        left:35,
-        width:'100%'
+
     },
+    chatButton: {
+        marginTop:15,
+        alignSelf:'center'
+    },
+
     continueButtonLabel: {
         textAlign:'center',
         flex:1
     },
-
     inputField: {
         flex:1,
-        borderBottomWidth: 0,
         fontSize:18,
         lineHeight: 24,
         color:ColorScheme.darkest
     },
+    amountInput: {
+        textAlign:'right',
+        fontSize:36
+    },
     inputContainer: {
         backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderColor: ColorScheme.neutralDark,
-        marginLeft:0
+        borderBottomWidth: 1,
+        borderBottomColor: ColorScheme.neutralDarker,
+        marginLeft:0,
+        minHeight:50
+    },
+    amountCurrency: {
+        fontFamily:'Roboto_light',
+        color: ColorScheme.darker,
+        fontSize:20,
+        paddingTop:8,
+        lineHeight:20,
+        marginLeft:10
+    },
+    confirmationText: {
+        fontFamily:'Roboto_light',
+        fontSize:16,
+        color: ColorScheme.light,
+        textAlign:'center',
+        marginTop:15
     }
-
 };

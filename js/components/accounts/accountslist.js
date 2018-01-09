@@ -41,7 +41,7 @@ class AccountsList extends Component {
                         <Col style={{justifyContent: 'center'}}>
                             <Text style={styles.headerLabel}>{(I18n.t(accountTypes[account._type]) + ' ' + I18n.t('account')).toUpperCase()}</Text>
                         </Col>
-                        <Col style={{justifyContent: 'flex-end', flexDirection: 'row', width: 155}}>
+                        <Col style={{justifyContent: 'flex-end', flexDirection: 'row'}}>
                             <Button style={styles.headerButton}
                                     onPress={() => this.props.navigation.navigate("PreviousBalance", {
                                         _id: account._id,

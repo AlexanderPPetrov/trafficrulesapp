@@ -22,5 +22,5 @@ export default {
     win:'#23a540',
     loss:'#e66560',
     stepActive:'#31a78e',
-    stepInactive:'#fff'
+    stepInactive:'#e0e2e1'
 };

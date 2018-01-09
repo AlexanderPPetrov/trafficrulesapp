@@ -3,6 +3,7 @@ const React = require("react-native");
 const {StyleSheet} = React;
 
 import ColorScheme from "../../common/colorscheme";
+import Ui from '../../common/ui';
 
 export default {
 
@@ -14,24 +15,7 @@ export default {
         flex: 1,
     },
 
-    mainBalanceValue: {
-        color: ColorScheme.darkest,
-        fontSize: 26,
-        textAlign: 'right',
-        fontFamily: 'Roboto_light',
-        flex: 1,
-        paddingLeft:15
-    },
-    mainBalanceCurrency: {
-        textAlign: 'left',
-        alignSelf: 'flex-start',
-        fontFamily:'Roboto_light',
-        color: ColorScheme.darker,
-        paddingTop:4,
-        paddingLeft:5,
-        fontSize:15,
-        paddingRight:15
-    },
+
     mainBalance: {
         flex: 1,
         height: 80,

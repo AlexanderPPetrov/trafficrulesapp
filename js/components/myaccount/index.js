@@ -70,11 +70,7 @@ class MyAccount extends Component {
             pieChartData: result
         })
 
-        AsyncStorage.multiSet([
-            ["currency", response._currency],
-            ["skrillToken", response._skrill_1tap_token]
-        ])
-
+        AsyncStorage.setItem('accountSettings', JSON.stringify(response))
     };
 
     render() {

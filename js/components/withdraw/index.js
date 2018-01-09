@@ -31,6 +31,8 @@ import Api from "../../../Api";
 
 const Item = Picker.Item;
 
+const labels = [I18n.t('method'), I18n.t('account'), I18n.t('amount'), I18n.t('notes'), I18n.t('withdraw')];
+
 class Withdraw extends Component {
 
     constructor(props) {
@@ -119,19 +121,24 @@ class Withdraw extends Component {
                         {this.getRightHeader()}
                     </Right>
                 </Header>
-                <Steps currentPage={this.state.currentPage} stepCount={5}></Steps>
 
-                <View style={{flex: 1}}>
+                <Content >
                     <Card style={styles.cardContainer}>
-                        <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
-                                       onUpdatePage={this.changeHandler}
-                                       disableButton={this.setButtonState}></WithdrawSteps>
-                        {this.getButton()}
+                        <View style={{flex:1}}>
+                            <Steps currentPage={this.state.currentPage} stepCount={5} labels={labels}></Steps>
+
+                            <View style={styles.formContainer}>
+                                <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
+                                               onUpdatePage={this.changeHandler}
+                                               disableButton={this.setButtonState}></WithdrawSteps>
+                                {this.getButton()}
+                            </View>
+                        </View>
                     </Card>
-                    <View style={{flex:1, justifyContent:'center'}}>
-                        {this.getChat()}
-                    </View>
-                </View>
+
+                    {this.getChat()}
+
+                </Content>
 
             </Container>
         );

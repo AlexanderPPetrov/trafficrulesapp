@@ -27,10 +27,10 @@ class SafeBalance extends Component {
                         </Text>
                     </Row>
                     <Row>
-                        <Text style={styles.mainBalanceValue}>
+                        <Text style={Ui.mainBalanceValue}>
                             {this.props._safe_balance}
                         </Text>
-                        <Text style={styles.mainBalanceCurrency}>{this.props._currency}</Text>
+                        <Text style={Ui.mainBalanceCurrency}>{this.props._currency}</Text>
                     </Row>
                 </Grid>
 

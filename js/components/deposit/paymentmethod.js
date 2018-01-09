@@ -74,8 +74,7 @@ class PaymentMethod extends Component {
         return (
             <Picker
                 mode="dropdown"
-                placeholder={I18n.t('paymentMethod')}
-                iosHeader={I18n.t('paymentMethod')}
+                placeholder="Select One"
                 selectedValue={this.props.paymentMethod}
                 onValueChange={(value) =>
                     this.props.setPayment(this.state.paymentMethods.find(method => method._key === value))

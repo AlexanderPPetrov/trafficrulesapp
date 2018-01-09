@@ -124,6 +124,7 @@ class SettledBets extends Component {
 
     getFilter = () => {
         return <Grid>
+            <Row>
             <Col>
                 <Card style={styles.datePickerContainer}>
                     <Text style={styles.datePickerLabel}>{I18n.t('from')}</Text>
@@ -140,6 +141,8 @@ class SettledBets extends Component {
                         onDateChange={(date) => {
                             this.dateFromChange(date)
                         }}
+                        confirmBtnText={I18n.t('ok')}
+                        cancelBtnText={I18n.t('cancel')}
                         btnTextConfirm={I18n.t('ok')}
                         btnTextCancel={I18n.t('cancel')}
                     />
@@ -159,14 +162,15 @@ class SettledBets extends Component {
                         onDateChange={(date) => {
                             this.dateToChange(date)
                         }}
+                        confirmBtnText={I18n.t('ok')}
+                        cancelBtnText={I18n.t('cancel')}
                         btnTextConfirm={I18n.t('ok')}
                         btnTextCancel={I18n.t('cancel')}
-
                     />
                 </Card>
             </Col>
+            </Row>
         </Grid>
-
     };
 
     getStatus = (profit) => {
@@ -184,7 +188,7 @@ class SettledBets extends Component {
             <Grid>
                 <Row>
                     <Col size={1}>
-                        <Text style={[styles.datePickerLabel, styles.settledBetLabel]}>{bet._date.split(' ')[0]}</Text>
+                        <Text style={styles.settledBetLabel}>{bet._date.split(' ')[0]}</Text>
                     </Col>
                     <Col size={1}>
                         {this.getStatus(bet._profit)}

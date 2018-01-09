@@ -113,10 +113,10 @@ class PreviousBalance extends Component {
                             <Icon name="arrow-back"/>
                         </Button>
                     </Left>
-                    <Body>
-                    <Title>{I18n.t('_balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>
+                    <Body style={{flex: 3}}>
+                    <Title style={{textAlign:'left'}}>{I18n.t('_balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>
                     </Body>
-                    <Right/>
+
 
                 </Header>
                 <ScrollView refreshControl={

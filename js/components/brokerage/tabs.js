@@ -1,16 +1,15 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {SimpleLineIcons, FontAwesome} from '@expo/vector-icons';
-import {TabNavigator} from "react-navigation";
+import {TabNavigator, TabBarTop} from "react-navigation";
 import OpenBets from "./openbets";
 import SettledBets from "./settledbets";
 import ColorScheme from "../../common/colorscheme";
 
-import {
-    Image,
-    Button,
-    StyleSheet
-} from "react-native";
+const indicatorStyle = (props, alignSelf) => ({
+    backgroundColor: props.indicatorStyle.backgroundColor,
+    alignSelf: 'flex-end',
+});
 
 
 class OpenBetsTab extends React.Component {
@@ -49,6 +48,7 @@ const Tabs = TabNavigator({
 }, {
     tabBarPosition: 'top',
     animationEnabled: true,
+    tabBarComponent: (props)=> <TabBarTop {...props} indicatorStyle={indicatorStyle(props, 'flex-end')} />,
     tabBarOptions: {
         activeTintColor: ColorScheme.neutralLight,
         inactiveTintColor : ColorScheme.neutralDark,

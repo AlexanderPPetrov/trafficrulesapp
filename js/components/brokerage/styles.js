@@ -113,7 +113,8 @@ export default {
     datePickerLabel: {
         fontSize:13,
         color: ColorScheme.light,
-        fontFamily:'Roboto_light'
+        fontFamily:'Roboto_light',
+        backgroundColor:'transparent'
     },
     datePickerStyles: {
         dateIcon: {
@@ -138,6 +139,9 @@ export default {
         marginBottom:0
     },
     settledBetLabel: {
+        fontSize:13,
+        color: ColorScheme.light,
+        fontFamily:'Roboto_light',
         marginBottom:10
     },
     noBets: {

@@ -1,7 +1,22 @@
 const React = require("react-native");
 import ColorScheme from "./colorscheme";
 
-const {StyleSheet} = React;
+const {StyleSheet, Dimensions, Platform, PixelRatio } = React;
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
+const scale = SCREEN_WIDTH / 320;
+
+export function normalize(size) {
+    size = size*scale
+    if (Platform.OS === 'ios') {
+        return Math.round(PixelRatio.roundToNearestPixel(size))
+    } else {
+        return Math.round(PixelRatio.roundToNearestPixel(size)) - 2
+    }
+}
 
 export default {
     listHeader: {
@@ -30,13 +45,13 @@ export default {
     },
     balanceLabel: {
         color: ColorScheme.darker,
-        fontSize: 16,
+        fontSize: normalize(13),
         fontFamily:'Roboto_light'
     },
     balanceValue: {
         textAlign: 'right',
         alignSelf: 'stretch',
-        fontSize:20,
+        fontSize:normalize(18),
         color:ColorScheme.darkest,
         fontFamily:'Roboto_light'
     },
@@ -48,9 +63,9 @@ export default {
         alignSelf: 'flex-start',
         fontFamily:'Roboto_light',
         color: ColorScheme.darker,
-        paddingTop:4,
+        paddingTop:normalize(10)/4,
         paddingLeft:5,
-        fontSize:12
+        fontSize:normalize(10)
     },
     currencyWidth: {
         width:30
@@ -62,5 +77,23 @@ export default {
         lineHeight: 15,
         paddingTop: 15,
         paddingLeft: 15
-    }
+    },
+    mainBalanceValue: {
+        color: ColorScheme.darkest,
+        fontSize: normalize(22),
+        textAlign: 'right',
+        fontFamily: 'Roboto_light',
+        flex: 1,
+        paddingLeft:15
+    },
+    mainBalanceCurrency: {
+        textAlign: 'left',
+        alignSelf: 'flex-start',
+        fontFamily:'Roboto_light',
+        color: ColorScheme.darker,
+        paddingTop:normalize(13)/5,
+        paddingLeft:5,
+        fontSize:normalize(13),
+        paddingRight:15
+    },
 };

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {VictoryPie,VictoryContainer, VictoryPortal, VictoryLabel} from 'victory-native';
-import {View, Text, Dimensions} from 'react-native';
+import {View, Text, Dimensions, AsyncStorage} from 'react-native';
 import I18n from '../../../i18n/i18n';
 import styles from "./styles";
 import ColorScheme from "../../common/colorscheme";
@@ -21,8 +21,17 @@ class PieChartBalance extends Component {
             pieHeight:width,
             labelRadius:labelRadius,
             innerRadius:innerRadius,
-            padding: padding
+            padding: padding,
+            currency:''
         };
+    }
+
+    componentDidMount (){
+        AsyncStorage.getItem('accountSettings').then((value) => {
+            this.setState({
+                currency:JSON.parse(value)._currency
+            })
+        });
     }
     render() {
 
@@ -30,7 +39,7 @@ class PieChartBalance extends Component {
         return (
             <View style={styles.pieChartContainer}>
                 <Text style={Ui.cardHeader}>
-                    {I18n.t('distributionIn')}
+                    {I18n.t('distributionIn')} {this.state.currency}
                 </Text>
                 <View style={{paddingTop:15}}>
                     <VictoryPie
