@@ -77,7 +77,8 @@ class PaymentMethod extends Component {
         return (
             <Picker
                 mode="dropdown"
-                placeholder="Select One"
+                placeholder=""
+                iosHeader=" "
                 selectedValue={this.props.paymentMethod}
                 onValueChange={(value) =>
                     this.props.setPayment(this.state.paymentMethods.find(method => method._key === value))

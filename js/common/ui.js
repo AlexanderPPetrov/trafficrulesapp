@@ -30,6 +30,7 @@ export default {
     listHeaderExtended: {
         backgroundColor: ColorScheme.neutralDark                                                                                                                                                           ,
         height:50,
+        paddingLeft:10
     },
     listHeaderLabel: {
         fontSize:14,

@@ -77,7 +77,9 @@ class Deposit extends Component {
 
     getButton = () => {
         if (this.state.currentPage == 4) {
-            return null;
+            return <Button style={styles.continueButton} onPress={() => this.props.navigation.navigate("FundsTransfer")} disabled={this.state.buttonDisabled}>
+                <Text style={styles.continueButtonLabel}>{I18n.t('fundsTransfer')}</Text>
+            </Button>
         }
         return (
             <Button style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>

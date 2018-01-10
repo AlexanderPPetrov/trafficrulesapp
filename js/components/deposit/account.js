@@ -48,7 +48,7 @@ class Account extends Component {
                 </Form>
                 <Form style={styles.form}>
                     <Item style={[styles.inputContainer, styles.inputSecureId]}>
-                        <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('secureId')} value={this.props.secureId} onChangeText={(text) => this.props.onValueChange('secureId', text)}/>
+                        <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('secureId')} value={this.props.secureId} keyboardType='numeric' onChangeText={(text) => this.props.onValueChange('secureId', text) }/>
                     </Item>
                 </Form>
             </View>

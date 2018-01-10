@@ -82,6 +82,11 @@ class WithdrawSteps extends Component {
                 value = this.state.minAmount
             }
         }
+
+        if (key == 'secureId') {
+            value = value.replace(/[^0-9]/g, '')
+        }
+
         this.setState({
             [key]: value
         }, ()=> this.checkButton(key, value));

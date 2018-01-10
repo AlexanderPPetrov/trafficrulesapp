@@ -23,7 +23,7 @@ export default {
         stepIndicatorLabelCurrentColor: 'transparent',
         stepIndicatorLabelFinishedColor: 'transparent',
         stepIndicatorLabelUnFinishedColor: 'transparent',
-        labelColor: ColorScheme.neutralDarker,
+        labelColor: ColorScheme.neutralDarkest,
         labelSize: 12,
         currentStepLabelColor: ColorScheme.stepActive
     },

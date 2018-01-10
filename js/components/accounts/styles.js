@@ -14,22 +14,13 @@ export default {
     safeBalanceContainer: {
         backgroundColor: ColorScheme.neutralLight,
     },
-
     balanceView: {
         borderBottomColor: ColorScheme.neutralLight,
         borderBottomWidth: 1
     },
-
-
     headerIconContainer: {
-        // borderWidth: 1,
-        // borderColor: 'rgba(0,0,0,0.2)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 30,
-        // height: 30,
-        // backgroundColor: ColorScheme.primary,
-        // borderRadius: 30
+        justifyContent: 'flex-start',
+        width: 30
     },
     headerIcon: {
         color: ColorScheme.dark
@@ -42,10 +33,8 @@ export default {
     headerButton: {
         height: 30
     },
-
     accountValue: {
         textAlign: 'right',
         color: ColorScheme.light
     }
-
 };

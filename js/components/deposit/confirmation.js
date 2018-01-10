@@ -35,17 +35,17 @@ class Confirmation extends Component {
     render() {
         return (
 
-            <View >
+            <View style={{marginBottom:30}}>
                 <View style={[styles.withdrawHeader, styles.centered]} >
                     <Icon active name='ios-checkmark-circle' style={styles.successIcon}/>
                     <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('depositConfirmation')}</Text>
                 </View>
                 <Text style={styles.confirmationText}>
-                    {I18n.t('withdrawSuccess')}
+                    {I18n.t('depositSuccess')}
                 </Text>
-                {/*<Text style={styles.confirmationText}>*/}
-                    {/*{I18n.t('withdrawSuccessTwo')}*/}
-                {/*</Text>*/}
+                <Text style={styles.confirmationText}>
+                    {I18n.t('depositSuccessTwo')}
+                </Text>
 
             </View>
 
