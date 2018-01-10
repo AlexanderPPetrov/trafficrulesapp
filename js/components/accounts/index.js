@@ -39,11 +39,12 @@ class Accounts extends Component {
         this.loadData()
     }
 
-    loadData = () => {
+    loadData = (loader = true) => {
         Api.get({
             url: 'get-member-accounts',
             success: this.dataLoaded,
-            always: this.setRefreshing
+            always: this.setRefreshing,
+            loader: loader
 
         })
     }
@@ -60,7 +61,7 @@ class Accounts extends Component {
 
     onRefresh = () => {
         this.setState({refreshing: true});
-        this.loadData()
+        this.loadData(false)
     }
 
     render() {

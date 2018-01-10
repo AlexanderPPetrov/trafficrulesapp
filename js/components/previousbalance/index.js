@@ -35,8 +35,9 @@ class PreviousBalance extends Component {
                 balances: []
             },
             refreshing: false,
-            balance:[],
-            change:[]
+            balance: [],
+            change: [],
+            loaded: false
 
         }
     }
@@ -47,20 +48,22 @@ class PreviousBalance extends Component {
 
     };
 
-    loadData = () => {
+    loadData = (loader = true) => {
         Api.get({
             url: 'get-account-balances',
             data: {
                 account_id: this.props.navigation.state.params._id
             },
             success: this.dataLoaded,
-            always: this.setRefreshing
+            always: this.setRefreshing,
+            loader: loader
         })
     };
 
     dataLoaded = (response) => {
         this.setState({
-            _payload: response
+            _payload: response,
+            loaded: true
         })
 
         this.prepareChartData(response)
@@ -73,8 +76,8 @@ class PreviousBalance extends Component {
         for (let i = 0; i < response.balances.length; i++) {
 
             let value = response.balances[i]
-            balance.push({x: value._date_created,y: parseInt(value._balance)})
-            change.push({x: value._date_created,y: parseInt(value._change)})
+            balance.push({x: value._date_created, y: parseInt(value._balance)})
+            change.push({x: value._date_created, y: parseInt(value._change)})
         }
 
         balance.reverse();
@@ -92,16 +95,29 @@ class PreviousBalance extends Component {
 
     onRefresh = () => {
         this.setState({refreshing: true});
-        this.loadData()
+        this.loadData(false)
     };
 
     getChart = () => {
-        if(this.state.balance.length >= 2){
+        if (this.state.balance.length >= 2) {
             return <Card>
-            <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance} change={this.state.change} currency={this.props.navigation.state.params._currency} currentBalance={this.props.navigation.state.params._balance}/>
+                <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance}
+                                      change={this.state.change} currency={this.props.navigation.state.params._currency}
+                                      currentBalance={this.props.navigation.state.params._balance}/>
             </Card>
         }
         return null
+    }
+
+    getBalances = () => {
+        if (this.state.loaded && this.state._payload.balances.length > 0) {
+            return <Card>
+                <Balance navigation={this.props.navigation} balances={this.state._payload.balances}
+                         currency={this.props.navigation.state.params._currency}></Balance>
+            </Card>
+        }
+        return null
+
     }
 
     render() {
@@ -114,7 +130,8 @@ class PreviousBalance extends Component {
                         </Button>
                     </Left>
                     <Body style={{flex: 3}}>
-                    <Title style={{textAlign:'left'}}>{I18n.t('_balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>
+                    <Title
+                        style={{textAlign: 'left'}}>{I18n.t('_balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>
                     </Body>
 
 
@@ -126,12 +143,10 @@ class PreviousBalance extends Component {
                     />
                 }>
 
-                        {this.getChart()}
+                    {this.getChart()}
+                    {this.getBalances()}
 
-                    <Card>
-                        <Balance navigation={this.props.navigation} balances={this.state._payload.balances}
-                                 currency={this.props.navigation.state.params._currency}></Balance>
-                    </Card>
+
                 </ScrollView>
             </Container>
         );

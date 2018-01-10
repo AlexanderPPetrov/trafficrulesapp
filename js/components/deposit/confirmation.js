@@ -38,7 +38,7 @@ class Confirmation extends Component {
             <View >
                 <View style={[styles.withdrawHeader, styles.centered]} >
                     <Icon active name='ios-checkmark-circle' style={styles.successIcon}/>
-                    <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('withdrawConfirmation')}</Text>
+                    <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('depositConfirmation')}</Text>
                 </View>
                 <Text style={styles.confirmationText}>
                     {I18n.t('withdrawSuccess')}

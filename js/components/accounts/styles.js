@@ -22,17 +22,17 @@ export default {
 
 
     headerIconContainer: {
-        borderWidth: 1,
-        borderColor: 'rgba(0,0,0,0.2)',
+        // borderWidth: 1,
+        // borderColor: 'rgba(0,0,0,0.2)',
         alignItems: 'center',
         justifyContent: 'center',
         width: 30,
-        height: 30,
-        backgroundColor: ColorScheme.primary,
-        borderRadius: 30
+        // height: 30,
+        // backgroundColor: ColorScheme.primary,
+        // borderRadius: 30
     },
     headerIcon: {
-        color: ColorScheme.neutralLight
+        color: ColorScheme.dark
     },
     headerLabel: {
         color: ColorScheme.dark,

@@ -77,6 +77,10 @@ export default {
         marginLeft:0,
         minHeight:50
     },
+    inputSecureId: {
+        marginTop:15,
+        marginBottom:30
+    },
     amountCurrency: {
         fontFamily:'Roboto_light',
         color: ColorScheme.darker,
@@ -89,7 +93,6 @@ export default {
         fontFamily:'Roboto_light',
         fontSize:16,
         color: ColorScheme.light,
-        textAlign:'center',
-        marginTop:15
+        textAlign:'center'
     }
 };

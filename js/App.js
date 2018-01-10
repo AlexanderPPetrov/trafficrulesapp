@@ -14,7 +14,7 @@ import PreviousBalance from "./components/previousbalance/";
 
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
-import {Preloader} from "./common/preloader/index";
+import Loader from "./common/loader/index";
 
 const AppNavigator = StackNavigator(
     {
@@ -30,9 +30,7 @@ const AppNavigator = StackNavigator(
 
 export default () =>
     <Root>
-        {/*<Preloader ref={c => {*/}
-            {/*if (!Preloader.preloaderInstance) Preloader.preloaderInstance = c;*/}
-        {/*}}/>*/}
+        <Loader />
         <StyleProvider style={getTheme(material)}>
             <AppNavigator />
         </StyleProvider>

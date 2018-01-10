@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Steps from '../../common/steps/index';
 import Chat from '../../common/chat/index';
-import WithdrawSteps from './withdrawsteps';
+import DepositSteps from './depositsteps';
 import {
     Container,
     Card,
@@ -65,7 +65,7 @@ class Deposit extends Component {
     }
 
     getRightHeader = () => {
-        if (this.state.currentPage == 4) {
+        if (this.state.currentPage == 0 || this.state.currentPage == 4) {
             return null;
         }
         return (
@@ -126,9 +126,9 @@ class Deposit extends Component {
                             <Steps currentPage={this.state.currentPage} stepCount={4} labels={labels}></Steps>
 
                             <View style={styles.formContainer}>
-                                <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
+                                <DepositSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
                                                onUpdatePage={this.changeHandler}
-                                               disableButton={this.setButtonState}></WithdrawSteps>
+                                               disableButton={this.setButtonState}></DepositSteps>
                                 {this.getButton()}
                             </View>
                         </View>

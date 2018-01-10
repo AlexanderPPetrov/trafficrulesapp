@@ -35,7 +35,8 @@ class MyAccount extends Component {
                 balances: []
             },
             pieChartData: [],
-            refreshing: false
+            refreshing: false,
+            loaded: false
         }
     }
 
@@ -43,11 +44,12 @@ class MyAccount extends Component {
         this.loadData()
     };
 
-    loadData = () => {
+    loadData = (loader = true) => {
         Api.get({
             url: 'get-member-details',
             success: this.dataLoaded,
-            always: this.setRefreshing
+            always: this.setRefreshing,
+            loader: loader
         })
     };
 
@@ -57,7 +59,7 @@ class MyAccount extends Component {
 
     onRefresh = () => {
         this.setState({refreshing: true});
-        this.loadData()
+        this.loadData(false)
     };
 
     dataLoaded = (response) => {
@@ -67,7 +69,8 @@ class MyAccount extends Component {
         var result = pieChartData.map(balance => ({ x: balance._currency, y: balance._total_in_eur }));
         this.setState({
             _payload: response,
-            pieChartData: result
+            pieChartData: result,
+            loaded: true
         })
 
         AsyncStorage.setItem('accountSettings', JSON.stringify(response))
@@ -92,7 +95,7 @@ class MyAccount extends Component {
 
                 </Header>
 
-                <Tabs balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>
+                <Tabs loaded={this.state.loaded} balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>
 
 
             </Container>

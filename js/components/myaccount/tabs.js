@@ -24,6 +24,15 @@ class BalanceTab extends React.Component {
         tabBarLabel: I18n.t('balance')
     };
 
+    getBalanceList = () => {
+        if (this.props.screenProps.loaded) {
+            return <Card style={{flexDirection: 'column', flex: 1, alignItems: 'stretch', marginTop: 1}}>
+                <Balance balances={this.props.screenProps.balances}></Balance>
+            </Card>
+        }
+        return null
+    }
+
     render() {
         return (
             <ScrollView refreshControl={
@@ -43,9 +52,7 @@ class BalanceTab extends React.Component {
                                           _currency={this.props.screenProps._payload._brokerage_currency}></BrokerageBalance>
                     </Card>
                 </View>
-                    <Card style={{flexDirection:'column', flex:1, alignItems: 'stretch', marginTop:1}}>
-                        <Balance balances={this.props.screenProps.balances}></Balance>
-                    </Card>
+                {this.getBalanceList()}
 
             </ScrollView>
 
@@ -68,7 +75,6 @@ class PieChartTab extends React.Component {
 }
 
 
-
 const TabNavigation = TabNavigator({
     OpenBets: {
         screen: BalanceTab,
@@ -80,18 +86,18 @@ const TabNavigation = TabNavigator({
 }, {
     tabBarPosition: 'top',
     animationEnabled: true,
-    tabBarComponent: (props)=> <TabBarTop {...props} indicatorStyle={indicatorStyle(props, 'flex-end')} />,
+    tabBarComponent: (props) => <TabBarTop {...props} indicatorStyle={indicatorStyle(props, 'flex-end')}/>,
     tabBarOptions: {
         activeTintColor: ColorScheme.neutralLight,
-        inactiveTintColor : ColorScheme.neutralDark,
+        inactiveTintColor: ColorScheme.neutralDark,
         labelStyle: {
             fontSize: 12,
         },
         style: {
             backgroundColor: ColorScheme.dark,
         },
-        indicatorStyle:{
-            backgroundColor:ColorScheme.info
+        indicatorStyle: {
+            backgroundColor: ColorScheme.info
         }
     }
 })
@@ -99,8 +105,9 @@ const TabNavigation = TabNavigator({
 class Tabs extends Component {
     render() {
         return (
-            <TabNavigation screenProps={this.props} />
+            <TabNavigation screenProps={this.props}/>
         )
     }
 }
+
 export default Tabs;

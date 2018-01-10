@@ -9,6 +9,7 @@ import {ActivityIndicator} from 'react-native'
 let auth = '';
 
 import {Toast} from "native-base";
+import Loader from "./js/common/loader/index";
 import I18n from './i18n/i18n';
 
 let Api = {
@@ -22,7 +23,17 @@ let Api = {
     },
 
     executeRequest: (opts, type) => {
-        console.log(opts, type);
+
+        let loader = true,
+            retries = 2;
+
+        if(opts.loader == false){
+            loader = false;
+        }
+
+        if(opts.retries){
+            retries = opts.retries;
+        }
 
         if (!opts.url) {
             throw new Error('url is required');
@@ -39,55 +50,92 @@ let Api = {
         if (type == 'GET' && Object.keys(data).length > 0) {
             _url = _url + '?' + Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
         }
+        let count = 1;
 
-        return fetch(_url, _data)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson)
-                if (opts.success && responseJson._status == 'success') {
-                    if (opts.url == 'login') {
-                        auth = responseJson._payload._userLoginHash;
+        if(loader){
+            Loader.show();
+        }
+        const attempt = () => {
+            console.log(_url, data)
+
+            return fetch(_url, _data)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    console.log(responseJson)
+                    if (opts.success && responseJson._status == 'success') {
+                        if (opts.url == 'login') {
+                            auth = responseJson._payload._userLoginHash;
+                        }
+
+                        opts.success(responseJson._payload)
+                        if (opts.always) {
+                            opts.always()
+                        }
+                    } else {
+
+
+
+                            if(opts.error){
+                                opts.error(responseJson._payload._message)
+                            }
+                            let message = I18n.t(responseJson._payload._message)
+                            if (responseJson._payload._code == 404) {
+                                message = responseJson._payload._message
+                            }
+
+                            if(responseJson._payload.errors && responseJson._payload.errors.length > 0) {
+                                message = '';
+                                for(let i = 0; i < responseJson._payload.errors.length; i++){
+                                    message+= responseJson._payload.errors[i] +'\n'
+                                }
+                            }
+
+                            Toast.show({
+                                text: message,
+                                buttonText: I18n.t('ok')
+                            })
+                            if (opts.always) {
+                                opts.always()
+                            }
+
                     }
-                    opts.success(responseJson._payload)
-                } else {
 
-                    let message = I18n.t(responseJson._payload._message)
-                    if (responseJson._payload._code == 404) {
-                        message = responseJson._payload._message
+                    if(loader){
+                        Loader.hide();
                     }
-                    Toast.show({
-                        text: message,
-                        buttonText: I18n.t('ok')
-                    })
-                }
-                if (responseJson._status == 'error' && opts.error) {
-                    opts.error(responseJson._payload._message)
 
-                }
-                if (opts.always) {
-                    opts.always()
-                }
+                })
+                .catch((error) => {
+                    console.log(count, retries)
+                    if (count < retries) {
+                        console.log('retry fetch')
+                        count++
+                        attempt()
+                    } else {
+                        let message = error.message;
+                        if (message == 'Network request failed') {
+                            message = I18n.t('network_request_failed')
+                        }
 
-            })
-            .catch((error) => {
+                        Alert.alert(
+                            I18n.t('error_title'),
+                            message,
+                            [
+                                {text: 'OK'},
+                            ]
+                        )
+                        if (opts.always) {
+                            opts.always()
+                        }
+                    }
+                    if(loader){
+                        Loader.hide();
+                    }
 
-                let message = error.message;
-                if (message == 'Network request failed') {
-                    message = I18n.t('network_request_failed')
-                }
+                })
+        }
 
-                Alert.alert(
-                    I18n.t('error_title'),
-                    message,
-                    [
-                        {text: 'OK'},
-                    ]
-                )
-                if (opts.always) {
-                    opts.always()
-                }
-            })
-
+        attempt()
     },
 
     formatDate: (date) => {
@@ -100,8 +148,8 @@ let Api = {
         date = [date.getFullYear(),
                 (date.getMonth() + 1).padLeft(),
                 date.getDate().padLeft()].join('-') +
-                ' ' +
-                [date.getHours().padLeft(),
+            ' ' +
+            [date.getHours().padLeft(),
                 date.getMinutes().padLeft(),
                 date.getSeconds().padLeft()].join(':');
 

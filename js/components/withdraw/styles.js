@@ -89,7 +89,6 @@ export default {
         fontFamily:'Roboto_light',
         fontSize:16,
         color: ColorScheme.light,
-        textAlign:'center',
-        marginTop:15
+        textAlign:'center'
     }
 };

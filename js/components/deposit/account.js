@@ -29,7 +29,7 @@ import styles from "./styles";
 class Account extends Component {
 
     componentDidMount = () => {
-        if(this.props.account == '' ){
+        if(this.props.account == '' || this.props.secureId == ''){
             this.props.disableButton(true)
         }else{
             this.props.disableButton(false)
@@ -44,6 +44,11 @@ class Account extends Component {
                 <Form style={styles.form}>
                     <Item style={styles.inputContainer}>
                         <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
+                    </Item>
+                </Form>
+                <Form style={styles.form}>
+                    <Item style={[styles.inputContainer, styles.inputSecureId]}>
+                        <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('secureId')} value={this.props.secureId} onChangeText={(text) => this.props.onValueChange('secureId', text)}/>
                     </Item>
                 </Form>
             </View>

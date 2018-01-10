@@ -25,7 +25,7 @@ import {
     Body,
 } from "native-base";
 
-import PaymentMethod from './paymentmethod'
+import DepositMethod from './depositmethod'
 import Account from "./account"
 import Amount from './amount'
 import Notes from './notes'
@@ -48,6 +48,7 @@ class WithdrawSteps extends Component {
             minAmount: 0,
             maxAmount: 0,
             notes: '',
+            secureId:''
 
         }
     }
@@ -83,7 +84,29 @@ class WithdrawSteps extends Component {
         }
         this.setState({
             [key]: value
-        });
+        }, ()=> this.checkButton(key, value));
+
+
+    }
+
+    checkButton = (key, value) => {
+        if(key == 'account'){
+            if(value != '' && this.state.secureId != ''){
+                this.props.disableButton(false)
+            }else{
+                this.props.disableButton(true)
+            }
+            return;
+        }
+
+        if(key == 'secureId'){
+            if(value != '' && this.state.account != ''){
+                this.props.disableButton(false)
+            }else{
+                this.props.disableButton(true)
+            }
+            return;
+        }
 
         if (value != '') {
             this.props.disableButton(false)
@@ -92,33 +115,33 @@ class WithdrawSteps extends Component {
         }
     }
 
-    withdrawMoney = () => {
+    depositMoney = () => {
         Api.post({
-            url: 'withdraw',
+            url: 'deposit',
             data: {
                 payment_method: this.state.paymentMethod,
                 account: this.state.account,
                 amount: this.state.amount,
-                notes: this.state.notes
+                secure_id: this.state.secureId
             },
-            success: this.withdrawSuccess
+            success: this.depositSuccess
         })
     }
 
-    withdrawSuccess = () => {
-        this.props.onUpdatePage(5)
+    depositSuccess = () => {
+        this.props.onUpdatePage(4)
         this.refs.view.fadeInRight(300);
     }
 
     renderStep = () => {
 
         if (this.props.currentPage == 0) {
-            return <PaymentMethod setPayment={this.setPayment} disableButton={this.props.disableButton}
-                                  paymentMethod={this.state.paymentMethod}></PaymentMethod>
+            return <DepositMethod setPayment={this.setPayment} disableButton={this.props.disableButton}
+                                  paymentMethod={this.state.paymentMethod}></DepositMethod>
         }
         if (this.props.currentPage == 1) {
             return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton}
-                            account={this.state.account}></Account>
+                            account={this.state.account} secureId={this.state.secureId}></Account>
         }
         if (this.props.currentPage == 2) {
             return <Amount onValueChange={this.changeValue} disableButton={this.props.disableButton}
@@ -126,20 +149,18 @@ class WithdrawSteps extends Component {
                            amount={this.state.amount}></Amount>
         }
         if (this.props.currentPage == 3) {
-            return <Notes onValueChange={this.changeValue} disableButton={this.props.disableButton}
-                          notes={this.state.notes}></Notes>
+
         }
+
         if (this.props.currentPage == 4) {
-        }
-        if (this.props.currentPage == 5) {
             return <Confirmation></Confirmation>
         }
         return null;
     }
 
     goForward = () => {
-        if (this.props.currentPage == 3) {
-            this.withdrawMoney()
+        if (this.props.currentPage == 2) {
+            this.depositMoney()
 
         } else {
             this.props.onUpdatePage(this.props.currentPage + 1)

@@ -42,11 +42,12 @@ class OpenBets extends Component {
         this.loadData()
     };
 
-    loadData = () => {
+    loadData = (loader = true) => {
         Api.get({
             url: 'get-brokerage-open-bets',
             success: this.dataLoaded,
-            always: this.setRefreshing
+            always: this.setRefreshing,
+            loader:loader
         })
     };
 
@@ -64,7 +65,7 @@ class OpenBets extends Component {
 
     onRefresh = () => {
         this.setState({refreshing: true});
-        this.loadData()
+        this.loadData(false)
     };
 
     getListItem = (bet, i) => {

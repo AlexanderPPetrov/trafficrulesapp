@@ -67,7 +67,7 @@ class Withdraw extends Component {
     }
 
     getRightHeader = () => {
-        if (this.state.currentPage == 5) {
+        if (this.state.currentPage == 0 || this.state.currentPage == 5) {
             return null;
         }
         return (

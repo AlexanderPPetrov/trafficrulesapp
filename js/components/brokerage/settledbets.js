@@ -22,8 +22,6 @@ import Ui from '../../common/ui';
 
 import DatePicker from 'react-native-datepicker'
 
-import {MaterialCommunityIcons} from '@expo/vector-icons';
-
 import styles from "./styles";
 import Api from "../../../Api";
 
@@ -48,7 +46,7 @@ class SettledBets extends Component {
 
     }
 
-    loadData = () => {
+    loadData = (loader = true) => {
         Api.get({
             url: 'get-brokerage-settled-bets',
             success: this.dataLoaded,
@@ -56,7 +54,8 @@ class SettledBets extends Component {
                 date_to: Api.formatDate(this.state.dateTo),
                 date_from: Api.formatDate(this.state.dateFrom),
             },
-            always: this.setRefreshing
+            always: this.setRefreshing,
+            loader:loader
         })
     };
 
@@ -74,7 +73,7 @@ class SettledBets extends Component {
 
     onRefresh = () => {
         this.setState({refreshing: true, loaded: false});
-        this.loadData()
+        this.loadData(false)
     };
 
     setDates = () => {
@@ -91,9 +90,6 @@ class SettledBets extends Component {
             dateTo: currentDate
 
         }, function () {
-
-            // this.refs.dateFrom.setDate(this.state.dateFrom);
-            // this.refs.dateTo.setDate(this.state.dateTo);
             this.loadData()
         });
 

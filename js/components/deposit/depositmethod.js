@@ -48,6 +48,9 @@ class PaymentMethod extends Component {
 
         Api.get({
             url: 'get-member-payment-options',
+            data:{
+                method:'deposit'
+            },
             success: this.dataLoaded
         })
     }

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {AppRegistry, SectionList, StyleSheet, Text, View, ScrollView} from 'react-native';
 import styles from "./styles";
-import {SimpleLineIcons, FontAwesome} from '@expo/vector-icons';
+import {SimpleLineIcons, MaterialCommunityIcons} from '@expo/vector-icons';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {Button, Content, Card, CardItem, List, ListItem, Separator, Right, Left, Body} from "native-base";
 import Ui from '../../common/ui';
@@ -31,11 +31,11 @@ class AccountsList extends Component {
             <List >
                 <ListItem itemDivider style={[Ui.listHeader, Ui.listHeaderExtended]}>
                     <Grid>
-                        <Col style={{width: 30, justifyContent: 'center'}}>
+                        <Col style={{width: 30, justifyContent: 'flex-start'}}>
                             <View style={styles.headerIconContainer}>
                                 {account._type == '0' ?
-                                    <FontAwesome name="soccer-ball-o" size={18} style={styles.headerIcon}/> :
-                                    <SimpleLineIcons name="user" size={18} style={styles.headerIcon}/>}
+                                    <MaterialCommunityIcons name="soccer" size={28} style={styles.headerIcon}/> :
+                                    <SimpleLineIcons name="user" size={20} style={styles.headerIcon}/>}
                             </View>
                         </Col>
                         <Col style={{justifyContent: 'center'}}>
