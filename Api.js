@@ -78,7 +78,9 @@ let Api = {
                             if(opts.error){
                                 opts.error(responseJson._payload._message)
                             }
+
                             let message = I18n.t(responseJson._payload._message)
+
                             if (responseJson._payload._code == 404) {
                                 message = responseJson._payload._message
                             }
@@ -89,6 +91,7 @@ let Api = {
                                     message+= responseJson._payload.errors[i] +'\n'
                                 }
                             }
+
 
                             Toast.show({
                                 text: message,

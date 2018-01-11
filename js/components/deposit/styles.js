@@ -1,12 +1,13 @@
 const React = require("react-native");
 import ColorScheme from "../../common/colorscheme";
 
-const {StyleSheet} = React;
+const {StyleSheet, Dimensions} = React;
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 
 export default {
     stepsContainer: {
         backgroundColor: ColorScheme.neutralLight,
-        minHeight: 300,
         padding:15
     },
     withdrawHeader: {
@@ -22,6 +23,11 @@ export default {
         fontSize:45,
         marginBottom:10
     },
+    errorIcon: {
+        color:ColorScheme.loss,
+        fontSize:45,
+        marginBottom:10
+    },
     formContainer: {
         padding:20,
         flex:1,
@@ -34,6 +40,10 @@ export default {
         // padding:0
     },
 
+    webview: {
+        width: deviceWidth,
+        height:deviceHeight
+    },
 
     formLabel:{
         color: ColorScheme.light,
@@ -43,7 +53,7 @@ export default {
     },
     cardContainer:{
         padding:15,
-        minHeight:300
+        paddingBottom:0
     },
     continueButtonContainer: {
         alignSelf:'flex-end'
@@ -93,6 +103,7 @@ export default {
         fontFamily:'Roboto_light',
         fontSize:16,
         color: ColorScheme.light,
-        textAlign:'center'
+        textAlign:'center',
+        marginTop:15
     }
 };

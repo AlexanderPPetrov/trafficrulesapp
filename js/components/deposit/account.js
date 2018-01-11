@@ -29,16 +29,27 @@ import styles from "./styles";
 class Account extends Component {
 
     componentDidMount = () => {
-        if(this.props.account == '' || this.props.secureId == ''){
+        if(this.props.account == '' || (this.props.secureId == '' && this.props.paymentMethod == 'NT')){
             this.props.disableButton(true)
         }else{
             this.props.disableButton(false)
         }
     }
 
+    getSecureIdField = () => {
+
+        if(this.props.paymentMethod == 'NT'){
+            return <Form style={styles.form}>
+                <Item style={[styles.inputContainer, styles.inputSecureId]}>
+                    <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('secureId')} value={this.props.secureId} keyboardType='numeric' onChangeText={(text) => this.props.onValueChange('secureId', text) }/>
+                </Item>
+            </Form>
+        }
+        return null
+    }
+
     render() {
         return (
-
             <View >
                 <Text style={styles.formLabel}>{I18n.t('accountSettings')}</Text>
                 <Form style={styles.form}>
@@ -46,11 +57,7 @@ class Account extends Component {
                         <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
                     </Item>
                 </Form>
-                <Form style={styles.form}>
-                    <Item style={[styles.inputContainer, styles.inputSecureId]}>
-                        <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('secureId')} value={this.props.secureId} keyboardType='numeric' onChangeText={(text) => this.props.onValueChange('secureId', text) }/>
-                    </Item>
-                </Form>
+                {this.getSecureIdField()}
             </View>
 
         );

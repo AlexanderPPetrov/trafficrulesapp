@@ -28,8 +28,7 @@ export default {
         currentStepLabelColor: ColorScheme.stepActive
     },
     stepsContainer: {
-        paddingTop:15,
-        paddingBottom:15
+        paddingTop:15
     }
 
 };

@@ -24,7 +24,7 @@ import {
     Body,
 } from "native-base";
 
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, WebView} from 'react-native';
 
 import styles from "./styles";
 
@@ -38,16 +38,25 @@ class Deposit extends Component {
 
         this.state = {
             currentPage: 0,
-            buttonDisabled: true
+            buttonDisabled: true,
+            depositCompleted:'',
+            _redirect_url: '',
+            payment_id:''
         }
     }
 
+    setRedirectUrl = (value) => {
+        this.setState({_redirect_url: value})
+    }
     setButtonState = (value) => {
         this.setState({
             buttonDisabled: value
         })
     }
 
+    setPaymentId = (value) => {
+        this.setState({payment_id: value})
+    }
     goBackward = () => {
         this.tabs.goBackward()
     }
@@ -76,10 +85,16 @@ class Deposit extends Component {
     }
 
     getButton = () => {
-        if (this.state.currentPage == 4) {
-            return <Button style={styles.continueButton} onPress={() => this.props.navigation.navigate("FundsTransfer")} disabled={this.state.buttonDisabled}>
+        if (this.state.depositCompleted == 'success') {
+            return <Button style={styles.continueButton} onPress={() => this.props.navigation.navigate("FundsTransfer", {
+                payment_id: this.state.payment_id,
+            })} >
                 <Text style={styles.continueButtonLabel}>{I18n.t('fundsTransfer')}</Text>
             </Button>
+        }
+
+        if(this.state.currentPage == 4){
+            return null;
         }
         return (
             <Button style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
@@ -107,6 +122,54 @@ class Deposit extends Component {
         });
     }
 
+    setDepositCompleted = (value) => {
+        this.setState({
+            depositCompleted: value
+        })
+    }
+
+    webViewChanged = (webViewState) => {
+
+        if(webViewState.url.indexOf('#success') != -1){
+            let params  = this.getUrlParameters(webViewState.url);
+            console.log(params)
+            this.setDepositCompleted('success')
+            this.setRedirectUrl('')
+        }
+        if(webViewState.url.indexOf('#error') != -1){
+            let params  = this.getUrlParameters(webViewState.url);
+            console.log(params)
+            this.setDepositCompleted('error')
+            this.setRedirectUrl('')
+        }
+    }
+
+    getUrlParameters = (url) => {
+
+        var regex = /[?&]([^=#]+)=([^&#]*)/g,
+            params = {},
+            match;
+        while(match = regex.exec(url)) {
+            params[match[1]] = match[2];
+        }
+        return params;
+    }
+
+    getWebView = () => {
+        if (this.state._redirect_url != '') {
+            return <WebView
+                style={styles.webview}
+                source={{uri: this.state._redirect_url}}
+                javaScriptEnabled={true}
+                domStorageEnabled={true}
+                startInLoadingState={true}
+                onNavigationStateChange={this.webViewChanged}
+            >
+            </WebView>
+        }
+        return null;
+    }
+
     render() {
         return (
             <Container style={styles.container}>
@@ -122,22 +185,25 @@ class Deposit extends Component {
                     </Right>
                 </Header>
 
-                <Content >
+                <Content>
                     <Card style={styles.cardContainer}>
-                        <View style={{flex:1}}>
+                        <View style={{flex: 1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={4} labels={labels}></Steps>
-
+                            {this.getChat()}
                             <View style={styles.formContainer}>
-                                <DepositSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
-                                               onUpdatePage={this.changeHandler}
-                                               disableButton={this.setButtonState}></DepositSteps>
+                                <DepositSteps currentPage={this.state.currentPage}
+                                              onRef={ref => (this.tabs = ref)} {...this.props}
+                                              onUpdatePage={this.changeHandler}
+                                              setRedirectUrl={this.setRedirectUrl}
+                                              setPaymentId={this.setPaymentId}
+                                              setDepositCompleted={this.setDepositCompleted}
+                                              depositCompleted={this.state.depositCompleted}
+                                              disableButton={this.setButtonState}></DepositSteps>
                                 {this.getButton()}
                             </View>
                         </View>
                     </Card>
-
-                    {this.getChat()}
-
+                    {this.getWebView()}
                 </Content>
 
             </Container>

@@ -23,6 +23,7 @@ import {
     Left,
     Right,
     Body,
+
 } from "native-base";
 
 import DepositMethod from './depositmethod'
@@ -48,7 +49,8 @@ class WithdrawSteps extends Component {
             minAmount: 0,
             maxAmount: 0,
             notes: '',
-            secureId:''
+            secureId:'',
+            _payload:{}
 
         }
     }
@@ -91,15 +93,17 @@ class WithdrawSteps extends Component {
             [key]: value
         }, ()=> this.checkButton(key, value));
 
-
     }
 
+
+
     checkButton = (key, value) => {
+
         if(key == 'account'){
-            if(value != '' && this.state.secureId != ''){
-                this.props.disableButton(false)
-            }else{
+            if(value == '' || (this.state.secureId == '' && this.state.paymentMethod == 'NT')){
                 this.props.disableButton(true)
+            }else{
+                this.props.disableButton(false)
             }
             return;
         }
@@ -127,15 +131,30 @@ class WithdrawSteps extends Component {
                 payment_method: this.state.paymentMethod,
                 account: this.state.account,
                 amount: this.state.amount,
-                secure_id: this.state.secureId
+                secure_id: this.state.secureId,
+                success_url: 'https://mytest2.premiumtradings.com/#success',
+                error_url: 'https://mytest2.premiumtradings.com/#error',
+                fail_url: 'https://mytest2.premiumtradings.com/#error',
+                cancel_url: 'https://mytest2.premiumtradings.com/#cancel'
             },
             success: this.depositSuccess
         })
     }
 
-    depositSuccess = () => {
-        this.props.onUpdatePage(4)
+    depositSuccess = (response) => {
+        this.setState({
+            _payload: response
+        })
+            this.props.onUpdatePage(4)
+
+        this.props.setPaymentId(response._payment_num);
+        if(response._status == 'confirmed'){
+            this.props.setDepositCompleted('success')
+        }
         this.refs.view.fadeInRight(300);
+        if(response._redirect_url){
+            this.props.setRedirectUrl(response._redirect_url)
+        }
     }
 
     renderStep = () => {
@@ -145,7 +164,7 @@ class WithdrawSteps extends Component {
                                   paymentMethod={this.state.paymentMethod}></DepositMethod>
         }
         if (this.props.currentPage == 1) {
-            return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton}
+            return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton} paymentMethod={this.state.paymentMethod}
                             account={this.state.account} secureId={this.state.secureId}></Account>
         }
         if (this.props.currentPage == 2) {
@@ -158,7 +177,7 @@ class WithdrawSteps extends Component {
         }
 
         if (this.props.currentPage == 4) {
-            return <Confirmation></Confirmation>
+            return <Confirmation _payload={this.state._payload} depositCompleted={this.props.depositCompleted}></Confirmation>
         }
         return null;
     }
