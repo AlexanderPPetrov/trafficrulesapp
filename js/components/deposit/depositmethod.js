@@ -49,7 +49,7 @@ class PaymentMethod extends Component {
         Api.get({
             url: 'get-member-payment-options',
             data:{
-                method:'deposit'
+                mode:'deposit'
             },
             success: this.dataLoaded
         })
@@ -76,6 +76,7 @@ class PaymentMethod extends Component {
         );
         return (
             <Picker
+
                 mode="dropdown"
                 placeholder=""
                 iosHeader=" "
@@ -83,6 +84,18 @@ class PaymentMethod extends Component {
                 onValueChange={(value) =>
                     this.props.setPayment(this.state.paymentMethods.find(method => method._key === value))
                 }
+                renderHeader={backAction =>
+                    <Header style={{ backgroundColor: "#f44242" }}>
+                        <Left>
+                            <Button transparent onPress={backAction}>
+                                <Icon name="arrow-back"  />
+                            </Button>
+                        </Left>
+                        <Body style={{ flex: 3 }}>
+                        <Title style={{ color: "#fff" }}></Title>
+                        </Body>
+                        <Right />
+                    </Header>}
                 note={false}
             >
                 {listItems}
@@ -96,6 +109,7 @@ class PaymentMethod extends Component {
 
         return (
             <View >
+                <Text style={styles.stepHeader}>{I18n.t('paymentMethod')}</Text>
                 <Text style={styles.formLabel}>{I18n.t('selectPaymentMethod')}</Text>
                 <View >
                     <Form style={styles.form}>

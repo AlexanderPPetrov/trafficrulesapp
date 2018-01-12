@@ -25,11 +25,9 @@ import {
 } from "native-base";
 
 import {View, ScrollView, WebView} from 'react-native';
+import {MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
 
 import styles from "./styles";
-
-
-const labels = [I18n.t('method'), I18n.t('account'), I18n.t('amount'), I18n.t('deposit')];
 
 class Deposit extends Component {
 
@@ -39,33 +37,54 @@ class Deposit extends Component {
         this.state = {
             currentPage: 0,
             buttonDisabled: true,
-            depositCompleted:'',
+            depositCompleted: '',
             _redirect_url: '',
-            payment_id:''
+            steps: 4,
+            payment_id: '',
+            labels: [I18n.t('method'), I18n.t('account'), I18n.t('amount'), I18n.t('deposit')],
+            stepsNames: ['method', 'account', 'amount', 'process', 'deposit']
         }
     }
 
     setRedirectUrl = (value) => {
         this.setState({_redirect_url: value})
     }
+
     setButtonState = (value) => {
         this.setState({
             buttonDisabled: value
         })
     }
 
+    setPages = (number) => {
+        let labels = [I18n.t('method'), I18n.t('account'), I18n.t('amount'), I18n.t('deposit')],
+            stepsNames = ['method', 'account', 'amount', 'process', 'deposit'];
+        if (number == 3) {
+            labels = [I18n.t('method'), I18n.t('amount'), I18n.t('deposit')];
+            stepsNames = ['method', 'amount', 'process', 'deposit'];
+        }
+        this.setState({steps: number, labels: labels, stepsNames: stepsNames})
+        console.log('steps ', number)
+    }
+
     setPaymentId = (value) => {
         this.setState({payment_id: value})
     }
+
     goBackward = () => {
         this.tabs.goBackward()
+        this.setState({
+            _redirect_url:'',
+            depositCompleted:''
+        })
     }
+
     goForward = () => {
         this.tabs.goForward()
     }
 
     getChat = () => {
-        if (this.state.currentPage == 4) {
+        if (this.state.currentPage == this.state.steps - 1 || this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
@@ -74,7 +93,7 @@ class Deposit extends Component {
     }
 
     getRightHeader = () => {
-        if (this.state.currentPage == 0 || this.state.currentPage == 4) {
+        if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
@@ -84,20 +103,71 @@ class Deposit extends Component {
         )
     }
 
+    resetDeposit = () => {
+        this.setState({
+            currentPage: 0,
+            depositCompleted: '',
+            _redirect_url: '',
+            payment_id: ''
+        })
+    }
+
+    getErrorMessage = () => {
+        if (this.state.depositCompleted == 'error') {
+            return <View>
+                <View style={[styles.withdrawHeader, styles.centered]}>
+                    {/*<Icon active name='ios-close-circle' style={styles.errorIcon}/>*/}
+                    <MaterialIcons name="error" size={30} style={styles.errorIcon}></MaterialIcons>
+                    <Text style={{textAlign: 'center', fontSize: 20}}>{I18n.t('depositError')}</Text>
+                </View>
+
+                <Text style={styles.confirmationText}>
+                    {I18n.t('depositErrorMessage')}
+                </Text>
+
+            </View>
+        }
+        if (this.state.depositCompleted == 'cancel') {
+            return <View>
+                <View style={[styles.withdrawHeader, styles.centered]}>
+                    <MaterialCommunityIcons name="cancel" size={30} style={styles.cancelIcon}></MaterialCommunityIcons>
+                    <Text style={{textAlign: 'center', fontSize: 20}}>{I18n.t('depositCancel')}</Text>
+                </View>
+
+                <Text style={styles.confirmationText}>
+                    {I18n.t('depositCancelMessage')}
+                </Text>
+
+            </View>
+        }
+        return null;
+    }
+
     getButton = () => {
         if (this.state.depositCompleted == 'success') {
-            return <Button style={styles.continueButton} onPress={() => this.props.navigation.navigate("FundsTransfer", {
-                payment_id: this.state.payment_id,
-            })} >
+            return <Button block style={styles.continueButton}
+                           onPress={() => this.props.navigation.navigate("FundsTransfer", {
+                               payment_id: this.state.payment_id,
+                           })}>
                 <Text style={styles.continueButtonLabel}>{I18n.t('fundsTransfer')}</Text>
             </Button>
         }
 
-        if(this.state.currentPage == 4){
+        if (this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
+            return <View>
+                <Button block style={styles.continueButton} onPress={() => this.resetDeposit()}>
+                    <Text style={styles.continueButtonLabel}>{I18n.t('startOver')}</Text>
+                </Button>
+            </View>
+
+
+        }
+
+        if (this.state.currentPage == this.state.steps - 1) {
             return null;
         }
         return (
-            <Button style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
+            <Button block style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
                 <Text style={styles.continueButtonLabel}>{I18n.t('continue')}</Text>
             </Button>
         )
@@ -105,7 +175,7 @@ class Deposit extends Component {
 
     getBackButton = () => {
 
-        if (this.state.currentPage == 0 || this.state.currentPage == 4) {
+        if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps || this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
             return ( <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
                     <Icon name="ios-menu"/>
                 </Button>
@@ -120,7 +190,9 @@ class Deposit extends Component {
         this.setState({
             currentPage: page
         });
+        console.log(page, this.state.steps)
     }
+
 
     setDepositCompleted = (value) => {
         this.setState({
@@ -129,17 +201,28 @@ class Deposit extends Component {
     }
 
     webViewChanged = (webViewState) => {
+        console.log(webViewState)
 
-        if(webViewState.url.indexOf('#success') != -1){
-            let params  = this.getUrlParameters(webViewState.url);
+        if (webViewState.url.indexOf('#success') != -1) {
+            let params = this.getUrlParameters(webViewState.url);
             console.log(params)
             this.setDepositCompleted('success')
+            this.setState({
+                currentPage: this.state.steps
+            })
             this.setRedirectUrl('')
         }
-        if(webViewState.url.indexOf('#error') != -1){
-            let params  = this.getUrlParameters(webViewState.url);
+        if (webViewState.url.indexOf('#error') != -1) {
+            let params = this.getUrlParameters(webViewState.url);
             console.log(params)
             this.setDepositCompleted('error')
+            this.setRedirectUrl('')
+        }
+
+        if (webViewState.url.indexOf('#cancel') != -1) {
+            let params = this.getUrlParameters(webViewState.url);
+            console.log(params)
+            this.setDepositCompleted('cancel')
             this.setRedirectUrl('')
         }
     }
@@ -149,7 +232,7 @@ class Deposit extends Component {
         var regex = /[?&]([^=#]+)=([^&#]*)/g,
             params = {},
             match;
-        while(match = regex.exec(url)) {
+        while (match = regex.exec(url)) {
             params[match[1]] = match[2];
         }
         return params;
@@ -167,9 +250,15 @@ class Deposit extends Component {
             >
             </WebView>
         }
-        return null;
+        return null
     }
 
+    getStyle = () => {
+        if(this.state._redirect_url != ''){
+            return [styles.cardContainer, styles.webViewOpened]
+        }
+        return styles.cardContainer
+    }
     render() {
         return (
             <Container style={styles.container}>
@@ -184,12 +273,11 @@ class Deposit extends Component {
                         {this.getRightHeader()}
                     </Right>
                 </Header>
-
                 <Content>
-                    <Card style={styles.cardContainer}>
+                    <Card style={this.getStyle()}>
                         <View style={{flex: 1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={4} labels={labels}></Steps>
-                            {this.getChat()}
+                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps}
+                                   labels={this.state.labels}></Steps>
                             <View style={styles.formContainer}>
                                 <DepositSteps currentPage={this.state.currentPage}
                                               onRef={ref => (this.tabs = ref)} {...this.props}
@@ -198,8 +286,14 @@ class Deposit extends Component {
                                               setPaymentId={this.setPaymentId}
                                               setDepositCompleted={this.setDepositCompleted}
                                               depositCompleted={this.state.depositCompleted}
+                                              setPages={this.setPages}
+                                              stepsNames={this.state.stepsNames}
                                               disableButton={this.setButtonState}></DepositSteps>
-                                {this.getButton()}
+                                {this.getErrorMessage()}
+                                <View style={styles.buttonsContainer}>
+                                    {this.getButton()}
+                                    {this.getChat()}
+                                </View>
                             </View>
                         </View>
                     </Card>

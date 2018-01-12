@@ -51,7 +51,8 @@ class Account extends Component {
     render() {
         return (
             <View >
-                <Text style={styles.formLabel}>{I18n.t('accountSettings')}</Text>
+                <Text style={styles.stepHeader}>{I18n.t('accountSettings')}</Text>
+                <Text style={styles.formLabel}>{I18n.t('enterAccount')}</Text>
                 <Form style={styles.form}>
                     <Item style={styles.inputContainer}>
                         <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>

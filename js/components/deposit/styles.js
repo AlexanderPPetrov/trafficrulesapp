@@ -2,9 +2,8 @@ const React = require("react-native");
 import ColorScheme from "../../common/colorscheme";
 
 const {StyleSheet, Dimensions} = React;
-const deviceHeight = Dimensions.get('window').height;
-const deviceWidth = Dimensions.get('window').width;
-
+const deviceHeight = Dimensions.get("window").height;
+const deviceWidth = Dimensions.get("window").width;
 export default {
     stepsContainer: {
         backgroundColor: ColorScheme.neutralLight,
@@ -12,7 +11,8 @@ export default {
     },
     withdrawHeader: {
         flex:1,
-        marginBottom:15
+        marginBottom:15,
+        alignSelf:'stretch'
     },
     centered: {
         justifyContent: 'center',
@@ -28,18 +28,21 @@ export default {
         fontSize:45,
         marginBottom:10
     },
+    cancelIcon: {
+        color:ColorScheme.neutralDarkest,
+        fontSize:45,
+        marginBottom:10
+    },
     formContainer: {
-        padding:20,
         flex:1,
         justifyContent: 'space-between'
     },
     form: {
         // borderBottomWidth: 1,
         // borderColor: ColorScheme.neutralDark,
-        // minHeight:50,
-        // padding:0
+        minHeight:50,
+        padding:0
     },
-
     webview: {
         width: deviceWidth,
         height:deviceHeight
@@ -51,19 +54,46 @@ export default {
         marginBottom:10,
         fontSize: 14
     },
-    cardContainer:{
-        padding:15,
-        paddingBottom:0
-    },
-    continueButtonContainer: {
-        alignSelf:'flex-end'
-    },
-    continueButton: {
 
+    stepHeader: {
+        textAlign:'center',
+        fontSize:18,
+        padding:10,
+        paddingBottom:45,
+        color:ColorScheme.darkest
+    },
+    cardContainer:{
+        padding:30,
+        paddingTop:15,
+        paddingBottom:30,
+        width:deviceWidth - 6,
+        minHeight:deviceHeight - 92,
+        // minHeight:deviceHeight - 90,
+        alignSelf:'stretch',
+        opacity:1
+    },
+
+    webViewOpened: {
+        opacity:0,
+        height:0,
+        minHeight:0,
+        padding:0,
+        paddingTop:0,
+        paddingBottom:0,
+        marginTop:0,
+        marginBottom:0
+    },
+
+    buttonsContainer: {
+        alignSelf:'flex-end',
+        justifyContent: 'space-between',
+        width:'100%'
     },
     chatButton: {
-        marginTop:15,
-        alignSelf:'center'
+    },
+
+    continueButton:{
+
     },
 
     continueButtonLabel: {

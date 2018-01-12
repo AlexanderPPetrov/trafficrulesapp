@@ -60,6 +60,7 @@ class WithdrawSteps extends Component {
     }
 
     setPayment = (paymentMethod) => {
+        console.log('#######',paymentMethod)
         this.setState({
             paymentMethod: paymentMethod._key,
             maxAmount: paymentMethod._max_amount,
@@ -72,6 +73,12 @@ class WithdrawSteps extends Component {
             }
 
         });
+
+        if(paymentMethod._key == 'ECOPAYZ'){
+            this.props.setPages(3)
+        }else{
+            this.props.setPages(4)
+        }
 
         this.props.disableButton(false)
     }
@@ -132,6 +139,7 @@ class WithdrawSteps extends Component {
                 account: this.state.account,
                 amount: this.state.amount,
                 secure_id: this.state.secureId,
+                response_url: 'http://api-prmts.dev.cc/v1/payment-response',
                 success_url: 'https://mytest2.premiumtradings.com/#success',
                 error_url: 'https://mytest2.premiumtradings.com/#error',
                 fail_url: 'https://mytest2.premiumtradings.com/#error',
@@ -145,11 +153,12 @@ class WithdrawSteps extends Component {
         this.setState({
             _payload: response
         })
-            this.props.onUpdatePage(4)
+            this.props.onUpdatePage(this.props.currentPage + 1)
 
         this.props.setPaymentId(response._payment_num);
         if(response._status == 'confirmed'){
             this.props.setDepositCompleted('success')
+            this.props.onUpdatePage(this.props.currentPage + 1)
         }
         this.refs.view.fadeInRight(300);
         if(response._redirect_url){
@@ -159,31 +168,35 @@ class WithdrawSteps extends Component {
 
     renderStep = () => {
 
-        if (this.props.currentPage == 0) {
+        let currentStep = this.props.stepsNames[this.props.currentPage]
+        console.log(currentStep, this.props.currentPage)
+
+        if (currentStep == 'method') {
             return <DepositMethod setPayment={this.setPayment} disableButton={this.props.disableButton}
                                   paymentMethod={this.state.paymentMethod}></DepositMethod>
         }
-        if (this.props.currentPage == 1) {
+        if (currentStep == 'account') {
             return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton} paymentMethod={this.state.paymentMethod}
                             account={this.state.account} secureId={this.state.secureId}></Account>
         }
-        if (this.props.currentPage == 2) {
+        if (currentStep == 'amount') {
             return <Amount onValueChange={this.changeValue} disableButton={this.props.disableButton}
                            minAmount={this.state.minAmount} maxAmount={this.state.maxAmount}
                            amount={this.state.amount}></Amount>
         }
-        if (this.props.currentPage == 3) {
+        if (currentStep == 'process') {
 
         }
 
-        if (this.props.currentPage == 4) {
+        if (currentStep == 'deposit') {
             return <Confirmation _payload={this.state._payload} depositCompleted={this.props.depositCompleted}></Confirmation>
         }
         return null;
     }
 
     goForward = () => {
-        if (this.props.currentPage == 2) {
+        let currentStep = this.props.stepsNames[this.props.currentPage]
+        if (currentStep == 'amount') {
             this.depositMoney()
 
         } else {

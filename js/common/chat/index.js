@@ -30,10 +30,13 @@ class Chat extends Component {
 
     render() {
         return (
-            <Button style={styles.chatButton} iconLeft transparent primary block onPress={() => console.log('chat pat')}>
-                <Icon name='ios-chatbubbles' />
-                <Text>{I18n.t('contactOperators')}</Text>
-            </Button>
+            <View style={{paddingTop:30}}>
+                <Button style={styles.chatButton} iconLeft transparent primary block onPress={() => console.log('chat pat')}>
+                    <Icon name='ios-chatbubbles' />
+                    <Text>{I18n.t('contactOperators')}</Text>
+                </Button>
+            </View>
+
         );
     }
 }

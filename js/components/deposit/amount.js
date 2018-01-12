@@ -54,7 +54,8 @@ class Amount extends Component {
         return (
 
             <View>
-                <Text style={styles.formLabel}>{I18n.t('depositAmount')}</Text>
+                <Text style={styles.stepHeader}>{I18n.t('depositAmount')}</Text>
+                <Text style={styles.formLabel}>{I18n.t('enterDepositAmount')}</Text>
                 <Grid>
                     <Row>
                         <Col>
