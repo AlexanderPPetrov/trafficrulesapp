@@ -1,8 +1,9 @@
 import React, {Component} from "react";
+import Expo from "expo";
 import I18n from '../../../i18n/i18n';
 import {View} from "react-native";
 import ColorScheme from "../../common/colorscheme";
-var CryptoJS = require("crypto-js");
+
 import {
     Container,
     Header,
@@ -23,62 +24,185 @@ import {
 
 import styles from "./styles";
 import Api from '../../../Api';
+
 class Login extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            username:'test9070',
-            password:'test9070',
-            showToast: false
+        this.state = {
+            username: '',
+            password: '',
+            pin: '',
+            pinEntered: ''
+
         }
     }
 
+    componentWillMount = () => {
+
+        this.readSecureItem('pin')
+        this.readSecureItem('username')
+        this.readSecureItem('password')
+
+    };
+
+
+    readSecureItem = (key) => {
+        Expo.SecureStore.getItemAsync(key)
+            .then((value) => {
+                this.setState({
+                    [key]:value
+                })
+            })
+            .catch((error) => {
+                this.errorMessage(error)
+            })
+
+    };
+
+    resetPin = () => {
+        this.deleteSecureItem('pin');
+        this.deleteSecureItem('password');
+    };
+
+    deleteSecureItem = (key) => {
+
+        Expo.SecureStore.deleteItemAsync(key)
+            .then((value) => {
+                this.setState({
+                    [key]:value
+                })
+            })
+            .catch((error) => {
+                this.errorMessage(error)
+            })
+    };
+
+    errorMessage = (message) => {
+        Toast.show({
+            text: message,
+            buttonText: I18n.t('ok')
+        })
+    };
+
+    loginHandler = () => {
+
+        if (this.state.pin) {
+
+            if(this.state.pin === this.state.pinEntered){
+                this.login()
+            }else{
+                this.errorMessage(I18n.t('wrongPin'))
+            }
+
+        } else {
+            this.login()
+        }
+
+
+    };
 
     login = () => {
+
         let loginData = {
             username: this.state.username,
             password: this.state.password,
-        }
+        };
 
         Api.post({
-            url:'login',
+            url: 'login',
             data: loginData,
-            success: this.loginSuccess
+            success: this.loginSuccess,
+            error: this.loginError
         })
 
     };
 
-    loginSuccess = (response) => {
-        console.log(response)
+    loginError = (message) => {
 
-
-        var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
-        console.log("encrypted text", ciphertext.toString());
-
-        var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
-        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-        console.log("decrypted text", plaintext);
-
-
-        this.props.navigation.navigate("SetPin")
+        if(message === 'wrong_user_name_or_password' || message === 'invalid_or_missing_credetials'){
+            if(this.state.pin){
+                this.deleteSecureItem('pin')
+                this.deleteSecureItem('password')
+            }
+        }
+        Toast.show({
+            text: I18n.t(message),
+            buttonText: I18n.t('ok')
+        })
     };
+
+    changeValue = (value) => {
+        value = value.replace(/[^0-9]/g, '');
+
+        this.setState({
+            pinEntered: value
+        })
+
+    };
+
+    getLoginForm = () => {
+
+        if (this.state.pin) {
+            return <Form>
+                <View style={{paddingTop:30}}>
+                    <Button style={styles.chatButton} iconLeft transparent primary block onPress={() => this.resetPin()}>
+                        <Icon name='ios-sync-outline' />
+                        <Text>{I18n.t('resetPin')}</Text>
+                    </Button>
+                </View>
+                <Text>{I18n.t('enterPin')}</Text>
+                <Item style={[styles.inputContainer, styles.inputMargin]}>
+                    <Input keyboardType='numeric' placeholderTextColor={ColorScheme.lighter}
+                           style={styles.inputField} placeholder="****" value={this.state.pinEntered} maxLength={4}
+                           secureTextEntry={true}
+                           onChangeText={(newValue) => this.changeValue(newValue)}/>
+                </Item>
+
+            </Form>
+        }
+
+        return <Form>
+            <Item style={[styles.inputContainer, styles.inputMargin]}>
+                <Icon active name='ios-person-outline' style={[styles.inputIcon, styles.inputIconUser]}/>
+                <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField}
+                       placeholder={I18n.t('username')} value={this.state.username}
+                       onChangeText={(newValue) => this.setState({username: newValue})}/>
+            </Item>
+            <Item style={styles.inputContainer}>
+                <Icon active name='ios-lock-outline' style={styles.inputIcon}/>
+                <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} secureTextEntry={true}
+                       placeholder={I18n.t('password')} value={this.state.password}
+                       onChangeText={(newValue) => this.setState({password: newValue})}/>
+            </Item>
+        </Form>
+    };
+
+    loginSuccess = (response) => {
+
+        if (this.state.pin) {
+            this.props.navigation.navigate("MyAccount")
+        } else {
+            Expo.SecureStore.setItemAsync('username', this.state.username)
+                .then(() => Expo.SecureStore.setItemAsync('password', this.state.password)
+                    .then(() => this.props.navigation.navigate("SetPin"))
+                )
+                .catch((error) => {
+                    console.log(error)
+                    this.props.navigation.navigate("SetPin")
+                })
+        }
+
+    };
+
     render() {
         return (
             <View style={styles.formContainer}>
-                <Form >
-                    <Item style={[styles.inputContainer, styles.inputMargin]} >
-                        <Icon active name='ios-person-outline' style={[styles.inputIcon, styles.inputIconUser]} />
-                        <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} placeholder={I18n.t('username')} value={this.state.username} onChangeText = {(newValue) => this.setState({username:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Icon active name='ios-lock-outline' style={styles.inputIcon} />
-                        <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} secureTextEntry={true} placeholder={I18n.t('password')} value={this.state.password} onChangeText = {(newValue) => this.setState({password:newValue})}/>
-                    </Item>
-                </Form>
+
+                {this.getLoginForm()}
                 <Button block style={styles.loginButton} onPress={() =>
 
-                    this.login()
+                    this.loginHandler()
                     // this.props.navigation.navigate("MyAccount")
 
                 }>

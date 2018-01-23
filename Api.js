@@ -75,6 +75,7 @@ let Api = {
 
                             if(opts.error){
                                 opts.error(responseJson._payload._message)
+                                return;
                             }
 
                             let message = I18n.t(responseJson._payload._message)

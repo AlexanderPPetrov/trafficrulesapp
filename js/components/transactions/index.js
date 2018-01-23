@@ -203,7 +203,7 @@ class Transactions extends Component {
             value = '0'
         }
         if(property == '_date_created'){
-            value = transaction[property].slice(' ')[0]
+            value = transaction[property].split(' ')[0]
         }
 
         return <ListItem key={i} style={Ui.listItem}>

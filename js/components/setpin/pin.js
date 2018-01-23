@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {View} from "react-native";
 import ColorScheme from "../../common/colorscheme";
-
+import Expo from "expo";
 import {
     Container,
     Header,
@@ -21,11 +21,7 @@ import {
     Toast
 } from "native-base";
 
-import {Octicons} from '@expo/vector-icons';
 import styles from "./styles";
-import Api from '../../../Api';
-
-import {AsyncStorage} from "react-native"
 
 class Pin extends React.Component {
 
@@ -40,7 +36,9 @@ class Pin extends React.Component {
 
 
     changeValue = (key, value) => {
-        console.log(key, value)
+
+        value = value.replace(/[^0-9]/g, '');
+
         this.setState({[key]: value}, () => {
             if (this.state.pin == this.state.confirmPin && this.state.pin.length == 4) {
                 this.setState({
@@ -56,17 +54,16 @@ class Pin extends React.Component {
     };
 
     setPin = () => {
-1
-        AsyncStorage.setItem('pin', this.state.pin)
-        this.props.navigation.navigate("MyAccount")
 
+        Expo.SecureStore.setItemAsync('pin', this.state.pin)
+            .then(() => this.props.navigation.navigate("MyAccount"))
+            .catch((error) => {
+                console.log(error, 'pin not saved');
+                this.props.navigation.navigate("MyAccount")
+            })
 
     }
 
-    loginSuccess = (response) => {
-
-        this.props.navigation.navigate("MyAccount")
-    };
 
     render() {
         return (
@@ -78,12 +75,16 @@ class Pin extends React.Component {
                     <Item style={[styles.inputContainer, styles.inputMargin]}>
                         <Input keyboardType='numeric' placeholderTextColor={ColorScheme.lighter}
                                style={styles.inputField} placeholder="****" value={this.state.username}
+                               maxLength={4}
+                               secureTextEntry={true}
                                onChangeText={(newValue) => this.changeValue('pin', newValue)}/>
                     </Item>
                     <Text>{I18n.t('confirmPin')}</Text>
                     <Item style={[styles.inputContainer, styles.inputMargin]}>
                         <Input keyboardType='numeric' placeholderTextColor={ColorScheme.lighter}
                                style={styles.inputField} placeholder="****" value={this.state.username}
+                               maxLength={4}
+                               secureTextEntry={true}
                                onChangeText={(newValue) => this.changeValue('confirmPin', newValue)}/>
                     </Item>
                 </Form>
