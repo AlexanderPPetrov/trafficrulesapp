@@ -85,14 +85,14 @@ class PaymentMethod extends Component {
                     this.props.setPayment(this.state.paymentMethods.find(method => method._key === value))
                 }
                 renderHeader={backAction =>
-                    <Header style={{ backgroundColor: "#f44242" }}>
+                    <Header >
                         <Left>
                             <Button transparent onPress={backAction}>
                                 <Icon name="arrow-back"  />
                             </Button>
                         </Left>
                         <Body style={{ flex: 3 }}>
-                        <Title style={{ color: "#fff" }}></Title>
+
                         </Body>
                         <Right />
                     </Header>}

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {View} from "react-native";
 import ColorScheme from "../../common/colorscheme";
-
+var CryptoJS = require("crypto-js");
 import {
     Container,
     Header,
@@ -51,7 +51,17 @@ class Login extends React.Component {
 
     loginSuccess = (response) => {
         console.log(response)
-        this.props.navigation.navigate("MyAccount")
+
+
+        var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
+        console.log("encrypted text", ciphertext.toString());
+
+        var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+        console.log("decrypted text", plaintext);
+
+
+        this.props.navigation.navigate("SetPin")
     };
     render() {
         return (

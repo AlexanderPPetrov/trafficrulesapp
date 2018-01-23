@@ -47,7 +47,9 @@ export default {
     balanceLabel: {
         color: ColorScheme.darker,
         fontSize: normalize(13),
-        fontFamily:'Roboto_light'
+        fontFamily:'Roboto_light',
+        textAlign:'left',
+        alignSelf: 'stretch'
     },
     balanceValue: {
         textAlign: 'right',
@@ -97,4 +99,34 @@ export default {
         fontSize:normalize(13),
         paddingRight:15
     },
+    datePickerContainer: {
+        padding:15,
+        paddingTop:10,
+        paddingBottom:0,
+        marginBottom:0
+    },
+    datePickerLabel: {
+        fontSize:13,
+        color: ColorScheme.light,
+        fontFamily:'Roboto_light',
+        backgroundColor:'transparent'
+    },
+    datePickerStyles: {
+        dateIcon: {
+            // position: 'absolute',
+            // left: 0,
+            // top: 5,
+            marginLeft: 0
+        },
+        dateInput: {
+            marginRight: 0,
+            borderWidth:0
+        },
+        dateText: {
+            color:ColorScheme.dark
+        }
+    },
+    calendarIcon:{
+        color:ColorScheme.light
+    }
 };

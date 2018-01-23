@@ -8,7 +8,7 @@ import { StackNavigator } from "react-navigation";
 
 import Drawer from "./Drawer";
 import Home from "./components/home/";
-import MyAccount from "./components/myaccount/";
+import SetPin from "./components/setpin/";
 import Accounts from "./components/accounts/";
 import PreviousBalance from "./components/previousbalance/";
 
@@ -19,6 +19,7 @@ import Loader from "./common/loader/index";
 const AppNavigator = StackNavigator(
     {
         Home: {screen: Home},
+        SetPin: {screen: SetPin},
         Drawer: { screen: Drawer }
 
     },

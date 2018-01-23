@@ -122,15 +122,15 @@ class SettledBets extends Component {
         return <Grid>
             <Row>
             <Col>
-                <Card style={styles.datePickerContainer}>
-                    <Text style={styles.datePickerLabel}>{I18n.t('from')}</Text>
+                <Card style={Ui.datePickerContainer}>
+                    <Text style={Ui.datePickerLabel}>{I18n.t('from')}</Text>
                     <DatePicker
                         style={{alignSelf: 'flex-end'}}
                         date={this.state.dateFrom}
-                        customStyles={styles.datePickerStyles}
+                        customStyles={Ui.datePickerStyles}
                         format="YYYY-MM-DD"
                         mode="date"
-                        iconComponent={<Icon active name='ios-calendar-outline' style={styles.calendarIcon}/>}
+                        iconComponent={<Icon active name='ios-calendar-outline' style={Ui.calendarIcon}/>}
                         // minDate={new Date('2017-1-1')}
                         maxDate={new Date()}
                         placeholder={I18n.t('from')}
@@ -145,14 +145,14 @@ class SettledBets extends Component {
                 </Card>
             </Col>
             <Col>
-                <Card style={styles.datePickerContainer}>
-                    <Text style={styles.datePickerLabel}>{I18n.t('to')}</Text>
+                <Card style={Ui.datePickerContainer}>
+                    <Text style={Ui.datePickerLabel}>{I18n.t('to')}</Text>
                     <DatePicker
                         style={{alignSelf: 'flex-end'}}
-                        customStyles={styles.datePickerStyles}
+                        customStyles={Ui.datePickerStyles}
                         date={this.state.dateTo}
                         mode="date"
-                        iconComponent={<Icon active name='ios-calendar-outline' style={styles.calendarIcon}/>}
+                        iconComponent={<Icon active name='ios-calendar-outline' style={Ui.calendarIcon}/>}
                         maxDate={new Date()}
                         placeholder={I18n.t('to')}
                         onDateChange={(date) => {

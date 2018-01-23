@@ -1,6 +1,8 @@
 const React = require("react-native");
 
 const {StyleSheet} = React;
+import ColorScheme from "../../common/colorscheme";
+import { normalize } from "../../common/ui";
 
 export default {
     balancePadding: {
@@ -22,7 +24,14 @@ export default {
         borderBottomWidth: 1
     },
 
+    headerIconContainer: {
+        justifyContent: 'flex-start',
+        width: 30
+    },
 
+    headerIcon: {
+        color: ColorScheme.dark
+    },
 
     balanceHeader: {
         color:"#888"
@@ -42,21 +51,11 @@ export default {
         flexDirection: 'row'
     },
 
-    balanceLabel: {
-        flex: 2,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        paddingTop:7,
-        paddingBottom:7
-    },
-
-    balanceValue: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        textAlign:'right',
-        paddingTop:7,
-        paddingBottom:7
+    headerLabel: {
+        color: ColorScheme.dark,
+        fontSize: normalize(13),
+        textAlign:'left',
+        marginLeft: 7
     },
 
     brokerageBalanceContainer: {

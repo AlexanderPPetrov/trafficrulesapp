@@ -104,36 +104,7 @@ export default {
         fontSize: 14,
         fontFamily:'Roboto_light'
     },
-    datePickerContainer: {
-        padding:15,
-        paddingTop:10,
-        paddingBottom:0,
-        marginBottom:0
-    },
-    datePickerLabel: {
-        fontSize:13,
-        color: ColorScheme.light,
-        fontFamily:'Roboto_light',
-        backgroundColor:'transparent'
-    },
-    datePickerStyles: {
-        dateIcon: {
-            // position: 'absolute',
-            // left: 0,
-            // top: 5,
-            marginLeft: 0
-        },
-        dateInput: {
-            marginRight: 0,
-            borderWidth:0
-        },
-        dateText: {
-            color:ColorScheme.dark
-        }
-    },
-    calendarIcon:{
-        color:ColorScheme.light
-    },
+
     settledBetContainer:{
         padding:15,
         marginBottom:0
