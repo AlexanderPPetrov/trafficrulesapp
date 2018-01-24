@@ -74,6 +74,7 @@ export default {
     selectAccount: 'Select Account',
     fundsTransfer: 'Funds Transfer',
     transferToExistingAccount: 'Transfer to Existing Account',
+    accountAlreadyAdded: 'Account Already Added',
     existing:'Existing',
     new:'New',
     transfer:'Transfer',

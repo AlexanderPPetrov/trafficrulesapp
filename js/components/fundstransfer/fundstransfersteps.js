@@ -25,10 +25,9 @@ import {
     Right,
     Body,
 } from "native-base";
-
-import ExistingAccounts from './existingaccounts'
-import NewAccounts from "./newaccounts"
-import Amount from './amount'
+import _ from 'lodash'
+import {Toast} from "native-base";
+import AddAccount from './addaccount'
 import Notes from './notes'
 import Confirmation from './confirmation'
 
@@ -43,26 +42,34 @@ class FundsTransferSteps extends Component {
         super(props);
 
         this.state = {
-            selectedExistingAccount: '',
-            existingAccountAmount: '0',
-            selectedExistingAccounts: [],
-            existingAccountAmountVisible: false,
-            existingAccounts: [{
-                _id: 'none',
-                _username: I18n.t('selectAccount')
-            }],
-
-            selectedNewAccount: '',
-            newAccountAmount: '0',
+            existing: {
+                selectedAccount: 'none',
+                accountAmount:'1',
+                selectedAccounts:[],
+                accounts:[{
+                    _id: 'none',
+                    _username: I18n.t('selectAccount')
+                }],
+                loadedAccounts:[]
+            },
+            new: {
+                selectedAccount: 'none',
+                accountAmount:'1',
+                selectedAccounts:[],
+                accounts:[{
+                    _id: 'none',
+                    _username: I18n.t('selectAccount')
+                }],
+                loadedAccounts:[]
+            },
             minAmount: '1',
-            newAccounts: [],
             notes: '',
             currency:''
         }
     }
 
     componentDidMount() {
-        console.log(this.props.navigation.state.params.payment_id)
+        console.log(this.props.navigation.state.params)
         this.props.onRef(this)
         AsyncStorage.getItem('accountSettings').then((value) => {
             this.setState({
@@ -71,61 +78,58 @@ class FundsTransferSteps extends Component {
         });
     }
 
-    addExistingAccount = () => {
-        const existingAccount = {id: this.state.selectedExistingAccount, amount: this.state.existingAccountAmount};
-        this.state.selectedExistingAccounts.push(existingAccount);
-        this.setState({
-            selectedExistingAccounts: this.state.selectedExistingAccounts,
-            selectedExistingAccount: '',
-            existingAccountAmount: '0'
+    addAccount = (stateKey) => {
+
+        console.log(stateKey, this.state[stateKey])
+        let currentAccounts = this.state[stateKey].accounts;
+        let remainingAccounts = currentAccounts.filter((account) => {
+            if (account._id !== this.state[stateKey].selectedAccount) return account;
         });
-    }
 
-    removeExistingAccount(id) {
-        const remainder = this.state.existingAccounts.filter((account) => {
-            if (account.id !== id) return account;
+        let account = _.filter(currentAccounts, { _id: this.state[stateKey].selectedAccount})[0];
+        let selectedAccount = {_id: account._id, amount: this.state[stateKey].accountAmount, username: account._username};
+        this.state[stateKey].selectedAccounts.push(selectedAccount);
+        this.setState({ [stateKey]: { ...this.state[stateKey],
+            selectedAccounts: this.state[stateKey].selectedAccounts,
+            selectedAccount: 'none',
+            accountAmount: this.state.minAmount,
+            accounts: remainingAccounts
+        } });
+
+    };
+
+    removeAccount = (stateKey, id) => {
+        let selectedAccounts = this.state[stateKey].selectedAccounts;
+        let remainingAccounts = selectedAccounts.filter((account) => {
+            if (account._id !== id) return account;
         });
-        this.setState({existingAccounts: remainder});
-    }
 
-    setExistingAccounts = (accounts) => {
-        this.setState({
-            existingAccounts: [...this.state.existingAccounts, ...accounts]
-        })
-    }
+        let accounts = _.without(this.state[stateKey].loadedAccounts, ...remainingAccounts);
 
-    changeValue = (key, value) => {
+        this.setState({ [stateKey]: { ...this.state[stateKey], selectedAccounts: remainingAccounts, accounts: accounts} });
+    };
 
-        if (key == 'existingAccountAmount') {
+    setAccounts = (stateKey, accounts) => {
+        let accountsList = [...this.state[stateKey].accounts, ...accounts]
+        this.setState({ [stateKey]: { ...this.state[stateKey], accounts: accountsList, loadedAccounts: accountsList} });
+
+    };
+
+    changeAccountValue = (stateKey, key, value) => {
+
+        if(key === 'accountAmount'){
             value = value.replace(/[^0-9.]/g, '');
+            if(value == ''){
+                value = this.state.minAmount
+            }
             console.log(Number.parseFloat(value), Number.parseFloat(this.state.minAmount))
             if (Number.parseFloat(value) < Number.parseFloat(this.state.minAmount)) {
                 value = this.state.minAmount
             }
         }
-        this.setState({
-            [key]: value
-        });
 
+        this.setState({ [stateKey]: { ...this.state[stateKey], [key]: value} });
 
-        if(key == 'selectedExistingAccount'){
-            if(value == 'none'){
-                this.setState({
-                    existingAccountAmountVisible: false
-                })
-            }else{
-                this.setState({
-                    existingAccountAmountVisible: true
-                })
-            }
-        }
-
-
-        if (value != '') {
-            this.props.disableButton(false)
-        } else {
-            this.props.disableButton(true)
-        }
     }
 
     withdrawMoney = () => {
@@ -142,13 +146,6 @@ class FundsTransferSteps extends Component {
     }
 
 
-    // data.append("new_accounts_site[0]", "IBC");
-    // data.append("new_accounts_amount[0]", "2");
-    // data.append("notes", "test note");
-    // data.append("existing_accounts_site[0]", "245");
-    // data.append("existing_accounts_amount[0]", "2");
-
-
     fundsTransferSuccess = () => {
         this.props.onUpdatePage(4)
         this.refs.view.fadeInRight(300);
@@ -157,20 +154,35 @@ class FundsTransferSteps extends Component {
     renderStep = () => {
 
         if (this.props.currentPage == 0) {
-            return <ExistingAccounts onValueChange={this.changeValue}
-                                     onExistingValues={this.setExistingAccounts}
-                                     amountVisible={this.state.existingAccountAmountVisible}
-                                     amount={this.state.existingAccountAmount}
-                                     disableButton={this.props.disableButton}
-                                     selectedExistingAccount={this.state.selectedExistingAccount}
+            return <AddAccount       changeAccountValue={this.changeAccountValue}
+                                     label={I18n.t('transferToExistingAccount')}
+                                     stateKey='existing'
+                                     fetchUrl='get-member-accounts'
+                                     setAccounts={this.setAccounts}
+                                     addAccount={this.addAccount}
+                                     removeAccount={this.removeAccount}
+                                     accountAmount={this.state.existing.accountAmount}
+                                     selectedAccount={this.state.existing.selectedAccount}
+                                     selectedAccounts={this.state.existing.selectedAccounts}
                                      currency={this.state.currency}
-                                     existingAccounts={this.state.existingAccounts}></ExistingAccounts>
+                                     accounts={this.state.existing.accounts}
+            ></AddAccount>
         }
         if (this.props.currentPage == 1) {
-            return <NewAccounts onValueChange={this.changeValue} disableButton={this.props.disableButton}
-                                account={this.state.account}></NewAccounts>
+            return <AddAccount       changeAccountValue={this.changeAccountValue}
+                                     label={I18n.t('transferToExistingAccount')}
+                                     stateKey='new'
+                                     fetchUrl='get-member-accounts'
+                                     setAccounts={this.setAccounts}
+                                     addAccount={this.addAccount}
+                                     removeAccount={this.removeAccount}
+                                     accountAmount={this.state.new.accountAmount}
+                                     selectedAccount={this.state.new.selectedAccount}
+                                     selectedAccounts={this.state.new.selectedAccounts}
+                                     currency={this.state.currency}
+                                     accounts={this.state.new.accounts}
+            ></AddAccount>
         }
-
         if (this.props.currentPage == 2) {
             return <Notes onValueChange={this.changeValue} disableButton={this.props.disableButton}
                           notes={this.state.notes}></Notes>

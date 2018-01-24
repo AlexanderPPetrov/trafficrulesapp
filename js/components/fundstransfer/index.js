@@ -40,7 +40,7 @@ class Withdraw extends Component {
 
         this.state = {
             currentPage: 0,
-            buttonDisabled: true
+            buttonDisabled: false
         }
     }
 
@@ -67,7 +67,7 @@ class Withdraw extends Component {
     }
 
     getRightHeader = () => {
-        if (this.state.currentPage == 0 || this.state.currentPage == 5) {
+        if (this.state.currentPage == 5) {
             return null;
         }
         return (
@@ -131,13 +131,13 @@ class Withdraw extends Component {
                                 <FundsTransferSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
                                                onUpdatePage={this.changeHandler}
                                                disableButton={this.setButtonState}></FundsTransferSteps>
-                                {this.getButton()}
+                                <View style={styles.buttonsContainer}>
+                                    {this.getButton()}
+                                    {this.getChat()}
+                                </View>
                             </View>
                         </View>
                     </Card>
-
-                    {this.getChat()}
-
                 </Content>
 
             </Container>

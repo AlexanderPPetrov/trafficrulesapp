@@ -38,11 +38,17 @@ class Login extends React.Component {
         }
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
 
-        this.readSecureItem('pin')
-        this.readSecureItem('username')
-        this.readSecureItem('password')
+        //Workaround for bug in React Native 0.50
+        setTimeout(() => {
+
+            this.readSecureItem('pin')
+            this.readSecureItem('username')
+            this.readSecureItem('password')
+
+
+        }, 50)
 
     };
 

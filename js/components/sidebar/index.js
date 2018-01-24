@@ -64,11 +64,6 @@ const datas = [
         name: I18n.t('sendMoney'),
         route: "SendMoney",
         icon: "ios-share-alt-outline",
-    },
-    {
-        name: I18n.t('logOut'),
-        route: "SendMoney",
-        icon: "ios-log-out-outline",
     }
 ];
 

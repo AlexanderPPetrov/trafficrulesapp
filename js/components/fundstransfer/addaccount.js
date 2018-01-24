@@ -1,0 +1,161 @@
+import React, {Component} from "react";
+import I18n from '../../../i18n/i18n';
+import {
+    Container,
+    Card,
+    CardItem,
+    Header,
+    Title,
+    Content,
+    Form,
+    Picker,
+    Input,
+    Item as FormItem,
+    Text,
+    H3,
+    Button,
+    Icon,
+    Footer,
+    FooterTab,
+    Left,
+    Right,
+    Body,
+} from "native-base";
+import Ui from '../../common/ui';
+
+import {View, ScrollView} from 'react-native';
+import {Grid, Row, Col} from "react-native-easy-grid";
+import ColorScheme from "../../common/colorscheme";
+
+import styles from "./styles";
+import Api from "../../../Api";
+
+const Item = Picker.Item;
+
+class AddAccount extends Component {
+
+
+    componentDidMount = () => {
+        // if (this.props.paymentMethod == '') {
+        //     this.props.disableButton(true)
+        // }
+
+        Api.get({
+            url: 'get-member-accounts',
+            success: this.dataLoaded
+        })
+    }
+
+    dataLoaded = (response) => {
+        this.props.setAccounts(this.props.stateKey, response.accounts)
+    }
+
+    getAmountField = () => {
+        if(this.props.selectedAccount != 'none'){
+            return <View>
+                <Text style={styles.formLabel}>{I18n.t('amount')}</Text>
+                <Grid>
+                    <Row>
+                        <Col>
+                            <Form style={[styles.inputContainer]}>
+                                <Input style={[styles.inputField, styles.amountInput]} placeholder="0" value={this.props.accountAmount}
+                                       placeholderTextColor={ColorScheme.lighter}
+                                       onChangeText={(amount) => this.props.changeAccountValue(this.props.stateKey, 'accountAmount', amount)}
+                                       keyboardType='numeric'/>
+                            </Form>
+                        </Col>
+                        <Col style={{width:60}}>
+                            <Text style={styles.amountCurrency}>{this.props.currency}</Text>
+                        </Col>
+                        <Col style={{width:60}}>
+                            <Button transparent primary style={styles.removeAccountButton} onPress={() => this.props.addAccount(this.props.stateKey)}>
+                                <Icon name="ios-add-circle" style={styles.addAccountIcon} />
+                            </Button>
+                        </Col>
+                    </Row>
+
+                </Grid>
+            </View>
+        }
+        return null
+
+    };
+
+    getPicker = () => {
+
+        const listItems = this.props.accounts.map((method, i) =>
+            <Item key={i} value={method._id} label={method._username}></Item>
+        );
+        return (
+            <Picker
+                mode="dropdown"
+                placeholder={I18n.t('paymentMethod')}
+                iosHeader=" "
+                selectedValue={this.props.selectedAccount}
+                onValueChange={(value) =>
+                    this.props.changeAccountValue(this.props.stateKey, 'selectedAccount', value)
+                }
+                note={false}
+            >
+                {listItems}
+            </Picker>
+
+        );
+    };
+
+    getAccount = (account, i) => {
+        return <View key={i} style={styles.accountInList}>
+            <Grid>
+                <Row>
+                    <Col>
+                        <Text style={[Ui.balanceLabel, styles.accountLabel]}>{account.username}</Text>
+                    </Col>
+                    <Col>
+                        <Text style={[Ui.balanceValue, styles.accountAmount]}>{account.amount} {this.props.currency}</Text>
+                    </Col>
+                    <Col style={{width:45}}>
+                        <Button  transparent primary style={styles.removeAccountButton} onPress={() => this.props.removeAccount(this.props.stateKey, account._id)}>
+                            <Icon name="ios-close-circle-outline" style={styles.removeAccountIcon} />
+                        </Button>
+                    </Col>
+                </Row>
+
+            </Grid>
+        </View>;
+    };
+
+    getAccounts = () => {
+        let accounts = this.props.selectedAccounts.map((account, i) =>
+            this.getAccount(account, i)
+        );
+
+        return <View>
+            {accounts}
+        </View>
+    };
+
+    render() {
+
+
+        return (
+            <View>
+                <Text style={styles.formLabel}>{this.props.label}</Text>
+                <View>
+                    <Form style={styles.form}>
+                        <View style={styles.inputContainer}>
+                            {this.getPicker()}
+                        </View>
+                        {this.getAmountField()}
+                    </Form>
+                    <View style={styles.accountsList}>
+                        {this.getAccounts()}
+                    </View>
+                </View>
+
+
+            </View>
+        );
+    }
+}
+
+export default AddAccount;

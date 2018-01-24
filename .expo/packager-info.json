@@ -1,8 +1,8 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 200080,
+  "packagerPid": 197324,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://qp-ra4.alexppetrov.premium-tradings-mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.qp-ra4.alexppetrov.premium-tradings-mobile.exp.direct",
-  "ngrokPid": 204772
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

@@ -1,8 +1,9 @@
 const React = require("react-native");
 import ColorScheme from "../../common/colorscheme";
 
-const {StyleSheet} = React;
-
+const {StyleSheet, Dimensions} = React;
+const deviceHeight = Dimensions.get("window").height;
+const deviceWidth = Dimensions.get("window").width;
 export default {
     stepsContainer: {
         backgroundColor: ColorScheme.neutralLight,
@@ -17,6 +18,7 @@ export default {
         justifyContent: 'center',
         alignItems: 'center'
     },
+
     successIcon: {
         color:ColorScheme.win,
         fontSize:45,
@@ -33,7 +35,16 @@ export default {
         // minHeight:50,
         // padding:0
     },
-
+    cardContainer:{
+        padding:30,
+        paddingTop:15,
+        paddingBottom:30,
+        width:deviceWidth - 6,
+        minHeight:deviceHeight - 92,
+        // minHeight:deviceHeight - 90,
+        alignSelf:'stretch',
+        opacity:1
+    },
 
     formLabel:{
         color: ColorScheme.light,
@@ -41,10 +52,7 @@ export default {
         marginBottom:10,
         fontSize: 14
     },
-    cardContainer:{
-        padding:15,
-        minHeight:300
-    },
+
     continueButtonContainer: {
         alignSelf:'flex-end'
     },
@@ -76,6 +84,38 @@ export default {
         borderBottomColor: ColorScheme.neutralDarker,
         marginLeft:0,
         minHeight:50
+    },
+
+    accountsList: {
+        paddingTop:15,
+        paddingBottom:15
+    },
+
+    accountInList: {
+        marginTop:3,
+        borderWidth: 1,
+        borderColor: ColorScheme.neutralDarker,
+    },
+
+    accountLabel: {
+
+    },
+    addAccountButton: {
+        paddingLeft:5,
+        paddingRight:5
+    },
+    addAccountIcon: {
+        fontSize:42
+    },
+    accountAmount: {
+
+    },
+    removeAccountButton: {
+        paddingLeft:5,
+        paddingRight:5
+    },
+    removeAccountIcon: {
+        fontSize:26
     },
     amountCurrency: {
         fontFamily:'Roboto_light',
