@@ -30,10 +30,6 @@ import styles from "./styles";
 class Notes extends Component {
 
 
-    componentDidMount = () => {
-        this.props.disableButton(false)
-    }
-
     render() {
         return (
 
@@ -42,7 +38,7 @@ class Notes extends Component {
                 <Form style={styles.form}>
                     <Item style={styles.inputContainer}>
                     <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('writeNotes')}
-                           value={this.props.notes} onChangeText={(text) => this.props.onValueChange('notes', text)} />
+                           value={this.props.notes} onChangeText={(text) => this.props.setNotes(text)} />
                     </Item>
                 </Form>
             </View>

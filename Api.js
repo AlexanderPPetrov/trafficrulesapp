@@ -75,7 +75,6 @@ let Api = {
 
                             if(opts.error){
                                 opts.error(responseJson._payload._message)
-                                return;
                             }
 
                             let message = I18n.t(responseJson._payload._message)
@@ -177,10 +176,19 @@ let Api = {
         if (type == 'POST') {
             bodyData = new FormData();
             Object.keys(data).map(function (key) {
-                bodyData.append(key, data[key]);
+                if(Array.isArray(data[key])){
+                    for (let i = 0; i < data[key].length; i++) {
+                        bodyData.append(key + '['+ i +']', data[key][i]);
+                    }
+                }else{
+                    bodyData.append(key, data[key]);
+                }
             });
 
             requestData.body = bodyData;
+
+
+            console.log(bodyData)
         }
 
         return requestData

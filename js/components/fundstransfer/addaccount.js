@@ -32,21 +32,66 @@ import Api from "../../../Api";
 
 const Item = Picker.Item;
 
+const newAccounts = {accounts:[{
+        _id: 'IBC',
+        _username: 'IBCBet'
+    },
+    {
+        _id: 'SBO',
+        _username: 'SBOBet'
+    },
+    {
+        _id: 'PINNACLE',
+        _username: 'Pinnacle Sports'
+    },
+    {
+        _id: 'EDYN',
+        _username: 'Eastern Dynasty'
+    },
+    {
+        _id: 'SING',
+        _username: 'SingBet'
+    },
+    {
+        _id: 'ISN',
+        _username: 'ISNBet'
+    },
+    {
+        _id: '1BET',
+        _username: '1Bet'
+    },
+    {
+        _id: '18BET',
+        _username: '18Bet'
+    },
+    {
+        _id: 'BEX',
+        _username: 'Betting Exchange'
+    },
+    {
+        _id: 'BFAIR',
+        _username: 'BetFair'
+    }
+]}
+
 class AddAccount extends Component {
 
 
     componentDidMount = () => {
-        // if (this.props.paymentMethod == '') {
-        //     this.props.disableButton(true)
-        // }
+        //Hardcoded for now
+        if (this.props.stateKey == 'new') {
+            this.dataLoaded(newAccounts)
+        }else{
+            Api.get({
+                url: this.props.fetchUrl,
+                success: this.dataLoaded
+            })
+        }
 
-        Api.get({
-            url: 'get-member-accounts',
-            success: this.dataLoaded
-        })
     }
 
     dataLoaded = (response) => {
+        console.log(response.accounts)
         this.props.setAccounts(this.props.stateKey, response.accounts)
     }
 

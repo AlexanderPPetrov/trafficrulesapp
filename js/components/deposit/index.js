@@ -40,7 +40,7 @@ class Deposit extends Component {
             depositCompleted: '',
             _redirect_url: '',
             steps: 4,
-            payment_id: '',
+            paymentData: {},
             labels: [I18n.t('method'), I18n.t('account'), I18n.t('amount'), I18n.t('deposit')],
             stepsNames: ['method', 'account', 'amount', 'process', 'deposit']
         }
@@ -67,8 +67,8 @@ class Deposit extends Component {
         console.log('steps ', number)
     }
 
-    setPaymentId = (value) => {
-        this.setState({payment_id: value})
+    setPaymentData = (value) => {
+        this.setState({paymentData: value})
     }
 
     goBackward = () => {
@@ -108,7 +108,7 @@ class Deposit extends Component {
             currentPage: 0,
             depositCompleted: '',
             _redirect_url: '',
-            payment_id: ''
+            paymentData: {}
         })
     }
 
@@ -147,7 +147,7 @@ class Deposit extends Component {
         if (this.state.depositCompleted == 'success') {
             return <Button block style={styles.continueButton}
                            onPress={() => this.props.navigation.navigate("FundsTransfer", {
-                               payment_id: this.state.payment_id,
+                               paymentData: this.state.paymentData,
                            })}>
                 <Text style={styles.continueButtonLabel}>{I18n.t('fundsTransfer')}</Text>
             </Button>
@@ -283,7 +283,7 @@ class Deposit extends Component {
                                               onRef={ref => (this.tabs = ref)} {...this.props}
                                               onUpdatePage={this.changeHandler}
                                               setRedirectUrl={this.setRedirectUrl}
-                                              setPaymentId={this.setPaymentId}
+                                              setPaymentData={this.setPaymentData}
                                               setDepositCompleted={this.setDepositCompleted}
                                               depositCompleted={this.state.depositCompleted}
                                               setPages={this.setPages}

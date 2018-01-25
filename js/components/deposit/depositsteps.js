@@ -155,7 +155,12 @@ class WithdrawSteps extends Component {
         })
             this.props.onUpdatePage(this.props.currentPage + 1)
 
-        this.props.setPaymentId(response._payment_num);
+        this.props.setPaymentData({
+            payment_method: this.state.paymentMethod,
+            account: this.state.account,
+            amount:this.state.amount,
+            payment_id: response._payment_num
+        });
         if(response._status == 'confirmed'){
             this.props.setDepositCompleted('success')
             this.props.onUpdatePage(this.props.currentPage + 1)

@@ -38,10 +38,10 @@ class Confirmation extends Component {
             <View >
                 <View style={[styles.withdrawHeader, styles.centered]} >
                     <Icon active name='ios-checkmark-circle' style={styles.successIcon}/>
-                    <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('withdrawConfirmation')}</Text>
+                    <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('fundsTransferConfirmation')}</Text>
                 </View>
                 <Text style={styles.confirmationText}>
-                    {I18n.t('withdrawSuccess')}
+                    {I18n.t('fundsTransferSuccess')}
                 </Text>
                 {/*<Text style={styles.confirmationText}>*/}
                     {/*{I18n.t('withdrawSuccessTwo')}*/}
