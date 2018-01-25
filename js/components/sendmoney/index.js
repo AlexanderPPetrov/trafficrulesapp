@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Steps from '../../common/steps/index';
 import Chat from '../../common/chat/index';
-import WithdrawSteps from './withdrawsteps';
+import SendMoneySteps from './sendmoneysteps';
 import {
     Container,
     Card,
@@ -31,34 +31,54 @@ import Api from "../../../Api";
 
 const Item = Picker.Item;
 
-const labels = [I18n.t('method'), I18n.t('account'), I18n.t('amount'), I18n.t('notes'), I18n.t('withdraw')];
+const labels = [I18n.t('existing'), I18n.t('new'), I18n.t('notes'), I18n.t('transfer')];
 
-class Withdraw extends Component {
+class SendMoney extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
+            _is_allowed: false,
             currentPage: 0,
-            buttonDisabled: true
+            buttonDisabled: false,
+            loaded: false,
+            paymentData: {}
         }
     }
+
+    componentDidMount = () => {
+
+        Api.get({
+            url: 'is-member-send-money-allowed',
+            success: this.dataLoaded,
+        })
+
+    };
+
+    dataLoaded = (response) => {
+        this.setState({
+            _is_allowed: response._is_allowed,
+            loaded: true
+        })
+    };
 
     setButtonState = (value) => {
         this.setState({
             buttonDisabled: value
         })
-    }
+    };
 
     goBackward = () => {
         this.tabs.goBackward()
-    }
+    };
+
     goForward = () => {
         this.tabs.goForward()
-    }
+    };
 
     getChat = () => {
-        if (this.state.currentPage == 5) {
+        if (this.state.currentPage == 4) {
             return null;
         }
         return (
@@ -67,7 +87,7 @@ class Withdraw extends Component {
     }
 
     getRightHeader = () => {
-        if (this.state.currentPage == 0 || this.state.currentPage == 5) {
+        if (this.state.currentPage == 4) {
             return null;
         }
         return (
@@ -75,22 +95,21 @@ class Withdraw extends Component {
                 <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
             </Button>
         )
-    }
+    };
 
     getButton = () => {
-        if (this.state.currentPage == 5) {
+        if (this.state.currentPage == 4) {
             return null;
         }
         return (
-                <Button style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                    <Text style={styles.continueButtonLabel}>{I18n.t('continue')}</Text>
-                </Button>
+            <Button style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
+                <Text style={styles.continueButtonLabel}>{I18n.t('continue')}</Text>
+            </Button>
         )
-    }
+    };
 
     getBackButton = () => {
-
-        if (this.state.currentPage == 0 || this.state.currentPage == 5) {
+        if (this.state.currentPage == 0 || this.state.currentPage == 4) {
             return ( <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
                     <Icon name="ios-menu"/>
                 </Button>
@@ -99,13 +118,13 @@ class Withdraw extends Component {
         return (<Button transparent onPress={this.goBackward}>
             <Icon name="arrow-back"/>
         </Button>)
-    }
+    };
 
-    changeHandler = (page) => {
+    setPage = (page) => {
         this.setState({
             currentPage: page
         });
-    }
+    };
 
     render() {
         return (
@@ -115,22 +134,25 @@ class Withdraw extends Component {
                         {this.getBackButton()}
                     </Left>
                     <Body>
-                    <Title>{I18n.t('withdraw')}</Title>
+                    <Title>{I18n.t('sendMoney')}</Title>
                     </Body>
                     <Right>
                         {this.getRightHeader()}
                     </Right>
                 </Header>
 
-                <Content >
+                <Content>
                     <Card style={styles.cardContainer}>
-                        <View style={{flex:1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={5} labels={labels}></Steps>
+                        <View style={{flex: 1}}>
+                            <Steps currentPage={this.state.currentPage} stepCount={4} labels={labels}></Steps>
 
                             <View style={styles.formContainer}>
-                                <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
-                                               onUpdatePage={this.changeHandler}
-                                               disableButton={this.setButtonState}></WithdrawSteps>
+                                <SendMoneySteps currentPage={this.state.currentPage}
+                                                onRef={ref => (this.tabs = ref)} {...this.props}
+                                                setPage={this.setPage}
+                                                paymentData={this.state.paymentData}
+                                                disableButton={this.setButtonState}></SendMoneySteps>
+
                                 <View style={styles.buttonsContainer}>
                                     {this.getButton()}
                                     {this.getChat()}
@@ -138,7 +160,6 @@ class Withdraw extends Component {
                             </View>
                         </View>
                     </Card>
-
                 </Content>
 
             </Container>
@@ -146,4 +167,4 @@ class Withdraw extends Component {
     }
 }
 
-export default Withdraw;
+export default SendMoney;

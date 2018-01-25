@@ -13,7 +13,7 @@ import Withdraw from "./components/withdraw/";
 
 import FundsTransfer from "./components/fundstransfer/";
 import Transactions from "./components/transactions/";
-import SendMoneyOne from "./components/sendmoneyone/";
+import SendMoney from "./components/sendmoney/";
 
 
 import SideBar from "./components/sidebar";
@@ -29,7 +29,7 @@ const DrawerExample = DrawerNavigator(
         Withdraw: {screen: Withdraw},
         FundsTransfer: {screen: FundsTransfer},
         Transactions: {screen: Transactions},
-        SendMoneyOne: {screen: SendMoneyOne},
+        SendMoney: {screen: SendMoney},
     },
     {
         initialRouteName: "MyAccount",

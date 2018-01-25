@@ -24,7 +24,6 @@ import {
 } from "native-base";
 
 import {View, ScrollView} from 'react-native';
-import {Grid, Row, Col} from "react-native-easy-grid";
 
 import styles from "./styles";
 import Api from "../../../Api";
@@ -39,25 +38,10 @@ class Confirmation extends Component {
             <View >
                 <View style={[styles.withdrawHeader, styles.centered]} >
                     <Icon active name='ios-checkmark-circle' style={styles.successIcon}/>
-                    <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('withdrawConfirmation')}</Text>
+                    <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('fundsTransferConfirmation')}</Text>
                 </View>
-                <Grid>
-                    <Row style={{marginBottom:15}}>
-                        <Col>
-                            <Text>{I18n.t('withdrawStatus')}</Text>
-                        </Col>
-                        <Col >
-                            <Text style={{
-                                flex: 1,
-                                flexDirection: 'row',
-                                justifyContent: 'flex-end',
-                                textAlign:'right',
-                            }}>{I18n.t(this.props.status)}</Text>
-                        </Col>
-                    </Row>
-                </Grid>
                 <Text style={styles.confirmationText}>
-                    {I18n.t('withdrawSuccess')}
+                    {I18n.t('fundsTransferSuccess')}
                 </Text>
                 {/*<Text style={styles.confirmationText}>*/}
                     {/*{I18n.t('withdrawSuccessTwo')}*/}

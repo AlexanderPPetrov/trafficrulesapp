@@ -105,7 +105,10 @@ class WithdrawSteps extends Component {
         })
     }
 
-    withdrawSuccess = () => {
+    withdrawSuccess = (response) => {
+        this.setState({
+            status: response._status
+        })
         this.props.onUpdatePage(5)
         this.refs.view.fadeInRight(300);
     }
@@ -132,7 +135,7 @@ class WithdrawSteps extends Component {
         if (this.props.currentPage == 4) {
         }
         if (this.props.currentPage == 5) {
-            return <Confirmation></Confirmation>
+            return <Confirmation status={this.state.status}></Confirmation>
         }
         return null;
     }
