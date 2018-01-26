@@ -31,7 +31,7 @@ import Api from "../../../Api";
 
 const Item = Picker.Item;
 
-const labels = [I18n.t('existing'), I18n.t('new'), I18n.t('notes'), I18n.t('transfer')];
+const labels = [I18n.t('account'), I18n.t('yourSecureId'), I18n.t('confirmation'), I18n.t('sendMoney')];
 
 class SendMoney extends Component {
 

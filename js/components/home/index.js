@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, View, StatusBar, Dimensions } from "react-native";
+import { ScrollView , View, StatusBar, Dimensions } from "react-native";
 
 import I18n from '../../../i18n/i18n';
 import Logo from '../../common/logo/logo';
@@ -68,7 +68,7 @@ class Home extends Component {
 					</Rect>
 				</Svg>
 
-				<View style={styles.loginContainer}>
+				<ScrollView contentContainerStyle={styles.loginContainer}>
 					<View style={styles.imageContainer}>
 						<Logo scale={this.state.scale} primary={ColorScheme.neutralLight} secondary={ColorScheme.action} slogan={ColorScheme.neutralLight}></Logo>
                         {/*<View>*/}
@@ -77,7 +77,7 @@ class Home extends Component {
                         {/*</View>*/}
 					</View>
 					<Login navigation={this.props.navigation}></Login>
-				</View>
+				</ScrollView >
 			</Container>
 		);
 	}

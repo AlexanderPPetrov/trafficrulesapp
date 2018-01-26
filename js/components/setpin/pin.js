@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import {View} from "react-native";
+import {ScrollView } from "react-native";
 import ColorScheme from "../../common/colorscheme";
 import Expo from "expo";
 import {
@@ -34,7 +34,6 @@ class Pin extends React.Component {
         }
     }
 
-
     changeValue = (key, value) => {
 
         value = value.replace(/[^0-9]/g, '');
@@ -67,7 +66,7 @@ class Pin extends React.Component {
 
     render() {
         return (
-            <View style={styles.formContainer}>
+            <ScrollView  contentContainerStyle={styles.formContainer}>
                 <Text style={styles.pinLabel}>{I18n.t('setPinTitle')}</Text>
                 <Text>{I18n.t('setPinHint')}</Text>
                 <Form>
@@ -95,7 +94,7 @@ class Pin extends React.Component {
                 }>
                     <Text>{I18n.t('setPin').toUpperCase()}</Text>
                 </Button>
-            </View>
+            </ScrollView>
         );
     }
 }

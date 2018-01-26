@@ -35,6 +35,9 @@ export default {
         // minHeight:50,
         // padding:0
     },
+    currencyPicker: {
+        width:100
+    },
     cardContainer:{
         padding:30,
         paddingTop:15,
@@ -45,7 +48,6 @@ export default {
         alignSelf:'stretch',
         opacity:1
     },
-
     formLabel:{
         color: ColorScheme.light,
         fontFamily: 'Roboto_light',

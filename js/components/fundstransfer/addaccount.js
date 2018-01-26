@@ -141,8 +141,21 @@ class AddAccount extends Component {
                     this.props.changeAccountValue(this.props.stateKey, 'selectedAccount', value)
                 }
                 note={false}
+                renderHeader={backAction =>
+                    <Header >
+                        <Left>
+                            <Button transparent onPress={backAction}>
+                                <Icon name="arrow-back"  />
+                            </Button>
+                        </Left>
+                        <Body style={{ flex: 3 }}>
+
+                        </Body>
+                        <Right />
+                    </Header>}
             >
                 {listItems}
+
             </Picker>
 
         );
