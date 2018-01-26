@@ -103,7 +103,9 @@ class FundsTransferSteps extends Component {
             if (account._id !== id) return account;
         });
 
-        let accounts = _.without(this.state[stateKey].loadedAccounts, ...remainingAccounts);
+        let accountsList = [...this.state.empty, ...this.state[stateKey].loadedAccounts];
+
+        let accounts = _.without(accountsList, ...remainingAccounts);
         this.setState({ [stateKey]: { ...this.state[stateKey], selectedAccounts: remainingAccounts, accounts: accounts} });
     };
 
