@@ -27,6 +27,8 @@ import {
 import _ from 'lodash'
 import {Toast} from "native-base";
 import Account from './account'
+import Verify from './verify'
+import SecureId from './secureid'
 import Confirmation from './confirmation'
 import * as Animatable from 'react-native-animatable';
 
@@ -46,6 +48,7 @@ class SendMoneySteps extends Component {
             amount:'',
             currency:'',
             minAmount: '1',
+            notesVisible: false,
             notes: '',
         }
     }
@@ -78,14 +81,22 @@ class SendMoneySteps extends Component {
 
     sendMoney = () => {
         Api.post({
-            url: 'transfer',
+            url: 'send-money',
             data: {
-
+                email: this.state.account,
+                amount: this.state.amount,
+                currency: this.state.currency,
+                secure_id: this.state.secureId,
+                notes: this.state.notes,
             },
             success: this.sendMoneySuccess,
         })
     };
-
+    // data.append("email", "vasill.k@delasport.com");
+    // data.append("amount", "3");
+    // data.append("currency", "EUR");
+    // data.append("secure_id", "MklJNjY=");
+    // data.append("notes", "test");
     sendMoneySuccess = () => {
         console.log('success')
         this.props.setPage(4)
@@ -99,15 +110,28 @@ class SendMoneySteps extends Component {
                              account={this.state.account}
                              currency={this.state.currency}
                              amount={this.state.amount}
+                             disableButton={this.props.disableButton}
+                             notesVisible={this.state.notesVisible}
+                             notes={this.state.notes}
             ></Account>
         }
 
         if (this.props.currentPage == 1) {
 
-            return null
+            return <SecureId  changeValue={this.changeValue}
+                              secureId={this.state.secureId}
+                              disableButton={this.props.disableButton}
+            ></SecureId>
+
         }
-        if (this.props.currentPage == 3) {
-            console.log('currentPage', this.props.currentPage)
+        if (this.props.currentPage == 2) {
+            return <Verify    secureId={this.state.secureId}
+                              email={this.state.account}
+                              amount={this.state.amount}
+                              currency={this.state.currency}
+
+
+            ></Verify>
         }
         if (this.props.currentPage == 4) {
             return <Confirmation></Confirmation>
@@ -117,7 +141,7 @@ class SendMoneySteps extends Component {
 
     goForward = () => {
 
-        if (this.props.currentPage == 3) {
+        if (this.props.currentPage == 2) {
             this.sendMoney();
         } else {
             this.props.setPage(this.props.currentPage + 1)

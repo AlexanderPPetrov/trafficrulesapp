@@ -10,7 +10,7 @@ import {
     Form,
     Picker,
     Input,
-    Item as FormItem,
+    Item,
     Text,
     H3,
     Button,
@@ -30,7 +30,7 @@ import ColorScheme from "../../common/colorscheme";
 import styles from "./styles";
 import Api from "../../../Api";
 
-const Item = Picker.Item;
+const PickerItem = Picker.Item;
 
 class AddAccount extends Component {
 
@@ -38,8 +38,7 @@ class AddAccount extends Component {
         super(props);
 
         this.state = {
-            currencies:[],
-            notesVisible: false
+            currencies:[]
         }
     }
     componentDidMount = () => {
@@ -50,19 +49,30 @@ class AddAccount extends Component {
             })
 
 
+            if(this.props.account === '' ){
+                this.props.disableButton(true)
+            }else{
+                this.props.disableButton(false)
+            }
+
     }
 
     dataLoaded = (response) => {
-        this.setState({
-            currencies:response.currencies
-        })
-    }
 
+        if(response.currencies.length > 0){
+            this.setState({
+                currencies:response.currencies
+            }, function(){
+                this.props.changeValue('currency',response.currencies[0]._code)
+            })
+        }
+
+    };
 
     getPicker = () => {
 
         const listItems = this.state.currencies.map((currency, i) =>
-            <Item key={i} value={currency._code} label={currency._code}></Item>
+            <PickerItem key={i} value={currency._code} label={currency._code}></PickerItem>
         );
         return (
             <Picker
@@ -95,16 +105,15 @@ class AddAccount extends Component {
 
 
     getMessageField = () => {
-        if(this.state.notesVisible) {
-            return    <Form style={styles.form}>
+        if(this.props.notesVisible) {
+            return <Form style={styles.form}>
                 <Item style={styles.inputContainer}>
                     <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('message')}
-                           value={this.props.notes} onChangeText={(text) => this.props.setValue('notes', text)} />
+                           value={this.props.notes} onChangeText={(text) => this.props.changeValue('notes', text)} />
                 </Item>
             </Form>
         }
-        return
-                <Button transparent primary style={styles.removeAccountButton} onPress={() => this.setState({notesVisible: true})}>
+        return <Button transparent primary style={styles.removeAccountButton} onPress={() => this.props.changeValue('notesVisible', true)}>
                     <Text>{I18n.t('addMessage')}</Text>
                 </Button>
 
@@ -115,7 +124,7 @@ class AddAccount extends Component {
 
         return (
             <View>
-                <Text style={styles.formLabel}>{this.props.label}</Text>
+                <Text style={styles.formLabel}>{I18n.t('sendMoneyTo')}</Text>
                 <View>
                     <Grid>
                         <Row>
