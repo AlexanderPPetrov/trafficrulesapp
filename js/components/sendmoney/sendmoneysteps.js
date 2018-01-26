@@ -50,6 +50,7 @@ class SendMoneySteps extends Component {
             minAmount: '1',
             notesVisible: false,
             notes: '',
+            fee:''
         }
     }
 
@@ -77,6 +78,26 @@ class SendMoneySteps extends Component {
             }
         }
 
+    };
+
+    setFee = (response) => {
+        this.setState({
+            fee: response._fee
+        })
+        this.props.setPage(3)
+    };
+
+    getFee = () => {
+        Api.post({
+            url: 'calculate-member-send-money-fee',
+            data: {
+                email: this.state.account,
+                amount: this.state.amount,
+                currency: this.state.currency,
+                secure_id: this.state.secureId,
+            },
+            success: this.setFee,
+        })
     };
 
     sendMoney = () => {
@@ -129,6 +150,7 @@ class SendMoneySteps extends Component {
                               email={this.state.account}
                               amount={this.state.amount}
                               currency={this.state.currency}
+                              fee={this.state.fee}
 
 
             ></Verify>
@@ -141,12 +163,18 @@ class SendMoneySteps extends Component {
 
     goForward = () => {
 
+        if (this.props.currentPage == 1) {
+            this.getFee();
+            return;
+        }
         if (this.props.currentPage == 2) {
             this.sendMoney();
-        } else {
-            this.props.setPage(this.props.currentPage + 1)
-            this.refs.view.fadeInRight(300);
+            return;
         }
+
+        this.props.setPage(this.props.currentPage + 1)
+        this.refs.view.fadeInRight(300);
+
 
     }
     goBackward = () => {

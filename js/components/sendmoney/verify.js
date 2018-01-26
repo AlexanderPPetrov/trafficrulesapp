@@ -37,15 +37,7 @@ class Confirmation extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            fee:''
-        }
     }
-
-    componentDidMount() {
-        // todo get fee?
-    }
-
 
     render() {
         return (
@@ -75,7 +67,7 @@ class Confirmation extends Component {
                                 <Text>{I18n.t('fee')}</Text>
                             </Col>
                             <Col>
-                                <Text>{this.state.fee} {this.props.currency}</Text>
+                                <Text>{this.props.fee} {this.props.currency}</Text>
                             </Col>
                         </Row>
                     </Grid>
