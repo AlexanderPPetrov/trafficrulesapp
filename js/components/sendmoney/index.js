@@ -39,11 +39,9 @@ class SendMoney extends Component {
         super(props);
 
         this.state = {
-            _is_allowed: false,
             currentPage: 0,
-            buttonDisabled: false,
-            loaded: false,
-            paymentData: {}
+            buttonDisabled: true,
+            loaded: false
         }
     }
 
@@ -58,7 +56,6 @@ class SendMoney extends Component {
 
     dataLoaded = (response) => {
         this.setState({
-            _is_allowed: response._is_allowed,
             loaded: true
         })
     };
@@ -150,7 +147,6 @@ class SendMoney extends Component {
                                 <SendMoneySteps currentPage={this.state.currentPage}
                                                 onRef={ref => (this.tabs = ref)} {...this.props}
                                                 setPage={this.setPage}
-                                                paymentData={this.state.paymentData}
                                                 disableButton={this.setButtonState}></SendMoneySteps>
 
                                 <View style={styles.buttonsContainer}>

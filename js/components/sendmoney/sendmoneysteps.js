@@ -27,7 +27,6 @@ import {
 import _ from 'lodash'
 import {Toast} from "native-base";
 import Account from './account'
-import Notes from './notes'
 import Confirmation from './confirmation'
 import * as Animatable from 'react-native-animatable';
 
@@ -43,6 +42,7 @@ class SendMoneySteps extends Component {
 
         this.state = {
             account: '',
+            secureId: '',
             amount:'',
             currency:'',
             minAmount: '1',
@@ -66,8 +66,13 @@ class SendMoneySteps extends Component {
 
         this.setState({ [key]: value });
 
-
-        this.props.disableButton(true)
+        if(key === 'account' || key === 'secureId'){
+            if(value !== ''){
+                this.props.disableButton(false)
+            }else{
+                this.props.disableButton(true)
+            }
+        }
 
     };
 
@@ -97,10 +102,9 @@ class SendMoneySteps extends Component {
             ></Account>
         }
 
-        if (this.props.currentPage == 2) {
+        if (this.props.currentPage == 1) {
 
-            return <Notes setNotes={this.setNotes} disableButton={this.props.disableButton}
-                          notes={this.state.notes}></Notes>
+            return null
         }
         if (this.props.currentPage == 3) {
             console.log('currentPage', this.props.currentPage)

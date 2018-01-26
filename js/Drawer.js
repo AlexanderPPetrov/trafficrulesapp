@@ -21,7 +21,13 @@ import SideBar from "./components/sidebar";
 
 const DrawerExample = DrawerNavigator(
     {
-        MyAccount: {screen: MyAccount},
+        MyAccount: {
+            screen: MyAccount,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+
+        },
         Accounts: {screen: Accounts},
         PreviousBalance: {screen: PreviousBalance},
         Brokerage: {screen: Brokerage},

@@ -38,7 +38,8 @@ class AddAccount extends Component {
         super(props);
 
         this.state = {
-            currencies: []
+            currencies:[],
+            notesVisible: false
         }
     }
     componentDidMount = () => {
@@ -93,6 +94,22 @@ class AddAccount extends Component {
     };
 
 
+    getMessageField = () => {
+        if(this.state.notesVisible) {
+            return    <Form style={styles.form}>
+                <Item style={styles.inputContainer}>
+                    <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('message')}
+                           value={this.props.notes} onChangeText={(text) => this.props.setValue('notes', text)} />
+                </Item>
+            </Form>
+        }
+        return
+                <Button transparent primary style={styles.removeAccountButton} onPress={() => this.setState({notesVisible: true})}>
+                    <Text>{I18n.t('addMessage')}</Text>
+                </Button>
+
+    }
+
     render() {
 
 
@@ -129,6 +146,12 @@ class AddAccount extends Component {
                                 </Form>
                             </Col>
                         </Row>
+                        <Row>
+                            <Col>
+                                {this.getMessageField()}
+                            </Col>
+                        </Row>
+
                     </Grid>
                 </View>
 

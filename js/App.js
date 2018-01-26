@@ -2,9 +2,9 @@
 
 import React from "react";
 
-import { Platform } from "react-native";
-import { StyleProvider,Root } from "native-base";
-import { StackNavigator } from "react-navigation";
+import {Platform} from "react-native";
+import {StyleProvider, Root} from "native-base";
+import {StackNavigator} from "react-navigation";
 
 import Drawer from "./Drawer";
 import Home from "./components/home/";
@@ -18,9 +18,21 @@ import Loader from "./common/loader/index";
 
 const AppNavigator = StackNavigator(
     {
-        Home: {screen: Home},
-        SetPin: {screen: SetPin},
-        Drawer: { screen: Drawer }
+        Home: {
+            screen: Home,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+        },
+        SetPin: {
+            screen: SetPin,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+        },
+        Drawer: {
+            screen: Drawer
+        }
 
     },
     {
@@ -31,8 +43,8 @@ const AppNavigator = StackNavigator(
 
 export default () =>
     <Root>
-        <Loader />
+        <Loader/>
         <StyleProvider style={getTheme(material)}>
-            <AppNavigator />
+            <AppNavigator/>
         </StyleProvider>
     </Root>;

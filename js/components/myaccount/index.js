@@ -21,7 +21,7 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 
-import {AsyncStorage} from "react-native"
+import {AsyncStorage, BackHandler, Alert} from "react-native"
 import Tabs from "./tabs";
 import Api from "../../../Api";
 
@@ -44,6 +44,14 @@ class MyAccount extends Component {
         this.loadData()
     };
 
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
     loadData = (loader = true) => {
         Api.get({
             url: 'get-member-details',
@@ -53,6 +61,21 @@ class MyAccount extends Component {
         })
     };
 
+    confirmExit = () => {
+        Alert.alert(
+            I18n.t('exitTitle'),
+            I18n.t('exitQuestion'),
+            [
+                {text:I18n.t('cancel')},
+                {text:I18n.t('ok'), onPress:() => BackHandler.exitApp()}
+            ]
+        )
+    }
+
+    handleBackButton = () => {
+        this.confirmExit()
+        return true;
+    };
     setRefreshing = () => {
         this.setState({refreshing: false})
     };
