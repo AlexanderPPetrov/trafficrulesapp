@@ -64,7 +64,13 @@ const datas = [
         name: I18n.t('sendMoney'),
         route: "SendMoney",
         icon: "ios-share-alt-outline",
+    },
+    {
+        name: I18n.t('settings'),
+        route: "Settings",
+        icon: "ios-settings-outline",
     }
+
 ];
 
 class SideBar extends Component {

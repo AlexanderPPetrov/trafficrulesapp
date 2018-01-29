@@ -7,8 +7,8 @@ import {StyleProvider, Root, Text} from "native-base";
 import {StackNavigator} from "react-navigation";
 
 import Drawer from "./Drawer";
-import Home from "./components/home/";
-import SetPin from "./components/setpin/";
+import Home from "./screens/home/";
+import SetPin from "./screens/setpin/";
 
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';

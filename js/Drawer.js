@@ -3,20 +3,21 @@
 import React from "react";
 import {DrawerNavigator} from "react-navigation";
 
-import Home from "./components/home/";
-import MyAccount from "./components/myaccount/";
-import Accounts from "./components/accounts/";
-import PreviousBalance from "./components/previousbalance/";
-import Brokerage from "./components/brokerage/";
-import Deposit from "./components/deposit/";
-import Withdraw from "./components/withdraw/";
+import Home from "./screens/home/";
+import MyAccount from "./screens/myaccount/";
+import Accounts from "./screens/accounts/";
+import PreviousBalance from "./screens/previousbalance/";
+import Brokerage from "./screens/brokerage/";
+import Deposit from "./screens/deposit/";
+import Withdraw from "./screens/withdraw/";
 
-import FundsTransfer from "./components/fundstransfer/";
-import Transactions from "./components/transactions/";
-import SendMoney from "./components/sendmoney/";
+import FundsTransfer from "./screens/fundstransfer/";
+import Transactions from "./screens/transactions/";
+import SendMoney from "./screens/sendmoney/";
+import Settings from "./screens/settings/";
 
 
-import SideBar from "./components/sidebar";
+import SideBar from "./screens/sidebar";
 
 
 const DrawerExample = DrawerNavigator(
@@ -36,6 +37,7 @@ const DrawerExample = DrawerNavigator(
         FundsTransfer: {screen: FundsTransfer},
         Transactions: {screen: Transactions},
         SendMoney: {screen: SendMoney},
+        Settings: {screen: Settings},
     },
     {
         initialRouteName: "MyAccount",

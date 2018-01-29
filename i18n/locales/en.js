@@ -98,6 +98,7 @@ export default {
     cashWithdraw: 'Cash Withdraw',
     receiveMoney: 'Receive Money',
     sendMoney: 'Send Money',
+    settings: 'Settings',
     sendMoneyTo: 'Send money to',
     enterSecureId: 'Enter Secure ID',
     confirmSendMoney: 'Confirm sending money',
