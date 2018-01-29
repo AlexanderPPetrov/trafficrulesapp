@@ -22,14 +22,7 @@ export default {
         justifyContent: 'flex-start',
         width: 30
     },
-    headerIcon: {
-        color: ColorScheme.dark
-    },
-    headerLabel: {
-        color: ColorScheme.dark,
-        fontSize: normalize(13),
-        marginLeft: 7
-    },
+
     headerButton: {
         height: 30
     },

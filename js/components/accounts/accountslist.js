@@ -27,19 +27,19 @@ class AccountsList extends Component {
         let cardListItems = listOrder.map((property, i) =>
             this.getListItem(account, property, i)
         );
-        return <Card key={i}>
+        return <View key={i}>
             <List >
                 <ListItem itemDivider style={[Ui.listHeader, Ui.listHeaderExtended]}>
                     <Grid>
                         <Col style={{width: 30, justifyContent: 'flex-start'}}>
                             <View style={styles.headerIconContainer}>
                                 {account._type == '0' ?
-                                    <MaterialCommunityIcons name="soccer" size={28} style={styles.headerIcon}/> :
-                                    <SimpleLineIcons name="user" size={20} style={styles.headerIcon}/>}
+                                    <MaterialCommunityIcons name="soccer" size={28} style={Ui.headerIcon}/> :
+                                    <SimpleLineIcons name="user" size={20} style={Ui.headerIcon}/>}
                             </View>
                         </Col>
                         <Col style={{justifyContent: 'center'}}>
-                            <Text style={styles.headerLabel}>{(I18n.t(accountTypes[account._type]) + ' ' + I18n.t('account')).toUpperCase()}</Text>
+                            <Text style={Ui.headerLabel}>{(I18n.t(accountTypes[account._type]) + ' ' + I18n.t('account')).toUpperCase()}</Text>
                         </Col>
                         <Col style={{justifyContent: 'flex-end', flexDirection: 'row'}}>
                             <Button style={styles.headerButton}
@@ -57,7 +57,7 @@ class AccountsList extends Component {
                 </ListItem>
                 {cardListItems}
             </List>
-        </Card>;
+        </View>;
     };
 
     getAccountCards = (accounts) => {

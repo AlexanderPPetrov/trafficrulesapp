@@ -20,24 +20,32 @@ export function normalize(size) {
 
 export default {
     container: {
-        backgroundColor:'#393939'
+        backgroundColor:'#2b2b2b'
     },
     listHeader: {
-        backgroundColor: ColorScheme.neutralDark,
+        backgroundColor: ColorScheme.darker,
         height:45,
         justifyContent: 'center',
         paddingLeft:15,
-        borderBottomWidth: 1,
-        borderBottomColor: ColorScheme.neutralDarker
+        borderBottomWidth: 2,
+        borderBottomColor: ColorScheme.info
     },
     listHeaderExtended: {
-        backgroundColor: ColorScheme.neutralDark                                                                                                                                                           ,
+        backgroundColor: ColorScheme.darker                                                                                                                                                           ,
         height:50,
         paddingLeft:10
     },
     listHeaderLabel: {
         fontSize:14,
-        color: ColorScheme.neutralDarkest,
+        color: '#ececec',
+    },
+    headerIcon: {
+        color: '#ececec'
+    },
+    headerLabel: {
+        color: '#ececec',
+        fontSize: normalize(13),
+        marginLeft: 7
     },
     listItem: {
         paddingLeft: 15,
@@ -223,6 +231,20 @@ export default {
         color: ColorScheme.light,
         textAlign:'center',
         marginTop:15
+    },
+
+    tabsStyle: {
+        activeTintColor: ColorScheme.neutralLight,
+        inactiveTintColor : ColorScheme.neutralDark,
+        labelStyle: {
+            fontSize: 12,
+        },
+        style: {
+            backgroundColor: ColorScheme.dark,
+        },
+        indicatorStyle:{
+            backgroundColor:ColorScheme.info
+        }
     }
 
 

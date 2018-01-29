@@ -14,6 +14,8 @@ import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 import Loader from "./common/loader/index";
 
+import Api from '../Api';
+
 const AppNavigator = StackNavigator(
     {
         Home: {
@@ -39,10 +41,22 @@ const AppNavigator = StackNavigator(
     }
 );
 
-export default () =>
-    <Root>
-        <Loader/>
-        <StyleProvider style={getTheme(material)}>
-            <AppNavigator/>
-        </StyleProvider>
-    </Root>;
+class AppRoot extends React.Component {
+    constructor(props)  {
+        super(props);
+    }
+    render() {
+        return (
+            <Root>
+                <Loader/>
+                <StyleProvider style={getTheme(material)}>
+                    <AppNavigator ref={navigatorRef => {
+                        Api.setNavigator(navigatorRef);
+                    }}/>
+                </StyleProvider>
+            </Root>
+        );
+    }
+}
+export default AppRoot
+

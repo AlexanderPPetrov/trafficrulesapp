@@ -12,6 +12,7 @@ import {
     Card
 
 } from "native-base";
+import Ui from '../../common/ui';
 
 const indicatorStyle = (props, alignSelf) => ({
     backgroundColor: props.indicatorStyle.backgroundColor,
@@ -87,19 +88,7 @@ const TabNavigation = TabNavigator({
     tabBarPosition: 'top',
     animationEnabled: true,
     tabBarComponent: (props) => <TabBarTop {...props} indicatorStyle={indicatorStyle(props, 'flex-end')}/>,
-    tabBarOptions: {
-        activeTintColor: ColorScheme.neutralLight,
-        inactiveTintColor: ColorScheme.neutralDark,
-        labelStyle: {
-            fontSize: 12,
-        },
-        style: {
-            backgroundColor: ColorScheme.dark,
-        },
-        indicatorStyle: {
-            backgroundColor: ColorScheme.info
-        }
-    }
+    tabBarOptions: Ui.tabsStyle
 })
 
 class Tabs extends Component {

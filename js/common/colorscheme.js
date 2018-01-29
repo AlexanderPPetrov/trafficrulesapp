@@ -1,16 +1,16 @@
 export default {
-    darkest:'#0c161e',
-    darker:'#2c3c48',
-    dark:'#37474F',
-    light:'#607D8B',
+    darkest:'#151515',
+    darker:'#252525',
+    dark:'#2b2b2b',
+    light:'#333',
     lighter:'#83a8b5',
-    info:'#31a78e',
+    info:'#ffae00',
     primary:'#F9A825',
     action:'#ef5a48',
     neutralLight:'#fff',
-    neutralDark:'#f1f5f4',
-    neutralDarker:'#e0e2e1',
-    neutralDarkest:'#999999',
+    neutralDark:'#f8f8f8',
+    neutralDarker:'#efefef',
+    neutralDarkest:'#ebebeb',
     BTC: '#67a7f7',
     USD: '#52dbb9',
     GBP: '#ffd862',
@@ -22,5 +22,6 @@ export default {
     win:'#23a540',
     loss:'#e66560',
     stepActive:'#31a78e',
-    stepInactive:'#e0e2e1'
+    stepInactive:'#e0e2e1',
+    loader:'#555'
 };

@@ -46,7 +46,7 @@ class Loader extends Component {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
-                <ActivityIndicator size="small" color={ColorScheme.dark} />
+                <ActivityIndicator size="small" color={ColorScheme.loader} />
             </View>
         )}
 

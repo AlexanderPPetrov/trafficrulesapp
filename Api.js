@@ -5,12 +5,17 @@ const appKey = '122$sads1CCssa@$%AScccaas552112';
 import fetch from 'react-native-fetch-polyfill';
 import {Alert} from 'react-native';
 import {ActivityIndicator} from 'react-native'
+import { NavigationActions } from 'react-navigation';
+import type { NavigationParams, NavigationRoute } from 'react-navigation';
+
+let _navigator;
 
 let auth = '';
 
 import {Toast} from "native-base";
 import Loader from "./js/common/loader/index";
 import I18n from './i18n/i18n';
+
 
 let Api = {
 
@@ -27,7 +32,7 @@ let Api = {
         let loader = true,
             retries = 2;
 
-        if(opts.loader == false){
+        if(opts.loader === false){
             loader = false;
         }
 
@@ -47,7 +52,7 @@ let Api = {
 
         var _url = baseUrl + opts.url;
 
-        if (type == 'GET' && Object.keys(data).length > 0) {
+        if (type === 'GET' && Object.keys(data).length > 0) {
             _url = _url + '?' + Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
         }
         let count = 1;
@@ -60,47 +65,48 @@ let Api = {
             return fetch(_url, _data)
                 .then((response) => response.json())
                 .then((responseJson) => {
+
                     if (opts.success && responseJson._status == 'success') {
-                        if (opts.url == 'login') {
+                        if (opts.url === 'login') {
                             auth = responseJson._payload._userLoginHash;
                         }
 
                         opts.success(responseJson._payload)
-                        if (opts.always) {
-                            opts.always()
-                        }
+
                     } else {
 
+                        if(responseJson._payload._message === 'user_not_authorized'){
+                            Api.navigateTo('Home')
+                            return;
+                        }
 
+                        if(opts.error){
+                            opts.error(responseJson._payload._message)
+                        }
 
-                            if(opts.error){
-                                opts.error(responseJson._payload._message)
+                        let message = I18n.t(responseJson._payload._message)
+
+                        if (responseJson._payload._code === 404) {
+                            message = responseJson._payload._message
+                        }
+
+                        if(responseJson._payload.errors && responseJson._payload.errors.length > 0) {
+                            message = '';
+                            for(let i = 0; i < responseJson._payload.errors.length; i++){
+                                message+= responseJson._payload.errors[i] +'\n'
                             }
-
-                            let message = I18n.t(responseJson._payload._message)
-
-                            if (responseJson._payload._code == 404) {
-                                message = responseJson._payload._message
-                            }
-
-                            if(responseJson._payload.errors && responseJson._payload.errors.length > 0) {
-                                message = '';
-                                for(let i = 0; i < responseJson._payload.errors.length; i++){
-                                    message+= responseJson._payload.errors[i] +'\n'
-                                }
-                            }
+                        }
 
 
-                            Toast.show({
-                                text: message,
-                                buttonText: I18n.t('ok')
-                            })
-                            if (opts.always) {
-                                opts.always()
-                            }
+                        Toast.show({
+                            text: message,
+                            buttonText: I18n.t('ok')
+                        })
 
                     }
-
+                    if (opts.always) {
+                        opts.always()
+                    }
                     if(loader){
                         Loader.hide();
                     }
@@ -114,7 +120,7 @@ let Api = {
                         attempt()
                     } else {
                         let message = error.message;
-                        if (message == 'Network request failed') {
+                        if (message === 'Network request failed') {
                             message = I18n.t('network_request_failed')
                         }
 
@@ -192,10 +198,20 @@ let Api = {
         }
 
         return requestData
+    },
+
+    setNavigator: (navigator) => {
+        _navigator = navigator;
+    },
+
+    navigateTo: (routeName) => {
+        _navigator.dispatch(
+            NavigationActions.navigate({
+                type: 'Navigation/NAVIGATE',
+                routeName
+            }),
+        );
     }
-
-
 }
-
 
 export default Api;

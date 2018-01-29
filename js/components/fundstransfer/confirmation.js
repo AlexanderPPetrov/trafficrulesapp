@@ -24,6 +24,7 @@ import {
 } from "native-base";
 
 import {View, ScrollView} from 'react-native';
+import Ui from '../../common/ui';
 
 import styles from "./styles";
 import Api from "../../../Api";
