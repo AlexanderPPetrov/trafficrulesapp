@@ -25,7 +25,7 @@ import {
 } from "native-base";
 
 import {View, ScrollView} from 'react-native';
-
+import Ui from '../../common/ui';
 import styles from "./styles";
 import Api from "../../../Api";
 
@@ -125,7 +125,7 @@ class SendMoney extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container style={Ui.container}>
                 <Header hasTabs>
                     <Left>
                         {this.getBackButton()}
@@ -139,17 +139,17 @@ class SendMoney extends Component {
                 </Header>
 
                 <Content>
-                    <Card style={styles.cardContainer}>
+                    <Card style={Ui.cardContainer}>
                         <View style={{flex: 1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={4} labels={labels}></Steps>
 
-                            <View style={styles.formContainer}>
+                            <View style={Ui.formContainer}>
                                 <SendMoneySteps currentPage={this.state.currentPage}
                                                 onRef={ref => (this.tabs = ref)} {...this.props}
                                                 setPage={this.setPage}
                                                 disableButton={this.setButtonState}></SendMoneySteps>
 
-                                <View style={styles.buttonsContainer}>
+                                <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
                                     {this.getChat()}
                                 </View>

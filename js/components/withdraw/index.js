@@ -28,6 +28,7 @@ import {View, ScrollView} from 'react-native';
 
 import styles from "./styles";
 import Api from "../../../Api";
+import Ui from '../../common/ui';
 
 const Item = Picker.Item;
 
@@ -109,7 +110,7 @@ class Withdraw extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container style={Ui.container}>
                 <Header hasTabs>
                     <Left>
                         {this.getBackButton()}
@@ -123,15 +124,15 @@ class Withdraw extends Component {
                 </Header>
 
                 <Content >
-                    <Card style={styles.cardContainer}>
+                    <Card style={Ui.cardContainer}>
                         <View style={{flex:1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={5} labels={labels}></Steps>
 
-                            <View style={styles.formContainer}>
+                            <View style={Ui.formContainer}>
                                 <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
                                                onUpdatePage={this.changeHandler}
                                                disableButton={this.setButtonState}></WithdrawSteps>
-                                <View style={styles.buttonsContainer}>
+                                <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
                                     {this.getChat()}
                                 </View>

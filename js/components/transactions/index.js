@@ -265,7 +265,7 @@ class Transactions extends Component {
 
     render() {
         return (
-            <View>
+            <Container style={Ui.container}>
                 <Header>
                     <Left>
                         <Button
@@ -294,7 +294,7 @@ class Transactions extends Component {
                         renderItem={({item}) => this.getCard(item)}
                     />
                 </List>
-            </View>
+            </Container>
 
         );
     }

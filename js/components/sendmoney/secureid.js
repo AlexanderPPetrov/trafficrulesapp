@@ -25,6 +25,7 @@ import {
 import {View, ScrollView} from 'react-native';
 import ColorScheme from "../../common/colorscheme";
 import styles from "./styles";
+import Ui from '../../common/ui';
 
 class SecureId extends Component {
 
@@ -39,10 +40,10 @@ class SecureId extends Component {
     render() {
         return (
             <View >
-                <Text style={styles.formLabel}>{I18n.t('enterSecureId')}</Text>
-                <Form style={styles.form}>
-                    <Item style={styles.inputContainer}>
-                        <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('yourSecureId')} value={this.props.secureId} onChangeText={(text) => this.props.changeValue('secureId', text)}/>
+                <Text style={Ui.formLabel}>{I18n.t('enterSecureId')}</Text>
+                <Form style={Ui.form}>
+                    <Item style={Ui.inputContainer}>
+                        <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('yourSecureId')} value={this.props.secureId} onChangeText={(text) => this.props.changeValue('secureId', text)}/>
                     </Item>
                 </Form>
             </View>

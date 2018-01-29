@@ -15,6 +15,7 @@ import {
     Right,
     Body
 } from "native-base";
+import Ui from '../../common/ui';
 
 import styles from "./styles";
 import Tabs from "./tabs";
@@ -23,7 +24,7 @@ class Brokerage extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container style={Ui.container}>
                 <Header>
                     <Left>
                         <Button

@@ -28,6 +28,7 @@ import ColorScheme from "../../common/colorscheme";
 import {Grid, Row, Col} from "react-native-easy-grid";
 
 import styles from "./styles";
+import Ui from '../../common/ui';
 
 class Amount extends Component {
 
@@ -54,13 +55,13 @@ class Amount extends Component {
         return (
 
             <View>
-                <Text style={styles.formLabel}>{I18n.t('withdrawAmount')}</Text>
+                <Text style={Ui.formLabel}>{I18n.t('withdrawAmount')}</Text>
                 <Grid>
                     <Row>
                         <Col>
-                            <Form style={styles.form}>
-                                <Item style={styles.inputContainer}>
-                                    <Input style={[styles.inputField, styles.amountInput]} placeholder="0" value={this.props.amount}
+                            <Form style={Ui.form}>
+                                <Item style={Ui.inputContainer}>
+                                    <Input style={[Ui.inputField, Ui.amountInput]} placeholder="0" value={this.props.amount}
                                            placeholderTextColor={ColorScheme.lighter}
                                            onChangeText={(text) => this.props.onValueChange('amount', text)}
                                            keyboardType='numeric'/>
@@ -68,7 +69,7 @@ class Amount extends Component {
                             </Form>
                         </Col>
                         <Col style={{width:60}}>
-                            <Text style={styles.amountCurrency}>{this.state.currency}</Text>
+                            <Text style={Ui.amountCurrency}>{this.state.currency}</Text>
                         </Col>
                     </Row>
 

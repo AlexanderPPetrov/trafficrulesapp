@@ -106,9 +106,9 @@ class AddAccount extends Component {
 
     getMessageField = () => {
         if(this.props.notesVisible) {
-            return <Form style={styles.form}>
-                <Item style={styles.inputContainer}>
-                    <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('message')}
+            return <Form style={Ui.form}>
+                <Item style={Ui.inputContainer}>
+                    <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('message')}
                            value={this.props.notes} onChangeText={(text) => this.props.changeValue('notes', text)} />
                 </Item>
             </Form>
@@ -124,14 +124,14 @@ class AddAccount extends Component {
 
         return (
             <View>
-                <Text style={styles.formLabel}>{I18n.t('sendMoneyTo')}</Text>
+                <Text style={Ui.formLabel}>{I18n.t('sendMoneyTo')}</Text>
                 <View>
                     <Grid>
                         <Row>
                             <Col>
-                                <Form style={styles.form}>
-                                    <View style={styles.inputContainer}>
-                                        <Input style={styles.inputField} placeholder={I18n.t('enterEmail')} value={this.props.account}
+                                <Form style={Ui.form}>
+                                    <View style={Ui.inputContainer}>
+                                        <Input style={Ui.inputField} placeholder={I18n.t('enterEmail')} value={this.props.account}
                                                placeholderTextColor={ColorScheme.lighter}
                                                onChangeText={(text) => this.props.changeValue('account', text)}
                                                 />
@@ -141,14 +141,14 @@ class AddAccount extends Component {
                         </Row>
                         <Row>
                             <Col style={styles.currencyPicker}>
-                                <Form style={[styles.inputContainer]}>
+                                <Form style={[Ui.inputContainer]}>
                                     {this.getPicker()}
                                 </Form>
                             </Col>
                             <Col style={{paddingLeft:15}}>
-                                <Form style={[styles.inputContainer]}>
+                                <Form style={[Ui.inputContainer]}>
 
-                                    <Input style={[styles.inputField, styles.amountInput]} placeholder="1" value={this.props.amount}
+                                    <Input style={[Ui.inputField, Ui.amountInput]} placeholder="1" value={this.props.amount}
                                            placeholderTextColor={ColorScheme.lighter}
                                            onChangeText={(amount) => this.props.changeValue('amount', amount)}
                                            keyboardType='numeric'/>

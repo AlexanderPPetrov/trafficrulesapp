@@ -20,6 +20,7 @@ import {View, ScrollView, RefreshControl} from "react-native";
 import SportAccount from "./accountslist";
 import styles from "./styles";
 import Api from "../../../Api";
+import Ui from '../../common/ui';
 
 
 class Accounts extends Component {
@@ -66,7 +67,7 @@ class Accounts extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container style={Ui.container}>
                 <Header>
                     <Left>
                         <Button

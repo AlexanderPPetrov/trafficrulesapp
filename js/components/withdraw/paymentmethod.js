@@ -28,6 +28,7 @@ import {View, ScrollView} from 'react-native';
 import styles from "./styles";
 import Api from "../../../Api";
 const Item = Picker.Item;
+import Ui from '../../common/ui';
 
 class PaymentMethod extends Component {
 
@@ -108,10 +109,10 @@ class PaymentMethod extends Component {
 
         return (
             <View >
-                <Text style={styles.formLabel}>{I18n.t('selectPaymentMethod')}</Text>
+                <Text style={Ui.formLabel}>{I18n.t('selectPaymentMethod')}</Text>
                 <View >
-                    <Form style={styles.form}>
-                        <View style={styles.inputContainer}>
+                    <Form style={Ui.form}>
+                        <View style={Ui.inputContainer}>
                             {this.getPicker()}
                         </View>
                     </Form>

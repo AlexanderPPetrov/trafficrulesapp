@@ -26,6 +26,7 @@ import {
 import {View, ScrollView} from 'react-native';
 import ColorScheme from "../../common/colorscheme";
 import styles from "./styles";
+import Ui from '../../common/ui';
 
 class Notes extends Component {
 
@@ -38,10 +39,10 @@ class Notes extends Component {
         return (
 
             <View >
-                <Text style={styles.formLabel}>{I18n.t('additionalInformation')}</Text>
-                <Form style={styles.form}>
-                    <Item style={styles.inputContainer}>
-                    <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('writeNotes')}
+                <Text style={Ui.formLabel}>{I18n.t('additionalInformation')}</Text>
+                <Form style={Ui.form}>
+                    <Item style={Ui.inputContainer}>
+                    <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('writeNotes')}
                            value={this.props.notes} onChangeText={(text) => this.props.onValueChange('notes', text)} />
                     </Item>
                 </Form>

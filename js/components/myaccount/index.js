@@ -24,6 +24,8 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import {AsyncStorage, BackHandler, Alert} from "react-native"
 import Tabs from "./tabs";
 import Api from "../../../Api";
+import Ui from '../../common/ui';
+
 
 class MyAccount extends Component {
 
@@ -101,7 +103,7 @@ class MyAccount extends Component {
 
     render() {
         return (
-            <Container>
+            <Container style={Ui.container}>
                 <Header>
                     <Left>
                         <Button

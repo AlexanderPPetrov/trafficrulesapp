@@ -98,19 +98,19 @@ class AddAccount extends Component {
     getAmountField = () => {
         if(this.props.selectedAccount != 'none'){
             return <View>
-                <Text style={styles.formLabel}>{I18n.t('amount')}</Text>
+                <Text style={Ui.formLabel}>{I18n.t('amount')}</Text>
                 <Grid>
                     <Row>
                         <Col>
-                            <Form style={[styles.inputContainer]}>
-                                <Input style={[styles.inputField, styles.amountInput]} placeholder="0" value={this.props.accountAmount}
+                            <Form style={[Ui.inputContainer]}>
+                                <Input style={[Ui.inputField, Ui.amountInput]} placeholder="0" value={this.props.accountAmount}
                                        placeholderTextColor={ColorScheme.lighter}
                                        onChangeText={(amount) => this.props.changeAccountValue(this.props.stateKey, 'accountAmount', amount)}
                                        keyboardType='numeric'/>
                             </Form>
                         </Col>
                         <Col style={{width:60}}>
-                            <Text style={styles.amountCurrency}>{this.props.currency}</Text>
+                            <Text style={Ui.amountCurrency}>{this.props.currency}</Text>
                         </Col>
                         <Col style={{width:60}}>
                             <Button transparent primary style={styles.removeAccountButton} onPress={() => this.props.addAccount(this.props.stateKey)}>
@@ -197,10 +197,10 @@ class AddAccount extends Component {
 
         return (
             <View>
-                <Text style={styles.formLabel}>{this.props.label}</Text>
+                <Text style={Ui.formLabel}>{this.props.label}</Text>
                 <View>
-                    <Form style={styles.form}>
-                        <View style={styles.inputContainer}>
+                    <Form style={Ui.form}>
+                        <View style={Ui.inputContainer}>
                             {this.getPicker()}
                         </View>
                         {this.getAmountField()}

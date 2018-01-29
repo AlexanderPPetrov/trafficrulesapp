@@ -24,34 +24,6 @@ export default {
         fontSize:45,
         marginBottom:10
     },
-    formContainer: {
-        padding:20,
-        flex:1,
-        justifyContent: 'space-between'
-    },
-    form: {
-        // borderBottomWidth: 1,
-        // borderColor: ColorScheme.neutralDark,
-        // minHeight:50,
-        // padding:0
-    },
-    cardContainer:{
-        padding:30,
-        paddingTop:15,
-        paddingBottom:30,
-        width:deviceWidth - 6,
-        minHeight:deviceHeight - 92,
-        // minHeight:deviceHeight - 90,
-        alignSelf:'stretch',
-        opacity:1
-    },
-
-    formLabel:{
-        color: ColorScheme.light,
-        fontFamily: 'Roboto_light',
-        marginBottom:10,
-        fontSize: 14
-    },
 
     continueButtonContainer: {
         alignSelf:'flex-end'
@@ -68,22 +40,10 @@ export default {
         textAlign:'center',
         flex:1
     },
-    inputField: {
-        flex:1,
-        fontSize:18,
-        lineHeight: 24,
-        color:ColorScheme.darkest
-    },
+
     amountInput: {
         textAlign:'right',
         fontSize:36
-    },
-    inputContainer: {
-        backgroundColor: 'transparent',
-        borderBottomWidth: 1,
-        borderBottomColor: ColorScheme.neutralDarker,
-        marginLeft:0,
-        minHeight:50
     },
 
     accountsList: {

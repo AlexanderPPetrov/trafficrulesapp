@@ -25,6 +25,7 @@ import {
 import {View, ScrollView} from 'react-native';
 import ColorScheme from "../../common/colorscheme";
 import styles from "./styles";
+import Ui from '../../common/ui';
 
 class Account extends Component {
 
@@ -39,9 +40,9 @@ class Account extends Component {
     getSecureIdField = () => {
 
         if(this.props.paymentMethod == 'NT'){
-            return <Form style={styles.form}>
-                <Item style={[styles.inputContainer, styles.inputSecureId]}>
-                    <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('secureId')} value={this.props.secureId} keyboardType='numeric' onChangeText={(text) => this.props.onValueChange('secureId', text) }/>
+            return <Form style={Ui.form}>
+                <Item style={[Ui.inputContainer, styles.inputSecureId]}>
+                    <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('secureId')} value={this.props.secureId} keyboardType='numeric' onChangeText={(text) => this.props.onValueChange('secureId', text) }/>
                 </Item>
             </Form>
         }
@@ -51,11 +52,11 @@ class Account extends Component {
     render() {
         return (
             <View >
-                <Text style={styles.stepHeader}>{I18n.t('accountSettings')}</Text>
-                <Text style={styles.formLabel}>{I18n.t('enterAccount')}</Text>
-                <Form style={styles.form}>
-                    <Item style={styles.inputContainer}>
-                        <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
+                <Text style={Ui.stepHeader}>{I18n.t('accountSettings')}</Text>
+                <Text style={Ui.formLabel}>{I18n.t('enterAccount')}</Text>
+                <Form style={Ui.form}>
+                    <Item style={Ui.inputContainer}>
+                        <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
                     </Item>
                 </Form>
                 {this.getSecureIdField()}

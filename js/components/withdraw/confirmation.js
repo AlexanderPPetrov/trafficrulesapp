@@ -25,6 +25,7 @@ import {
 
 import {View, ScrollView} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
+import Ui from '../../common/ui';
 
 import styles from "./styles";
 import Api from "../../../Api";
@@ -37,8 +38,8 @@ class Confirmation extends Component {
         return (
 
             <View >
-                <View style={[styles.withdrawHeader, styles.centered]} >
-                    <Icon active name='ios-checkmark-circle' style={styles.successIcon}/>
+                <View style={[Ui.confirmationHeader, Ui.centered]} >
+                    <Icon active name='ios-checkmark-circle' style={Ui.successIcon}/>
                     <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('withdrawConfirmation')}</Text>
                 </View>
                 <Grid>
@@ -56,10 +57,10 @@ class Confirmation extends Component {
                         </Col>
                     </Row>
                 </Grid>
-                <Text style={styles.confirmationText}>
+                <Text style={Ui.confirmationText}>
                     {I18n.t('withdrawSuccess')}
                 </Text>
-                {/*<Text style={styles.confirmationText}>*/}
+                {/*<Text style={Ui.confirmationText}>*/}
                     {/*{I18n.t('withdrawSuccessTwo')}*/}
                 {/*</Text>*/}
 

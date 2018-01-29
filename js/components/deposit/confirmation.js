@@ -23,6 +23,7 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, ScrollView} from 'react-native';
+import Ui from '../../common/ui';
 
 import styles from "./styles";
 
@@ -32,8 +33,8 @@ class Confirmation extends Component {
         if (this.props.depositCompleted == 'success') {
             return <View style={{alignItems: 'flex-start', alignSelf:'center', flex:1, flexDirection:'column'}}>
                 <View style={{}}>
-                    <View style={[styles.withdrawHeader, styles.centered]}>
-                        <Icon active name='ios-checkmark-circle' style={styles.successIcon}/>
+                    <View style={[Ui.confirmationHeader, Ui.centered]}>
+                        <Icon active name='ios-checkmark-circle' style={Ui.successIcon}/>
                         <Text style={{textAlign: 'center', fontSize: 20}}>{I18n.t('depositConfirmation')}</Text>
                     </View>
                     <View >
@@ -42,10 +43,10 @@ class Confirmation extends Component {
                         <Text>{I18n.t('netAmount')} {this.props._payload._net_amount} {this.props._payload._currency}</Text>
                     </View>
 
-                    <Text style={styles.confirmationText}>
+                    <Text style={Ui.confirmationText}>
                         {I18n.t('depositSuccess')}
                     </Text>
-                    <Text style={styles.confirmationText}>
+                    <Text style={Ui.confirmationText}>
                         {I18n.t('depositSuccessTwo')}
                     </Text>
                 </View>

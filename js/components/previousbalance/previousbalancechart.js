@@ -4,6 +4,7 @@ import {
     VictoryArea,
     VictoryScatter,
     VictoryAxis,
+    VictoryLine,
     VictoryLabel,
     VictoryZoomContainer
 } from 'victory-native';
@@ -42,19 +43,14 @@ class PreviousBalanceChart extends Component {
         //     zoomDomain: { x: [this.props.balance[0], this.props.balance[this.props.balance.length - 1]] },
         //     selectedDomain: { x: [this.props.balance[0], this.props.balance[this.props.balance.length - 1]] }
         // };
+
+        console.log(this.props.maxBalance, this.props.maxChange)
     }
 
     componentDidMount = () => {
 
     }
 
-    handleZoom = (domain) => {
-        this.setState({selectedDomain: domain});
-    }
-
-    handleBrush = (domain) => {
-        this.setState({zoomDomain: domain});
-    }
 
     getDate = (x, index) => {
         var label = '';
@@ -71,54 +67,18 @@ class PreviousBalanceChart extends Component {
                 <Text style={Ui.cardHeader}>
                     {I18n.t('currentBalance')} {this.props.currentBalance} {this.props.currency}
                 </Text>
+                <VictoryChart scale={{x: "time", y: "linear"}} height={250} domain={{y: [this.props.minBalance, this.props.maxBalance]}}
+                              // padding={{top: 30, left: 60, bottom: 30, right: 60}}
+                >
+                    <Defs>
+                        <LinearGradient id="gradient1"
+                                        x1="0%" y1="0%" x2="0%" y2="100%"
+                        >
+                            <Stop offset="0%" stopColor={ColorScheme.chartBalance}/>
+                            <Stop offset="100%" stopColor={'rgba(255, 255, 255, 0.5)'}/>
+                        </LinearGradient>
 
-                <VictoryChart scale={{x: "time", y: "linear"}} responsive={true}
-                              padding={{top: 30, left: 60, bottom: 30, right: 60}}>
-                    <VictoryArea
-                        interpolation={"catmullRom"}
-                        style={{
-                            data: {
-                                stroke: ColorScheme.chartBalance,
-                                fill: ColorScheme.chartBalance,
-                                fillOpacity: 0.5
-                            },
-                            parent: {border: "1px solid " + ColorScheme.chartBalance, overflow: 'visible'}
-                        }}
-                        data={this.props.balance}
-                    />
-                    <VictoryScatter data={this.props.balance}
-                                    size={3}
-                                    style={{
-                                        data: {
-                                            fill: ColorScheme.neutralLight,
-                                            stroke: ColorScheme.chartBalance,
-                                            strokeWidth: 1
-                                        }
-                                    }}
-                    />
-
-                    <VictoryArea
-                        interpolation={"catmullRom"}
-                        style={{
-                            data: {
-                                stroke: ColorScheme.chartChange,
-                                fill: ColorScheme.chartChange,
-                                fillOpacity: 0.5
-                            },
-                            parent: {border: "1px solid " + ColorScheme.chartChange, overflow: 'visible'}
-                        }}
-                        data={this.props.change}
-                    />
-                    <VictoryScatter data={this.props.change}
-                                    size={3}
-                                    style={{
-                                        data: {
-                                            fill: ColorScheme.neutralLight,
-                                            stroke: ColorScheme.chartChange,
-                                            strokeWidth: 1
-                                        }
-                                    }}
-                    />
+                    </Defs>
                     <VictoryAxis dependentAxis style={{
                         axis: {
                             stroke: ColorScheme.lighter
@@ -138,6 +98,7 @@ class PreviousBalanceChart extends Component {
                                  tickFormat={(y) => parseFloat(y).toFixed(2)}
                     />
                     <VictoryAxis
+                        offsetY={50}
                         tickFormat={(x, i) => this.getDate(x, i)}
                         style={{
                             axis: {
@@ -151,6 +112,57 @@ class PreviousBalanceChart extends Component {
                             }
                         }}
                     />
+                    <VictoryArea key={0}
+                        interpolation={"catmullRom"}
+                        style={{
+                            data: {
+                                stroke: ColorScheme.chartBalance,
+                                fill: "url(#gradient1)",
+                                fillOpacity: 0.5
+                            }
+                        }}
+                        data={this.props.balance}
+                        y0={() => this.props.minBalance}
+                        y={(data) => data.y / this.props.maxBalance}
+                    />
+
+
+                    <VictoryLine key={1}
+                                 interpolation={"catmullRom"}
+                        style={{
+                            data: {
+                                stroke: ColorScheme.chartChange,
+                                fillOpacity: 0.5
+                            }
+                        }}
+                        data={this.props.change}
+                        // y0={() => this.props.minChange}
+                        y={(data) => data.y / this.props.maxChange}
+
+                    />
+                    <VictoryScatter data={this.props.balance}
+                                    size={3}
+                                    style={{
+                                        data: {
+                                            fill: ColorScheme.neutralLight,
+                                            stroke: ColorScheme.chartBalance,
+                                            strokeWidth: 1
+                                        }
+                                    }}
+                                    y={(data) => data.y / this.props.maxBalance}
+                    />
+                    <VictoryScatter data={this.props.change}
+                                    size={3}
+                                    style={{
+                                        data: {
+                                            fill: ColorScheme.neutralLight,
+                                            stroke: ColorScheme.chartChange,
+                                            strokeWidth: 1
+                                        }
+                                    }}
+                                    y={(data) => data.y / this.props.maxChange}
+                    />
+
                 </VictoryChart>
                 <View style={{
                     flex: 1,

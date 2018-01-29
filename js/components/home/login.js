@@ -93,17 +93,17 @@ class Login extends React.Component {
 
     loginHandler = () => {
 
-        if (this.state.pin) {
-
-            if(this.state.pin === this.state.pinEntered){
-                this.login()
-            }else{
-                this.errorMessage(I18n.t('wrongPin'))
-            }
-
-        } else {
+        // if (this.state.pin) {
+        //
+        //     if(this.state.pin === this.state.pinEntered){
+        //         this.login()
+        //     }else{
+        //         this.errorMessage(I18n.t('wrongPin'))
+        //     }
+        //
+        // } else {
             this.login()
-        }
+        // }
 
 
     };
@@ -145,6 +145,10 @@ class Login extends React.Component {
             pinEntered: value
         })
 
+        if(this.state.pin === value){
+            this.login()
+        }
+
     };
 
     getLoginForm = () => {
@@ -168,20 +172,31 @@ class Login extends React.Component {
             </Form>
         }
 
-        return <Form>
-            <Item style={[styles.inputContainer, styles.inputMargin]}>
-                <Icon active name='ios-person-outline' style={[styles.inputIcon, styles.inputIconUser]}/>
-                <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField}
-                       placeholder={I18n.t('username')} value={this.state.username}
-                       onChangeText={(newValue) => this.setState({username: newValue})}/>
-            </Item>
-            <Item style={styles.inputContainer}>
-                <Icon active name='ios-lock-outline' style={styles.inputIcon}/>
-                <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} secureTextEntry={true}
-                       placeholder={I18n.t('password')} value={this.state.password}
-                       onChangeText={(newValue) => this.setState({password: newValue})}/>
-            </Item>
-        </Form>
+        return <View>
+            <Form>
+                <Item style={[styles.inputContainer, styles.inputMargin]}>
+                    <Icon active name='ios-person-outline' style={[styles.inputIcon, styles.inputIconUser]}/>
+                    <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField}
+                           placeholder={I18n.t('username')} value={this.state.username}
+                           onChangeText={(newValue) => this.setState({username: newValue})}/>
+                </Item>
+                <Item style={styles.inputContainer}>
+                    <Icon active name='ios-lock-outline' style={styles.inputIcon}/>
+                    <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} secureTextEntry={true}
+                           placeholder={I18n.t('password')} value={this.state.password}
+                           onChangeText={(newValue) => this.setState({password: newValue})}/>
+                </Item>
+            </Form>
+            <Button block style={styles.loginButton} onPress={() =>
+
+                this.loginHandler()
+                // this.props.navigation.navigate("MyAccount")
+
+            }>
+                <Text>{I18n.t('login').toUpperCase()}</Text>
+            </Button>
+        </View>
+
     };
 
     loginSuccess = (response) => {
@@ -206,14 +221,7 @@ class Login extends React.Component {
             <View style={styles.formContainer}>
 
                 {this.getLoginForm()}
-                <Button block style={styles.loginButton} onPress={() =>
 
-                    this.loginHandler()
-                    // this.props.navigation.navigate("MyAccount")
-
-                }>
-                    <Text>{I18n.t('login').toUpperCase()}</Text>
-                </Button>
             </View>
         );
     }

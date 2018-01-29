@@ -32,6 +32,7 @@ import Api from "../../../Api";
 const Item = Picker.Item;
 
 const labels = [I18n.t('existing'), I18n.t('new'), I18n.t('notes'), I18n.t('transfer')];
+import Ui from '../../common/ui';
 
 class Withdraw extends Component {
 
@@ -119,7 +120,7 @@ class Withdraw extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container style={Ui.container}>
                 <Header hasTabs>
                     <Left>
                         {this.getBackButton()}
@@ -133,18 +134,18 @@ class Withdraw extends Component {
                 </Header>
 
                 <Content >
-                    <Card style={styles.cardContainer}>
+                    <Card style={Ui.cardContainer}>
                         <View style={{flex:1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={4} labels={labels}></Steps>
 
-                            <View style={styles.formContainer}>
+                            <View style={Ui.formContainer}>
                                 {console.log('FundsTransferSteps')}
                                     <FundsTransferSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
                                                         setPage={this.setPage}
                                                         paymentData={this.state.paymentData}
                                                         disableButton={this.setButtonState}></FundsTransferSteps>
 
-                                <View style={styles.buttonsContainer}>
+                                <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
                                     {this.getChat()}
                                 </View>

@@ -22,6 +22,7 @@ import {
     Right,
     Body,
 } from "native-base";
+import Ui from '../../common/ui';
 
 import {View, ScrollView} from 'react-native';
 
@@ -36,14 +37,14 @@ class Confirmation extends Component {
         return (
 
             <View >
-                <View style={[styles.withdrawHeader, styles.centered]} >
-                    <Icon active name='ios-checkmark-circle' style={styles.successIcon}/>
+                <View style={[Ui.confirmationHeader, Ui.centered]} >
+                    <Icon active name='ios-checkmark-circle' style={Ui.successIcon}/>
                     <Text style={{textAlign:'center', fontSize:20}}>{I18n.t('fundsTransferConfirmation')}</Text>
                 </View>
-                <Text style={styles.confirmationText}>
+                <Text style={Ui.confirmationText}>
                     {I18n.t('fundsTransferSuccess')}
                 </Text>
-                {/*<Text style={styles.confirmationText}>*/}
+                {/*<Text style={Ui.confirmationText}>*/}
                     {/*{I18n.t('withdrawSuccessTwo')}*/}
                 {/*</Text>*/}
 

@@ -3,11 +3,11 @@ import ColorScheme from "./colorscheme";
 
 const {StyleSheet, Dimensions, Platform, PixelRatio } = React;
 const {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
+    width: deviceWidth,
+    height: deviceHeight,
 } = Dimensions.get('window');
 
-const scale = SCREEN_WIDTH / 320;
+const scale = deviceWidth / 320;
 
 export function normalize(size) {
     size = size*scale
@@ -19,6 +19,9 @@ export function normalize(size) {
 }
 
 export default {
+    container: {
+        backgroundColor:'#393939'
+    },
     listHeader: {
         backgroundColor: ColorScheme.neutralDark,
         height:45,
@@ -128,5 +131,99 @@ export default {
     },
     calendarIcon:{
         color:ColorScheme.light
+    },
+    formContainer: {
+        flex:1,
+        justifyContent: 'space-between'
+    },
+    buttonsContainer: {
+        alignSelf:'flex-end',
+        justifyContent: 'space-between',
+        width:'100%'
+    },
+
+    stepHeader: {
+        textAlign:'center',
+        fontSize:18,
+        padding:10,
+        paddingBottom:45,
+        color:ColorScheme.darkest
+    },
+    formLabel:{
+        color: ColorScheme.light,
+        fontFamily: 'Roboto_light',
+        marginBottom:10,
+        fontSize: 14
+    },
+    cardContainer:{
+        padding:30,
+        paddingTop:15,
+        paddingBottom:30,
+        width:deviceWidth - 6,
+        minHeight:deviceHeight - 92,
+        // minHeight:deviceHeight - 90,
+        alignSelf:'stretch',
+        opacity:1
+    },
+    inputContainer: {
+        backgroundColor: 'transparent',
+        borderBottomWidth: 1,
+        borderBottomColor: ColorScheme.neutralDarker,
+        marginLeft:0,
+        minHeight:50
+    },
+    form: {
+        minHeight:50,
+        padding:0
+    },
+    inputField: {
+        flex:1,
+        fontSize:18,
+        lineHeight: 24,
+        color:ColorScheme.darkest
+    },
+    amountInput: {
+        textAlign:'right',
+        fontSize:36
+    },
+    amountCurrency: {
+        fontFamily:'Roboto_light',
+        color: ColorScheme.darker,
+        fontSize:20,
+        paddingTop:8,
+        lineHeight:20,
+        marginLeft:10
+    },
+    centered: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    successIcon: {
+        color:ColorScheme.win,
+        fontSize:45,
+        marginBottom:10
+    },
+    errorIcon: {
+        color:ColorScheme.loss,
+        fontSize:45,
+        marginBottom:10
+    },
+    cancelIcon: {
+        color:ColorScheme.neutralDarkest,
+        fontSize:45,
+        marginBottom:10
+    },
+    confirmationHeader:{
+
+    },
+
+    confirmationText: {
+        fontFamily:'Roboto_light',
+        fontSize:16,
+        color: ColorScheme.light,
+        textAlign:'center',
+        marginTop:15
     }
+
+
 };

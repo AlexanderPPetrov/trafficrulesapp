@@ -20,6 +20,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, ScrollView, RefreshControl} from 'react-native';
 import PreviousBalanceChart from './previousbalancechart'
 
+import Ui from '../../common/ui';
 
 import Balance from "./balance";
 import styles from "./styles";
@@ -36,6 +37,10 @@ class PreviousBalance extends Component {
             },
             refreshing: false,
             balance: [],
+            maxBalance: '',
+            minBalance: '',
+            maxChange: '',
+            minChange: '',
             change: [],
             loaded: false
 
@@ -83,9 +88,19 @@ class PreviousBalance extends Component {
         balance.reverse();
         change.reverse();
 
+        const maxBalance = this.defineMax(balance);
+        const maxChange = this.defineMax(change);
+
+        const minBalance = this.defineMin(balance);
+        const minChange = this.defineMin(change);
+
         this.setState({
-            balance: balance,
-            change: change
+            balance,
+            maxBalance,
+            minBalance,
+            maxChange,
+            minChange,
+            change
         })
     }
 
@@ -98,10 +113,27 @@ class PreviousBalance extends Component {
         this.loadData(false)
     };
 
+    defineMax = (data) => {
+        let maxValue = Math.max(...data.map((d) => d.y))
+        if(maxValue < 1){
+            maxValue = 1
+        }
+        return maxValue;
+    };
+
+    defineMin = (data) => {
+        let minValue = Math.min(...data.map((d) => d.y))
+        return minValue;
+    };
+
     getChart = () => {
         if (this.state.balance.length >= 2) {
             return <Card>
                 <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance}
+                                      maxBalance={this.state.maxBalance}
+                                      minBalance={this.state.minBalance}
+                                      maxChange={this.state.maxChange}
+                                      minChange={this.state.minChange}
                                       change={this.state.change} currency={this.props.navigation.state.params._currency}
                                       currentBalance={this.props.navigation.state.params._balance}/>
             </Card>
@@ -122,7 +154,7 @@ class PreviousBalance extends Component {
 
     render() {
         return (
-            <Container>
+            <Container style={Ui.container}>
                 <Header>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.navigate('Accounts')}>

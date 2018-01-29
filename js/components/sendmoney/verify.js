@@ -31,6 +31,7 @@ import ColorScheme from "../../common/colorscheme";
 import styles from "./styles";
 import Api from "../../../Api";
 
+import Ui from '../../common/ui';
 
 class Confirmation extends Component {
 
@@ -43,7 +44,7 @@ class Confirmation extends Component {
         return (
 
             <View>
-                <Text style={styles.formLabel}>{I18n.t('confirmSendMoney')}</Text>
+                <Text style={Ui.formLabel}>{I18n.t('confirmSendMoney')}</Text>
                 <View>
                     <Grid>
                         <Row>

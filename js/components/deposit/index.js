@@ -26,6 +26,7 @@ import {
 
 import {View, ScrollView, WebView} from 'react-native';
 import {MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
+import Ui from '../../common/ui';
 
 import styles from "./styles";
 
@@ -93,7 +94,7 @@ class Deposit extends Component {
     }
 
     getRightHeader = () => {
-        if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps) {
+        if (this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
@@ -115,13 +116,13 @@ class Deposit extends Component {
     getErrorMessage = () => {
         if (this.state.depositCompleted == 'error') {
             return <View>
-                <View style={[styles.withdrawHeader, styles.centered]}>
+                <View style={[Ui.confirmationHeader, Ui.centered]}>
                     {/*<Icon active name='ios-close-circle' style={styles.errorIcon}/>*/}
                     <MaterialIcons name="error" size={30} style={styles.errorIcon}></MaterialIcons>
                     <Text style={{textAlign: 'center', fontSize: 20}}>{I18n.t('depositError')}</Text>
                 </View>
 
-                <Text style={styles.confirmationText}>
+                <Text style={Ui.confirmationText}>
                     {I18n.t('depositErrorMessage')}
                 </Text>
 
@@ -129,12 +130,12 @@ class Deposit extends Component {
         }
         if (this.state.depositCompleted == 'cancel') {
             return <View>
-                <View style={[styles.withdrawHeader, styles.centered]}>
+                <View style={[Ui.confirmationHeader, Ui.centered]}>
                     <MaterialCommunityIcons name="cancel" size={30} style={styles.cancelIcon}></MaterialCommunityIcons>
                     <Text style={{textAlign: 'center', fontSize: 20}}>{I18n.t('depositCancel')}</Text>
                 </View>
 
-                <Text style={styles.confirmationText}>
+                <Text style={Ui.confirmationText}>
                     {I18n.t('depositCancelMessage')}
                 </Text>
 
@@ -255,13 +256,13 @@ class Deposit extends Component {
 
     getStyle = () => {
         if(this.state._redirect_url != ''){
-            return [styles.cardContainer, styles.webViewOpened]
+            return [Ui.cardContainer, styles.webViewOpened]
         }
-        return styles.cardContainer
+        return Ui.cardContainer
     }
     render() {
         return (
-            <Container style={styles.container}>
+            <Container style={Ui.container}>
                 <Header hasTabs>
                     <Left>
                         {this.getBackButton()}
@@ -278,7 +279,7 @@ class Deposit extends Component {
                         <View style={{flex: 1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={this.state.steps}
                                    labels={this.state.labels}></Steps>
-                            <View style={styles.formContainer}>
+                            <View style={Ui.formContainer}>
                                 <DepositSteps currentPage={this.state.currentPage}
                                               onRef={ref => (this.tabs = ref)} {...this.props}
                                               onUpdatePage={this.changeHandler}
@@ -290,7 +291,7 @@ class Deposit extends Component {
                                               stepsNames={this.state.stepsNames}
                                               disableButton={this.setButtonState}></DepositSteps>
                                 {this.getErrorMessage()}
-                                <View style={styles.buttonsContainer}>
+                                <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
                                     {this.getChat()}
                                 </View>
