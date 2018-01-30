@@ -194,7 +194,7 @@ class SettledBets extends Component {
                 <Row>
 
                     <Col size={3}>
-                        <Text style={Ui.balanceLabel}>{I18n.t('turnOver')}</Text>
+                        <Text style={Ui.itemLabel}>{I18n.t('turnOver')}</Text>
                     </Col>
                     <Col size={3}>
                         <Text style={Ui.balanceValue}>{bet._turnover}</Text>
@@ -207,7 +207,7 @@ class SettledBets extends Component {
                 <Row>
 
                     <Col size={3}>
-                        <Text style={Ui.balanceLabel}>{I18n.t('profit')}</Text>
+                        <Text style={Ui.itemLabel}>{I18n.t('profit')}</Text>
                     </Col>
                     <Col size={3}>
                         <Text style={Ui.balanceValue}>{bet._profit}</Text>

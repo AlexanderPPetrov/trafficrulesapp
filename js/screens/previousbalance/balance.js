@@ -21,7 +21,7 @@ class Balance extends Component {
                 <ListItem style={Ui.listItem}>
                     <Grid>
                         <Col size={3}>
-                            <Text style={Ui.balanceLabel}>{I18n.t('_balance')}</Text>
+                            <Text style={Ui.itemLabel}>{I18n.t('_balance')}</Text>
                         </Col>
                         <Col size={3}>
                             <Text style={Ui.balanceValue}>{balance._balance}</Text>
@@ -34,7 +34,7 @@ class Balance extends Component {
                 <ListItem style={Ui.listItem}>
                     <Grid>
                         <Col size={3}>
-                            <Text style={Ui.balanceLabel}>{I18n.t('change')}</Text>
+                            <Text style={Ui.itemLabel}>{I18n.t('change')}</Text>
                         </Col>
                         <Col size={3}>
                             <Text style={Ui.balanceValue}>{balance._change}</Text>

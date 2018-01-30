@@ -5,7 +5,7 @@ const {StyleSheet} = React;
 
 export default {
 
-    balanceLabel: {
+    itemLabel: {
 
     },
 

@@ -166,7 +166,7 @@ class AddAccount extends Component {
             <Grid>
                 <Row>
                     <Col>
-                        <Text style={[Ui.balanceLabel, styles.accountLabel]}>{account.username}</Text>
+                        <Text style={[Ui.itemLabel, styles.accountLabel]}>{account.username}</Text>
                     </Col>
                     <Col>
                         <Text style={[Ui.balanceValue, styles.accountAmount]}>{account.amount} {this.props.currency}</Text>

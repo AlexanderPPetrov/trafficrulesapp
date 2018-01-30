@@ -53,9 +53,10 @@ export default {
         backgroundColor: ColorScheme.neutralLight,
         flex: 1,
         flexDirection: 'row',
-        maxHeight:78
+        maxHeight:78,
+        minHeight:40
     },
-    balanceLabel: {
+    itemLabel: {
         color: ColorScheme.darker,
         fontSize: normalize(13),
         fontFamily:'Roboto_light',

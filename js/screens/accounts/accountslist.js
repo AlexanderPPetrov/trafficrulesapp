@@ -16,7 +16,7 @@ class AccountsList extends Component {
     getListItem = (account, property, i) => {
         return <ListItem key={i} style={Ui.listItem}>
             <Col size={2}>
-                <Text style={Ui.balanceLabel}>{I18n.t(property)}</Text>
+                <Text style={Ui.itemLabel}>{I18n.t(property)}</Text>
             </Col>
             <Col size={3}>
                 <Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{account[property]}</Text>

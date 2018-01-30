@@ -9,6 +9,7 @@ import {
     H3,
     Button,
     Icon,
+    Picker,
     Footer,
     FooterTab,
     Card, CardItem, List, ListItem,
@@ -21,10 +22,21 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, FlatList, RefreshControl} from "react-native";
 import Ui from '../../common/ui';
 
+const Item = Picker.Item;
+
 import styles from "./styles";
 import Api from "../../../Api";
 
 //  default: return 'Cash Deposit';
+
+const languages = [{
+    code:'en',
+    label:'English'
+},{
+    code: 'fr',
+    label:'Français'
+}]
+
 
 const switches = ['notificationsWithdrawDeposit', 'notificationsFundsTransfer', 'notificationsWeeklyStatus', 'notificationsBrokerageActivity', 'notificationsBettingTips', 'notificationsAdHocMessages']
 
@@ -33,7 +45,8 @@ class Transactions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            language: 'EN',
+            languageCode: 'en',
+            language: 'English',
             notificationsWithdrawDeposit: true,
             notificationsFundsTransfer: true,
             notificationsWeeklyStatus: true,
@@ -53,25 +66,60 @@ class Transactions extends Component {
 
     getSwitches = () => {
         const switchList = switches.map((switchKey, i) => {
-            return <ListItem icon key={i}>
-                <Left>
-                    <Icon name="plane" />
-                </Left>
-                <Body>
-                <Text>{I18n.t(switchKey)}</Text>
-                </Body>
-                <Right>
-                    <Switch value={this.state[switchKey]}
+            return <ListItem key={i} style={Ui.listItem}>
+                <Col size={3}>
+                <Text style={Ui.itemLabel}>{I18n.t(switchKey)}</Text>
+                </Col>
+                <Col size={1}>
+                <Switch value={this.state[switchKey]}
                             onValueChange={(value)=>this.setState({
                                 [switchKey]:value
                             })}/>
-                </Right>
+                </Col>
             </ListItem>
         });
 
         return <List>
             {switchList}
         </List>
+    }
+
+    changeLanguage = (value) => {
+        this.setState({
+            languageCode: value
+        })
+        I18n.locale = value
+        console.log(I18n.locale)
+    }
+    getLanguagePicker = () => {
+        const listItems = languages.map((language, i) =>
+            <Item key={i} value={language.code} label={language.label}></Item>
+        );
+        return  <Picker
+            mode="dropdown"
+            placeholder={I18n.t('language')}
+            iosHeader=" "
+            selectedValue={this.state.languageCode}
+            onValueChange={(value) =>
+                this.changeLanguage(value)
+            }
+            note={false}
+            renderHeader={backAction =>
+                <Header >
+                    <Left>
+                        <Button transparent onPress={backAction}>
+                            <Icon name="arrow-back"  />
+                        </Button>
+                    </Left>
+                    <Body style={{ flex: 3 }}>
+
+                    </Body>
+                    <Right />
+                </Header>}
+        >
+            {listItems}
+
+        </Picker>
     }
 
     render() {
@@ -91,10 +139,22 @@ class Transactions extends Component {
                     </Body>
                     <Right/>
                 </Header>
-                <List>
-
-                    {this.getSwitches()}
-                </List>
+                <Content>
+                    <List>
+                        <ListItem itemDivider>
+                            <Text>{I18n.t('language', { locale: this.state.languageCode })}</Text>
+                        </ListItem>
+                        <ListItem style={Ui.listItem}>
+                            <Col>
+                                {this.getLanguagePicker()}
+                            </Col>
+                        </ListItem>
+                        <ListItem itemDivider>
+                            <Text>{I18n.t('notifications')}</Text>
+                        </ListItem>
+                        {this.getSwitches()}
+                    </List>
+                </Content>
             </Container>
 
         );

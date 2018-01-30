@@ -29,8 +29,8 @@ class BalanceItem extends Component {
                 </View>
             </Col>
             <Col >
-                <Row><Text style={Ui.balanceLabel}>{I18n.t('cashBalance')}</Text></Row>
-                <Row><Text style={Ui.balanceLabel}>{I18n.t('moneyInAccounts')}</Text></Row>
+                <Row><Text style={Ui.itemLabel}>{I18n.t('cashBalance')}</Text></Row>
+                <Row><Text style={Ui.itemLabel}>{I18n.t('moneyInAccounts')}</Text></Row>
             </Col>
             <Col style={{minWidth:60}}>
                 <Row>

@@ -208,7 +208,7 @@ class Transactions extends Component {
 
         return <ListItem key={i} style={Ui.listItem}>
             <Col size={2}>
-                <Text style={Ui.balanceLabel}>{I18n.t(translationKeys[property])}</Text>
+                <Text style={Ui.itemLabel}>{I18n.t(translationKeys[property])}</Text>
             </Col>
             <Col size={3}>
                 <Text style={[Ui.balanceValue, valueStyle]}>{value}</Text>
