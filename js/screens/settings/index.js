@@ -58,7 +58,7 @@ class Transactions extends Component {
         this.loadLanguage();
     };
 
-    setLanguage = (switchKey) => {
+    setNotification = (switchKey, value) => {
         this.setState({
             [switchKey]:value
         })
@@ -66,7 +66,7 @@ class Transactions extends Component {
 
     loadLanguage = () => {
 
-    }
+    };
 
     getSwitches = () => {
         const switchList = switches.map((switchKey, i) => {
@@ -74,9 +74,9 @@ class Transactions extends Component {
                 <Col size={3}>
                 <Text style={Ui.itemLabel}>{I18n.t(switchKey)}</Text>
                 </Col>
-                <Col size={1}>
-                <Switch value={this.state[switchKey]}
-                            onValueChange={(value)=>this.setLanguage(switchKey)}/>
+                <Col size={1} >
+                <Switch style={{alignSelf:'flex-end'}} value={this.state[switchKey]}
+                            onValueChange={(value)=>this.setNotification(switchKey, value)}/>
                 </Col>
             </ListItem>
         });
@@ -84,7 +84,7 @@ class Transactions extends Component {
         return <List>
             {switchList}
         </List>
-    }
+    };
 
     changeLanguage = (value) => {
         this.setState({
@@ -93,8 +93,8 @@ class Transactions extends Component {
 
         I18n.locale = value
         Api.updateSideBar(value)
+    };
 
-    }
     getLanguagePicker = () => {
         const listItems = languages.map((language, i) =>
             <Item key={i} value={language.code} label={language.label}></Item>

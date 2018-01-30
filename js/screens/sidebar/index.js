@@ -112,7 +112,7 @@ class SideBar extends Component {
     getMenuItems = () => {
 
         const menuItems = menuData.map((item, i) => {
-            return <ListItem key={1} button noBorder onPress={() => this.props.navigation.navigate(item.route)}>
+            return <ListItem key={i} button noBorder onPress={() => this.props.navigation.navigate(item.route)}>
                 <Left style={{paddingLeft: 10}}>
                     <Icon active name={item.icon} style={this.iconStyle(item.icon)}/>
                     <Text style={styles.text}>
