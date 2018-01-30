@@ -1,3 +1,19 @@
 export default {
-    greeting: 'Bonjour!'
+    settings: 'Paramètres',
+    language: 'La langue',
+    notifications: 'Notifications',
+    myAccount:'Mon compte',
+    accounts:'Comptes',
+    brokerage:'Courtage',
+    deposit:'Dépôt',
+    withdraw:'Se désister',
+    fundsTransfer:'Transfert de fonds',
+    transactions:'Transactions',
+    sendMoney:'Envoyer de l\'argent',
+    notificationsWithdrawDeposit: 'Retirer et déposer',
+    notificationsFundsTransfer: 'Transfert de fonds',
+    notificationsWeeklyStatus: 'Statut hebdomadaire',
+    notificationsBrokerageActivity: 'Activité de courtage',
+    notificationsBettingTips: 'Conseils de paris',
+    notificationsAdHocMessages: 'Messages Ad-Hoc',
 };

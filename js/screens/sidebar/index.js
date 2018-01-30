@@ -23,50 +23,49 @@ import I18n from '../../../i18n/i18n';
 import Logo from '../../common/logo/logo';
 import ColorScheme from "../../common/colorscheme";
 
-
-const datas = [
+const menuData = [
     {
-        name: I18n.t('myAccount'),
+        name: 'myAccount',
         route: "MyAccount",
         icon: "ios-person"
     },
     {
-        name: I18n.t('accounts'),
+        name: 'accounts',
         route: "Accounts",
         icon: "ios-people"
     },
     {
-        name: I18n.t('brokerage'),
+        name: 'brokerage',
         route: "Brokerage",
         icon: "ios-briefcase-outline",
     },
     {
-        name: I18n.t('deposit'),
+        name: 'deposit',
         route: "Deposit",
         icon: "ios-card",
     },
     {
-        name: I18n.t('withdraw'),
+        name: 'withdraw',
         route: "Withdraw",
         icon: "ios-cash-outline",
     },
     {
-        name: I18n.t('fundsTransfer'),
+        name: 'fundsTransfer',
         route: "FundsTransfer",
         icon: "ios-swap",
     },
     {
-        name: I18n.t('transactions'),
+        name: 'transactions',
         route: "Transactions",
         icon: "ios-list-box-outline",
     },
     {
-        name: I18n.t('sendMoney'),
+        name: 'sendMoney',
         route: "SendMoney",
         icon: "ios-share-alt-outline",
     },
     {
-        name: I18n.t('settings'),
+        name: 'settings',
         route: "Settings",
         icon: "ios-settings-outline",
     }
@@ -83,12 +82,18 @@ class SideBar extends Component {
         this.state = {
             shadowOffsetWidth: 1,
             shadowRadius: 4,
-            scale:scale
+            scale:scale,
+            language:'en',
+            translatedLabels:[]
         };
     }
 
+    changeLanguage = (language) => {
+        this.setState({
+            language
+        })
+    }
     iconStyle = (icon) => {
-        console.log(icon)
         let marginLeft = 0,
             marginRight = 0
         if (icon == 'ios-person') {
@@ -104,6 +109,22 @@ class SideBar extends Component {
         }
     };
 
+    getMenuItems = () => {
+
+        const menuItems = menuData.map((item, i) => {
+            return <ListItem key={1} button noBorder onPress={() => this.props.navigation.navigate(item.route)}>
+                <Left style={{paddingLeft: 10}}>
+                    <Icon active name={item.icon} style={this.iconStyle(item.icon)}/>
+                    <Text style={styles.text}>
+                        {I18n.t(item.name, {locale: this.state.language})}
+                    </Text>
+                </Left>
+            </ListItem>
+        });
+
+        return menuItems
+    };
+
     render() {
         return (
             <Container>
@@ -113,32 +134,9 @@ class SideBar extends Component {
                         <Logo scale={this.state.scale} primary={ColorScheme.neutralLight} secondary={ColorScheme.action} slogan={ColorScheme.neutralLight}>
                         </Logo>
                     </View>
-
-                    <List style={{paddingTop:15}}
-                        dataArray={datas}
-                        renderRow={data =>
-                            <ListItem button noBorder onPress={() => this.props.navigation.navigate(data.route)}>
-                                <Left style={{paddingLeft: 10}}>
-                                    <Icon active name={data.icon} style={this.iconStyle(data.icon)}/>
-                                    <Text style={styles.text}>
-                                        {data.name}
-                                    </Text>
-                                </Left>
-                                {data.types &&
-                                <Right style={{flex: 1}}>
-                                    <Badge
-                                        style={{
-                                            borderRadius: 3,
-                                            height: 25,
-                                            width: 72,
-                                            backgroundColor: data.bg,
-                                        }}
-                                    >
-                                        <Text style={styles.badgeText}>{`${data.types} Types`}</Text>
-                                    </Badge>
-                                </Right>}
-                            </ListItem>}
-                    />
+                    <List style={{paddingTop:15}}>
+                        {this.getMenuItems()}
+                    </List>
                 </Content>
             </Container>
         );

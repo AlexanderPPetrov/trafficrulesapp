@@ -9,6 +9,7 @@ import { NavigationActions } from 'react-navigation';
 import type { NavigationParams, NavigationRoute } from 'react-navigation';
 
 let _navigator;
+let _sidebar;
 
 let auth = '';
 
@@ -202,6 +203,15 @@ let Api = {
 
     setNavigator: (navigator) => {
         _navigator = navigator;
+    },
+
+    setSidebar: (sidebar) => {
+        _sidebar = sidebar;
+    },
+
+    updateSideBar: (language) => {
+        _sidebar.changeLanguage(language)
+        _navigator.forceUpdate()
     },
 
     navigateTo: (routeName) => {

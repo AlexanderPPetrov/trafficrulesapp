@@ -26,8 +26,7 @@ const Item = Picker.Item;
 
 import styles from "./styles";
 import Api from "../../../Api";
-
-//  default: return 'Cash Deposit';
+import { NavigationActions } from 'react-navigation'
 
 const languages = [{
     code:'en',
@@ -35,8 +34,7 @@ const languages = [{
 },{
     code: 'fr',
     label:'Français'
-}]
-
+}];
 
 const switches = ['notificationsWithdrawDeposit', 'notificationsFundsTransfer', 'notificationsWeeklyStatus', 'notificationsBrokerageActivity', 'notificationsBettingTips', 'notificationsAdHocMessages']
 
@@ -60,9 +58,15 @@ class Transactions extends Component {
         this.loadLanguage();
     };
 
+    setLanguage = (switchKey) => {
+        this.setState({
+            [switchKey]:value
+        })
+    };
+
     loadLanguage = () => {
 
-    };
+    }
 
     getSwitches = () => {
         const switchList = switches.map((switchKey, i) => {
@@ -72,9 +76,7 @@ class Transactions extends Component {
                 </Col>
                 <Col size={1}>
                 <Switch value={this.state[switchKey]}
-                            onValueChange={(value)=>this.setState({
-                                [switchKey]:value
-                            })}/>
+                            onValueChange={(value)=>this.setLanguage(switchKey)}/>
                 </Col>
             </ListItem>
         });
@@ -87,9 +89,11 @@ class Transactions extends Component {
     changeLanguage = (value) => {
         this.setState({
             languageCode: value
-        })
+        });
+
         I18n.locale = value
-        console.log(I18n.locale)
+        Api.updateSideBar(value)
+
     }
     getLanguagePicker = () => {
         const listItems = languages.map((language, i) =>
@@ -142,7 +146,7 @@ class Transactions extends Component {
                 <Content>
                     <List>
                         <ListItem itemDivider>
-                            <Text>{I18n.t('language', { locale: this.state.languageCode })}</Text>
+                            <Text>{I18n.t('language')}</Text>
                         </ListItem>
                         <ListItem style={Ui.listItem}>
                             <Col>

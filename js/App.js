@@ -31,7 +31,8 @@ const AppNavigator = StackNavigator(
             }
         },
         Drawer: {
-            screen: Drawer
+            screen: Drawer,
+            navigationOptions: { header: null }
         }
 
     },

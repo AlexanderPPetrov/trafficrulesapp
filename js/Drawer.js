@@ -16,11 +16,12 @@ import Transactions from "./screens/transactions/";
 import SendMoney from "./screens/sendmoney/";
 import Settings from "./screens/settings/";
 
+import Api from '../Api';
 
 import SideBar from "./screens/sidebar";
 
 
-const DrawerExample = DrawerNavigator(
+const DrawerNavigation = DrawerNavigator(
     {
         MyAccount: {
             screen: MyAccount,
@@ -44,8 +45,10 @@ const DrawerExample = DrawerNavigator(
         contentOptions: {
             activeTintColor: "#e91e63"
         },
-        contentComponent: props => <SideBar {...props} />
+        contentComponent: props => <SideBar {...props}  ref={navigatorRef => {
+            Api.setSidebar(navigatorRef);
+        }}/>
     }
 );
 
-export default DrawerExample;
+export default DrawerNavigation;
