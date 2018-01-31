@@ -22,6 +22,12 @@ import Tabs from "./tabs";
 
 class Brokerage extends Component {
 
+    componentDidMount = () => {
+        const navigation = this.props.navigation;
+        if(navigation && navigation.state && navigation.state.params){
+            console.log(navigation.state.params.settledBets)
+        }
+    }
     render() {
         return (
             <Container style={Ui.container}>

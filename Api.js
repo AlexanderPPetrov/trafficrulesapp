@@ -214,11 +214,12 @@ let Api = {
         _navigator.forceUpdate()
     },
 
-    navigateTo: (routeName) => {
+    navigateTo: (routeName, params) => {
         _navigator.dispatch(
             NavigationActions.navigate({
                 type: 'Navigation/NAVIGATE',
-                routeName
+                routeName,
+                params
             }),
         );
     }

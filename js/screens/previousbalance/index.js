@@ -41,6 +41,8 @@ class PreviousBalance extends Component {
             minBalance: '',
             maxChange: '',
             minChange: '',
+            minValue: '',
+            maxValue:'',
             change: [],
             loaded: false
 
@@ -94,12 +96,17 @@ class PreviousBalance extends Component {
         const minBalance = this.defineMin(balance);
         const minChange = this.defineMin(change);
 
+        const maxValue = Math.max(maxBalance, maxChange)
+        const minValue = Math.max(minBalance, minChange)
+
         this.setState({
             balance,
             maxBalance,
             minBalance,
             maxChange,
             minChange,
+            maxValue,
+            minValue,
             change
         })
     }
@@ -134,6 +141,8 @@ class PreviousBalance extends Component {
                                       minBalance={this.state.minBalance}
                                       maxChange={this.state.maxChange}
                                       minChange={this.state.minChange}
+                                      maxValue={this.state.maxValue}
+                                      minValue={this.state.minValue}
                                       change={this.state.change} currency={this.props.navigation.state.params._currency}
                                       currentBalance={this.props.navigation.state.params._balance}/>
             </Card>

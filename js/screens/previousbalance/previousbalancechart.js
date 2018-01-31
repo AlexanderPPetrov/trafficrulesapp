@@ -44,7 +44,7 @@ class PreviousBalanceChart extends Component {
         //     selectedDomain: { x: [this.props.balance[0], this.props.balance[this.props.balance.length - 1]] }
         // };
 
-        console.log(this.props.maxBalance, this.props.maxChange)
+        console.log(this.props.maxValue, this.props.maxValue)
     }
 
     componentDidMount = () => {
@@ -67,8 +67,8 @@ class PreviousBalanceChart extends Component {
                 <Text style={Ui.cardHeader}>
                     {I18n.t('currentBalance')} {this.props.currentBalance} {this.props.currency}
                 </Text>
-                <VictoryChart scale={{x: "time", y: "linear"}} height={250} domain={{y: [this.props.minBalance, this.props.maxBalance]}}
-                              // padding={{top: 30, left: 60, bottom: 30, right: 60}}
+                <VictoryChart scale={{x: "time", y: "linear"}} height={300}
+                               padding={{top: 45, left: 60, bottom: 45, right: 60}}
                 >
                     <Defs>
                         <LinearGradient id="gradient1"
@@ -79,7 +79,7 @@ class PreviousBalanceChart extends Component {
                         </LinearGradient>
 
                     </Defs>
-                    <VictoryAxis dependentAxis style={{
+                    <VictoryAxis crossAxis={false} dependentAxis style={{
                         axis: {
                             stroke: ColorScheme.lighter
                         },
@@ -98,7 +98,7 @@ class PreviousBalanceChart extends Component {
                                  tickFormat={(y) => parseFloat(y).toFixed(2)}
                     />
                     <VictoryAxis
-                        offsetY={50}
+                        offsetY={45}
                         tickFormat={(x, i) => this.getDate(x, i)}
                         style={{
                             axis: {
@@ -107,7 +107,7 @@ class PreviousBalanceChart extends Component {
                             tickLabels: {
                                 fontSize: '12',
                                 fontFamily: 'Roboto_light',
-                                padding: 5,
+                                padding: 15,
                                 fill:ColorScheme.dark
                             }
                         }}
@@ -122,8 +122,7 @@ class PreviousBalanceChart extends Component {
                             }
                         }}
                         data={this.props.balance}
-                        y0={() => this.props.minBalance}
-                        y={(data) => data.y / this.props.maxBalance}
+                        y0={() => this.props.minValue}
                     />
 
 
@@ -136,8 +135,7 @@ class PreviousBalanceChart extends Component {
                             }
                         }}
                         data={this.props.change}
-                        // y0={() => this.props.minChange}
-                        y={(data) => data.y / this.props.maxChange}
+                        y0={() => this.props.minValue}
 
                     />
                     <VictoryScatter data={this.props.balance}
@@ -149,7 +147,7 @@ class PreviousBalanceChart extends Component {
                                             strokeWidth: 1
                                         }
                                     }}
-                                    y={(data) => data.y / this.props.maxBalance}
+                                    y0={() => this.props.minValue}
                     />
                     <VictoryScatter data={this.props.change}
                                     size={3}
@@ -160,7 +158,7 @@ class PreviousBalanceChart extends Component {
                                             strokeWidth: 1
                                         }
                                     }}
-                                    y={(data) => data.y / this.props.maxChange}
+                                    y0={() => this.props.minValue}
                     />
 
                 </VictoryChart>

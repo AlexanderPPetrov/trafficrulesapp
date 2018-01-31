@@ -3,6 +3,7 @@ import Expo from "expo";
 import I18n from '../../../i18n/i18n';
 import {View} from "react-native";
 import ColorScheme from "../../common/colorscheme";
+import NotificationsHandler from "../../common/notifications/index";
 
 import {
     Container,
@@ -171,7 +172,7 @@ class Login extends React.Component {
                         <Text>{I18n.t('resetPin')}</Text>
                     </Button>
                 </View>
-                <Text>{I18n.t('enterPin')}</Text>
+                <Text style={{backgroundColor:'transparent'}}>{I18n.t('enterPin')}</Text>
                 <Item style={[styles.inputContainer, styles.inputMargin]}>
                     <Input keyboardType='numeric' placeholderTextColor={ColorScheme.lighter}
                            style={styles.inputField} placeholder="****" value={this.state.pinEntered} maxLength={4}
@@ -211,6 +212,7 @@ class Login extends React.Component {
 
     loginSuccess = (response) => {
 
+        NotificationsHandler.startListen();
         if (this.state.pin) {
             this.props.navigation.navigate("MyAccount")
         } else {

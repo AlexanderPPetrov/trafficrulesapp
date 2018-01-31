@@ -62,7 +62,9 @@ class PaymentMethod extends Component {
             this.setState({
                 paymentMethods: response.paymentMethods
             }, function(){
-                this.props.setPayment(response.paymentMethods[0])
+                if(!this.props.paymentMethod) {
+                    this.props.setPayment(response.paymentMethods[0])
+                }
             })
         }else{
             this.setState({

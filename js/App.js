@@ -15,6 +15,7 @@ import material from '../native-base-theme/variables/material';
 import Loader from "./common/loader/index";
 
 import Api from '../Api';
+import NotificationsHandler from "./common/notifications/index";
 
 const AppNavigator = StackNavigator(
     {
@@ -50,6 +51,7 @@ class AppRoot extends React.Component {
         return (
             <Root>
                 <Loader/>
+                <NotificationsHandler/>
                 <StyleProvider style={getTheme(material)}>
                     <AppNavigator ref={navigatorRef => {
                         Api.setNavigator(navigatorRef);

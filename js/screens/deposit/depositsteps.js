@@ -60,7 +60,6 @@ class WithdrawSteps extends Component {
     }
 
     setPayment = (paymentMethod) => {
-        console.log('#######',paymentMethod)
         this.setState({
             paymentMethod: paymentMethod._key,
             maxAmount: paymentMethod._max_amount,
