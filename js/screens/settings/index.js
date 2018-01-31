@@ -19,14 +19,13 @@ import {
     Switch
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-import {View, FlatList, RefreshControl} from "react-native";
+import {AsyncStorage} from "react-native";
 import Ui from '../../common/ui';
 
 const Item = Picker.Item;
 
 import styles from "./styles";
 import Api from "../../../Api";
-import { NavigationActions } from 'react-navigation'
 
 const languages = [{
     code:'en',
@@ -55,24 +54,53 @@ class Transactions extends Component {
     }
 
     componentDidMount = () => {
-        this.loadLanguage();
+        this.loadSettings();
+    };
+
+    loadSettings = () => {
+        AsyncStorage.multiGet(switches, (err, stores) => {
+            stores.map((result, i, store) => {
+                let key = store[i][0];
+                let value = store[i][1];
+
+                if(value == null || value == 'true'){
+                    value = true;
+                }else{
+                    value = false
+                }
+                this.setState({
+                    [key]:value
+                })
+            });
+        });
+
+        AsyncStorage.getItem('locale', (err, result) => {
+            this.setState({
+                languageCode:result
+            });
+        });
     };
 
     setNotification = (switchKey, value) => {
         this.setState({
             [switchKey]:value
-        })
+        });
+        AsyncStorage.setItem(switchKey, value.toString());
     };
 
-    loadLanguage = () => {
-
+    getSwitchLabelStyle = (switchKey) => {
+        let notificationLabel = [Ui.itemLabel];
+        if(this.state[switchKey] == false){
+            notificationLabel = [Ui.itemLabel, styles.notificationOff]
+        }
+        return notificationLabel
     };
 
     getSwitches = () => {
         const switchList = switches.map((switchKey, i) => {
             return <ListItem key={i} style={Ui.listItem}>
                 <Col size={3}>
-                <Text style={Ui.itemLabel}>{I18n.t(switchKey)}</Text>
+                <Text style={this.getSwitchLabelStyle(switchKey)}>{I18n.t(switchKey)}</Text>
                 </Col>
                 <Col size={1} >
                 <Switch style={{alignSelf:'flex-end'}} value={this.state[switchKey]}
@@ -91,8 +119,10 @@ class Transactions extends Component {
             languageCode: value
         });
 
-        I18n.locale = value
+        I18n.locale = value;
         Api.updateSideBar(value)
+        AsyncStorage.setItem('locale', value);
+
     };
 
     getLanguagePicker = () => {
