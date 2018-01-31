@@ -41,8 +41,22 @@ class Withdraw extends Component {
 
         this.state = {
             currentPage: 0,
-            buttonDisabled: true
+            buttonDisabled: true,
+            openedRequests: 0
         }
+    }
+
+    componentDidMount = () => {
+        Api.get({
+            url:'get-member-pending-withdraw-requests-count',
+            success: this.setOpenedRequests
+        })
+    }
+
+    setOpenedRequests = (response) => {
+        this.setState({
+            openedRequests: response._pending_withdraws
+        })
     }
 
     setButtonState = (value) => {
@@ -102,6 +116,16 @@ class Withdraw extends Component {
         </Button>)
     }
 
+    getOpenedRequests = () => {
+        if(this.state.openedRequests) {
+            return <View style={styles.openedRequestsContainer}>
+                <Text style={styles.openedRequestsLabel}>{I18n.t('openedWithdrawRequests')}</Text>
+                <Text style={styles.openedRequestsCount}>{this.state.openedRequests}</Text>
+            </View>
+        }
+        return null;
+    }
+
     changeHandler = (page) => {
         this.setState({
             currentPage: page
@@ -122,9 +146,9 @@ class Withdraw extends Component {
                         {this.getRightHeader()}
                     </Right>
                 </Header>
-
                 <Content >
                     <Card style={Ui.cardContainer}>
+                        {this.getOpenedRequests()}
                         <View style={{flex:1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={5} labels={labels}></Steps>
 

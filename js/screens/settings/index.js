@@ -131,7 +131,7 @@ class Transactions extends Component {
         );
         return  <Picker
             mode="dropdown"
-            placeholder={I18n.t('language')}
+            placeholder=""
             iosHeader=" "
             selectedValue={this.state.languageCode}
             onValueChange={(value) =>

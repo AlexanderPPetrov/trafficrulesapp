@@ -165,6 +165,7 @@ export default {
         fontSize: 14
     },
     cardContainer:{
+        position:'relative',
         padding:30,
         paddingTop:15,
         paddingBottom:30,

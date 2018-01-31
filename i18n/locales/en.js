@@ -37,6 +37,7 @@ export default {
     deposit: 'Deposit',
     depositAmount: 'Deposit Amount',
     withdraw: 'Withdraw',
+    openedWithdrawRequests: 'Opened Withdraw Requests',
     method:'Method',
     amount:'Amount',
     fee:'Fee',

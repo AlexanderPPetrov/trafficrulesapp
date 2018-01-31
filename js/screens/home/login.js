@@ -44,9 +44,9 @@ class Login extends React.Component {
         // //Workaround for bug in React Native 0.50
         // setTimeout(() => {
 
-            this.readSecureItem('pin')
             this.readSecureItem('username')
             this.readSecureItem('password')
+            this.readSecureItem('pin')
 
 
         // }, 50)
@@ -60,6 +60,11 @@ class Login extends React.Component {
                 this.setState({
                     [key]:value
                 })
+                if(key === 'pin'){
+                    this.setState({
+                        pinLoaded:true
+                    })
+                }
             })
             .catch((error) => {
                 this.errorMessage(error)
@@ -153,6 +158,10 @@ class Login extends React.Component {
     };
 
     getLoginForm = () => {
+
+        if(!this.state.pinLoaded){
+            return null;
+        }
 
         if (this.state.pin) {
             return <Form>

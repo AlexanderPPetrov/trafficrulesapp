@@ -28,13 +28,23 @@ export default {
         flex:1,
         justifyContent: 'space-between'
     },
-    form: {
-        // borderBottomWidth: 1,
-        // borderColor: ColorScheme.neutralDark,
-        // minHeight:50,
-        // padding:0
+    openedRequestsContainer: {
+        position:'absolute',
+        flex:1,
+        flexDirection:'row',
+        left:0,
+        right:0,
+        height:30,
+        backgroundColor:'rgba(0,0,0,0.5)'
     },
 
+    openedRequestsLabel: {
+        color:ColorScheme.neutralLight
+    },
+
+    openedRequestsCount: {
+        color:'#ff9900'
+    },
 
     formLabel:{
         color: ColorScheme.light,
