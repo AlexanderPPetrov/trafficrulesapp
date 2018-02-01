@@ -162,7 +162,7 @@ export default {
   toolbarInverseBg: "#222",
   toolbarTextColor: "#fff",
   toolbarDefaultBorder: "#232323",
-  iosStatusbar: "light-content",
+  iosStatusbar: "dark-content",
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hex();
   },

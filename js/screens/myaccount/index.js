@@ -65,8 +65,8 @@ class MyAccount extends Component {
 
     confirmExit = () => {
         Alert.alert(
-            I18n.t('exitTitle'),
-            I18n.t('exitQuestion'),
+            I18n.t('confirm'),
+            I18n.t('confirmExit'),
             [
                 {text:I18n.t('cancel')},
                 {text:I18n.t('ok'), onPress:() => BackHandler.exitApp()}

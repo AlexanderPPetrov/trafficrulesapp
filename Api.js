@@ -7,11 +7,11 @@ import {Alert} from 'react-native';
 import {ActivityIndicator} from 'react-native'
 import { NavigationActions } from 'react-navigation';
 import type { NavigationParams, NavigationRoute } from 'react-navigation';
+import Controller from './Controller'
 
 let _navigator;
 let _sidebar;
 
-let auth = '';
 
 import {Toast} from "native-base";
 import Loader from "./js/common/loader/index";
@@ -20,6 +20,7 @@ import I18n from './i18n/i18n';
 
 let Api = {
 
+    auth:'',
     post: (opts = {}) => {
         Api.executeRequest(opts, 'POST')
     },
@@ -69,7 +70,7 @@ let Api = {
 
                     if (opts.success && responseJson._status == 'success') {
                         if (opts.url === 'login') {
-                            auth = responseJson._payload._userLoginHash;
+                            Api.auth = responseJson._payload._userLoginHash;
                         }
 
                         opts.success(responseJson._payload)
@@ -77,7 +78,7 @@ let Api = {
                     } else {
 
                         if(responseJson._payload._message === 'user_not_authorized'){
-                            Api.navigateTo('Home')
+                            Controller.navigateTo('Home')
                             return;
                         }
 
@@ -175,7 +176,7 @@ let Api = {
                 'Content-Type': 'multipart/form-data',
                 'App-Key': appKey,
                 'Accept-Language': 'en-US,en;q=0.5',
-                'Authorization': auth
+                'Authorization': Api.auth
             },
             timeout: 20 * 1000
         };
@@ -201,18 +202,7 @@ let Api = {
         return requestData
     },
 
-    setNavigator: (navigator) => {
-        _navigator = navigator;
-    },
 
-    setSidebar: (sidebar) => {
-        _sidebar = sidebar;
-    },
-
-    updateSideBar: (language) => {
-        _sidebar.changeLanguage(language)
-        _navigator.forceUpdate()
-    },
 
     navigateTo: (routeName, params) => {
         _navigator.dispatch(

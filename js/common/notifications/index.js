@@ -2,8 +2,11 @@ import React, {Component} from "react";
 import {View, ActivityIndicator, Text} from "react-native";
 import { Constants, Permissions, Notifications } from 'expo';
 import Api from '../../../Api';
+import Controller from '../../../Controller';
 
 import ColorScheme from "../colorscheme";
+
+const notificationScreens = ['Transactions', 'Brokerage', 'WeeklyStatus'];
 
 
 let notificationsInstance = null;
@@ -22,17 +25,26 @@ class NotificationsHandler extends Component {
 
     static startListen = () => {
         notificationsInstance.registerForPushNotificationsAsync()
-    }
+    };
 
     componentWillMount() {
         Notifications.addListener((receivedNotification) => {
 
             if(receivedNotification.origin == 'selected'){
+
+                // Check if application was closed
+                if(!Api.auth){
+                    //Save notification data for further navigate
+                    Controller.redirectScreen = notificationScreens[receivedNotification.data.type];
+                    Controller.notificationData = receivedNotification.data;
+                    return;
+                }
+
                 if(receivedNotification.data.type === 0){
-                    Api.navigateTo('Transactions')
+                    Controller.navigateTo('Transactions')
                 }
                 if(receivedNotification.data.type === 1){
-                    Api.navigateTo('Brokerage', {settledBets: true})
+                    Controller.navigateTo('Brokerage', {settledBets: true})
                 }
             }
             this.setState({
@@ -41,7 +53,6 @@ class NotificationsHandler extends Component {
             });
         });
     }
-
 
     registerForPushNotificationsAsync = async () => {
         const { status: existingStatus } = await Permissions.getAsync(
@@ -66,6 +77,7 @@ class NotificationsHandler extends Component {
         // Get the token that uniquely identifies this device
         let token = await Notifications.getExpoPushTokenAsync();
         console.log(token)
+
         // POST the token to your backend server from where you can retrieve it to send push notifications.
         // return fetch(PUSH_ENDPOINT, {
         //     method: 'POST',

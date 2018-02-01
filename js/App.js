@@ -7,26 +7,20 @@ import {StyleProvider, Root, Text} from "native-base";
 import {StackNavigator} from "react-navigation";
 
 import Drawer from "./Drawer";
-import Home from "./screens/home/";
-import SetPin from "./screens/setpin/";
+import Landing from "./screens/landing/";
 
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 import Loader from "./common/loader/index";
+import PinModal from "./common/pinmodal/pinmodal";
 
-import Api from '../Api';
+import Controller from '../Controller';
 import NotificationsHandler from "./common/notifications/index";
 
 const AppNavigator = StackNavigator(
     {
-        Home: {
-            screen: Home,
-            navigationOptions: {
-                gesturesEnabled: false,
-            }
-        },
-        SetPin: {
-            screen: SetPin,
+        Landing: {
+            screen: Landing,
             navigationOptions: {
                 gesturesEnabled: false,
             }
@@ -38,7 +32,7 @@ const AppNavigator = StackNavigator(
 
     },
     {
-        initialRouteName: "Home",
+        initialRouteName: "Landing",
         headerMode: "none",
     }
 );
@@ -54,9 +48,12 @@ class AppRoot extends React.Component {
                 <NotificationsHandler/>
                 <StyleProvider style={getTheme(material)}>
                     <AppNavigator ref={navigatorRef => {
-                        Api.setNavigator(navigatorRef);
+                        Controller.setNavigator(navigatorRef);
                     }}/>
                 </StyleProvider>
+                <PinModal ref={pinModal => {
+                    Controller.setPinModal(pinModal);
+                }}/>
             </Root>
         );
     }

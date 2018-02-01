@@ -3,7 +3,6 @@
 import React from "react";
 import {DrawerNavigator} from "react-navigation";
 
-import Home from "./screens/home/";
 import MyAccount from "./screens/myaccount/";
 import Accounts from "./screens/accounts/";
 import PreviousBalance from "./screens/previousbalance/";
@@ -15,8 +14,9 @@ import FundsTransfer from "./screens/fundstransfer/";
 import Transactions from "./screens/transactions/";
 import SendMoney from "./screens/sendmoney/";
 import Settings from "./screens/settings/";
+import WeeklyStatus from "./screens/weeklystatus/";
 
-import Api from '../Api';
+import Controller from '../Controller';
 
 import SideBar from "./screens/sidebar";
 
@@ -39,6 +39,7 @@ const DrawerNavigation = DrawerNavigator(
         Transactions: {screen: Transactions},
         SendMoney: {screen: SendMoney},
         Settings: {screen: Settings},
+        WeeklyStatus: {screen: WeeklyStatus},
     },
     {
         initialRouteName: "MyAccount",
@@ -46,7 +47,7 @@ const DrawerNavigation = DrawerNavigator(
             activeTintColor: "#e91e63"
         },
         contentComponent: props => <SideBar {...props}  ref={navigatorRef => {
-            Api.setSidebar(navigatorRef);
+            Controller.setSidebar(navigatorRef);
         }}/>
     }
 );

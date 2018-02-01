@@ -25,7 +25,7 @@ import Ui from '../../common/ui';
 const Item = Picker.Item;
 
 import styles from "./styles";
-import Api from "../../../Api";
+import Controller from "../../../Controller";
 
 const languages = [{
     code:'en',
@@ -120,7 +120,7 @@ class Transactions extends Component {
         });
 
         I18n.locale = value;
-        Api.updateSideBar(value)
+        Controller.updateSideBar(value)
         AsyncStorage.setItem('locale', value);
 
     };
