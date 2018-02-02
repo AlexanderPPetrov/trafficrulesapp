@@ -45,7 +45,6 @@ class AppRoot extends React.Component {
         return (
             <Root>
                 <Loader/>
-                <NotificationsHandler/>
                 <StyleProvider style={getTheme(material)}>
                     <AppNavigator ref={navigatorRef => {
                         Controller.setNavigator(navigatorRef);
@@ -54,6 +53,7 @@ class AppRoot extends React.Component {
                 <PinModal ref={pinModal => {
                     Controller.setPinModal(pinModal);
                 }}/>
+                <NotificationsHandler/>
             </Root>
         );
     }
