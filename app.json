@@ -7,7 +7,6 @@
 //      "backgroundImage": "./img/splashscreen.png",
       "hideExponentText": true,
       "backgroundColor": "#344756",
-      "resizeMode": "cover",
       "icon": "./img/logo.png"
     },
     "orientation": "portrait",

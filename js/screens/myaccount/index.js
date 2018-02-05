@@ -25,6 +25,8 @@ import {AsyncStorage, BackHandler, Alert} from "react-native"
 import Tabs from "./tabs";
 import Api from "../../../Api";
 import Ui from '../../common/ui';
+import NotificationsButton from '../../common/notifications/notificationsbutton';
+import styles from "./styles";
 
 
 class MyAccount extends Component {
@@ -36,6 +38,7 @@ class MyAccount extends Component {
             _payload: {
                 balances: []
             },
+            notificationsCounter:234,
             pieChartData: [],
             refreshing: false,
             loaded: false
@@ -116,7 +119,9 @@ class MyAccount extends Component {
                     <Body>
                     <Title>{I18n.t('myAccount')}</Title>
                     </Body>
-                    <Right/>
+                    <Right>
+                        <NotificationsButton/>
+                    </Right>
 
                 </Header>
 

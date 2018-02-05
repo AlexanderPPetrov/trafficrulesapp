@@ -9,6 +9,7 @@ let Controller = {
 
     redirectScreen: '',
     notificationData: {},
+    unreadNotifications: [],
 
     setPinModal: (pinModal) => {
         _pinModal = pinModal;

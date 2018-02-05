@@ -36,6 +36,6 @@ export default class App1 extends React.Component {
         if (!this.state.isReady) {
             return <Expo.AppLoading/>;
         }
-        return <App/>;
+        return <App exp={this.props.exp}/>;
     }
 }

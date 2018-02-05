@@ -9,10 +9,6 @@ import { NavigationActions } from 'react-navigation';
 import type { NavigationParams, NavigationRoute } from 'react-navigation';
 import Controller from './Controller'
 
-let _navigator;
-let _sidebar;
-
-
 import {Toast} from "native-base";
 import Loader from "./js/common/loader/index";
 import I18n from './i18n/i18n';
@@ -78,6 +74,7 @@ let Api = {
                     } else {
 
                         if(responseJson._payload._message === 'user_not_authorized'){
+                            console.log('navigate to home')
                             Controller.navigateTo('Home')
                             return;
                         }
@@ -200,19 +197,8 @@ let Api = {
         }
 
         return requestData
-    },
-
-
-
-    navigateTo: (routeName, params) => {
-        _navigator.dispatch(
-            NavigationActions.navigate({
-                type: 'Navigation/NAVIGATE',
-                routeName,
-                params
-            }),
-        );
     }
+
 }
 
 export default Api;

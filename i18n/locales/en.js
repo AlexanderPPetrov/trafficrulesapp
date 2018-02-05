@@ -103,6 +103,7 @@ export default {
     settings: 'Settings',
     language: 'Language',
     notifications: 'Notifications',
+    clearAll: 'Clear all',
     notificationsWithdrawDeposit: 'Withdraw & Deposit',
     notificationsFundsTransfer: 'Funds Transfer',
     notificationsWeeklyStatus: 'Weekly Status',

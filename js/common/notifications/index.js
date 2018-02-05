@@ -5,6 +5,7 @@ import Api from '../../../Api';
 import Controller from '../../../Controller';
 import styles from "./styles";
 import Notification from "./notification";
+import NotificationsButton from "./notificationsbutton";
 import GestureView from './GestureView';
 import * as Animatable from 'react-native-animatable';
 
@@ -27,31 +28,12 @@ class NotificationsHandler extends Component {
         super(props);
         this.state = {
             renderNotificationsContainer: false,
-            notifications: [
-                {
-                    remote: true,
-                    origin: "received",
-                    data: {type: 0, id:0}
-                },
-                {
-                    remote: true,
-                    origin: "received",
-                    data: {type: 0,  id:1}
-                },
-                {
-                    remote: true,
-                    origin: "received",
-                    data: {type: 0,  id:2}
-                },
-                {
-                    remote: true,
-                    origin: "received",
-                    data: {type: 0,  id:3}
-                }],
+            notifications: [],
             receivedNotification: null,
             lastNotificationId: null,
         };
         notificationsInstance = this;
+
     }
 
     static startListen = () => {
@@ -83,11 +65,15 @@ class NotificationsHandler extends Component {
             }
 
             this.state.notifications.push(receivedNotification);
+            NotificationsButton.addNotification();
+
             this.setState({
                 receivedNotification,
                 lastNotificationId: receivedNotification.notificationId,
                 notifications: this.state.notifications
             });
+
+            console.log(receivedNotification.notificationId)
         });
     }
 
@@ -148,28 +134,52 @@ class NotificationsHandler extends Component {
         });
     };
 
+    dismissNotification = (fadeOutEffect, notificationId, delay = 300, callback) => {
+        if(!this.refs['notification' + notificationId]) return;
+        this.refs['notification' + notificationId][fadeOutEffect](delay)
+        setTimeout(() => {
+
+            let remainingNotifications = this.state.notifications.filter((notification) => {
+                if (notification.notificationId !== notificationId) return notification;
+            });
+
+            this.setState({
+                notifications: remainingNotifications,
+            }, () => {
+                if(callback) callback()
+            });
+        }, delay + 150);
+    };
+
+    handlePressedNotification = (notificationId) => {
+        this.dismissNotification('fadeOut', notificationId, 100, () => {
+            console.log('navigate to');
+        })
+    };
+
 
     getNotification = (notification, i) => {
 
-        return <Animatable.View key={counter} ref={"notification" + i} style={[styles.container,this.getNotificationStyle(i)]} >
+        // Auto dismiss on 5 seconds
+        setTimeout(() => {
+            this.dismissNotification('fadeOut', notification.notificationId);
+            if(Controller.unreadNotifications){
+                Controller.unreadNotifications.push(notification);
+            }
+        }, 5000);
+
+        const notificationId = notification.notificationId;
+        return <Animatable.View key={notificationId} ref={"notification" + notificationId} style={[styles.container,this.getNotificationStyle(i)]} >
             <GestureView style={{alignSelf:'stretch'}}
-                content={ <Notification title={i} message={counter} />}
-                onSwipeRight={(distance, angle) => console.log('asd')}
-                onSwipeLeft={(distance, angle) => {
-                    this.refs['notification' + i].fadeOutLeft(150)
-                    setTimeout(() => {
-                        this.state.notifications.splice(i,1);
-                        this.setState({
-                            notifications: this.state.notifications,
-                        });
-                   }, 300);
-                }}
+                content={ <Notification title={notificationId} message={counter} onPress={() => this.handlePressedNotification(notificationId)} />}
+                onSwipeRight={(distance, angle) => this.dismissNotification('fadeOutRight', notificationId)}
+                onSwipeLeft={(distance, angle) => this.dismissNotification('fadeOutLeft', notificationId)}
                 onSwipeUp={(distance, angle) => console.log('asd')}
                 onSwipeDown={(distance, angle) => console.log('asd')}
                 onUnhanledSwipe={(distance, angle) => console.log('asd')} />
 
         </Animatable.View>
-    }
+    };
 
     getNotificationStyle(i) {
         let offsetTop = Platform.OS === "ios" ? 64 : 56;

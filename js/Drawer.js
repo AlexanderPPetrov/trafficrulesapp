@@ -4,6 +4,7 @@ import React from "react";
 import {DrawerNavigator} from "react-navigation";
 
 import MyAccount from "./screens/myaccount/";
+import Notifications from "./screens/notifications/";
 import Accounts from "./screens/accounts/";
 import PreviousBalance from "./screens/previousbalance/";
 import Brokerage from "./screens/brokerage/";
@@ -30,6 +31,7 @@ const DrawerNavigation = DrawerNavigator(
             }
 
         },
+        Notifications: {screen: Notifications},
         Accounts: {screen: Accounts},
         PreviousBalance: {screen: PreviousBalance},
         Brokerage: {screen: Brokerage},
@@ -48,7 +50,7 @@ const DrawerNavigation = DrawerNavigator(
         },
         contentComponent: props => <SideBar {...props}  ref={navigatorRef => {
             Controller.setSidebar(navigatorRef);
-        }}/>
+        }}></SideBar>
     }
 );
 

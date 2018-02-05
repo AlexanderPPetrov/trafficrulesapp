@@ -41,7 +41,7 @@ class PieChartBalance extends Component {
                 <Text style={Ui.cardHeader}>
                     {I18n.t('distributionIn')} {this.state.currency}
                 </Text>
-                <View style={{paddingTop:15}}>
+                <View style={{paddingTop:15}} pointerEvents="none">
                     <VictoryPie
                         style={{
                             data: {

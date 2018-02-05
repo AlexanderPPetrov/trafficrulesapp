@@ -15,7 +15,7 @@ import Loader from "./common/loader/index";
 import PinModal from "./common/pinmodal/pinmodal";
 
 import Controller from '../Controller';
-import NotificationsHandler from "./common/notifications/index";
+import Notifications from "./common/notifications/index";
 
 const AppNavigator = StackNavigator(
     {
@@ -42,6 +42,7 @@ class AppRoot extends React.Component {
         super(props);
     }
     render() {
+        Controller.unreadNotifications = this.props.exp.unreadNotifications;
         return (
             <Root>
                 <Loader/>
@@ -53,7 +54,7 @@ class AppRoot extends React.Component {
                 <PinModal ref={pinModal => {
                     Controller.setPinModal(pinModal);
                 }}/>
-                <NotificationsHandler/>
+                <Notifications/>
             </Root>
         );
     }
