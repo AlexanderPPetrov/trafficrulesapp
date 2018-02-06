@@ -19,6 +19,7 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, FlatList, RefreshControl} from "react-native";
 import Ui from '../../common/ui';
+import Controller from '../../../Controller';
 
 import DatePicker from 'react-native-datepicker'
 
@@ -270,7 +271,7 @@ class Transactions extends Component {
                     <Left>
                         <Button
                             transparent
-                            onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                            onPress={() => Controller.navigateTo("DrawerOpen")}
                         >
                             <Icon name="ios-menu"/>
                         </Button>

@@ -20,6 +20,7 @@ import {
     Text,
     Toast
 } from "native-base";
+import Controller from '../../../Controller';
 
 import styles from "./styles";
 
@@ -55,10 +56,10 @@ class Pin extends React.Component {
     setPin = () => {
 
         Expo.SecureStore.setItemAsync('pin', this.state.pin)
-            .then(() => this.props.navigation.navigate("MyAccount"))
+            .then(() => Controller.navigateTo("MyAccount"))
             .catch((error) => {
                 console.log(error, 'pin not saved');
-                this.props.navigation.navigate("MyAccount")
+                Controller.navigateTo("MyAccount")
             })
 
     }

@@ -9,7 +9,9 @@ let Controller = {
 
     redirectScreen: '',
     notificationData: {},
+    currentRoute:'',
     unreadNotifications: [],
+    unseenNotifications:0,
 
     setPinModal: (pinModal) => {
         _pinModal = pinModal;
@@ -37,6 +39,7 @@ let Controller = {
     },
 
     navigateTo: (routeName, params) => {
+        Controller.currentRoute = routeName;
         _navigator.dispatch(
             NavigationActions.navigate({
                 type: 'Navigation/NAVIGATE',

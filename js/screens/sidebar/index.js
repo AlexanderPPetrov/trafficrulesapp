@@ -17,6 +17,7 @@ import {
     getTheme,
     variables,
 } from "native-base";
+import Controller from '../../../Controller';
 
 import styles from "./style";
 import I18n from '../../../i18n/i18n';
@@ -112,7 +113,7 @@ class SideBar extends Component {
     getMenuItems = () => {
 
         const menuItems = menuData.map((item, i) => {
-            return <ListItem key={i} button noBorder onPress={() => this.props.navigation.navigate(item.route)}>
+            return <ListItem key={i} button noBorder onPress={() => Controller.navigateTo(item.route)}>
                 <Left style={{paddingLeft: 10}}>
                     <Icon active name={item.icon} style={this.iconStyle(item.icon)}/>
                     <Text style={styles.text}>

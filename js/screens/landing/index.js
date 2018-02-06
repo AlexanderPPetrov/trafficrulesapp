@@ -146,7 +146,7 @@ class Landing extends Component {
             if(Controller.redirectScreen){
                 Controller.navigateTo(Controller.redirectScreen, Controller.notificationData)
             }else{
-                this.props.navigation.navigate("MyAccount")
+                Controller.navigateTo("MyAccount")
             }
         } else {
             Expo.SecureStore.setItemAsync('username', this.state.username)

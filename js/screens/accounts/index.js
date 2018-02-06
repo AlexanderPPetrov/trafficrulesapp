@@ -21,6 +21,7 @@ import SportAccount from "./accountslist";
 import styles from "./styles";
 import Api from "../../../Api";
 import Ui from '../../common/ui';
+import Controller from '../../../Controller';
 
 
 class Accounts extends Component {
@@ -72,7 +73,7 @@ class Accounts extends Component {
                     <Left>
                         <Button
                             transparent
-                            onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                            onPress={() => Controller.navigateTo("DrawerOpen")}
                         >
                             <Icon name="ios-menu"/>
                         </Button>

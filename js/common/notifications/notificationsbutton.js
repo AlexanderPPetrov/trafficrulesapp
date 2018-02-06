@@ -36,58 +36,51 @@ class NotificationsButton extends Component {
     constructor(props) {
         super(props);
 
-        let unreadNotificationsCount = 0
-        if(Controller.unreadNotifications){
-            unreadNotificationsCount = Controller.unreadNotifications.length
-        }
         this.state = {
-            unreadNotificationsCount
+            unseenNotifications:Controller.unseenNotifications
         };
 
         NotificationsButtonInstance = this;
     }
 
-    static addNotification = () => {
+    static addUnseenNotification = () => {
         if(!NotificationsButtonInstance) return;
-        NotificationsButtonInstance.addNotification()
+        NotificationsButtonInstance.addUnseenNotification()
     };
 
     setNotifications = (count) => {
         this.setState({
-            unreadNotifications:count
+            unseenNotifications:count
         })
     };
 
-    addNotification = () => {
-        const unreadNotifications = this.state.unreadNotificationsCount + 1;
+    addUnseenNotification = () => {
+        const unseenNotifications = this.state.unseenNotifications + 1;
         this.setState({
-            unreadNotificationsCount:unreadNotifications
+            unseenNotifications
         })
     };
 
-    static clearNotifications = () => {
+    static clearUnseenNotifications = () => {
         if(!NotificationsButtonInstance) return;
+        Controller.unseenNotifications = 0;
         NotificationsButtonInstance.setState({
-            unreadNotificationsCount:0
+            unseenNotifications:0
         })
     };
 
     getNotificationButton = () => {
-        let pointerEvents = 'none';
-        if(this.state.unreadNotificationsCount){
-            pointerEvents = 'auto';
-        }
-        return <Button transparent style={styles.notificationButton} pointerEvents={pointerEvents} onPress={() => Controller.navigateTo('Notifications')}>
+        return <Button transparent style={styles.notificationButton} onPress={() => Controller.navigateTo('Notifications')}>
             <Ionicons name="md-notifications-outline" style={[styles.toggleNotification]}/>
             {this.getNotificationCount()}
         </Button>
     }
 
     getNotificationCount = () => {
-        if(this.state.unreadNotificationsCount){
-            return <Text style={styles.notificationsBadge}>{this.state.unreadNotificationsCount}</Text>
+        if(this.state.unseenNotifications){
+            return <Text style={styles.notificationsBadge}>{this.state.unseenNotifications}</Text>
         }
-        return <Text style={[styles.notificationsBadge, styles.notificationsBadgeInactive]}>{this.state.unreadNotificationsCount}</Text>
+        return <Text style={[styles.notificationsBadge, styles.notificationsBadgeInactive]}>{this.state.unseenNotifications}</Text>
     };
 
     render() {

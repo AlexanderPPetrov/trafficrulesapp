@@ -27,6 +27,7 @@ import Api from "../../../Api";
 import Ui from '../../common/ui';
 import NotificationsButton from '../../common/notifications/notificationsbutton';
 import styles from "./styles";
+import Controller from '../../../Controller';
 
 
 class MyAccount extends Component {
@@ -111,7 +112,7 @@ class MyAccount extends Component {
                     <Left>
                         <Button
                             transparent
-                            onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                            onPress={() => Controller.navigateTo("DrawerOpen")}
                         >
                             <Icon name="ios-menu"/>
                         </Button>

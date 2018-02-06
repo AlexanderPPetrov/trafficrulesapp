@@ -29,6 +29,7 @@ import {MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
 import Ui from '../../common/ui';
 
 import styles from "./styles";
+import Controller from '../../../Controller';
 
 class Deposit extends Component {
 
@@ -98,7 +99,7 @@ class Deposit extends Component {
             return null;
         }
         return (
-            <Button transparent small onPress={() => this.props.navigation.navigate("MyAccount")}>
+            <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
                 <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
             </Button>
         )
@@ -147,7 +148,7 @@ class Deposit extends Component {
     getButton = () => {
         if (this.state.depositCompleted == 'success') {
             return <Button block style={styles.continueButton}
-                           onPress={() => this.props.navigation.navigate("FundsTransfer", {
+                           onPress={() => Controller.navigateTo("FundsTransfer", {
                                paymentData: this.state.paymentData,
                            })}>
                 <Text style={styles.continueButtonLabel}>{I18n.t('fundsTransfer')}</Text>
@@ -177,7 +178,7 @@ class Deposit extends Component {
     getBackButton = () => {
 
         if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps || this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
-            return ( <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+            return ( <Button transparent onPress={() => Controller.navigateTo("DrawerOpen")}>
                     <Icon name="ios-menu"/>
                 </Button>
             )

@@ -9,6 +9,7 @@ import Ui from '../../common/ui';
 
 const accountTypes = ['sport']
 const listOrder = ['_site', '_username', '_currency', '_credit', '_balance', '_last_status']
+import Controller from '../../../Controller';
 
 class AccountsList extends Component {
 
@@ -43,7 +44,7 @@ class AccountsList extends Component {
                         </Col>
                         <Col style={{justifyContent: 'flex-end', flexDirection: 'row'}}>
                             <Button style={styles.headerButton}
-                                    onPress={() => this.props.navigation.navigate("PreviousBalance", {
+                                    onPress={() => Controller.navigateTo("PreviousBalance", {
                                         _id: account._id,
                                         _username: account._username,
                                         _currency: account._currency,

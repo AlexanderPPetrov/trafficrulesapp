@@ -23,6 +23,7 @@ import {
     Right,
     Body,
 } from "native-base";
+import Controller from '../../../Controller';
 
 import {View, ScrollView} from 'react-native';
 
@@ -86,7 +87,7 @@ class Withdraw extends Component {
             return null;
         }
         return (
-            <Button transparent small onPress={() => this.props.navigation.navigate("MyAccount")}>
+            <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
                 <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
             </Button>
         )
@@ -106,7 +107,7 @@ class Withdraw extends Component {
     getBackButton = () => {
 
         if (this.state.currentPage == 0 || this.state.currentPage == 5) {
-            return ( <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+            return ( <Button transparent onPress={() => Controller.navigateTo("DrawerOpen")}>
                     <Icon name="ios-menu"/>
                 </Button>
             )

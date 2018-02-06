@@ -25,7 +25,7 @@ import Expo from "expo";
 import {ScrollView} from "react-native"
 import Api from "../../../Api";
 import Ui from '../../common/ui';
-import Notification from '../../common/notifications/notification';
+import NotificationMessage from '../../common/notifications/notification';
 import NotificationsButton from '../../common/notifications/notificationsbutton';
 import styles from "./styles";
 import Controller from '../../../Controller';
@@ -37,24 +37,36 @@ class Notifications extends Component {
         super(props);
 
         this.state = {
-            notifications:Controller.unreadNotifications
+            notifications:[]
         }
     }
 
     componentDidMount = () => {
-        NotificationsButton.clearNotifications();
+        NotificationsButton.clearUnseenNotifications();
+        this.setState({
+            notifications:Controller.unreadNotifications
+        })
     };
 
     handlePressedNotification = () => {
         console.log('lalala')
     }
 
+    getClearButton = () => {
+        if(this.state.notifications.length === 0){
+            return null;
+        }
+        return <Button onPress={()=> this.clearAllNotifications()}>
+            <Text>{I18n.t('clearAll')}</Text>
+        </Button>
+    }
+
     getNotifications = () => {
         if(this.state.notifications.length === 0){
-            return null
+            return <Text>{I18n.t('noNotifications')}</Text>
         }
         const notificationList = this.state.notifications.map((notification, i) => {
-            return <Notification key={i} title={i} message={i} onPress={() => this.handlePressedNotification(notification, i)} />
+            return <NotificationMessage key={i} title={i} message={i} onPress={() => this.handlePressedNotification(notification, i)} />
         });
 
         return notificationList
@@ -71,7 +83,7 @@ class Notifications extends Component {
                     <Left>
                         <Button
                             transparent
-                            onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                            onPress={() => Controller.navigateTo("DrawerOpen")}
                         >
                             <Icon name="ios-menu"/>
                         </Button>
@@ -84,9 +96,7 @@ class Notifications extends Component {
                     </Right>
 
                 </Header>
-                <Button onPress={()=> this.clearAllNotifications()}>
-                    <Text>{I18n.t('clearAll')}</Text>
-                </Button>
+                {this.getClearButton()}
                 <ScrollView>
                     {this.getNotifications()}
                 </ScrollView>

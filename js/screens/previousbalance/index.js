@@ -19,6 +19,7 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, ScrollView, RefreshControl} from 'react-native';
 import PreviousBalanceChart from './previousbalancechart'
+import Controller from '../../../Controller';
 
 import Ui from '../../common/ui';
 
@@ -166,7 +167,7 @@ class PreviousBalance extends Component {
             <Container style={Ui.container}>
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => this.props.navigation.navigate('Accounts')}>
+                        <Button transparent onPress={() => Controller.navigateTo('Accounts')}>
                             <Icon name="arrow-back"/>
                         </Button>
                     </Left>

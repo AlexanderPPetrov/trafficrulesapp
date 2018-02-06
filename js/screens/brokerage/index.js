@@ -16,6 +16,7 @@ import {
     Body
 } from "native-base";
 import Ui from '../../common/ui';
+import Controller from '../../../Controller';
 
 import styles from "./styles";
 import Tabs from "./tabs";
@@ -35,7 +36,7 @@ class Brokerage extends Component {
                     <Left>
                         <Button
                             transparent
-                            onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                            onPress={() => Controller.navigateTo("DrawerOpen")}
                         >
                             <Icon name="ios-menu"/>
                         </Button>

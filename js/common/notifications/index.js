@@ -4,7 +4,7 @@ import {Constants, Permissions, Notifications} from 'expo';
 import Api from '../../../Api';
 import Controller from '../../../Controller';
 import styles from "./styles";
-import Notification from "./notification";
+import NotificationMessage from "./notification";
 import NotificationsButton from "./notificationsbutton";
 import GestureView from './GestureView';
 import * as Animatable from 'react-native-animatable';
@@ -17,8 +17,6 @@ const config = {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 80
 };
-
-let counter = 0;
 
 let notificationsInstance = null;
 
@@ -65,7 +63,7 @@ class NotificationsHandler extends Component {
             }
 
             this.state.notifications.push(receivedNotification);
-            NotificationsButton.addNotification();
+            NotificationsButton.addUnseenNotification();
 
             this.setState({
                 receivedNotification,
@@ -159,7 +157,6 @@ class NotificationsHandler extends Component {
 
 
     getNotification = (notification, i) => {
-
         // Auto dismiss on 5 seconds
         setTimeout(() => {
             this.dismissNotification('fadeOut', notification.notificationId);
@@ -171,7 +168,7 @@ class NotificationsHandler extends Component {
         const notificationId = notification.notificationId;
         return <Animatable.View key={notificationId} ref={"notification" + notificationId} style={[styles.container,this.getNotificationStyle(i)]} >
             <GestureView style={{alignSelf:'stretch'}}
-                content={ <Notification title={notificationId} message={counter} onPress={() => this.handlePressedNotification(notificationId)} />}
+                content={ <NotificationMessage title={notificationId} message={i} onPress={() => this.handlePressedNotification(notificationId)} />}
                 onSwipeRight={(distance, angle) => this.dismissNotification('fadeOutRight', notificationId)}
                 onSwipeLeft={(distance, angle) => this.dismissNotification('fadeOutLeft', notificationId)}
                 onSwipeUp={(distance, angle) => console.log('asd')}
@@ -193,7 +190,6 @@ class NotificationsHandler extends Component {
             return null
         }
         const notificationList = this.state.notifications.map((notification, i) => {
-            counter++
             return this.getNotification(notification, i);
         });
 

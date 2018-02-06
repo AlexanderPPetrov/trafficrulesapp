@@ -104,6 +104,7 @@ export default {
     language: 'Language',
     notifications: 'Notifications',
     clearAll: 'Clear all',
+    noNotifications: 'There are no notifications',
     notificationsWithdrawDeposit: 'Withdraw & Deposit',
     notificationsFundsTransfer: 'Funds Transfer',
     notificationsWeeklyStatus: 'Weekly Status',
