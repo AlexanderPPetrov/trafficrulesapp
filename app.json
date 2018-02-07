@@ -19,8 +19,8 @@
     "privacy": "unlisted",
     "androidStatusBarColor": "#222c34",
     "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#222c34"
+      "barStyle": "dark-content",
+      "backgroundColor": "#e0e0e0"
     }
   }
 }

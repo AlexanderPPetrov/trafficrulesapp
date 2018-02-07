@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -20,6 +19,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, FlatList, RefreshControl} from "react-native";
 import Ui from '../../common/ui';
 import Controller from '../../../Controller';
+import Header from '../../common/header/header';
 
 import DatePicker from 'react-native-datepicker'
 
@@ -267,21 +267,9 @@ class Transactions extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => Controller.navigateTo("DrawerOpen")}
-                        >
-                            <Icon name="ios-menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('transactions')}</Title>
-                    </Body>
-                    <Right/>
-
-                </Header>
+                <Header
+                    title={I18n.t('transactions')}
+                />
                 <View style={{height:80}}>
                     {this.getFilter()}
                 </View>

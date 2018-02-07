@@ -14,10 +14,10 @@ export default class App1 extends React.Component {
 
     async componentWillMount() {
 
-        AsyncStorage.getItem('locale').then((value) => {
-            if(value){
+        AsyncStorage.getItem('locale').then(value => {
+            if (value) {
                 I18n.locale = value
-            }else{
+            } else {
                 I18n.initAsync();
             }
         });

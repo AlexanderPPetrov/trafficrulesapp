@@ -5,6 +5,7 @@ import {TabNavigator, TabBarTop} from "react-navigation";
 import OpenBets from "./openbets";
 import SettledBets from "./settledbets";
 import ColorScheme from "../../common/colorscheme";
+import Ui from '../../common/ui';
 
 const indicatorStyle = (props, alignSelf) => ({
     backgroundColor: props.indicatorStyle.backgroundColor,
@@ -49,19 +50,7 @@ const Tabs = TabNavigator({
     tabBarPosition: 'top',
     animationEnabled: true,
     tabBarComponent: (props)=> <TabBarTop {...props} indicatorStyle={indicatorStyle(props, 'flex-end')} />,
-    tabBarOptions: {
-        activeTintColor: ColorScheme.neutralLight,
-        inactiveTintColor : ColorScheme.neutralDark,
-        labelStyle: {
-            fontSize: 12,
-        },
-        style: {
-            backgroundColor: ColorScheme.dark,
-        },
-        indicatorStyle:{
-            backgroundColor:ColorScheme.info
-        }
-    }
+    tabBarOptions: Ui.tabsStyle
 })
 
 export default () => <Tabs/>;

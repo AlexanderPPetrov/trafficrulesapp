@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, TouchableOpacity, Alert} from 'react-native';
 import styles from "./styles";
 import I18n from '../../../i18n/i18n';
-
+import StatusBar from "../header/statusbar"
 import {
     Container,
     Header,
@@ -145,13 +145,24 @@ class PinModal extends Component {
 
     getKey = (keyValue, i) => {
 
+        let keyStyle = styles.pinKey
+        if(keyValue === 'back' || keyValue === 'reset'){
+            keyStyle = [styles.pinKey, styles.pinKeyAction]
+        }
+        let fontSize = 26;
+        let label = keyValue;
+        if(keyValue === 'reset'){
+            fontSize = 16
+            label = I18n.t('resetPin')
+        }
+
         if (keyValue === 'back') {
-            return <TouchableOpacity key={i} style={styles.pinKey} onPress={() => this.enterValue(keyValue)}>
-                <Icon style={{fontSize: 26}} name='ios-backspace-outline'></Icon>
+            return <TouchableOpacity key={i} style={keyStyle} onPress={() => this.enterValue(keyValue)}>
+                <Icon style={{fontSize}} name='ios-backspace'></Icon>
             </TouchableOpacity>
         }
-        return <TouchableOpacity key={i} style={styles.pinKey} onPress={() => this.enterValue(keyValue)}>
-            <Text style={{fontSize: 26}}>{keyValue}</Text>
+        return <TouchableOpacity key={i} style={keyStyle} onPress={() => this.enterValue(keyValue)}>
+            <Text style={{fontSize}}>{label}</Text>
         </TouchableOpacity>
 
     };
@@ -175,6 +186,7 @@ class PinModal extends Component {
         }
         return (
             <View style={styles.container}>
+                <StatusBar/>
                 <View style={styles.pinView}>
                     <Text style={styles.pinPromptText}>Enter PIN</Text>
                     {this.getPinBoxList()}

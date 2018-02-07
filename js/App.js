@@ -1,8 +1,4 @@
-/* @flow */
-
 import React from "react";
-
-import {View} from "react-native";
 import {StyleProvider, Root, Text} from "native-base";
 import {StackNavigator} from "react-navigation";
 
@@ -44,6 +40,7 @@ class AppRoot extends React.Component {
     render() {
         if(this.props.exp.unreadNotifications){
             Controller.unreadNotifications = this.props.exp.unreadNotifications;
+            Controller.unseenNotifications = Controller.unreadNotifications.length;
         }
         return (
             <Root>

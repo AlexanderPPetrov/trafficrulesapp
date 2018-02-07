@@ -4,7 +4,6 @@ import _ from "lodash";
 
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -25,7 +24,7 @@ import {AsyncStorage, BackHandler, Alert} from "react-native"
 import Tabs from "./tabs";
 import Api from "../../../Api";
 import Ui from '../../common/ui';
-import NotificationsButton from '../../common/notifications/notificationsbutton';
+import Header from '../../common/header/header';
 import styles from "./styles";
 import Controller from '../../../Controller';
 
@@ -108,23 +107,10 @@ class MyAccount extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => Controller.navigateTo("DrawerOpen")}
-                        >
-                            <Icon name="ios-menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('myAccount')}</Title>
-                    </Body>
-                    <Right>
-                        <NotificationsButton/>
-                    </Right>
-
-                </Header>
+                <Header
+                    headerStyle={Ui.headerNoShadow}
+                    title={I18n.t('myAccount')}
+                />
 
                 <Tabs loaded={this.state.loaded} balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>
 

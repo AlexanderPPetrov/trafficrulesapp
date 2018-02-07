@@ -1,6 +1,7 @@
 import color from "color";
 
 import { Platform, Dimensions, PixelRatio } from "react-native";
+import ColorScheme from "../../js/common/colorscheme";
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -160,7 +161,8 @@ export default {
   toolbarInverseBg: "#222",
   toolbarTextColor: platform === "ios" ? "#000" : "#fff",
   toolbarDefaultBorder: platform === "ios" ? "#a7a6ab" : "#3F51B5",
-  iosStatusbar: platform === "ios" ? "dark-content" : "light-content",
+  // iosStatusbar: platform === "ios" ? "dark-content" : "light-content",
+  iosStatusbar:  "dark-content",
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hex();
   },
@@ -253,7 +255,7 @@ export default {
   subtitleColor: platform === "ios" ? "#8e8e93" : "#FFF",
 
   // New Variable
-  titleFontColor: platform === "ios" ? "#000" : "#FFF",
+  titleFontColor: ColorScheme.headerColor,
 
   // Other
   borderRadiusBase: platform === "ios" ? 5 : 2,

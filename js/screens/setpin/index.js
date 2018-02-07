@@ -47,7 +47,7 @@ class Home extends Component {
 
 		return (
 			<Container >
-				<StatusBar barStyle="light-content" />
+				<StatusBar barStyle="dark-content" />
 
 				<Svg height={this.state.height} width={this.state.width} style={{position:'absolute'}}>
 					<Defs>

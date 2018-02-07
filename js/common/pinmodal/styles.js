@@ -29,7 +29,7 @@ export default {
     },
     pinBox: {
         borderWidth: 1,
-        borderColor: 'black',
+        borderColor: '#252525',
         borderRadius: 30/2,
         height: 30,
         width: 30,
@@ -37,7 +37,7 @@ export default {
     },
 
     pinBoxFilled: {
-        backgroundColor: 'black'
+        backgroundColor: '#252525'
     },
 
     pinKeyboard: {
@@ -51,10 +51,15 @@ export default {
         alignItems: 'center',
         width: deviceWidth/3,
         height: 70,
-        borderWidth: 1,
-        borderColor: 'rgb(239, 239, 244)',
+        borderWidth: 0.5,
+        borderColor: '#e5e5e5',
         flexGrow: 1
     },
+
+    pinKeyAction: {
+        backgroundColor:'#f8f8f8'
+    },
+
     pinKeyEmpty: {
         backgroundColor: 'rgb(239, 239, 244)',
     },

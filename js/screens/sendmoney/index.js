@@ -7,7 +7,6 @@ import {
     Container,
     Card,
     CardItem,
-    Header,
     Title,
     Content,
     Form,
@@ -23,6 +22,7 @@ import {
     Right,
     Body,
 } from "native-base";
+import Header from '../../common/header/header';
 
 import {View, ScrollView} from 'react-native';
 import Ui from '../../common/ui';
@@ -41,6 +41,7 @@ class SendMoney extends Component {
 
         this.state = {
             currentPage: 0,
+            steps:4,
             buttonDisabled: true,
             loaded: false
         }
@@ -76,7 +77,7 @@ class SendMoney extends Component {
     };
 
     getChat = () => {
-        if (this.state.currentPage == 4) {
+        if (this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
@@ -84,19 +85,8 @@ class SendMoney extends Component {
         )
     }
 
-    getRightHeader = () => {
-        if (this.state.currentPage == 4) {
-            return null;
-        }
-        return (
-            <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
-                <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
-            </Button>
-        )
-    };
-
     getButton = () => {
-        if (this.state.currentPage == 4) {
+        if (this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
@@ -106,17 +96,18 @@ class SendMoney extends Component {
         )
     };
 
-    getBackButton = () => {
-        if (this.state.currentPage == 0 || this.state.currentPage == 4) {
-            return ( <Button transparent onPress={() => Controller.navigateTo("DrawerOpen")}>
-                    <Icon name="ios-menu"/>
-                </Button>
-            )
+    getHeader = () => {
+
+        if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps) {
+            return <Header
+                title={I18n.t('sendMoney')}
+            />
         }
-        return (<Button transparent onPress={this.goBackward}>
-            <Icon name="arrow-back"/>
-        </Button>)
-    };
+        return <Header
+            title={I18n.t('sendMoney')}
+            onBack={this.goBackward}
+        />
+    }
 
     setPage = (page) => {
         this.setState({
@@ -127,22 +118,11 @@ class SendMoney extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header hasTabs>
-                    <Left>
-                        {this.getBackButton()}
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('sendMoney')}</Title>
-                    </Body>
-                    <Right>
-                        {this.getRightHeader()}
-                    </Right>
-                </Header>
-
+                {this.getHeader()}
                 <Content>
                     <Card style={Ui.cardContainer}>
                         <View style={{flex: 1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={4} labels={labels}></Steps>
+                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
 
                             <View style={Ui.formContainer}>
                                 <SendMoneySteps currentPage={this.state.currentPage}

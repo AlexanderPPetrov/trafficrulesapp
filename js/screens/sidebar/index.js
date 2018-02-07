@@ -28,12 +28,12 @@ const menuData = [
     {
         name: 'myAccount',
         route: "MyAccount",
-        icon: "ios-person"
+        icon: "ios-person-outline"
     },
     {
         name: 'accounts',
         route: "Accounts",
-        icon: "ios-people"
+        icon: "ios-people-outline"
     },
     {
         name: 'brokerage',
@@ -97,7 +97,7 @@ class SideBar extends Component {
     iconStyle = (icon) => {
         let marginLeft = 0,
             marginRight = 0
-        if (icon == 'ios-person') {
+        if (icon == 'ios-person-outline') {
             marginLeft = 4,
                 marginRight = -4
         }

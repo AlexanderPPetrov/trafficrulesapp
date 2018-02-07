@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {View, ActivityIndicator, Text} from "react-native";
+import {View, ActivityIndicator} from "react-native";
 import ColorScheme from "../colorscheme";
 let loaderInstance = null;
 
@@ -14,10 +14,14 @@ class Loader extends Component {
     }
 
     static show = () => {
-        loaderInstance.showLoader()
+        if(loaderInstance){
+            loaderInstance.showLoader()
+        }
     }
     static hide = () => {
-        loaderInstance.hideLoader()
+        if(loaderInstance){
+            loaderInstance.hideLoader()
+        }
     }
 
     hideLoader() {

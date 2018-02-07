@@ -2,7 +2,7 @@ export default {
     username: 'Username',
     password: 'Password',
     login: 'Log in',
-    resetPin: 'Reset PIN',
+    resetPin: 'Reset PIN?',
     wrongPin: 'Wrong PIN',
     logOut: 'Log out',
     ok: 'OK',

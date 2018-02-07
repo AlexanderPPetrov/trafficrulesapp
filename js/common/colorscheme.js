@@ -1,4 +1,19 @@
 export default {
+    mainBackground: '#ffffff',
+    statusBarBackground: '#e0e0e0',
+    headerBackground:'#f8f8f8',
+    headerColor:'#151515',
+    headerIconColor:'#151515',
+    tabsBackground:'#f8f8f8',
+    tabInactiveColor:'#5a5a5a',
+    tabActiveColor:'#151515',
+    tabsIndicator:'#ffae00',
+
+
+
+
+
+
     darkest:'#151515',
     darker:'#252525',
     dark:'#2b2b2b',

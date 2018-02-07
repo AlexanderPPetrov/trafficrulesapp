@@ -13,7 +13,7 @@ let Controller = {
     unreadNotifications: [],
     unseenNotifications:0,
 
-    setPinModal: (pinModal) => {
+    setPinModal: pinModal => {
         _pinModal = pinModal;
     },
 
@@ -25,15 +25,15 @@ let Controller = {
         _pinModal.hide()
     },
 
-    setNavigator: (navigator) => {
+    setNavigator: navigator => {
         _navigator = navigator;
     },
 
-    setSidebar: (sidebar) => {
+    setSidebar: sidebar => {
         _sidebar = sidebar;
     },
 
-    updateSideBar: (language) => {
+    updateSideBar: language => {
         _sidebar.changeLanguage(language)
         _navigator.forceUpdate()
     },

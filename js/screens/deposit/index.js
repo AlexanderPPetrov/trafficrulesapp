@@ -7,7 +7,6 @@ import {
     Container,
     Card,
     CardItem,
-    Header,
     Title,
     Content,
     Form,
@@ -27,6 +26,7 @@ import {
 import {View, ScrollView, WebView} from 'react-native';
 import {MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
 import Ui from '../../common/ui';
+import Header from '../../common/header/header';
 
 import styles from "./styles";
 import Controller from '../../../Controller';
@@ -94,15 +94,17 @@ class Deposit extends Component {
         )
     }
 
-    getRightHeader = () => {
-        if (this.state.currentPage == this.state.steps) {
-            return null;
+    getHeader = () => {
+
+        if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps || this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
+            return <Header
+                title={I18n.t('deposit')}
+            />
         }
-        return (
-            <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
-                <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
-            </Button>
-        )
+        return <Header
+                title={I18n.t('deposit')}
+                onBack={this.goBackward}
+        />
     }
 
     resetDeposit = () => {
@@ -175,18 +177,6 @@ class Deposit extends Component {
         )
     }
 
-    getBackButton = () => {
-
-        if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps || this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
-            return ( <Button transparent onPress={() => Controller.navigateTo("DrawerOpen")}>
-                    <Icon name="ios-menu"/>
-                </Button>
-            )
-        }
-        return (<Button transparent onPress={this.goBackward}>
-            <Icon name="arrow-back"/>
-        </Button>)
-    }
 
     changeHandler = (page) => {
         this.setState({
@@ -264,17 +254,7 @@ class Deposit extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header hasTabs>
-                    <Left>
-                        {this.getBackButton()}
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('deposit')}</Title>
-                    </Body>
-                    <Right>
-                        {this.getRightHeader()}
-                    </Right>
-                </Header>
+                {this.getHeader()}
                 <Content>
                     <Card style={this.getStyle()}>
                         <View style={{flex: 1}}>

@@ -61,8 +61,8 @@ let Api = {
         const attempt = () => {
 
             return fetch(_url, _data)
-                .then((response) => response.json())
-                .then((responseJson) => {
+                .then(response => response.json())
+                .then(responseJson => {
 
                     if (opts.success && responseJson._status == 'success') {
                         if (opts.url === 'login') {
@@ -111,7 +111,7 @@ let Api = {
                     }
 
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.log(count, retries)
                     if (count < retries) {
                         console.log('retry fetch')
@@ -144,7 +144,7 @@ let Api = {
         attempt()
     },
 
-    formatDate: (date) => {
+    formatDate: date => {
 
         Number.prototype.padLeft = function (base, chr) {
             var len = (String(base || 10).length - String(this).length) + 1;

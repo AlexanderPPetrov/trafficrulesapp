@@ -44,13 +44,12 @@ class PreviousBalanceChart extends Component {
         //     selectedDomain: { x: [this.props.balance[0], this.props.balance[this.props.balance.length - 1]] }
         // };
 
-        console.log(this.props.maxValue, this.props.maxValue)
+        console.log(this.props.maxValue, this.props.minValue)
     }
 
     componentDidMount = () => {
 
     }
-
 
     getDate = (x, index) => {
         var label = '';
@@ -95,6 +94,7 @@ class PreviousBalanceChart extends Component {
                             fill: ColorScheme.dark
                         }
                     }}
+                                 tickCount ={5}
                                  tickFormat={(y) => parseFloat(y).toFixed(2)}
                     />
                     <VictoryAxis

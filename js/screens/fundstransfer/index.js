@@ -7,7 +7,6 @@ import {
     Container,
     Card,
     CardItem,
-    Header,
     Title,
     Content,
     Form,
@@ -24,6 +23,7 @@ import {
     Body,
 } from "native-base";
 import Controller from '../../../Controller';
+import Header from '../../common/header/header';
 
 import {View, ScrollView} from 'react-native';
 
@@ -42,6 +42,7 @@ class Withdraw extends Component {
 
         this.state = {
             currentPage: 0,
+            steps:4,
             buttonDisabled: false,
             paymentData: {}
         }
@@ -71,7 +72,7 @@ class Withdraw extends Component {
     };
 
     getChat = () => {
-        if (this.state.currentPage == 4) {
+        if (this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
@@ -79,19 +80,9 @@ class Withdraw extends Component {
         )
     }
 
-    getRightHeader = () => {
-        if (this.state.currentPage == 4) {
-            return null;
-        }
-        return (
-            <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
-                <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
-            </Button>
-        )
-    };
 
     getButton = () => {
-        if (this.state.currentPage == 4) {
+        if (this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
@@ -101,16 +92,16 @@ class Withdraw extends Component {
         )
     };
 
-    getBackButton = () => {
-        if (this.state.currentPage == 0 || this.state.currentPage == 4) {
-            return ( <Button transparent onPress={() => Controller.navigateTo("DrawerOpen")}>
-                    <Icon name="ios-menu"/>
-                </Button>
-            )
+    getHeader = () => {
+        if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps) {
+            return <Header
+                title={I18n.t('fundsTransfer')}
+            />
         }
-        return (<Button transparent onPress={this.goBackward}>
-            <Icon name="arrow-back"/>
-        </Button>)
+        return <Header
+            title={I18n.t('fundsTransfer')}
+            onBack={this.goBackward}
+        />
     };
 
     setPage = (page) => {
@@ -122,22 +113,12 @@ class Withdraw extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header hasTabs>
-                    <Left>
-                        {this.getBackButton()}
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('fundsTransfer')}</Title>
-                    </Body>
-                    <Right>
-                        {this.getRightHeader()}
-                    </Right>
-                </Header>
 
+                {this.getHeader()}
                 <Content >
                     <Card style={Ui.cardContainer}>
                         <View style={{flex:1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={4} labels={labels}></Steps>
+                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
 
                             <View style={Ui.formContainer}>
                                 {console.log('FundsTransferSteps')}

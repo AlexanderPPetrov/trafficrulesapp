@@ -5,6 +5,7 @@ import Api from '../../../Api';
 import Controller from '../../../Controller';
 import styles from "./styles";
 import NotificationMessage from "./notification";
+import NotificationsList from "../../screens/notifications/index";
 import NotificationsButton from "./notificationsbutton";
 import GestureView from './GestureView';
 import * as Animatable from 'react-native-animatable';
@@ -62,14 +63,20 @@ class NotificationsHandler extends Component {
                 }
             }
 
-            this.state.notifications.push(receivedNotification);
-            NotificationsButton.addUnseenNotification();
+            if(Controller.currentRoute === 'Notifications'){
+                Controller.unreadNotifications.push(receivedNotification)
+                NotificationsList.getUnreadNotifications()
 
-            this.setState({
-                receivedNotification,
-                lastNotificationId: receivedNotification.notificationId,
-                notifications: this.state.notifications
-            });
+            }else{
+                this.state.notifications.push(receivedNotification);
+
+                this.setState({
+                    receivedNotification,
+                    lastNotificationId: receivedNotification.notificationId,
+                    notifications: this.state.notifications
+                });
+            }
+
 
             console.log(receivedNotification.notificationId)
         });
@@ -160,9 +167,8 @@ class NotificationsHandler extends Component {
         // Auto dismiss on 5 seconds
         setTimeout(() => {
             this.dismissNotification('fadeOut', notification.notificationId);
-            if(Controller.unreadNotifications){
-                Controller.unreadNotifications.push(notification);
-            }
+            Controller.unreadNotifications.push(notification);
+            NotificationsButton.addUnseenNotification();
         }, 5000);
 
         const notificationId = notification.notificationId;

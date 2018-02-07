@@ -42,12 +42,12 @@ export default {
   checkboxTickColor: "#fff",
 
   // Segment
-  segmentBackgroundColor: "#232323",
+  segmentBackgroundColor: ColorScheme.headerBackground,
   segmentActiveBackgroundColor: "#fff",
   segmentTextColor: "#1ba98d",
-  segmentActiveTextColor: "#232323",
+  segmentActiveTextColor: ColorScheme.headerBackground,
   segmentBorderColor: "#fff",
-  segmentBorderColorMain: "#232323",
+  segmentBorderColorMain: ColorScheme.headerBackground,
 
   // New Variable
   get defaultTextColor() {
@@ -133,7 +133,7 @@ export default {
 
   // Footer
   footerHeight: 55,
-  footerDefaultBg: "#232323",
+  footerDefaultBg: ColorScheme.headerBackground,
 
   // FooterTab
   tabBarTextColor: "#ffffff",
@@ -144,7 +144,7 @@ export default {
   tabActiveBgColor: undefined,
 
   // Tab
-  tabDefaultBg: "#232323",
+  tabDefaultBg: ColorScheme.headerBackground,
   topTabBarTextColor: "#b3c7f9",
   topTabBarActiveTextColor: "#fff",
   topTabActiveBgColor: undefined,
@@ -152,8 +152,8 @@ export default {
   topTabBarActiveBorderColor: "#fff",
 
   // Header
-  toolbarBtnColor: "#fff",
-  toolbarDefaultBg: "#232323",
+  toolbarBtnColor: ColorScheme.headerIconColor,
+  toolbarDefaultBg: ColorScheme.headerBackground,
   toolbarHeight: platform === "ios" ? 76 : 56,
   toolbarIconSize: platform === "ios" ? 20 : 22,
   toolbarSearchIconSize: platform === "ios" ? 20 : 23,
@@ -161,10 +161,10 @@ export default {
   searchBarHeight: platform === "ios" ? 30 : 40,
   toolbarInverseBg: "#222",
   toolbarTextColor: "#fff",
-  toolbarDefaultBorder: "#232323",
+  toolbarDefaultBorder: ColorScheme.headerBackground,
   iosStatusbar: "dark-content",
   get statusBarColor() {
-    return color(this.toolbarDefaultBg).darken(0.2).hex();
+    return ColorScheme.statusBarBackground;
   },
 
   // Icon
@@ -239,7 +239,7 @@ export default {
   inverseSpinnerColor: "#1A191B",
 
   // Tabs
-  tabBgColor: "#F8F8F8",
+  tabBgColor: ColorScheme.headerBackground,
   tabFontSize: 15,
   tabTextColor: "#222222",
 
@@ -253,10 +253,10 @@ export default {
   titleFontfamily: platform === "ios" ? "Roboto" : "Roboto_medium",
   titleFontSize: 19,
   subTitleFontSize: 14,
-  subtitleColor: "#FFF",
+  subtitleColor: ColorScheme.headerColor,
 
   // New Variable
-  titleFontColor: "#FFF",
+  titleFontColor: ColorScheme.headerColor,
 
   // Other
   borderRadiusBase: 2,

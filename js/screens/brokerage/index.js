@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -17,6 +16,7 @@ import {
 } from "native-base";
 import Ui from '../../common/ui';
 import Controller from '../../../Controller';
+import Header from '../../common/header/header';
 
 import styles from "./styles";
 import Tabs from "./tabs";
@@ -32,20 +32,10 @@ class Brokerage extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => Controller.navigateTo("DrawerOpen")}
-                        >
-                            <Icon name="ios-menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('brokerage')}</Title>
-                    </Body>
-                    <Right/>
-                </Header>
+                <Header
+                    headerStyle={Ui.headerNoShadow}
+                    title={I18n.t('brokerage')}
+                />
 
                 <Tabs></Tabs>
             </Container>

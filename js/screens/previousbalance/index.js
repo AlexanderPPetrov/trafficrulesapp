@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -20,6 +19,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, ScrollView, RefreshControl} from 'react-native';
 import PreviousBalanceChart from './previousbalancechart'
 import Controller from '../../../Controller';
+import Header from '../../common/header/header';
 
 import Ui from '../../common/ui';
 
@@ -162,22 +162,19 @@ class PreviousBalance extends Component {
 
     }
 
+    goBack = () => {
+        Controller.navigateTo('Accounts')
+    }
+
     render() {
         return (
             <Container style={Ui.container}>
-                <Header>
-                    <Left>
-                        <Button transparent onPress={() => Controller.navigateTo('Accounts')}>
-                            <Icon name="arrow-back"/>
-                        </Button>
-                    </Left>
-                    <Body style={{flex: 3}}>
-                    <Title
-                        style={{textAlign: 'left'}}>{I18n.t('_balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}</Title>
-                    </Body>
 
+                <Header
+                    onBack={this.goBack}
+                    title={I18n.t('_balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}
+                />
 
-                </Header>
                 <ScrollView refreshControl={
                     <RefreshControl
                         refreshing={this.state.refreshing}

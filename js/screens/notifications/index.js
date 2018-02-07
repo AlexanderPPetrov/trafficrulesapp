@@ -4,7 +4,6 @@ import _ from "lodash";
 
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -21,6 +20,7 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import Expo from "expo";
+import Header from '../../common/header/header';
 
 import {ScrollView} from "react-native"
 import Api from "../../../Api";
@@ -30,6 +30,7 @@ import NotificationsButton from '../../common/notifications/notificationsbutton'
 import styles from "./styles";
 import Controller from '../../../Controller';
 
+let NotificationsList = null;
 
 class Notifications extends Component {
 
@@ -39,14 +40,24 @@ class Notifications extends Component {
         this.state = {
             notifications:[]
         }
+        NotificationsList = this;
     }
 
     componentDidMount = () => {
         NotificationsButton.clearUnseenNotifications();
+        this.getUnreadNotifications()
+    };
+
+
+    static getUnreadNotifications = () => {
+        NotificationsList.getUnreadNotifications()
+    }
+
+    getUnreadNotifications = () => {
         this.setState({
             notifications:Controller.unreadNotifications
         })
-    };
+    }
 
     handlePressedNotification = () => {
         console.log('lalala')
@@ -73,29 +84,19 @@ class Notifications extends Component {
     };
 
     clearAllNotifications = () => {
+        Controller.unreadNotifications = [];
+        this.setState({
+            notifications:Controller.unreadNotifications
+        });
         Expo.Notifications.dismissAllNotificationsAsync()
     };
 
     render() {
         return (
             <Container style={Ui.container}>
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => Controller.navigateTo("DrawerOpen")}
-                        >
-                            <Icon name="ios-menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('notifications')}</Title>
-                    </Body>
-                    <Right>
-                        <NotificationsButton/>
-                    </Right>
-
-                </Header>
+                <Header
+                    title={I18n.t('notifications')}
+                />
                 {this.getClearButton()}
                 <ScrollView>
                     {this.getNotifications()}

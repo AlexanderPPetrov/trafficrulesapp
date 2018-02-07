@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -21,6 +20,7 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {AsyncStorage} from "react-native";
 import Ui from '../../common/ui';
+import Header from '../../common/header/header';
 
 const Item = Picker.Item;
 
@@ -159,20 +159,9 @@ class Transactions extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => Controller.navigateTo("DrawerOpen")}
-                        >
-                            <Icon name="ios-menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('settings')}</Title>
-                    </Body>
-                    <Right/>
-                </Header>
+                <Header
+                    title={I18n.t('settings')}
+                />
                 <Content>
                     <List>
                         <ListItem itemDivider>

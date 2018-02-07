@@ -19,9 +19,19 @@ export function normalize(size) {
 }
 
 export default {
+
     container: {
-        backgroundColor:'#2b2b2b'
+        backgroundColor:ColorScheme.mainBackground
     },
+
+    headerNoShadow: {
+        shadowColor: null,
+        shadowOffset: null,
+        shadowOpacity: null,
+        shadowRadius: null,
+        elevation: 0,
+    },
+
     listHeader: {
         backgroundColor: ColorScheme.darker,
         height:45,
@@ -236,16 +246,16 @@ export default {
     },
 
     tabsStyle: {
-        activeTintColor: ColorScheme.neutralLight,
-        inactiveTintColor : ColorScheme.neutralDark,
+        activeTintColor: ColorScheme.tabActiveColor,
+        inactiveTintColor : ColorScheme.tabInactiveColor,
         labelStyle: {
             fontSize: 12,
         },
         style: {
-            backgroundColor: ColorScheme.dark,
+            backgroundColor: ColorScheme.tabsBackground,
         },
         indicatorStyle:{
-            backgroundColor:ColorScheme.info
+            backgroundColor:ColorScheme.tabsIndicator
         }
     }
 

@@ -43,12 +43,20 @@ class NotificationsButton extends Component {
         NotificationsButtonInstance = this;
     }
 
+    componentDidMount = () => {
+        NotificationsButtonInstance.mounted = true;
+    }
+
+    componentWillUnmount = () => {
+        NotificationsButtonInstance.mounted = false;
+    }
+
     static addUnseenNotification = () => {
-        if(!NotificationsButtonInstance) return;
+        if(!NotificationsButtonInstance || !NotificationsButtonInstance.mounted) return;
         NotificationsButtonInstance.addUnseenNotification()
     };
 
-    setNotifications = (count) => {
+    setNotifications = count => {
         this.setState({
             unseenNotifications:count
         })

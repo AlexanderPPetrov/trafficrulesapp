@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -22,6 +21,7 @@ import styles from "./styles";
 import Api from "../../../Api";
 import Ui from '../../common/ui';
 import Controller from '../../../Controller';
+import Header from '../../common/header/header';
 
 
 class Accounts extends Component {
@@ -69,21 +69,9 @@ class Accounts extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => Controller.navigateTo("DrawerOpen")}
-                        >
-                            <Icon name="ios-menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('accounts')}</Title>
-                    </Body>
-                    <Right/>
-
-                </Header>
+                <Header
+                    title={I18n.t('myAccount')}
+                />
                 <ScrollView refreshControl={
                     <RefreshControl
                         refreshing={this.state.refreshing}

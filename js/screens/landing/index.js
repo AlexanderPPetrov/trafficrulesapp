@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { ScrollView , View, StatusBar, Dimensions } from "react-native";
+import { ScrollView , View, Dimensions } from "react-native";
 import Expo from "expo";
 import NotificationsHandler from "../../common/notifications/index";
 
 import I18n from '../../../i18n/i18n';
 import Logo from '../../common/logo/logo';
 import ColorScheme from "../../common/colorscheme";
+import StatusBar from "../../common/header/statusbar";
 
 import { Container, Button, H3, Header, Title, Body, Left, Right, Text } from "native-base";
 import Login from "./login";
@@ -193,7 +194,7 @@ class Landing extends Component {
 	render() {
 
 		return <Container>
-			<StatusBar barStyle="dark-content"/>
+            <StatusBar/>
 			{this.getLandingScreen()}
 		</Container>
 	}
