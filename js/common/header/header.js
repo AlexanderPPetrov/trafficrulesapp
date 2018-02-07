@@ -55,7 +55,7 @@ class HeaderWrapper extends Component {
     }
 
     getRight = () => {
-        if(this.props.onBack){
+        if(this.props.onBack && !this.props.notifications){
         return <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
                 <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
             </Button>
@@ -65,13 +65,13 @@ class HeaderWrapper extends Component {
 
     render() {
         return (
-                <Header style={this.props.headerStyle}>
+                <Header hasTabs={this.props.hasTabs}>
                     <StatusBar/>
                     <Left>
                         {this.getLeft()}
                     </Left>
-                    <Body>
-                    <Title>{this.props.title}</Title>
+                    <Body style={{flex:3}}>
+                    <Title style={{paddingLeft:15}}>{this.props.title}</Title>
                     </Body>
                     <Right>
                         {this.getRight()}

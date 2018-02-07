@@ -24,13 +24,6 @@ export default {
         backgroundColor:ColorScheme.mainBackground
     },
 
-    headerNoShadow: {
-        shadowColor: null,
-        shadowOffset: null,
-        shadowOpacity: null,
-        shadowRadius: null,
-        elevation: 0,
-    },
 
     listHeader: {
         backgroundColor: ColorScheme.darker,

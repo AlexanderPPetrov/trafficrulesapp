@@ -77,8 +77,14 @@ class NotificationsButton extends Component {
         })
     };
 
+    goToNotifications = () => {
+        if(Controller.currentRoute !== 'Notifications'){
+            Controller.navigateTo('Notifications')
+        }
+    }
+
     getNotificationButton = () => {
-        return <Button transparent style={styles.notificationButton} onPress={() => Controller.navigateTo('Notifications')}>
+        return <Button transparent style={styles.notificationButton} onPress={() => this.goToNotifications()}>
             <Ionicons name="md-notifications-outline" style={[styles.toggleNotification]}/>
             {this.getNotificationCount()}
         </Button>

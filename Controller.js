@@ -10,6 +10,7 @@ let Controller = {
     redirectScreen: '',
     notificationData: {},
     currentRoute:'',
+    previousRoute:'',
     unreadNotifications: [],
     unseenNotifications:0,
 
@@ -38,8 +39,17 @@ let Controller = {
         _navigator.forceUpdate()
     },
 
+    goBack: () => {
+        Controller.navigateTo(Controller.previousRoute)
+    },
+
     navigateTo: (routeName, params) => {
-        Controller.currentRoute = routeName;
+        //Skip drawer open
+        if(routeName !== 'DrawerOpen') {
+            Controller.previousRoute = Controller.currentRoute;
+            Controller.currentRoute = routeName;
+        }
+
         _navigator.dispatch(
             NavigationActions.navigate({
                 type: 'Navigation/NAVIGATE',

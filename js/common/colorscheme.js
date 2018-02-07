@@ -5,6 +5,7 @@ export default {
     headerColor:'#151515',
     headerIconColor:'#151515',
     tabsBackground:'#f8f8f8',
+    tabsBorderBottom:'#cbcbcb',
     tabInactiveColor:'#5a5a5a',
     tabActiveColor:'#151515',
     tabsIndicator:'#ffae00',

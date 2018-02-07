@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {View} from "react-native";
 import I18n from '../../../i18n/i18n';
 import {SimpleLineIcons, FontAwesome} from '@expo/vector-icons';
 import {TabNavigator, TabBarTop} from "react-navigation";
@@ -49,7 +50,7 @@ const Tabs = TabNavigator({
 }, {
     tabBarPosition: 'top',
     animationEnabled: true,
-    tabBarComponent: (props)=> <TabBarTop {...props} indicatorStyle={indicatorStyle(props, 'flex-end')} />,
+    tabBarComponent: (props)=> <View style={Ui.dropShadow}><TabBarTop {...props} style={{ backgroundColor:ColorScheme.tabsBackground}} indicatorStyle={indicatorStyle(props, 'flex-end')} /></View>,
     tabBarOptions: Ui.tabsStyle
 })
 

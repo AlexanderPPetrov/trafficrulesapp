@@ -33,7 +33,7 @@ class Brokerage extends Component {
         return (
             <Container style={Ui.container}>
                 <Header
-                    headerStyle={Ui.headerNoShadow}
+                    hasTabs
                     title={I18n.t('brokerage')}
                 />
 

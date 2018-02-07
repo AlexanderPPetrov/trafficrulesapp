@@ -44,7 +44,6 @@ class Notifications extends Component {
     }
 
     componentDidMount = () => {
-        NotificationsButton.clearUnseenNotifications();
         this.getUnreadNotifications()
     };
 
@@ -91,11 +90,17 @@ class Notifications extends Component {
         Expo.Notifications.dismissAllNotificationsAsync()
     };
 
+    goBackward = () => {
+        Controller.goBack()
+    }
+
     render() {
         return (
             <Container style={Ui.container}>
-                <Header
+                    <Header
                     title={I18n.t('notifications')}
+                    onBack={this.goBackward}
+                    notifications={true}
                 />
                 {this.getClearButton()}
                 <ScrollView>

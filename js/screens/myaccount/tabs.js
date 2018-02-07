@@ -87,7 +87,7 @@ const TabNavigation = TabNavigator({
 }, {
     tabBarPosition: 'top',
     animationEnabled: true,
-    tabBarComponent: (props) => <TabBarTop {...props} indicatorStyle={indicatorStyle(props, 'flex-end')}/>,
+    tabBarComponent: (props)=> <TabBarTop {...props} style={{ backgroundColor:ColorScheme.tabsBackground}} indicatorStyle={indicatorStyle(props, 'flex-end')} />,
     tabBarOptions: Ui.tabsStyle
 })
 
