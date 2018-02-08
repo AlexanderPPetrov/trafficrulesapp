@@ -6,6 +6,8 @@ import {
 } from "native-base";
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import Ui from '../../common/ui';
+import CurrencyIcon from '../../common/currency/currency';
+import ColorScheme from '../../common/colorscheme';
 
 import styles from "./styles";
 
@@ -20,19 +22,17 @@ class SafeBalance extends Component {
         return (
             <View style={[styles.mainBalance, styles.safeBalance]}>
 
-                <Grid>
-                    <Row>
-                        <Text style={Ui.cardHeader}>
-                            {I18n.t('safeBalance')}
-                        </Text>
-                    </Row>
-                    <Row>
-                        <Text style={Ui.mainBalanceValue}>
-                            {this.props._safe_balance}
-                        </Text>
-                        <Text style={Ui.mainBalanceCurrency}>{this.props._currency}</Text>
-                    </Row>
-                </Grid>
+                <Text style={Ui.balanceHeader}>
+                    {I18n.t('safeBalance')}
+                </Text>
+
+                <View style={{flexDirection:'row'}}>
+                    <CurrencyIcon color={ColorScheme.mainCurrencyColor} size={26} currency={this.props._currency.toLowerCase()}/>
+                    <Text style={Ui.mainBalanceValue}>
+                        {this.props._safe_balance}
+                    </Text>
+                </View>
+
 
             </View>
         );

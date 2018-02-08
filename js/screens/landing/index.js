@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ScrollView , View, Dimensions } from "react-native";
 import Expo from "expo";
 import NotificationsHandler from "../../common/notifications/index";
+import {Toast} from "native-base";
 
 import I18n from '../../../i18n/i18n';
 import Logo from '../../common/logo/logo';
@@ -48,7 +49,7 @@ class Landing extends Component {
                 this.setState({
                     [key]:value
                 }, () => {
-                    if(key === 'pin'){
+                    if(key === 'pin' && value){
                         Controller.showPinModal(this.state.pin, this.loginHandler, this.resetPin);
                     }
                 })
@@ -61,6 +62,9 @@ class Landing extends Component {
     };
 
     resetPin = () => {
+        this.setState({
+            password:''
+        })
         this.deleteSecureItem('pin');
         this.deleteSecureItem('password');
     };
@@ -142,19 +146,26 @@ class Landing extends Component {
 
         NotificationsHandler.startListen();
         if (this.state.pin) {
-            Controller.hidePinModal();
 
             if(Controller.redirectScreen){
                 Controller.navigateTo(Controller.redirectScreen, Controller.notificationData)
             }else{
                 Controller.navigateTo("MyAccount")
             }
+            setTimeout(()=> {
+                Controller.hidePinModal();
+            }, 300)
+
         } else {
             Expo.SecureStore.setItemAsync('username', this.state.username)
                 .then(() => Expo.SecureStore.setItemAsync('password', this.state.password)
                     .then(() => this.setState({
                         setPin:true
+
                     }))
+                    .catch((error) => {
+                        console.log(error)
+                    })
                 )
                 .catch((error) => {
                     console.log(error)
@@ -179,9 +190,10 @@ class Landing extends Component {
         }
         console.log(this.state.pin, '3')
 
+
         return <ScrollView contentContainerStyle={styles.loginContainer}>
 			<View style={styles.imageContainer}>
-				<Logo scale={this.state.scale} primary={ColorScheme.neutralLight} secondary={ColorScheme.action} slogan={ColorScheme.neutralLight}></Logo>
+				<Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.logoSlogan}></Logo>
 				{/*<View>*/}
 				{/*<MaterialCommunityIcons name="account-box" size={100} style={styles.avatar}></MaterialCommunityIcons>*/}
 				{/*<Text style={styles.helloMessage}>Hello John!</Text>*/}

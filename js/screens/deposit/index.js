@@ -149,7 +149,7 @@ class Deposit extends Component {
 
     getButton = () => {
         if (this.state.depositCompleted == 'success') {
-            return <Button block style={styles.continueButton}
+            return <Button primary rounded style={styles.continueButton}
                            onPress={() => Controller.navigateTo("FundsTransfer", {
                                paymentData: this.state.paymentData,
                            })}>
@@ -159,7 +159,7 @@ class Deposit extends Component {
 
         if (this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
             return <View>
-                <Button block style={styles.continueButton} onPress={() => this.resetDeposit()}>
+                <Button primary rounded style={styles.continueButton} onPress={() => this.resetDeposit()}>
                     <Text style={styles.continueButtonLabel}>{I18n.t('startOver')}</Text>
                 </Button>
             </View>
@@ -171,8 +171,8 @@ class Deposit extends Component {
             return null;
         }
         return (
-            <Button block style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                <Text style={styles.continueButtonLabel}>{I18n.t('continue')}</Text>
+            <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
+                <Text style={Ui.buttonLabel}>{I18n.t('continue')}</Text>
             </Button>
         )
     }
@@ -256,29 +256,27 @@ class Deposit extends Component {
             <Container style={Ui.container}>
                 {this.getHeader()}
                 <Content>
-                    <Card style={this.getStyle()}>
-                        <View style={{flex: 1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps}
-                                   labels={this.state.labels}></Steps>
-                            <View style={Ui.formContainer}>
-                                <DepositSteps currentPage={this.state.currentPage}
-                                              onRef={ref => (this.tabs = ref)} {...this.props}
-                                              onUpdatePage={this.changeHandler}
-                                              setRedirectUrl={this.setRedirectUrl}
-                                              setPaymentData={this.setPaymentData}
-                                              setDepositCompleted={this.setDepositCompleted}
-                                              depositCompleted={this.state.depositCompleted}
-                                              setPages={this.setPages}
-                                              stepsNames={this.state.stepsNames}
-                                              disableButton={this.setButtonState}></DepositSteps>
-                                {this.getErrorMessage()}
-                                <View style={Ui.buttonsContainer}>
-                                    {this.getButton()}
-                                    {this.getChat()}
-                                </View>
+                    <View style={this.getStyle()}>
+                        <Steps currentPage={this.state.currentPage} stepCount={this.state.steps}
+                               labels={this.state.labels}></Steps>
+                        <View style={Ui.formContainer}>
+                            <DepositSteps currentPage={this.state.currentPage}
+                                          onRef={ref => (this.tabs = ref)} {...this.props}
+                                          onUpdatePage={this.changeHandler}
+                                          setRedirectUrl={this.setRedirectUrl}
+                                          setPaymentData={this.setPaymentData}
+                                          setDepositCompleted={this.setDepositCompleted}
+                                          depositCompleted={this.state.depositCompleted}
+                                          setPages={this.setPages}
+                                          stepsNames={this.state.stepsNames}
+                                          disableButton={this.setButtonState}></DepositSteps>
+                            {this.getErrorMessage()}
+                            <View style={Ui.buttonsContainer}>
+                                {this.getButton()}
+                                {this.getChat()}
                             </View>
                         </View>
-                    </Card>
+                    </View>
                     {this.getWebView()}
                 </Content>
 

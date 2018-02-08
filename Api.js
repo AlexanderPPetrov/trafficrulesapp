@@ -13,6 +13,8 @@ import {Toast} from "native-base";
 import Loader from "./js/common/loader/index";
 import I18n from './i18n/i18n';
 
+const monthKeys =  ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+
 
 let Api = {
 
@@ -142,6 +144,17 @@ let Api = {
         }
 
         attempt()
+    },
+
+    getMonthAbbr: month => {
+        return I18n.t(monthKeys[0])
+    },
+
+    getDate: date => {
+        const t = date.split(/[- :]/),
+            d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]),
+            fixedDate = new Date(d);
+        return fixedDate
     },
 
     formatDate: date => {

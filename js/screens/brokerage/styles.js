@@ -78,14 +78,29 @@ export default {
     },
 
     betWin: {
-        backgroundColor: ColorScheme.win
+        borderLeftColor: ColorScheme.win
     },
     betLoss: {
-        backgroundColor: ColorScheme.loss
+        borderLeftColor: ColorScheme.loss
     },
     betTie: {
-        backgroundColor: ColorScheme.neutralDarkest
+        borderLeftColor: ColorScheme.listLabelColor
     },
+
+    profitWin: {
+        color: ColorScheme.win
+
+    },
+    profitLoss: {
+        color: ColorScheme.loss
+
+    },
+
+    profitTie: {
+        color: ColorScheme.listLabelColor
+
+    },
+
     eventLabel: {
         color: ColorScheme.darker,
         fontSize: 14,
@@ -106,8 +121,14 @@ export default {
     },
 
     settledBetContainer:{
-        padding:15,
-        marginBottom:0
+        paddingTop:12,
+        paddingBottom:12,
+        marginBottom:0,
+        borderBottomColor: '#f2f2f2',
+        borderBottomWidth:1,
+        borderLeftWidth:4,
+        alignItems:"center",
+        justifyContent:"center"
     },
     settledBetLabel: {
         fontSize:13,

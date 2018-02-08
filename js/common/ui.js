@@ -23,7 +23,13 @@ export default {
     container: {
         backgroundColor:ColorScheme.mainBackground
     },
-
+    inputLabel: {
+        fontSize:normalize(14),
+    },
+    inputLabelFocused: {
+        width: 0,
+        fontSize:normalize(10),
+    },
 
     listHeader: {
         backgroundColor: ColorScheme.darker,
@@ -49,6 +55,11 @@ export default {
         color: '#ececec',
         fontSize: normalize(13),
         marginLeft: 7
+    },
+    balanceHeader: {
+        textAlign:'center',
+        color: ColorScheme.balanceHeaderColor,
+        fontSize: normalize(12)
     },
     listItem: {
         paddingLeft: 15,
@@ -97,7 +108,7 @@ export default {
         paddingLeft: 15
     },
     mainBalanceValue: {
-        color: ColorScheme.darkest,
+        color: ColorScheme.mainCurrencyColor,
         fontSize: normalize(22),
         textAlign: 'right',
         fontFamily: 'Roboto_light',
@@ -144,6 +155,17 @@ export default {
     calendarIcon:{
         color:ColorScheme.light
     },
+
+    dayLabel: {
+        textAlign:'center',
+        fontWeight:'700',
+        fontSize:normalize(16)
+    },
+    monthLabel: {
+        textAlign:'center',
+        color: ColorScheme.monthLabelColor,
+        fontSize:normalize(10)
+    },
     formContainer: {
         flex:1,
         justifyContent: 'space-between'
@@ -154,12 +176,19 @@ export default {
         width:'100%'
     },
 
+    buttonLabel: {
+        textAlign:'center',
+        flex:1,
+        fontSize:16
+    },
+
     stepHeader: {
         textAlign:'center',
-        fontSize:18,
+        fontSize: normalize(20),
+        fontWeight:'700',
         padding:10,
         paddingBottom:45,
-        color:ColorScheme.darkest
+        color:ColorScheme.stepHeader
     },
     formLabel:{
         color: ColorScheme.light,
@@ -183,6 +212,7 @@ export default {
         borderBottomWidth: 1,
         borderBottomColor: ColorScheme.neutralDarker,
         marginLeft:0,
+        padding:5,
         minHeight:50
     },
     form: {

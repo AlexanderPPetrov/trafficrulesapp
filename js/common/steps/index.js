@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 
 import {View, Text} from 'react-native';
-import StepIndicator from 'react-native-step-indicator';
+import StepIndicator from './StepIndicator';
 import styles from "./styles";
 
 

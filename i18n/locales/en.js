@@ -157,5 +157,16 @@ export default {
     noSettledBets: 'There are no settled bets for that period',
     noRunningBets: 'There are no running bets',
     from: 'From',
-
+    january:'January',
+    february: 'February',
+    march:'March',
+    april:'April',
+    may:'May',
+    june:'June',
+    july:'July',
+    august:'August',
+    september:'September',
+    october:'October',
+    november:'November',
+    december:'December'
 };

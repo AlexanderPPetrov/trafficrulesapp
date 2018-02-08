@@ -21,6 +21,7 @@ import {
     Toast
 } from "native-base";
 import Controller from '../../../Controller';
+import Ui from '../../common/ui';
 
 import styles from "./styles";
 
@@ -88,12 +89,12 @@ class Pin extends React.Component {
                                onChangeText={(newValue) => this.changeValue('confirmPin', newValue)}/>
                     </Item>
                 </Form>
-                <Button block style={styles.loginButton} disabled={this.state.buttonDisabled} onPress={() =>
+                <Button primary rounded style={styles.loginButton} disabled={this.state.buttonDisabled} onPress={() =>
 
                     this.setPin()
 
                 }>
-                    <Text>{I18n.t('setPin').toUpperCase()}</Text>
+                    <Text style={Ui.buttonLabel}>{I18n.t('setPin').toUpperCase()}</Text>
                 </Button>
             </ScrollView>
         );

@@ -1,4 +1,7 @@
 export default {
+    logoPrimary:'#231f20',
+    logoSecondary:'#ec2226',
+    logoSlogan:'rgba(255,255,255,0)',
     mainBackground: '#ffffff',
     statusBarBackground: '#e0e0e0',
     headerBackground:'#f8f8f8',
@@ -9,11 +12,20 @@ export default {
     tabInactiveColor:'#5a5a5a',
     tabActiveColor:'#151515',
     tabsIndicator:'#ffae00',
-
-
-
-
-
+    stepActive:'#ffae00',
+    stepInactive:'#dddddd',
+    stepLabel:'#252525',
+    stepLabelActive:'#252525',
+    stepHeader:'#252525',
+    primaryButton:'#ffae00',
+    inputTextColor:'#252525',
+    inputBorderColor:'#dddddd',
+    win:'#04d54a',
+    loss:'#ff3333',
+    listLabelColor: '#212121',
+    monthLabelColor: '#afafaf',
+    balanceHeaderColor: '#b1b1b1',
+    mainCurrencyColor:'#252525',
 
     darkest:'#151515',
     darker:'#252525',
@@ -35,9 +47,6 @@ export default {
     INR: '#d6bbf5',
     chartBalance: '#54fc00',
     chartChange: '#00a2ff',
-    win:'#23a540',
-    loss:'#e66560',
-    stepActive:'#31a78e',
-    stepInactive:'#e0e2e1',
+
     loader:'#555'
 };

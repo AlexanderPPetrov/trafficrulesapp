@@ -28,10 +28,6 @@ export default {
         marginBottom:0
     },
 
-    continueButtonLabel: {
-        textAlign:'center',
-        flex:1
-    },
 
     inputSecureId: {
         marginTop:15,

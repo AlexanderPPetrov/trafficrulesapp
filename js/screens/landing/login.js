@@ -19,7 +19,7 @@ import {
     Text,
     Toast
 } from "native-base";
-
+import Ui from '../../common/ui'
 import styles from "./styles";
 
 class Login extends React.Component {
@@ -28,27 +28,27 @@ class Login extends React.Component {
         return (
             <View style={styles.formContainer}>
 
-                <View>
                     <Form>
-                        <Item style={[styles.inputContainer, styles.inputMargin]}>
-                            <Icon active name='ios-person-outline' style={[styles.inputIcon, styles.inputIconUser]}/>
+                        <Item floatingLabel style={Ui.inputContainer}>
+                            {/*<Icon active name='ios-person-outline' style={[styles.inputIcon, styles.inputIconUser]}/>*/}
+                            <Label >{I18n.t('username')}</Label>
                             <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField}
-                                   placeholder={I18n.t('username')} value={this.props.username}
+                                   value={this.props.username}
                                    onChangeText={(newValue) => this.props.setValue('username', newValue)}/>
                         </Item>
-                        <Item style={styles.inputContainer}>
-                            <Icon active name='ios-lock-outline' style={styles.inputIcon}/>
+                        <Item floatingLabel style={Ui.inputContainer}>
+                            {/*<Icon active name='ios-lock-outline' style={styles.inputIcon}/>*/}
+                            <Label >{I18n.t('password')}</Label>
                             <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} secureTextEntry={true}
-                                   placeholder={I18n.t('password')} value={this.props.password}
+                                   value={this.props.password}
                                    onChangeText={(newValue) => this.props.setValue('password', newValue)}/>
                         </Item>
                     </Form>
-                    <Button block style={styles.loginButton} onPress={() =>
+                    <Button primary rounded style={styles.loginButton} onPress={() =>
                         {this.props.loginHandler()}
                     }>
-                        <Text>{I18n.t('login').toUpperCase()}</Text>
+                        <Text style={Ui.buttonLabel}>{I18n.t('login').toUpperCase()}</Text>
                     </Button>
-                </View>
 
             </View>
         );

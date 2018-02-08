@@ -12,20 +12,13 @@ export default {
         flex:1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor:ColorScheme.mainBackground
     },
     imageContainer: {
 
     },
 
-    inputMargin: {
-        marginBottom:20
-    },
 
-    inputContainer: {
-        backgroundColor: 'transparent',
-        borderColor: 'rgba(255,255,255,.2)',
-        marginLeft:0
-    },
     inputIcon: {
         color: ColorScheme.neutralDark,
         opacity:0.8,
@@ -40,13 +33,12 @@ export default {
     inputField: {
         flex:1,
         borderBottomWidth: 0,
-        fontSize:18,
-        lineHeight: 24,
-        color:ColorScheme.neutralLight
+        // fontSize:18,
+        // lineHeight: 24
     },
     formContainer: {
         marginTop:45,
-        padding:35,
+        padding:45,
         alignSelf: "stretch"
     },
     logo: {
@@ -72,7 +64,7 @@ export default {
 
     loginButton:{
         marginTop: 30,
-        backgroundColor:ColorScheme.action
+        alignSelf:'stretch'
     },
     linearGradient: {
         flex: 1,

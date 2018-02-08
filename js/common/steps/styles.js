@@ -5,27 +5,28 @@ import ColorScheme from "../colorscheme";
 
 export default {
     customStyles : {
-        stepIndicatorSize: 20,
-        currentStepIndicatorSize:25,
-        separatorStrokeWidth: 2,
-        currentStepStrokeWidth: 2,
+        stepIndicatorSize: 15,
+        currentStepIndicatorSize:15,
+        separatorStrokeWidth: 1,
+        currentStepStrokeWidth: 1,
         stepStrokeCurrentColor: ColorScheme.stepActive,
-        stepStrokeWidth: 2,
+        stepStrokeWidth: 1,
         stepStrokeFinishedColor: ColorScheme.stepActive,
         stepStrokeUnFinishedColor: ColorScheme.stepInactive,
         separatorFinishedColor: ColorScheme.stepActive,
         separatorUnFinishedColor: ColorScheme.stepInactive,
         stepIndicatorFinishedColor: ColorScheme.stepActive,
-        stepIndicatorUnFinishedColor: ColorScheme.stepInactive,
+        stepIndicatorUnFinishedColor: '#ffffff',
         stepIndicatorCurrentColor: '#ffffff',
-        stepIndicatorLabelFontSize: 13,
-        currentStepIndicatorLabelFontSize: 13,
+        stepIndicatorLabelFontSize: 12,
+        currentStepIndicatorLabelFontSize: 12,
         stepIndicatorLabelCurrentColor: 'transparent',
         stepIndicatorLabelFinishedColor: 'transparent',
         stepIndicatorLabelUnFinishedColor: 'transparent',
-        labelColor: ColorScheme.neutralDarkest,
+        labelColor: ColorScheme.stepLabel,
         labelSize: 12,
-        currentStepLabelColor: ColorScheme.stepActive
+        currentStepLabelColor: ColorScheme.stepLabelActive,
+
     },
     stepsContainer: {
         paddingTop:15,

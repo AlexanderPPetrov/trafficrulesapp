@@ -6,19 +6,13 @@ import {Container, Header, Content, Card, CardItem, Text, Right, ListItem} from 
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import Ui from '../../common/ui';
-
-let currencies = ['usd', 'btc', 'eur', 'inr', 'gbp'];
+import CurrencyIcon from '../../common/currency/currency';
 
 class BalanceItem extends Component {
 
     getCurrencyIcon = () => {
-        if (currencies.indexOf(this.props._currency.toLowerCase()) != -1) {
-            let iconName = 'currency-' + this.props._currency.toLowerCase()
-            return <MaterialCommunityIcons name={iconName} size={26} color='#fff'/>
-        } else {
-            return <Text style={{color: '#fff', fontSize: 22}}>{this.props._currency}</Text>
-        }
-    }
+        return <CurrencyIcon color='#fff' size={26} currency={this.props._currency.toLowerCase()}/>
+    };
 
     render() {
         return <ListItem style={Ui.listItem}>

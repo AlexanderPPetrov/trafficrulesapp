@@ -169,57 +169,71 @@ class SettledBets extends Component {
         </Grid>
     };
 
-    getStatus = (profit) => {
+    getProfitStyle = (profit) => {
+        let style = styles.profitWin;
         if(parseFloat(profit) < 0){
-            return <Text style={[styles.settledBetStatus, styles.betLoss]}>{I18n.t('loss').toUpperCase()}</Text>
+            style = styles.profitLoss
         }
         if(parseFloat(profit) == 0){
-            return <Text style={[styles.settledBetStatus, styles.betTie]}>{I18n.t('tie').toUpperCase()}</Text>
+            style = styles.profitTie
         }
-        return <Text style={[styles.settledBetStatus, styles.betWin]}>{I18n.t('win').toUpperCase()}</Text>
+        return style
+    }
+
+    getBetStyle = (profit) => {
+        let style = styles.betWin;
+        if(parseFloat(profit) < 0){
+            style = styles.betLoss
+        }
+        if(parseFloat(profit) == 0){
+            style = styles.betTie
+        }
+        return style
     }
 
     getListItem = (bet, i) => {
-        return <Card key={i} style={styles.settledBetContainer}>
+        // const date = new Date(bet._date),
+        //     dayDate = date.getDate();
+        //
+        const date = Api.getDate(bet._date),
+            dayDate = date.getDate(),
+            monthAbbr = Api.getMonthAbbr(date.getMonth() + 1).substring(0, 3).toUpperCase();
+
+        return <View key={i} style={[styles.settledBetContainer, this.getBetStyle(bet._profit)]}>
             <Grid>
-                <Row>
-                    <Col size={1}>
-                        <Text style={styles.settledBetLabel}>{bet._date.split(' ')[0]}</Text>
-                    </Col>
-                    <Col size={1}>
-                        {this.getStatus(bet._profit)}
-                    </Col>
+                <Col size={1} style={{justifyContent:'center'}}>
+                    <Text style={Ui.dayLabel}>{dayDate}</Text>
+                    <Text style={Ui.monthLabel}>{monthAbbr}</Text>
+                </Col>
+                <Col size={4} >
+                    <Row>
+                        <Col size={3} style={{justifyContent:'center'}}>
+                            <Text style={Ui.itemLabel}>{I18n.t('turnOver')}</Text>
+                        </Col>
+                        <Col size={3} style={{justifyContent:'center'}}>
+                            <Text style={Ui.balanceValue}>{bet._turnover}</Text>
+                        </Col>
+                        <Col style={Ui.currencyWidth} >
+                            <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
+                        </Col>
 
-                </Row>
-                <Row>
+                    </Row>
+                    <Row>
 
-                    <Col size={3}>
-                        <Text style={Ui.itemLabel}>{I18n.t('turnOver')}</Text>
-                    </Col>
-                    <Col size={3}>
-                        <Text style={Ui.balanceValue}>{bet._turnover}</Text>
-                    </Col>
-                    <Col style={Ui.currencyWidth}>
-                        <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
-                    </Col>
+                        <Col size={3} style={{justifyContent:'center'}}>
+                            <Text style={Ui.itemLabel}>{I18n.t('profit')}</Text>
+                        </Col>
+                        <Col size={3} style={{justifyContent:'center'}}>
+                            <Text style={[Ui.balanceValue, this.getProfitStyle(bet._profit)]}>{bet._profit}</Text>
+                        </Col>
+                        <Col style={Ui.currencyWidth}>
+                            <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
+                        </Col>
 
-                </Row>
-                <Row>
-
-                    <Col size={3}>
-                        <Text style={Ui.itemLabel}>{I18n.t('profit')}</Text>
-                    </Col>
-                    <Col size={3}>
-                        <Text style={Ui.balanceValue}>{bet._profit}</Text>
-                    </Col>
-                    <Col style={Ui.currencyWidth}>
-                        <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
-                    </Col>
-
-                </Row>
-
+                    </Row>
+                </Col>
             </Grid>
-        </Card>
+        </View>
     };
 
     getBetList = (bets) => {

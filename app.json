@@ -6,7 +6,7 @@
     "loading": {
 //      "backgroundImage": "./img/splashscreen.png",
       "hideExponentText": true,
-      "backgroundColor": "#344756",
+      "backgroundColor": "#ffffff",
       "icon": "./img/logo.png"
     },
     "orientation": "portrait",

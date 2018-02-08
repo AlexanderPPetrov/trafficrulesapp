@@ -110,7 +110,7 @@ export default {
   cardDefaultBg: "#fff",
 
   // Color
-  brandPrimary: "#fd6b59",
+  brandPrimary: ColorScheme.primaryButton,
   brandInfo: "#3F57D3",
   brandSuccess: "#5cb85c",
   brandDanger: "#d9534f",
@@ -175,7 +175,7 @@ export default {
 
   // InputGroup
   inputFontSize: 17,
-  inputBorderColor: "#D9D5DC",
+  inputBorderColor: ColorScheme.inputBorderColor,
   inputSuccessBorderColor: "#2b8339",
   inputErrorBorderColor: "#ed2f2f",
 
@@ -245,7 +245,7 @@ export default {
 
   // Text
   textColor: "#02121b",
-  inputTextColor: "#cececf",
+  inputTextColor: ColorScheme.inputTextColor,
   inverseTextColor: "#fff",
   noteFontSize: 14,
 

@@ -27,9 +27,9 @@ class BalanceTab extends React.Component {
 
     getBalanceList = () => {
         if (this.props.screenProps.loaded) {
-            return <Card style={{flexDirection: 'column', flex: 1, alignItems: 'stretch', marginTop: 1}}>
+            return <View style={{flexDirection: 'column', flex: 1, alignItems: 'stretch', marginTop: 1}}>
                 <Balance balances={this.props.screenProps.balances}></Balance>
-            </Card>
+            </View>
         }
         return null
     }
@@ -44,14 +44,14 @@ class BalanceTab extends React.Component {
             }>
 
                 <View style={styles.cardBody}>
-                    <Card style={styles.mainBalanceContainer}>
+                    <View style={styles.mainBalanceContainer}>
                         <SafeBalance _safe_balance={this.props.screenProps._payload._safe_balance}
                                      _currency={this.props.screenProps._payload._currency}></SafeBalance>
-                    </Card>
-                    <Card style={styles.mainBalanceContainer}>
+                    </View>
+                    <View style={styles.mainBalanceContainer}>
                         <BrokerageBalance _brokerage_balance={this.props.screenProps._payload._brokerage_balance}
                                           _currency={this.props.screenProps._payload._brokerage_currency}></BrokerageBalance>
-                    </Card>
+                    </View>
                 </View>
                 {this.getBalanceList()}
 

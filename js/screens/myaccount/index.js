@@ -38,7 +38,6 @@ class MyAccount extends Component {
             _payload: {
                 balances: []
             },
-            notificationsCounter:234,
             pieChartData: [],
             refreshing: false,
             loaded: false
@@ -107,8 +106,9 @@ class MyAccount extends Component {
     render() {
         return (
             <Container style={Ui.container}>
+
                 <Header
-                    hasTabs
+                    headerStyle={Ui.headerNoShadow}
                     title={I18n.t('myAccount')}
                 />
 

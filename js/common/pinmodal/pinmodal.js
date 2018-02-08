@@ -19,6 +19,7 @@ import {
     Body,
     Toast
 } from "native-base";
+import * as Animatable from 'react-native-animatable';
 
 
 const keyBoard = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'reset', '0', 'back'];
@@ -47,13 +48,19 @@ class PinModal extends Component {
             pinValues: ['-', '-', '-', '-'],
             currentIndex: 0,
             visible: true
+        }, () => {
+            this.refs.pinModal.slideInUp(500)
         })
+
     };
 
     hide = () => {
-        this.setState({
-            visible: false
-        })
+        this.refs.pinModal.fadeOutDown(500)
+        setTimeout(() => {
+            this.setState({
+                visible: false
+            })
+        }, 500)
     };
 
     getPinBox = (pinValue, i) => {
@@ -103,6 +110,7 @@ class PinModal extends Component {
 
         let value = keyValue,
             index = this.state.currentIndex;
+
         if (keyValue === 'back') {
             value = '-';
             index--;
@@ -127,11 +135,18 @@ class PinModal extends Component {
                     if (pinEntered === this.state.savedPin) {
                         _success()
                     } else {
-                        console.log('wrong pin')
+                        setTimeout(() => {
+                            this.setState({
+                                pinValues: ['-', '-', '-', '-'],
+                                currentIndex: 0
+                            })
+                        }, 300);
                         Toast.show({
                             text: I18n.t('wrongPin'),
-                            buttonText: I18n.t('ok')
+                            buttonText: I18n.t('ok'),
+
                         })
+                        return;
                     }
                 }
 
@@ -185,14 +200,15 @@ class PinModal extends Component {
             return null;
         }
         return (
-            <View style={styles.container}>
+
+            <Animatable.View ref="pinModal" style={styles.container} >
                 <StatusBar/>
                 <View style={styles.pinView}>
                     <Text style={styles.pinPromptText}>Enter PIN</Text>
                     {this.getPinBoxList()}
                 </View>
                 {this.getKeyboard()}
-            </View>
+            </Animatable.View>
         );
     }
 }

@@ -19,7 +19,8 @@ export default {
     mainBalance: {
         flex: 1,
         height: 80,
-        flexDirection: 'row',
+        flexDirection: 'column',
+        alignItems:'center',
         justifyContent: 'center',
     },
     balancesContainer: {
