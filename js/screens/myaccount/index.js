@@ -100,7 +100,7 @@ class MyAccount extends Component {
             loaded: true
         })
 
-        AsyncStorage.setItem('accountSettings', JSON.stringify(response))
+        Api.accountSettings = response;
     };
 
     render() {
@@ -108,7 +108,7 @@ class MyAccount extends Component {
             <Container style={Ui.container}>
 
                 <Header
-                    headerStyle={Ui.headerNoShadow}
+                    hasTabs
                     title={I18n.t('myAccount')}
                 />
 

@@ -20,6 +20,7 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {AsyncStorage} from "react-native";
 import Ui from '../../common/ui';
+import CommonPicker from '../../common/picker/picker';
 import Header from '../../common/header/header';
 
 const Item = Picker.Item;
@@ -28,11 +29,11 @@ import styles from "./styles";
 import Controller from "../../../Controller";
 
 const languages = [{
-    code:'en',
-    label:'English'
-},{
+    code: 'en',
+    label: 'English'
+}, {
     code: 'fr',
-    label:'Français'
+    label: 'Français'
 }];
 
 const switches = ['notificationsWithdrawDeposit', 'notificationsFundsTransfer', 'notificationsWeeklyStatus', 'notificationsBrokerageActivity', 'notificationsBettingTips', 'notificationsAdHocMessages']
@@ -63,34 +64,34 @@ class Transactions extends Component {
                 let key = store[i][0];
                 let value = store[i][1];
 
-                if(value == null || value == 'true'){
+                if (value == null || value == 'true') {
                     value = true;
-                }else{
+                } else {
                     value = false
                 }
                 this.setState({
-                    [key]:value
+                    [key]: value
                 })
             });
         });
 
         AsyncStorage.getItem('locale', (err, result) => {
             this.setState({
-                languageCode:result
+                languageCode: result
             });
         });
     };
 
     setNotification = (switchKey, value) => {
         this.setState({
-            [switchKey]:value
+            [switchKey]: value
         });
         AsyncStorage.setItem(switchKey, value.toString());
     };
 
     getSwitchLabelStyle = (switchKey) => {
         let notificationLabel = [Ui.itemLabel];
-        if(this.state[switchKey] == false){
+        if (this.state[switchKey] == false) {
             notificationLabel = [Ui.itemLabel, styles.notificationOff]
         }
         return notificationLabel
@@ -100,11 +101,11 @@ class Transactions extends Component {
         const switchList = switches.map((switchKey, i) => {
             return <ListItem key={i} style={Ui.listItem}>
                 <Col size={3}>
-                <Text style={this.getSwitchLabelStyle(switchKey)}>{I18n.t(switchKey)}</Text>
+                    <Text style={this.getSwitchLabelStyle(switchKey)}>{I18n.t(switchKey)}</Text>
                 </Col>
-                <Col size={1} >
-                <Switch style={{alignSelf:'flex-end'}} value={this.state[switchKey]}
-                            onValueChange={(value)=>this.setNotification(switchKey, value)}/>
+                <Col size={1}>
+                    <Switch style={{alignSelf: 'flex-end'}} value={this.state[switchKey]}
+                            onValueChange={(value) => this.setNotification(switchKey, value)}/>
                 </Col>
             </ListItem>
         });
@@ -129,32 +130,13 @@ class Transactions extends Component {
         const listItems = languages.map((language, i) =>
             <Item key={i} value={language.code} label={language.label}></Item>
         );
-        return  <Picker
-            mode="dropdown"
-            placeholder=""
-            iosHeader=" "
+        return <CommonPicker
+            title={I18n.t('language')}
             selectedValue={this.state.languageCode}
-            onValueChange={(value) =>
-                this.changeLanguage(value)
-            }
-            note={false}
-            renderHeader={backAction =>
-                <Header >
-                    <Left>
-                        <Button transparent onPress={backAction}>
-                            <Icon name="arrow-back"  />
-                        </Button>
-                    </Left>
-                    <Body style={{ flex: 3 }}>
-
-                    </Body>
-                    <Right />
-                </Header>}
-        >
-            {listItems}
-
-        </Picker>
-    }
+            onValueChange={this.changeLanguage}
+            listItems={listItems}
+        />
+    };
 
     render() {
         return (

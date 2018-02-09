@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Steps from '../../common/steps/index';
-import Chat from '../../common/chat/index';
+import CommonPicker from '../../common/picker/picker';
+
 import {
     Container,
     Card,
@@ -70,38 +71,21 @@ class PaymentMethod extends Component {
         }
     }
 
+    pickChangeHandler = (value) => {
+        this.props.setPayment(this.state.paymentMethods.find(method => method._key === value))
+    }
+
     getPicker = () => {
 
         const listItems = this.state.paymentMethods.map((method, i) =>
             <Item key={i} value={method._key} label={method._caption}></Item>
         );
-        return (
-            <Picker
-                mode="dropdown"
-                placeholder={I18n.t('paymentMethod')}
-                iosHeader=" "
+        return <CommonPicker
+                title={I18n.t('selectPaymentMethod')}
                 selectedValue={this.props.paymentMethod}
-                onValueChange={(value) =>
-                    this.props.setPayment(this.state.paymentMethods.find(method => method._key === value))
-                }
-                note={false}
-                renderHeader={backAction =>
-                    <Header >
-                        <Left>
-                            <Button transparent onPress={backAction}>
-                                <Icon name="arrow-back"  />
-                            </Button>
-                        </Left>
-                        <Body style={{ flex: 3 }}>
-
-                        </Body>
-                        <Right />
-                    </Header>}
-            >
-                {listItems}
-            </Picker>
-
-        );
+                onValueChange={this.pickChangeHandler}
+                listItems={listItems}
+            />
     }
 
     render() {
@@ -112,9 +96,7 @@ class PaymentMethod extends Component {
                 <Text style={Ui.formLabel}>{I18n.t('selectPaymentMethod')}</Text>
                 <View >
                     <Form style={Ui.form}>
-                        <View style={Ui.inputContainer}>
-                            {this.getPicker()}
-                        </View>
+                        {this.getPicker()}
                     </Form>
                 </View>
             </View>

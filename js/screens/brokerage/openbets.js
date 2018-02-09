@@ -19,9 +19,8 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import { ScrollView, RefreshControl, View } from "react-native";
 import Ui from '../../common/ui';
-
+import ColorScheme from '../../common/colorscheme';
 import styles from "./styles";
-import Tabs from "./tabs";
 import Api from "../../../Api";
 
 
@@ -69,8 +68,7 @@ class OpenBets extends Component {
     };
 
     getListItem = (bet, i) => {
-        return <Card key={i} style={{marginBottom: 0}}>
-            <Grid >
+        return  <Grid key={i} style={{borderBottomWidth:1, borderBottomColor: ColorScheme.listItemBorderColor}}>
                 <Col>
                     <Row style={{marginBottom:5}}>
                         <Text style={[Ui.cardHeader, styles.betId]}>{I18n.t('betNumber')} {bet._id}</Text>
@@ -108,7 +106,6 @@ class OpenBets extends Component {
                     </Row>
                 </Col>
             </Grid>
-        </Card>
     };
 
     getBetList = (bets) => {

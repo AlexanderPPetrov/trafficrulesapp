@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Steps from '../../common/steps/index';
-import Chat from '../../common/chat/index';
 import DepositSteps from './depositsteps';
 import {
     Container,
@@ -85,15 +84,6 @@ class Deposit extends Component {
         this.tabs.goForward()
     }
 
-    getChat = () => {
-        if (this.state.currentPage == this.state.steps - 1 || this.state.currentPage == this.state.steps) {
-            return null;
-        }
-        return (
-            <Chat></Chat>
-        )
-    }
-
     getHeader = () => {
 
         if (this.state.currentPage == 0 || this.state.currentPage == this.state.steps || this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
@@ -153,17 +143,16 @@ class Deposit extends Component {
                            onPress={() => Controller.navigateTo("FundsTransfer", {
                                paymentData: this.state.paymentData,
                            })}>
-                <Text style={styles.continueButtonLabel}>{I18n.t('fundsTransfer')}</Text>
+                <Text style={Ui.buttonLabel}>{I18n.t('fundsTransfer')}</Text>
             </Button>
         }
 
         if (this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
             return <View>
                 <Button primary rounded style={styles.continueButton} onPress={() => this.resetDeposit()}>
-                    <Text style={styles.continueButtonLabel}>{I18n.t('startOver')}</Text>
+                    <Text style={Ui.buttonLabel}>{I18n.t('startOver')}</Text>
                 </Button>
             </View>
-
 
         }
 
@@ -273,7 +262,6 @@ class Deposit extends Component {
                             {this.getErrorMessage()}
                             <View style={Ui.buttonsContainer}>
                                 {this.getButton()}
-                                {this.getChat()}
                             </View>
                         </View>
                     </View>

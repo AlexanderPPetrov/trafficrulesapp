@@ -68,11 +68,9 @@ class FundsTransferSteps extends Component {
 
     componentDidMount() {
         this.props.onRef(this)
-        AsyncStorage.getItem('accountSettings').then((value) => {
-            this.setState({
-                currency:JSON.parse(value)._currency
-            })
-        });
+        this.setState({
+            currency:Api.accountSettings._currency
+        })
     }
 
     addAccount = (stateKey) => {
@@ -185,11 +183,6 @@ class FundsTransferSteps extends Component {
 
         return data;
     }
-
-    // data.append("new_accounts_site[0]", "IBC");
-    // data.append("new_accounts_amount[0]", "2");
-    // data.append("existing_accounts_site[0]", "245");
-    // data.append("existing_accounts_amount[0]", "2");
 
     fundsTransferSuccess = () => {
         console.log('success')

@@ -21,7 +21,7 @@ import {
     Body,
     Input
 } from "native-base";
-
+import Api from '../../../Api'
 import {View, ScrollView, AsyncStorage} from 'react-native';
 import ColorScheme from "../../common/colorscheme";
 import Ui from '../../common/ui';
@@ -44,11 +44,9 @@ class Amount extends Component {
             this.props.disableButton(true)
         }
 
-        AsyncStorage.getItem('accountSettings').then((value) => {
             this.setState({
-                currency:JSON.parse(value)._currency
+                currency:Api.accountSettings._currency
             })
-        });
     }
 
     render() {

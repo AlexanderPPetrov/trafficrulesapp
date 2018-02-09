@@ -90,10 +90,11 @@ class Withdraw extends Component {
             return null;
         }
         return (
-                <Button style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                    <Text style={styles.continueButtonLabel}>{I18n.t('continue')}</Text>
+                <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
+                    <Text style={Ui.buttonLabel}>{I18n.t('continue')}</Text>
                 </Button>
         )
+
     }
 
     getHeader = () => {
@@ -130,7 +131,7 @@ class Withdraw extends Component {
             <Container style={Ui.container}>
                 {this.getHeader()}
                 <Content >
-                    <Card style={Ui.cardContainer}>
+                    <View style={Ui.cardContainer}>
                         {this.getOpenedRequests()}
                         <View style={{flex:1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
@@ -145,7 +146,7 @@ class Withdraw extends Component {
                                 </View>
                             </View>
                         </View>
-                    </Card>
+                    </View>
 
                 </Content>
 

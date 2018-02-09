@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Steps from '../../common/steps/index';
-import Chat from '../../common/chat/index';
 import {
     Container,
     Card,

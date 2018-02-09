@@ -136,8 +136,7 @@ class PreviousBalance extends Component {
 
     getChart = () => {
         if (this.state.balance.length >= 2) {
-            return <Card>
-                <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance}
+            return <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance}
                                       maxBalance={this.state.maxBalance}
                                       minBalance={this.state.minBalance}
                                       maxChange={this.state.maxChange}
@@ -146,17 +145,15 @@ class PreviousBalance extends Component {
                                       minValue={this.state.minValue}
                                       change={this.state.change} currency={this.props.navigation.state.params._currency}
                                       currentBalance={this.props.navigation.state.params._balance}/>
-            </Card>
+
         }
         return null
     }
 
     getBalances = () => {
         if (this.state.loaded && this.state._payload.balances.length > 0) {
-            return <Card>
-                <Balance navigation={this.props.navigation} balances={this.state._payload.balances}
+            return <Balance navigation={this.props.navigation} balances={this.state._payload.balances}
                          currency={this.props.navigation.state.params._currency}></Balance>
-            </Card>
         }
         return null
 

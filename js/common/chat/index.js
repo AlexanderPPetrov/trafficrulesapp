@@ -15,12 +15,13 @@ import {
     FooterTab,
     Left,
     Right,
-    Card,
     Body,
     CardItem
 } from "native-base";
+import Draggable from '../../common/draggable/Draggable';
 
 import {Ionicons} from '@expo/vector-icons';
+import Ui from '../ui'
 
 import {Grid, Row, Col} from "react-native-easy-grid";
 import styles from "./styles";
@@ -28,16 +29,20 @@ import styles from "./styles";
 
 class Chat extends Component {
 
+
+
     render() {
-        return (
-            <View style={{paddingTop:30}}>
-                <Button style={styles.chatButton} iconLeft transparent primary block onPress={() => console.log('chat pat')}>
-                    <Icon name='ios-chatbubbles' />
-                    <Text>{I18n.t('contactOperators')}</Text>
-                </Button>
+        return <View style={Ui.chatContainer}>
+                <Draggable reverse={false} renderComponent={
+                    <View style={Ui.chatButton}>
+                        <Icon name='ios-chatbubbles' />
+                        <Text>{I18n.t('contactOperators')}</Text>
+                    </View>
+                } x={0} y={0} renderText='B' pressDrag={()=>alert('touched!!')}/>
             </View>
 
-        );
+
+
     }
 }
 

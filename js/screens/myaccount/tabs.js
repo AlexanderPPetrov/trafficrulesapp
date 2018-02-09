@@ -3,9 +3,8 @@ import I18n from '../../../i18n/i18n';
 import {TabNavigator, TabBarTop} from "react-navigation";
 import Balance from "./balance";
 import PieChartBalance from "./piechart";
-import SafeBalance from "./safebalance";
 import styles from "./styles";
-import BrokerageBalance from "./brokeragebalance";
+import BalanceHeader from "../../common/balanceheader/balanceheader";
 import ColorScheme from "../../common/colorscheme";
 import {View, ScrollView, RefreshControl} from "react-native"
 import {
@@ -42,17 +41,14 @@ class BalanceTab extends React.Component {
                     onRefresh={this.props.screenProps.onRefresh}
                 />
             }>
-
-                <View style={styles.cardBody}>
-                    <View style={styles.mainBalanceContainer}>
-                        <SafeBalance _safe_balance={this.props.screenProps._payload._safe_balance}
-                                     _currency={this.props.screenProps._payload._currency}></SafeBalance>
-                    </View>
-                    <View style={styles.mainBalanceContainer}>
-                        <BrokerageBalance _brokerage_balance={this.props.screenProps._payload._brokerage_balance}
-                                          _currency={this.props.screenProps._payload._brokerage_currency}></BrokerageBalance>
-                    </View>
-                </View>
+                <BalanceHeader
+                    balanceLeft={this.props.screenProps._payload._safe_balance}
+                    currencyLeft={this.props.screenProps._payload._currency}
+                    titleLeft={I18n.t('safeBalance')}
+                    balanceRight={this.props.screenProps._payload._brokerage_balance}
+                    currencyRight={this.props.screenProps._payload._brokerage_currency}
+                    titleRight={I18n.t('brokerageBalance')}
+                />
                 {this.getBalanceList()}
 
             </ScrollView>
@@ -68,9 +64,9 @@ class PieChartTab extends React.Component {
 
     render() {
         return (
-            <Card style={styles.cardBody}>
+            <View style={styles.cardBody}>
                 <PieChartBalance data={this.props.screenProps.data}></PieChartBalance>
-            </Card>
+            </View>
         );
     }
 }

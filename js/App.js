@@ -12,6 +12,7 @@ import PinModal from "./common/pinmodal/pinmodal";
 
 import Controller from '../Controller';
 import Notifications from "./common/notifications/index";
+import Chat from "./common/chat/index";
 
 const AppNavigator = StackNavigator(
     {
@@ -54,6 +55,7 @@ class AppRoot extends React.Component {
                     Controller.setPinModal(pinModal);
                 }}/>
                 <Notifications/>
+                {/*<Chat/>*/}
             </Root>
         );
     }

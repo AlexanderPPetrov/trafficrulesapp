@@ -29,6 +29,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 
 import styles from "./styles";
 import Ui from '../../common/ui';
+import Api from '../../../Api';
 
 class Amount extends Component {
 
@@ -44,11 +45,9 @@ class Amount extends Component {
             this.props.disableButton(true)
         }
 
-        AsyncStorage.getItem('accountSettings').then((value) => {
             this.setState({
-                currency:JSON.parse(value)._currency
+                currency:Api.accountSettings._currency
             })
-        });
     }
 
     render() {

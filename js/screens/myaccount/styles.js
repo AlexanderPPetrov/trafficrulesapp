@@ -7,22 +7,11 @@ import Ui from '../../common/ui';
 
 export default {
 
-    mainBalanceContainer: {
-        flex: 1
-    },
     cardBody: {
         flexDirection: 'row',
         flex: 1,
     },
 
-
-    mainBalance: {
-        flex: 1,
-        height: 80,
-        flexDirection: 'column',
-        alignItems:'center',
-        justifyContent: 'center',
-    },
     balancesContainer: {
         paddingBottom: 100
     },

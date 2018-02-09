@@ -26,6 +26,7 @@ import Ui from '../../common/ui';
 import {View, ScrollView} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import ColorScheme from "../../common/colorscheme";
+import CommonPicker from '../../common/picker/picker';
 
 import styles from "./styles";
 import Api from "../../../Api";
@@ -75,30 +76,14 @@ class AddAccount extends Component {
             <PickerItem key={i} value={currency._code} label={currency._code}></PickerItem>
         );
         return (
-            <Picker
-                mode="dropdown"
-                placeholder={I18n.t('selectCurrency')}
-                iosHeader=" "
-                selectedValue={this.props.currency}
-                onValueChange={(value) =>
-                    this.props.changeValue('currency', value)
-                }
-                note={false}
-                renderHeader={backAction =>
-                    <Header >
-                        <Left>
-                            <Button transparent onPress={backAction}>
-                                <Icon name="arrow-back"  />
-                            </Button>
-                        </Left>
-                        <Body style={{ flex: 3 }}>
 
-                        </Body>
-                        <Right />
-                    </Header>}
-            >
-                {listItems}
-            </Picker>
+            <CommonPicker
+        title={I18n.t('selectCurrency')}
+        selectedValue={this.props.currency}
+        onValueChange={(value) =>
+        this.props.changeValue('currency', value)}
+        listItems={listItems}
+        />
 
         );
     };
@@ -141,9 +126,7 @@ class AddAccount extends Component {
                         </Row>
                         <Row>
                             <Col style={styles.currencyPicker}>
-                                <Form style={[Ui.inputContainer]}>
-                                    {this.getPicker()}
-                                </Form>
+                                {this.getPicker()}
                             </Col>
                             <Col style={{paddingLeft:15}}>
                                 <Form style={[Ui.inputContainer]}>

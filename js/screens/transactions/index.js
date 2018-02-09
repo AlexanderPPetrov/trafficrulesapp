@@ -21,7 +21,7 @@ import Ui from '../../common/ui';
 import Controller from '../../../Controller';
 import Header from '../../common/header/header';
 
-import DatePicker from 'react-native-datepicker'
+import DatePicker from '../../common/datepicker/datepicker'
 
 import styles from "./styles";
 import Api from "../../../Api";
@@ -145,48 +145,18 @@ class Transactions extends Component {
         return <Grid>
             <Row>
                 <Col>
-                    <Card style={Ui.datePickerContainer}>
-                        <Text style={Ui.datePickerLabel}>{I18n.t('from')}</Text>
-                        <DatePicker
-                            style={{alignSelf: 'flex-end'}}
-                            date={this.state.dateFrom}
-                            customStyles={Ui.datePickerStyles}
-                            format="YYYY-MM-DD"
-                            mode="date"
-                            iconComponent={<Icon active name='ios-calendar-outline' style={Ui.calendarIcon}/>}
-                            // minDate={new Date('2017-1-1')}
-                            maxDate={new Date()}
-                            placeholder={I18n.t('from')}
-                            onDateChange={(date) => {
-                                this.dateFromChange(date)
-                            }}
-                            confirmBtnText={I18n.t('ok')}
-                            cancelBtnText={I18n.t('cancel')}
-                            btnTextConfirm={I18n.t('ok')}
-                            btnTextCancel={I18n.t('cancel')}
-                        />
-                    </Card>
+                    <DatePicker
+                        date={this.state.dateFrom}
+                        title={I18n.t('from')}
+                        onDateChange={this.dateFromChange}
+                    />
                 </Col>
                 <Col>
-                    <Card style={Ui.datePickerContainer}>
-                        <Text style={Ui.datePickerLabel}>{I18n.t('to')}</Text>
-                        <DatePicker
-                            style={{alignSelf: 'flex-end'}}
-                            customStyles={Ui.datePickerStyles}
-                            date={this.state.dateTo}
-                            mode="date"
-                            iconComponent={<Icon active name='ios-calendar-outline' style={Ui.calendarIcon}/>}
-                            maxDate={new Date()}
-                            placeholder={I18n.t('to')}
-                            onDateChange={(date) => {
-                                this.dateToChange(date)
-                            }}
-                            confirmBtnText={I18n.t('ok')}
-                            cancelBtnText={I18n.t('cancel')}
-                            btnTextConfirm={I18n.t('ok')}
-                            btnTextCancel={I18n.t('cancel')}
-                        />
-                    </Card>
+                    <DatePicker
+                        date={this.state.dateTo}
+                        title={I18n.t('to')}
+                        onDateChange={this.dateToChange}
+                    />
                 </Col>
             </Row>
         </Grid>
@@ -239,7 +209,7 @@ class Transactions extends Component {
         let cardListItems = listOrder.map((property, i) =>
             this.getListItem(transaction, property, i)
         );
-        return <Card key={i}>
+        return <View key={i}>
             <List >
                 <ListItem itemDivider style={[Ui.listHeader, Ui.listHeaderExtended]}>
                     <Grid>
@@ -259,7 +229,7 @@ class Transactions extends Component {
                 </ListItem>
                 {cardListItems}
             </List>
-        </Card>;
+        </View>;
     };
 
     _keyExtractor = (item, index) => index;
@@ -273,16 +243,14 @@ class Transactions extends Component {
                 <View style={{height:80}}>
                     {this.getFilter()}
                 </View>
-                <List>
-                    <FlatList
-                        refreshing={this.state.refreshing}
-                        onRefresh={this.onRefresh}
-                        keyExtractor={this._keyExtractor}
-                        removeClippedSubviews={false}
-                        data={this.state._payload.transactions}
-                        renderItem={({item}) => this.getCard(item)}
-                    />
-                </List>
+                <FlatList
+                    refreshing={this.state.refreshing}
+                    onRefresh={this.onRefresh}
+                    keyExtractor={this._keyExtractor}
+                    removeClippedSubviews={false}
+                    data={this.state._payload.transactions}
+                    renderItem={({item}) => this.getCard(item)}
+                />
             </Container>
 
         );

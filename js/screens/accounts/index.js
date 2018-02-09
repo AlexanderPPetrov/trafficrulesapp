@@ -70,7 +70,7 @@ class Accounts extends Component {
         return (
             <Container style={Ui.container}>
                 <Header
-                    title={I18n.t('myAccount')}
+                    title={I18n.t('accounts')}
                 />
                 <ScrollView refreshControl={
                     <RefreshControl

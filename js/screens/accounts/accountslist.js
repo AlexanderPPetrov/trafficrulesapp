@@ -4,7 +4,7 @@ import {AppRegistry, SectionList, StyleSheet, Text, View, ScrollView} from 'reac
 import styles from "./styles";
 import {SimpleLineIcons, MaterialCommunityIcons} from '@expo/vector-icons';
 import {Grid, Row, Col} from "react-native-easy-grid";
-import {Button, Content, Card, CardItem, List, ListItem, Separator, Right, Left, Body} from "native-base";
+import {Button, Content,  List, ListItem, Separator, Right, Left, Body} from "native-base";
 import Ui from '../../common/ui';
 
 const accountTypes = ['sport']

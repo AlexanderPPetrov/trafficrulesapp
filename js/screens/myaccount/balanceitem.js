@@ -11,7 +11,7 @@ import CurrencyIcon from '../../common/currency/currency';
 class BalanceItem extends Component {
 
     getCurrencyIcon = () => {
-        return <CurrencyIcon color='#fff' size={26} currency={this.props._currency.toLowerCase()}/>
+        return <CurrencyIcon color='#fff' size={26} currency={this.props._currency}/>
     };
 
     render() {

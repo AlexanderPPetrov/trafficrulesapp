@@ -26,6 +26,11 @@ export default {
     monthLabelColor: '#afafaf',
     balanceHeaderColor: '#b1b1b1',
     mainCurrencyColor:'#252525',
+    chatBackgroundColor:'#ff3333',
+    listItemBorderColor:'#f2f2f2',
+
+
+
 
     darkest:'#151515',
     darker:'#252525',

@@ -14,9 +14,7 @@ import {
     FooterTab,
     Left,
     Right,
-    Card,
     Body,
-    CardItem
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import Expo from "expo";

@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import {VictoryPie,VictoryContainer, VictoryPortal, VictoryLabel} from 'victory-native';
-import {View, Text, Dimensions, AsyncStorage} from 'react-native';
+import {View, Text, Dimensions} from 'react-native';
 import I18n from '../../../i18n/i18n';
 import styles from "./styles";
 import ColorScheme from "../../common/colorscheme";
 import Ui from '../../common/ui';
-
+import Api from '../../../Api'
 
 class PieChartBalance extends Component {
 
@@ -27,11 +27,9 @@ class PieChartBalance extends Component {
     }
 
     componentDidMount (){
-        AsyncStorage.getItem('accountSettings').then((value) => {
-            this.setState({
-                currency:JSON.parse(value)._currency
-            })
-        });
+        this.setState({
+            currency:Api.accountSettings._currency
+        })
     }
     render() {
 

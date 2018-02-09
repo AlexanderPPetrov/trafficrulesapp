@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Steps from '../../common/steps/index';
-import Chat from '../../common/chat/index';
 import SendMoneySteps from './sendmoneysteps';
 import {
     Container,
@@ -76,24 +75,16 @@ class SendMoney extends Component {
         this.tabs.goForward()
     };
 
-    getChat = () => {
-        if (this.state.currentPage == this.state.steps) {
-            return null;
-        }
-        return (
-            <Chat></Chat>
-        )
-    }
-
     getButton = () => {
         if (this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
-            <Button style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                <Text style={styles.continueButtonLabel}>{I18n.t('continue')}</Text>
+            <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
+                <Text style={Ui.buttonLabel}>{I18n.t('continue')}</Text>
             </Button>
         )
+
     };
 
     getHeader = () => {
@@ -120,7 +111,7 @@ class SendMoney extends Component {
             <Container style={Ui.container}>
                 {this.getHeader()}
                 <Content>
-                    <Card style={Ui.cardContainer}>
+                    <View style={Ui.cardContainer}>
                         <View style={{flex: 1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
 
@@ -132,11 +123,10 @@ class SendMoney extends Component {
 
                                 <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
-                                    {this.getChat()}
                                 </View>
                             </View>
                         </View>
-                    </Card>
+                    </View>
                 </Content>
 
             </Container>
