@@ -1,4 +1,5 @@
 export default {
+    confirmLocaleQuestion: 'Do you want to switch language to: ',
     username: 'Username',
     password: 'Password',
     login: 'Log in',

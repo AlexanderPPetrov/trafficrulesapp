@@ -36,10 +36,12 @@ class NotificationsHandler extends Component {
     }
 
     static startListen = () => {
-        notificationsInstance.registerForPushNotificationsAsync()
-        notificationsInstance.setState({
-            renderNotificationsContainer:true
-        })
+        if(notificationsInstance){
+            notificationsInstance.registerForPushNotificationsAsync()
+            notificationsInstance.setState({
+                renderNotificationsContainer:true
+            })
+        }
     };
 
     componentWillMount() {

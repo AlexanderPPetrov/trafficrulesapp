@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { ScrollView , View, Dimensions } from "react-native";
-import Expo from "expo";
+import React, {Component} from "react";
+import {ScrollView, View, Dimensions, Alert} from "react-native";
 import NotificationsHandler from "../../common/notifications/index";
 import {Toast} from "native-base";
+import Expo, {Notifications} from 'expo';
 
 import I18n from '../../../i18n/i18n';
 import Logo from '../../common/logo/logo';
 import ColorScheme from "../../common/colorscheme";
 import StatusBar from "../../common/header/statusbar";
 
-import { Container, Button, H3, Header, Title, Body, Left, Right, Text } from "native-base";
+import {Container, Button, H3, Header, Title, Body, Left, Right, Text} from "native-base";
 import Login from "./login";
 import SetPin from "./setpin";
 import styles from "./styles";
 import Api from '../../../Api';
 import Controller from '../../../Controller';
-
+import {AsyncStorage} from "react-native";
 
 
 class Landing extends Component {
@@ -27,29 +27,76 @@ class Landing extends Component {
         this.state = {
             username: '',
             password: '',
-            pin:'',
+            pin: '',
             pinEntered: '',
-            setPin:false,
-            scale:scale,
-            width:width,
-            height:height
+            setPin: false,
+            scale: scale,
+            width: width,
+            height: height
 
         }
     }
 
     componentDidMount = () => {
+        this.setDeviceToken()
         this.readSecureItem('username')
         this.readSecureItem('password')
         this.readSecureItem('pin')
+        this.readLocale()
+    };
+
+    setDeviceToken = async () => {
+        let token = await Notifications.getExpoPushTokenAsync();
+        Api.deviceToken = token;
+
+    };
+
+    readLocale = () => {
+        AsyncStorage.getItem('locale', (err, result) => {
+            if (!result) {
+                this.detectLocale()
+            }else{
+                I18n.locale = result;
+                this.forceUpdate()
+            }
+        });
+    };
+
+    detectLocale = async () => {
+
+        let locale = await Expo.Util.getCurrentLocaleAsync();
+        const language = locale.split('_')[0];
+        if (language != 'en') {
+            this.showChangeLocaleConfirm(locale, language)
+        }
+
+    };
+
+    showChangeLocaleConfirm = (locale, language) => {
+        Alert.alert(
+            I18n.t('confirm'),
+            I18n.t('confirmLocaleQuestion') + locale,
+            [
+                {text: I18n.t('cancel')},
+                {text: I18n.t('ok'), onPress: () => this.setLocale(language)}
+            ]
+        )
+    };
+
+    setLocale = (language) => {
+        AsyncStorage.setItem('locale', language, () => {
+            I18n.locale = language;
+            Api.setLocale = true
+        });
     };
 
     readSecureItem = (key) => {
         Expo.SecureStore.getItemAsync(key)
             .then((value) => {
                 this.setState({
-                    [key]:value
+                    [key]: value
                 }, () => {
-                    if(key === 'pin' && value){
+                    if (key === 'pin' && value) {
                         Controller.showPinModal(this.state.pin, this.loginHandler, this.resetPin);
                     }
                 })
@@ -63,8 +110,9 @@ class Landing extends Component {
 
     resetPin = () => {
         this.setState({
-            password:''
-        })
+            password: ''
+        });
+
         this.deleteSecureItem('pin');
         this.deleteSecureItem('password');
     };
@@ -74,7 +122,7 @@ class Landing extends Component {
         Expo.SecureStore.deleteItemAsync(key)
             .then((value) => {
                 this.setState({
-                    [key]:value
+                    [key]: value
                 })
             })
             .catch((error) => {
@@ -98,6 +146,7 @@ class Landing extends Component {
         let loginData = {
             username: this.state.username,
             password: this.state.password,
+            device_id: Api.deviceToken
         };
 
         Api.post({
@@ -111,8 +160,8 @@ class Landing extends Component {
 
     loginError = (message) => {
 
-        if(message === 'wrong_user_name_or_password' || message === 'invalid_or_missing_credetials'){
-            if(this.state.pin){
+        if (message === 'wrong_user_name_or_password' || message === 'invalid_or_missing_credetials') {
+            if (this.state.pin) {
                 this.deleteSecureItem('pin')
                 this.deleteSecureItem('password')
             }
@@ -124,19 +173,19 @@ class Landing extends Component {
     };
 
     setValue = (key, value) => {
-    	this.setState({
-			[key]: value
-		})
-	}
+        this.setState({
+            [key]: value
+        })
+    };
 
     changeValue = (value) => {
         value = value.replace(/[^0-9]/g, '');
 
         this.setState({
             pinEntered: value
-        })
+        });
 
-        if(this.state.pin === value){
+        if (this.state.pin === value) {
             this.login()
         }
 
@@ -147,12 +196,12 @@ class Landing extends Component {
         NotificationsHandler.startListen();
         if (this.state.pin) {
 
-            if(Controller.redirectScreen){
+            if (Controller.redirectScreen) {
                 Controller.navigateTo(Controller.redirectScreen, Controller.notificationData)
-            }else{
+            } else {
                 Controller.navigateTo("MyAccount")
             }
-            setTimeout(()=> {
+            setTimeout(() => {
                 Controller.hidePinModal();
             }, 300)
 
@@ -160,7 +209,7 @@ class Landing extends Component {
             Expo.SecureStore.setItemAsync('username', this.state.username)
                 .then(() => Expo.SecureStore.setItemAsync('password', this.state.password)
                     .then(() => this.setState({
-                        setPin:true
+                        setPin: true
 
                     }))
                     .catch((error) => {
@@ -174,42 +223,44 @@ class Landing extends Component {
 
     };
 
-	getLandingScreen = () => {
-		if(this.state.pin === '') {
-		    console.log(this.state.pin, '1')
-			return null;
-		}
+    getLandingScreen = () => {
+        if (this.state.pin === '') {
+            console.log(this.state.pin, '1')
+            return null;
+        }
 
-		if(this.state.setPin) {
+        if (this.state.setPin) {
             console.log(this.state.pin, '2')
 
             return <ScrollView contentContainerStyle={styles.loginContainer}>
-                <SetPin navigation={this.props.navigation} >
+                <SetPin navigation={this.props.navigation}>
                 </SetPin>
-            </ScrollView >
+            </ScrollView>
         }
         console.log(this.state.pin, '3')
 
 
         return <ScrollView contentContainerStyle={styles.loginContainer}>
-			<View style={styles.imageContainer}>
-				<Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.logoSlogan}></Logo>
-				{/*<View>*/}
-				{/*<MaterialCommunityIcons name="account-box" size={100} style={styles.avatar}></MaterialCommunityIcons>*/}
-				{/*<Text style={styles.helloMessage}>Hello John!</Text>*/}
-				{/*</View>*/}
-			</View>
-			<Login navigation={this.props.navigation} username={this.state.username} password={this.state.password} setValue={this.setValue} loginHandler={this.loginHandler}></Login>
-		</ScrollView >
-	}
+            <View style={styles.imageContainer}>
+                <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary}
+                      slogan={ColorScheme.logoSlogan}></Logo>
+                {/*<View>*/}
+                {/*<MaterialCommunityIcons name="account-box" size={100} style={styles.avatar}></MaterialCommunityIcons>*/}
+                {/*<Text style={styles.helloMessage}>Hello John!</Text>*/}
+                {/*</View>*/}
+            </View>
+            <Login navigation={this.props.navigation} username={this.state.username} password={this.state.password}
+                   setValue={this.setValue} loginHandler={this.loginHandler}></Login>
+        </ScrollView>
+    }
 
-	render() {
+    render() {
 
-		return <Container>
+        return <Container>
             <StatusBar/>
-			{this.getLandingScreen()}
-		</Container>
-	}
+            {this.getLandingScreen()}
+        </Container>
+    }
 }
 
 

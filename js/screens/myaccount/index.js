@@ -46,7 +46,18 @@ class MyAccount extends Component {
 
     componentDidMount = () => {
         this.loadData()
+        this.checkIfLocaleSet()
     };
+
+    checkIfLocaleSet = () => {
+        if(Api.setLocale){
+            Api.post({
+                url: 'set-member-language',
+                success: (response)=> console.log('language changed to', response._language),
+                data: {language: I18n.locale}
+            })
+        }
+    }
 
     componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
@@ -106,15 +117,12 @@ class MyAccount extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-
                 <Header
                     hasTabs
                     title={I18n.t('myAccount')}
                 />
 
                 <Tabs loaded={this.state.loaded} balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>
-
-
             </Container>
         );
     }

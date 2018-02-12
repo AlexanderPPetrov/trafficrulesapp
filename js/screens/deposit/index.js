@@ -29,6 +29,7 @@ import Header from '../../common/header/header';
 
 import styles from "./styles";
 import Controller from '../../../Controller';
+import Chat from '../../common/chat/index';
 
 class Deposit extends Component {
 
@@ -47,6 +48,12 @@ class Deposit extends Component {
         }
     }
 
+    componentDidMount = () =>{
+        Chat.show()
+    }
+    componentWillUnmount = () =>{
+        Chat.hide()
+    }
     setRedirectUrl = (value) => {
         this.setState({_redirect_url: value})
     }

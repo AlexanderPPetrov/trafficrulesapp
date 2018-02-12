@@ -89,6 +89,10 @@ class SideBar extends Component {
         };
     }
 
+    componentDidMount = () => {
+        Controller.updateSideBar(I18n.locale)
+    }
+
     changeLanguage = (language) => {
         this.setState({
             language

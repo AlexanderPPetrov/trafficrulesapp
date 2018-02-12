@@ -14,25 +14,17 @@ class Loader extends Component {
     }
 
     static show = () => {
-        if(loaderInstance){
-            loaderInstance.showLoader()
-        }
+        if(loaderInstance) loaderInstance.showLoader(true)
     }
+
     static hide = () => {
-        if(loaderInstance){
-            loaderInstance.hideLoader()
-        }
+        if(loaderInstance) loaderInstance.showLoader(false)
+
     }
 
-    hideLoader() {
+    showLoader(loaderVisible) {
         this.setState({
-            loaderVisible: false
-        })
-    }
-
-    showLoader() {
-        this.setState({
-            loaderVisible: true
+            loaderVisible
         })
     }
 

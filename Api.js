@@ -19,6 +19,8 @@ const monthKeys =  ["january", "february", "march", "april", "may", "june", "jul
 let Api = {
     auth:'',
     accountSettings: {},
+    deviceToken: '',
+    setLocale:false,
     post: (opts = {}) => {
         Api.executeRequest(opts, 'POST')
     },

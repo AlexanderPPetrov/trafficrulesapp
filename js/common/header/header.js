@@ -48,7 +48,11 @@ class HeaderWrapper extends Component {
 
         return <Button
             transparent
-            onPress={() => Controller.navigateTo("DrawerOpen")}
+            onPress={() => {
+                    Controller.navigateTo("DrawerOpen")
+                    Controller.updateSideBar(I18n.locale)
+                }
+            }
         >
             <Icon name="ios-menu"/>
         </Button>

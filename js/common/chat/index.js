@@ -26,11 +26,35 @@ import Ui from '../ui'
 import {Grid, Row, Col} from "react-native-easy-grid";
 import styles from "./styles";
 
-
+let chatInstance = null;
 class Chat extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            chatVisible: false
+        };
+
+        chatInstance = this;
+    }
+
+    static show = () => {
+        if(chatInstance) chatInstance.showChat(true)
+    };
+
+    static hide = () => {
+        if(chatInstance) chatInstance.showChat(false)
+    };
+
+    showChat = (chatVisible) => {
+        this.setState({
+            chatVisible
+        })
+    };
 
     render() {
+        if(!this.state.chatVisible) return null;
+
         return <Draggable reverse={false} renderComponent={
                     <View style={Ui.chatButton}>
                         <Icon name='ios-chatbubbles' />

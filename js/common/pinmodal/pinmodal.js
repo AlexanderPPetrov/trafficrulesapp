@@ -204,7 +204,7 @@ class PinModal extends Component {
             <Animatable.View ref="pinModal" style={styles.container} >
                 <StatusBar/>
                 <View style={styles.pinView}>
-                    <Text style={styles.pinPromptText}>Enter PIN</Text>
+                    <Text style={styles.pinPromptText}>{I18n.t('enterPin')}</Text>
                     {this.getPinBoxList()}
                 </View>
                 {this.getKeyboard()}

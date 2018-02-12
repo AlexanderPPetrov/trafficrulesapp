@@ -27,6 +27,7 @@ const Item = Picker.Item;
 
 import styles from "./styles";
 import Controller from "../../../Controller";
+import Api from "../../../Api";
 
 const languages = [{
     code: 'en',
@@ -87,6 +88,15 @@ class Transactions extends Component {
             [switchKey]: value
         });
         AsyncStorage.setItem(switchKey, value.toString());
+
+        //http://api-prmts.dev.cc/v1/set-member-device-notificatoin-setting
+        Api.post({
+            url: 'set-member-device-notification-setting',
+            success: (response)=> console.log('language changed to', response._language),
+            data: {
+                device_id: Api.deviceToken,
+            }
+        })
     };
 
     getSwitchLabelStyle = (switchKey) => {
@@ -124,6 +134,11 @@ class Transactions extends Component {
         Controller.updateSideBar(value)
         AsyncStorage.setItem('locale', value);
 
+        Api.post({
+            url: 'set-member-language',
+            success: (response)=> console.log('language changed to', response._language),
+            data: {language: I18n.locale}
+        })
     };
 
     getLanguagePicker = () => {

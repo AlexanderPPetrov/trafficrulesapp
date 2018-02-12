@@ -7,6 +7,8 @@ export default {
     brokerage:'Courtage',
     deposit:'Dépôt',
     withdraw:'Se désister',
+    enterPin: 'Entrer la broche',
+    resetPin: 'Réinitialiser?',
     fundsTransfer:'Transfert de fonds',
     transactions:'Transactions',
     sendMoney:'Envoyer de l\'argent',

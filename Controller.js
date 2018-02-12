@@ -35,8 +35,9 @@ let Controller = {
     },
 
     updateSideBar: language => {
-        _sidebar.changeLanguage(language)
-        _navigator.forceUpdate()
+
+        if(_sidebar) _sidebar.changeLanguage(language)
+        if(_navigator) _navigator.forceUpdate()
     },
 
     goBack: () => {
