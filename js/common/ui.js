@@ -131,8 +131,8 @@ export default {
         backgroundColor: 'blue',
     },
     chatButton: {
-        width: 76,
-        height: 76,
+        width: 80,
+        height: 80,
         borderRadius: 38,
         backgroundColor: ColorScheme.chatBackgroundColor,
         elevation: 3,

@@ -55,7 +55,7 @@ class AppRoot extends React.Component {
                     Controller.setPinModal(pinModal);
                 }}/>
                 <Notifications/>
-                {/*<Chat/>*/}
+                <Chat/>
             </Root>
         );
     }

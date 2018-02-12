@@ -30,19 +30,13 @@ import styles from "./styles";
 class Chat extends Component {
 
 
-
     render() {
-        return <View style={Ui.chatContainer}>
-                <Draggable reverse={false} renderComponent={
+        return <Draggable reverse={false} renderComponent={
                     <View style={Ui.chatButton}>
                         <Icon name='ios-chatbubbles' />
                         <Text>{I18n.t('contactOperators')}</Text>
                     </View>
                 } x={0} y={0} renderText='B' pressDrag={()=>alert('touched!!')}/>
-            </View>
-
-
-
     }
 }
 
