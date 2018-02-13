@@ -7,7 +7,7 @@ import {
     Body,
     Right,
     Button,
-    Icon,
+    Icon
 
 } from "native-base";
 
@@ -27,9 +27,11 @@ class CommonPicker extends Component {
 
         return <View style={Ui.inputContainer}>
                 <Picker
+                    style={{width:'100%'}}
                     mode="dropdown"
                     placeholder=""
                     iosHeader=" "
+                    iosIcon={<Icon name="ios-arrow-down-outline"/>}
                     selectedValue={this.props.selectedValue}
                     onValueChange={(value) => this.props.onValueChange(value)}
                     renderHeader={backAction =>
@@ -44,7 +46,7 @@ class CommonPicker extends Component {
                                 <Title style={{paddingLeft:15}}>{this.props.title}</Title>
                             </Body>
                         </Header>}
-                    note={false}
+                    note={true}
                 >
                     {this.props.listItems}
                 </Picker>
