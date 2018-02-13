@@ -22,12 +22,13 @@ import {AsyncStorage} from "react-native";
 import Ui from '../../common/ui';
 import CommonPicker from '../../common/picker/picker';
 import Header from '../../common/header/header';
-
-const Item = Picker.Item;
-
 import styles from "./styles";
 import Controller from "../../../Controller";
 import Api from "../../../Api";
+
+const Item = Picker.Item;
+
+
 
 const languages = [{
     code: 'en',

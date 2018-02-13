@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
+import Header from '../../common/header/header';
+
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -17,7 +18,7 @@ import {
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-import {View, FlatList, RefreshControl} from "react-native";
+import {ScrollView} from "react-native";
 import Ui from '../../common/ui';
 
 import DatePicker from 'react-native-datepicker'
@@ -25,279 +26,223 @@ import DatePicker from 'react-native-datepicker'
 import styles from "./styles";
 import Api from "../../../Api";
 
-const listOrder = ['_payment_method', '_account', '_fee', '_amount', '_date_created', '_status'];
-const statuses = ['confirmed','pending','rejected','cancelled','failed','authorized','changed','inspected','revoked'];
 
-const translationKeys = {
-    _payment_method:'paymentMethod',
-    _account: 'account',
-    _fee:'fee',
-    _amount:'amount',
-    _date_created:'dateCreated',
-    _status:'status'
-}
-
-const transactionTypes = {
-    1: 'safeDeposit',
-    2: 'cashDeposit',
-    4: 'safeWithdraw',
-    5: 'cashWithdraw',
-    10: 'deposit',
-    11: 'withdraw',
-    13: 'receiveMoney',
-    14: 'sendMoney',
-}
-
-//  default: return 'Cash Deposit';
-
-class Transactions extends Component {
+class WeeklyStatus extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            _payload: {
-                transactions: []
-            },
-            refreshing: false,
-            dateFrom: null,
-            dateTo: null,
-            loaded: false
+            weekly_status: {
+                "cash_balances": [{
+                    "_currency": "BTC",
+                    "_balance": "0.00"
+                },
+                    {
+                        "_currency": "EUR",
+                        "_balance": "190.00"
+                    },
+                    {
+                        "_currency": "GBP",
+                        "_balance": "20.00"
+                    },
+                    {
+                        "_currency": "P",
+                        "_balance": "104.00"
+                    },
+                    {
+                        "_currency": "USD",
+                        "_balance": "32.00"
+                    }
+                ],
+                "accounts_balances": {
+                    "EUR": {
+                        "0": {
+                            "_site": "1 Bet",
+                            "_username": "1Bet",
+                            "_currency": "EUR",
+                            "_balance": "0.00"
+                        },
+                        "1": {
+                            "_site": "1 Bet",
+                            "_username": "hhh561",
+                            "_currency": "EUR",
+                            "_balance": "0.00"
+                        },
+                        "2": {
+                            "_site": "1 Bet",
+                            "_username": "hhh562",
+                            "_currency": "EUR",
+                            "_balance": "0.00"
+                        },
+                        "3": {
+                            "_site": "IBC BET",
+                            "_username": "klimentTest02",
+                            "_currency": "EUR",
+                            "_balance": "0.00"
+                        },
+                        "4": {
+                            "_site": "PINNACLE Sports",
+                            "_username": "Pinnacle",
+                            "_currency": "EUR",
+                            "_balance": "0.00"
+                        },
+                        "5": {
+                            "_site": "Matchbook",
+                            "_username": "test",
+                            "_currency": "EUR",
+                            "_balance": "0.00"
+                        },
+                        "_total_balance": 0
+                    },
+                    "GBP": {
+                        "0": {
+                            "_site": "Bop",
+                            "_username": "Test Bop",
+                            "_currency": "GBP",
+                            "_balance": "0.00"
+                        },
+                        "_total_balance": 0
+                    },
+                    "P": {
+                        "0": {
+                            "_site": "Brokerage",
+                            "_username": "Test brokerage",
+                            "_currency": "P",
+                            "_balance": "-82.00"
+                        },
+                        "_total_balance": -82
+                    }
+                },
+                "totals": [{
+                    "_currency": "P",
+                    "_balance": 22
+                },
+                    {
+                        "_currency": "EUR",
+                        "_balance": 190
+                    },
+                    {
+                        "_currency": "GBP",
+                        "_balance": 20
+                    },
+                    {
+                        "_currency": "USD",
+                        "_balance": 32
+                    }
+                ]
+            }
         }
     }
 
     componentDidMount = () => {
-        this.setDates();
 
     }
 
-    loadData = (loader = true) => {
-        Api.get({
-            url: 'get-member-transactions',
-            success: this.dataLoaded,
-            data: {
-                date_to: Api.formatDate(this.state.dateTo),
-                date_from: Api.formatDate(this.state.dateFrom),
-            },
-            always: this.setRefreshing,
-            loader:loader
-        })
-    };
-
-    setRefreshing = () => {
-        this.setState({refreshing: false})
-    };
-
-    dataLoaded = (response) => {
-        this.setState({
-            _payload: response,
-            loaded: true
-        })
-
-    };
-
-    onRefresh = () => {
-        this.setState({refreshing: true, loaded: false});
-        this.loadData(false)
-    };
-
-    setDates = () => {
-
-        var currentDate = new Date();
-
-        var days = 7;
-        var beforeSevenDays = new Date();
-        var res = beforeSevenDays.setTime(beforeSevenDays.getTime() - (days * 24 * 60 * 60 * 1000));
-        beforeSevenDays = new Date(res);
-
-        this.setState({
-            dateFrom: beforeSevenDays,
-            dateTo: currentDate
-
-        }, function () {
-            this.loadData()
-        });
-
-    };
-
-    dateFromChange = (date) => {
-
-        if (!this.state.loaded) return;
-        this.setState({
-            dateFrom: new Date(date),
-        }, function () {
-            this.loadData()
-        });
-
-    };
-
-    dateToChange = (date) => {
-        if (!this.state.loaded) return;
-
-        this.setState({
-            dateTo: new Date(date),
-        }, function () {
-            this.loadData()
-        });
-    };
-
-    getFilter = () => {
-        return <Grid>
-            <Row>
-                <Col>
-                    <Card style={Ui.datePickerContainer}>
-                        <Text style={Ui.datePickerLabel}>{I18n.t('from')}</Text>
-                        <DatePicker
-                            style={{alignSelf: 'flex-end'}}
-                            date={this.state.dateFrom}
-                            customStyles={Ui.datePickerStyles}
-                            format="YYYY-MM-DD"
-                            mode="date"
-                            iconComponent={<Icon active name='ios-calendar-outline' style={Ui.calendarIcon}/>}
-                            // minDate={new Date('2017-1-1')}
-                            maxDate={new Date()}
-                            placeholder={I18n.t('from')}
-                            onDateChange={(date) => {
-                                this.dateFromChange(date)
-                            }}
-                            confirmBtnText={I18n.t('ok')}
-                            cancelBtnText={I18n.t('cancel')}
-                            btnTextConfirm={I18n.t('ok')}
-                            btnTextCancel={I18n.t('cancel')}
-                        />
-                    </Card>
+    getCashBalance = (key, title) => {
+        const switchList = this.state.weekly_status[key].map((balance, i) => {
+            return <ListItem key={i} style={Ui.listItem}>
+                <Col size={3}>
+                    <Text style={{textAlign:'left', alignSelf:'stretch'}}>{balance._balance}</Text>
                 </Col>
-                <Col>
-                    <Card style={Ui.datePickerContainer}>
-                        <Text style={Ui.datePickerLabel}>{I18n.t('to')}</Text>
-                        <DatePicker
-                            style={{alignSelf: 'flex-end'}}
-                            customStyles={Ui.datePickerStyles}
-                            date={this.state.dateTo}
-                            mode="date"
-                            iconComponent={<Icon active name='ios-calendar-outline' style={Ui.calendarIcon}/>}
-                            maxDate={new Date()}
-                            placeholder={I18n.t('to')}
-                            onDateChange={(date) => {
-                                this.dateToChange(date)
-                            }}
-                            confirmBtnText={I18n.t('ok')}
-                            cancelBtnText={I18n.t('cancel')}
-                            btnTextConfirm={I18n.t('ok')}
-                            btnTextCancel={I18n.t('cancel')}
-                        />
-                    </Card>
+                <Col size={1}>
+                    <Text style={{textAlign:'right', alignSelf:'stretch'}}>{balance._currency}</Text>
                 </Col>
-            </Row>
-        </Grid>
+            </ListItem>
+        });
+
+        return <List>
+            <Text>{I18n.t(title).toUpperCase()}</Text>
+            <ListItem itemDivider>
+                <Col size={3}>
+                    <Text style={{textAlign:'left', alignSelf:'stretch'}}>{I18n.t('balance')}</Text>
+                </Col>
+                <Col size={1}>
+                    <Text style={{textAlign:'right', alignSelf:'stretch'}}>{I18n.t('_currency')}</Text>
+                </Col>
+            </ListItem>
+            {switchList}
+        </List>
     };
 
-    getListItem = (transaction, property, i) => {
-        let value = transaction[property],
-            valueStyle = Ui.balanceValueSmall;
+    getAccountsBalance = () => {
+        //TODO refactor after design is provided
+        let accountsList = [];
+        let index = 0;
+        for (let [k, v] of Object.entries(this.state.weekly_status.accounts_balances)) {
 
-        if(property == '_status') {
-            value = I18n.t(statuses[transaction[property]])
-        }
+            for(let [key, value] of Object.entries(v)){
+                index++;
 
-        if(property == '_fee' && !transaction[property]){
-            value = '0'
-        }
-        if(property == '_date_created'){
-            value = transaction[property].split(' ')[0]
-        }
-
-        return <ListItem key={i} style={Ui.listItem}>
-            <Col size={2}>
-                <Text style={Ui.itemLabel}>{I18n.t(translationKeys[property])}</Text>
-            </Col>
-            <Col size={3}>
-                <Text style={[Ui.balanceValue, valueStyle]}>{value}</Text>
-            </Col>
-        </ListItem>
-    }
-
-    getWholeAmount = (fee, amount) =>{
-        if(!fee){
-            fee = 0
-        }
-        let wholeAmount = parseFloat(fee) + parseFloat(amount);
-        return parseFloat(wholeAmount).toFixed(2)
-    }
-
-    getIcon = (type) =>{
-        return <Icon name="ios-arrow-round-forward-outline" size={28} style={styles.headerIcon}/>
-
-    }
-
-    getCard = (transaction, i) => {
-
-        if(!transactionTypes[transaction._payment_type]){
-            transaction._payment_type = 2;
-        }
-
-        let cardListItems = listOrder.map((property, i) =>
-            this.getListItem(transaction, property, i)
-        );
-        return <Card key={i}>
-            <List >
-                <ListItem itemDivider style={[Ui.listHeader, Ui.listHeaderExtended]}>
-                    <Grid>
-                        <Col style={{width: 30, justifyContent: 'flex-start'}}>
-                            <View style={styles.headerIconContainer}>
-                                {this.getIcon(transaction._payment_type)}
-                            </View>
-                        </Col>
-                        <Col style={{justifyContent: 'flex-start'}}>
-                            <Text style={styles.headerLabel}>{(I18n.t(transactionTypes[transaction._payment_type]))}</Text>
-                        </Col>
-                        <Col style={{justifyContent: 'flex-end', flexDirection: 'row'}}>
-                            <Text>{this.getWholeAmount(transaction._fee, transaction._amount)}</Text>
-                        </Col>
-                    </Grid>
-
+                if(key === '_total_balance') continue;
+                let item = <ListItem key={index} style={Ui.listItem}>
+                    <Col size={2}>
+                        <Text style={{textAlign:'left', alignSelf:'stretch'}}>{value._site}</Text>
+                    </Col>
+                    <Col size={2}>
+                        <Text style={{textAlign:'left', alignSelf:'stretch'}}>{value._username}</Text>
+                    </Col>
+                    <Col size={1}>
+                        <Text style={{textAlign:'left', alignSelf:'stretch'}}>{value._currency}</Text>
+                    </Col>
+                    <Col size={1}>
+                        <Text style={{textAlign:'right', alignSelf:'stretch'}}>{value._balance}</Text>
+                    </Col>
                 </ListItem>
-                {cardListItems}
-            </List>
-        </Card>;
-    };
+                accountsList.push(item)
+            }
 
-    _keyExtractor = (item, index) => index;
+            const total =  <ListItem key={k} itemDivider>
+                <Col size={1}>
+                    <Text style={{textAlign:'left', alignSelf:'stretch'}}>{I18n.t('total')}</Text>
+                </Col>
+                <Col size={1}>
+                    <Text style={{textAlign:'right', alignSelf:'stretch'}}>{v._total_balance}</Text>
+                </Col>
+            </ListItem>
+
+            accountsList.push(total)
+        }
+
+
+
+        return <List>
+            <Text>{I18n.t('balanceInAccounts').toUpperCase()}</Text>
+            <ListItem itemDivider>
+                <Col size={2}>
+                    <Text style={{textAlign:'left', alignSelf:'stretch'}}>{I18n.t('_site')}</Text>
+                </Col>
+                <Col size={2}>
+                    <Text style={{textAlign:'left', alignSelf:'stretch'}}>{I18n.t('account')}</Text>
+                </Col>
+                <Col size={1}>
+                    <Text style={{textAlign:'left', alignSelf:'stretch'}}>{I18n.t('_currency')}</Text>
+                </Col>
+                <Col size={1}>
+                    <Text style={{textAlign:'right', alignSelf:'stretch'}}>{I18n.t('balance')}</Text>
+                </Col>
+            </ListItem>
+            {accountsList}
+
+
+        </List>
+    }
 
     render() {
         return (
             <Container style={Ui.container}>
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => Controller.navigateTo("DrawerOpen")}
-                        >
-                            <Icon name="ios-menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>{I18n.t('transactions')}</Title>
-                    </Body>
-                    <Right/>
-
-                </Header>
-                <View style={{height:80}}>
-                    {this.getFilter()}
-                </View>
-                <List>
-                    <FlatList
-                        refreshing={this.state.refreshing}
-                        onRefresh={this.onRefresh}
-                        keyExtractor={this._keyExtractor}
-                        removeClippedSubviews={false}
-                        data={this.state._payload.transactions}
-                        renderItem={({item}) => this.getCard(item)}
-                    />
-                </List>
+                <Header
+                    title={I18n.t('weeklyStatus')}
+                />
+                <ScrollView>
+                    <Text>Status report for 23.23.2017</Text>
+                    {this.getCashBalance('cash_balances','cashBalance')}
+                    {this.getAccountsBalance()}
+                    {this.getCashBalance('totals','total')}
+                </ScrollView>
             </Container>
 
         );
     }
 }
 
-export default Transactions;
+export default WeeklyStatus;
