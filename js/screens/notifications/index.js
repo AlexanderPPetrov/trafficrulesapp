@@ -47,7 +47,7 @@ class Notifications extends Component {
 
 
     static getUnreadNotifications = () => {
-        NotificationsList.getUnreadNotifications()
+        if(NotificationsList) NotificationsList.getUnreadNotifications()
     }
 
     getUnreadNotifications = () => {

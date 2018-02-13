@@ -51,7 +51,8 @@ class Transactions extends Component {
             weekly_status: true,
             brokerage_activity: true,
             betting_tips: true,
-            ad_hoc_messages: true
+            ad_hoc_messages: true,
+            languageLoaded: false
         }
     }
 
@@ -77,9 +78,18 @@ class Transactions extends Component {
         });
 
         AsyncStorage.getItem('locale', (err, result) => {
+            let languageCode = result;
+            if(!result){
+                languageCode = I18n.locale
+            }
             this.setState({
-                languageCode: result
+                languageCode
+            }, () => {
+                this.setState({
+                    languageLoaded: true
+                })
             });
+
         });
     };
 
@@ -147,6 +157,7 @@ class Transactions extends Component {
     };
 
     getLanguagePicker = () => {
+        if(!this.state.languageLoaded) return null;
         const listItems = languages.map((language, i) =>
             <Item key={i} value={language.code} label={language.label}></Item>
         );

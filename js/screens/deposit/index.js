@@ -9,7 +9,6 @@ import {
     Title,
     Content,
     Form,
-    Picker,
     Item as FormItem,
     Text,
     H3,

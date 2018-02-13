@@ -13,7 +13,6 @@ import {
     Title,
     Content,
     Form,
-    Picker,
     Item as FormItem,
     H3,
     Button,

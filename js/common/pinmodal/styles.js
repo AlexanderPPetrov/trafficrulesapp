@@ -51,7 +51,7 @@ export default {
         alignItems: 'center',
         width: deviceWidth/3,
         height: 70,
-        borderWidth: 0.5,
+        borderWidth: 1,
         borderColor: '#e5e5e5',
         flexGrow: 1
     },

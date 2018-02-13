@@ -23,7 +23,6 @@ const Window = Dimensions.get('window');
 let _previousLeft = 0;
 let _previousTop = 0;
 let chatSize = 40;
-
 export default class Draggable extends Component {
     static propTypes = {
         renderText: PropTypes.string,
@@ -95,25 +94,32 @@ export default class Draggable extends Component {
     }
 
     restrictMovement = (moveX, moveY, dx, dy) => {
+        const { offsetX, offsetY} = this.props;
 
         let shouldMove = false,
             x = this.state._value.x,
-            y = this.state._value.y;
+            y = this.state._value.y,
+            offsetTop = StatusBar.currentHeight || 15;
 
-        if (this.state._value.x < 0) {
-            x = 0;
+        const minLeft = 0 - offsetX,
+              minTop = offsetTop - offsetY,
+              minRight = (Window.width - this.props.renderSize * 2) - offsetX,
+              minBottom = (Window.height - this.props.renderSize * 2 - offsetTop) - offsetY
+
+        if (this.state._value.x < minLeft) {
+            x = minLeft;
             shouldMove = true;
         }
-        if (this.state._value.y < 0) {
-            y = 0;
+        if (this.state._value.y < minTop) {
+            y = minTop;
             shouldMove = true;
         }
-        if (this.state._value.x > Window.width - this.props.renderSize * 2) {
-            x = Window.width - this.props.renderSize * 2
+        if (this.state._value.x > minRight) {
+            x = minRight
             shouldMove = true;
         }
-        if (this.state._value.y > Window.height - this.props.renderSize * 2 - StatusBar.currentHeight) {
-            y = Window.height - this.props.renderSize * 2 - StatusBar.currentHeight
+        if (this.state._value.y > minBottom) {
+            y = minBottom
             shouldMove = true;
         }
         _previousLeft = x;
@@ -130,17 +136,25 @@ export default class Draggable extends Component {
     }
 
     _positionCss = () => {
-        return Platform.select({
+        const { renderSize, offsetX, offsetY, x, y, z } = this.props;
+
+        let css = Platform.select({
             ios: {
                 zIndex: 999,
-                position: 'absolute'
+                position: 'absolute',
+                top: offsetY,
+                left: offsetX
             },
             android: {
                 position: 'absolute',
                 width: Window.width,
-                height: Window.height
+                height: Window.height,
+                top: offsetY,
+                left: offsetX
             },
         });
+        console.log(css)
+        return css
     }
 
     render() {

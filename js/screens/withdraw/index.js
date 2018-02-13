@@ -53,6 +53,10 @@ class Withdraw extends Component {
             url:'get-member-pending-withdraw-requests-count',
             success: this.setOpenedRequests
         })
+        Chat.show()
+    }
+    componentWillUnmount = () =>{
+        Chat.hide()
     }
 
     setOpenedRequests = (response) => {
@@ -73,17 +77,6 @@ class Withdraw extends Component {
     goForward = () => {
         this.tabs.goForward()
     }
-
-    getChat = () => {
-        if (this.state.currentPage == this.state.steps) {
-            return null;
-        }
-        return (
-            <Chat></Chat>
-        )
-    }
-
-
 
     getButton = () => {
         if (this.state.currentPage == this.state.steps) {
@@ -142,7 +135,6 @@ class Withdraw extends Component {
                                                disableButton={this.setButtonState}></WithdrawSteps>
                                 <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
-                                    {this.getChat()}
                                 </View>
                             </View>
                         </View>

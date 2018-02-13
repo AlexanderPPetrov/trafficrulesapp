@@ -55,7 +55,12 @@ class Withdraw extends Component {
                 paymentData: state.params.paymentData
             })
         }
+        Chat.show()
     };
+
+    componentWillUnmount = () => {
+        Chat.hide()
+    }
 
     setButtonState = (value) => {
         this.setState({
@@ -70,16 +75,6 @@ class Withdraw extends Component {
     goForward = () => {
         this.tabs.goForward()
     };
-
-    getChat = () => {
-        if (this.state.currentPage == this.state.steps) {
-            return null;
-        }
-        return (
-            <Chat></Chat>
-        )
-    }
-
 
     getButton = () => {
         if (this.state.currentPage == this.state.steps) {
@@ -129,7 +124,6 @@ class Withdraw extends Component {
 
                                 <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
-                                    {this.getChat()}
                                 </View>
                             </View>
                         </View>
