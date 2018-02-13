@@ -37,7 +37,7 @@ const languages = [{
     label: 'Français'
 }];
 
-const switches = ['notificationsWithdrawDeposit', 'notificationsFundsTransfer', 'notificationsWeeklyStatus', 'notificationsBrokerageActivity', 'notificationsBettingTips', 'notificationsAdHocMessages']
+const switches = ['withdraw_and_deposit', 'funds_transfer', 'weekly_status', 'brokerage_activity', 'betting_tips', 'ad_hoc_messages']
 
 class Transactions extends Component {
 
@@ -46,12 +46,12 @@ class Transactions extends Component {
         this.state = {
             languageCode: 'en',
             language: 'English',
-            notificationsWithdrawDeposit: true,
-            notificationsFundsTransfer: true,
-            notificationsWeeklyStatus: true,
-            notificationsBrokerageActivity: true,
-            notificationsBettingTips: true,
-            notificationsAdHocMessages: true
+            withdraw_and_deposit: true,
+            funds_transfer: true,
+            weekly_status: true,
+            brokerage_activity: true,
+            betting_tips: true,
+            ad_hoc_messages: true
         }
     }
 
@@ -89,12 +89,17 @@ class Transactions extends Component {
         });
         AsyncStorage.setItem(switchKey, value.toString());
 
-        //http://api-prmts.dev.cc/v1/set-member-device-notificatoin-setting
+        let flag = 1;
+        if(!value){
+            flag = 0;
+        }
         Api.post({
             url: 'set-member-device-notification-setting',
             success: (response)=> console.log('language changed to', response._language),
             data: {
                 device_id: Api.deviceToken,
+                value: flag,
+                type:switchKey
             }
         })
     };
