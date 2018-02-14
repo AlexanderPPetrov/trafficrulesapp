@@ -109,12 +109,9 @@ class Landing extends Component {
     };
 
     resetPin = () => {
-        this.setState({
-            password: ''
-        });
-
         this.deleteSecureItem('pin');
         this.deleteSecureItem('password');
+
     };
 
     deleteSecureItem = (key) => {
@@ -123,6 +120,10 @@ class Landing extends Component {
             .then((value) => {
                 this.setState({
                     [key]: value
+                }, () => {
+                    if(key === 'password'){
+                        this.refs.login.focusPassword();
+                    }
                 })
             })
             .catch((error) => {
@@ -225,21 +226,15 @@ class Landing extends Component {
 
     getLandingScreen = () => {
         if (this.state.pin === '') {
-            console.log(this.state.pin, '1')
             return null;
         }
 
         if (this.state.setPin) {
-            console.log(this.state.pin, '2')
-
             return <ScrollView contentContainerStyle={styles.loginContainer}>
                 <SetPin navigation={this.props.navigation}>
                 </SetPin>
             </ScrollView>
         }
-        console.log(this.state.pin, '3')
-
-
         return <ScrollView contentContainerStyle={styles.loginContainer}>
             <View style={styles.imageContainer}>
                 <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary}
@@ -249,7 +244,7 @@ class Landing extends Component {
                 {/*<Text style={styles.helloMessage}>Hello John!</Text>*/}
                 {/*</View>*/}
             </View>
-            <Login navigation={this.props.navigation} username={this.state.username} password={this.state.password}
+            <Login ref="login" navigation={this.props.navigation} username={this.state.username} password={this.state.password}
                    setValue={this.setValue} loginHandler={this.loginHandler}></Login>
         </ScrollView>
     }

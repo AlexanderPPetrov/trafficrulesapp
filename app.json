@@ -4,7 +4,6 @@
     "icon": "./img/app_icon.png",
 
     "loading": {
-//      "backgroundImage": "./img/splashscreen.png",
       "hideExponentText": true,
       "backgroundColor": "#ffffff",
       "icon": "./img/logo.png"

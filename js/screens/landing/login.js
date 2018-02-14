@@ -24,6 +24,14 @@ import styles from "./styles";
 
 class Login extends React.Component {
 
+
+    focusPassword = () => {
+        if(this.passwordInput && this.passwordInput._root){
+            this.passwordInput._root.focus()
+        }
+
+    }
+
     render() {
         return (
             <View style={styles.formContainer}>
@@ -39,7 +47,7 @@ class Login extends React.Component {
                         <Item floatingLabel style={Ui.inputContainer}>
                             {/*<Icon active name='ios-lock-outline' style={styles.inputIcon}/>*/}
                             <Label >{I18n.t('password')}</Label>
-                            <Input placeholderTextColor={ColorScheme.lighter} style={styles.inputField} secureTextEntry={true}
+                            <Input getRef={(input) => this.passwordInput = input} placeholderTextColor={ColorScheme.lighter} style={styles.inputField} secureTextEntry={true}
                                    value={this.props.password}
                                    onChangeText={(newValue) => this.props.setValue('password', newValue)}/>
                         </Item>
