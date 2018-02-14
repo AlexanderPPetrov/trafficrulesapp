@@ -64,7 +64,7 @@ class PreviousBalance extends Component {
             },
             success: this.dataLoaded,
             always: this.setRefreshing,
-            loader: loader
+            loader
         })
     };
 

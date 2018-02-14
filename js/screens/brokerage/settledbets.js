@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
+import Header from '../../common/header/header';
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -17,12 +17,13 @@ import {
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-import {View, ScrollView, RefreshControl} from "react-native";
+import {View, ScrollView, RefreshControl, TouchableWithoutFeedback, Modal} from "react-native";
 import Ui from '../../common/ui';
 
 import DatePicker from '../../common/datepicker/datepicker'
 
 import styles from "./styles";
+import BetDetails from "./betdetails";
 import Api from "../../../Api";
 
 
@@ -34,10 +35,13 @@ class SettledBets extends Component {
             _payload: {
                 bets: []
             },
+            settledBetsDetails: [],
             refreshing: false,
+            date:'',
             dateFrom: null,
             dateTo: null,
-            loaded: false
+            loaded: false,
+            modalVisible: false
         }
     }
 
@@ -55,7 +59,28 @@ class SettledBets extends Component {
                 date_from: Api.formatDate(this.state.dateFrom),
             },
             always: this.setRefreshing,
-            loader:loader
+            loader
+        })
+    };
+
+    loadSettledBetsData = (date) => {
+        Api.get({
+            url: 'get-brokerage-daily-balances',
+            success: this.settledBetsLoaded,
+            data: {
+                date_to: date,
+                date_from: date,
+            }
+        })
+        this.setState({
+            date
+        })
+    };
+
+    settledBetsLoaded = (response) => {
+        console.log(response)
+        this.setState({
+            settledBetsDetails: response.bets
         })
     };
 
@@ -165,41 +190,43 @@ class SettledBets extends Component {
             dayDate = date.getDate(),
             monthAbbr = Api.getMonthAbbr(date.getMonth() + 1).substring(0, 3).toUpperCase();
 
-        return <View key={i} style={[styles.settledBetContainer, this.getBetStyle(bet._profit)]}>
-            <Grid>
-                <Col size={1} style={{justifyContent:'center'}}>
-                    <Text style={Ui.dayLabel}>{dayDate}</Text>
-                    <Text style={Ui.monthLabel}>{monthAbbr}</Text>
-                </Col>
-                <Col size={4} >
-                    <Row>
-                        <Col size={3} style={{justifyContent:'center'}}>
-                            <Text style={Ui.itemLabel}>{I18n.t('turnOver')}</Text>
-                        </Col>
-                        <Col size={3} style={{justifyContent:'center'}}>
-                            <Text style={Ui.balanceValue}>{bet._turnover}</Text>
-                        </Col>
-                        <Col style={Ui.currencyWidth} >
-                            <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
-                        </Col>
+        return <TouchableWithoutFeedback key={i} onPress={()=> this.openModal(bet._date)}>
+            <View style={[styles.settledBetContainer, this.getBetStyle(bet._profit)]}>
+                <Grid>
+                    <Col size={1} style={{justifyContent:'center'}}>
+                        <Text style={Ui.dayLabel}>{dayDate}</Text>
+                        <Text style={Ui.monthLabel}>{monthAbbr}</Text>
+                    </Col>
+                    <Col size={4} >
+                        <Row>
+                            <Col size={3} style={{justifyContent:'center'}}>
+                                <Text style={Ui.itemLabel}>{I18n.t('turnOver')}</Text>
+                            </Col>
+                            <Col size={3} style={{justifyContent:'center'}}>
+                                <Text style={Ui.balanceValue}>{bet._turnover}</Text>
+                            </Col>
+                            <Col style={Ui.currencyWidth} >
+                                <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
+                            </Col>
 
-                    </Row>
-                    <Row>
+                        </Row>
+                        <Row>
 
-                        <Col size={3} style={{justifyContent:'center'}}>
-                            <Text style={Ui.itemLabel}>{I18n.t('profit')}</Text>
-                        </Col>
-                        <Col size={3} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.balanceValue, this.getProfitStyle(bet._profit)]}>{bet._profit}</Text>
-                        </Col>
-                        <Col style={Ui.currencyWidth}>
-                            <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
-                        </Col>
+                            <Col size={3} style={{justifyContent:'center'}}>
+                                <Text style={Ui.itemLabel}>{I18n.t('profit')}</Text>
+                            </Col>
+                            <Col size={3} style={{justifyContent:'center'}}>
+                                <Text style={[Ui.balanceValue, this.getProfitStyle(bet._profit)]}>{bet._profit}</Text>
+                            </Col>
+                            <Col style={Ui.currencyWidth}>
+                                <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
+                            </Col>
 
-                    </Row>
-                </Col>
-            </Grid>
-        </View>
+                        </Row>
+                    </Col>
+                </Grid>
+            </View>
+        </TouchableWithoutFeedback>
     };
 
     getBetList = (bets) => {
@@ -217,10 +244,49 @@ class SettledBets extends Component {
 
         );
     };
+    openModal = (date) =>{
+        this.setState({modalVisible:true});
+        this.loadSettledBetsData(date);
+    }
+
+    closeModal = () => {
+        this.setState({modalVisible:false});
+    }
+
+    getBetsDetails = () => {
+
+        const betDetails = this.state.settledBetsDetails.map((bet, i) => {
+            bet._event_date = bet._date;
+            return <BetDetails bet={bet} key={i}/>
+        });
+
+        return (
+            <View>
+                <Text>{this.state.date}</Text>
+                {betDetails}
+            </View>
+
+        );
+    }
 
     render() {
         return (
             <View>
+                <Modal
+                    visible={this.state.modalVisible}
+                    animationType={'slide'}
+                    onRequestClose={() => this.closeModal()}
+                >
+                    <Header
+                        onBack={this.closeModal}
+                        title={I18n.t('settledBets')}
+                        cancel={false}
+                    />
+
+                    <ScrollView>
+                        {this.getBetsDetails()}
+                    </ScrollView>
+                </Modal>
                 <ScrollView refreshControl={
                     <RefreshControl
                         refreshing={this.state.refreshing}

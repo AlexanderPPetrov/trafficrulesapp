@@ -59,6 +59,9 @@ class HeaderWrapper extends Component {
     }
 
     getRight = () => {
+        if(this.props.cancel === false){
+            return null;
+        }
         if(this.props.onBack && !this.props.notifications){
         return <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
                 <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>

@@ -21,6 +21,7 @@ import { ScrollView, RefreshControl, View } from "react-native";
 import Ui from '../../common/ui';
 import ColorScheme from '../../common/colorscheme';
 import styles from "./styles";
+import BetDetails from "./betdetails";
 import Api from "../../../Api";
 
 
@@ -68,44 +69,7 @@ class OpenBets extends Component {
     };
 
     getListItem = (bet, i) => {
-        return  <Grid key={i} style={{borderBottomWidth:1, borderBottomColor: ColorScheme.listItemBorderColor}}>
-                <Col>
-                    <Row style={{marginBottom:5}}>
-                        <Text style={[Ui.cardHeader, styles.betId]}>{I18n.t('betNumber')} {bet._id}</Text>
-                    </Row>
-                    <Row style={styles.selectionContainer}>
-                        <Col size={3}>
-                            <Text style={[styles.betLabel, styles.selectionLabel]}>{bet._selection}</Text>
-                        </Col>
-                        <Col size={2} >
-                            <Row style={{justifyContent: 'flex-end'}}>
-                                <Text style={[styles.betValue, styles.selectionLabel]}>{bet._score}</Text>
-                                <Text style={styles.odds}>@ {bet._odds}</Text>
-                            </Row>
-                        </Col>
-                    </Row>
-                    <Row style={styles.matchContainer}>
-                        <Col size={3} >
-                            <Text style={[styles.betLabel, styles.eventLabel]}>{bet._event}</Text>
-                        </Col>
-                        <Col size={2} >
-                            <Text style={[styles.betValue, styles.dateLabel]}>{bet._event_date.split(' ')[0]}</Text>
-                        </Col>
-                    </Row>
-                    <Row style={styles.infoContainer}>
-                        <Col size={3} >
-                            <Row>
-                                <Text style={styles.stakeLabel}>{I18n.t('stake')}:</Text>
-                                <Text style={styles.betLabel}>{bet._stake}</Text>
-                                <Text style={styles.betLabel}>{bet._currency}</Text>
-                            </Row>
-                        </Col>
-                        <Col size={2} >
-                            <Text style={styles.statusLabel}>{I18n.t('running').toUpperCase()}</Text>
-                        </Col>
-                    </Row>
-                </Col>
-            </Grid>
+        return  <BetDetails key={i} bet={bet}/>
     };
 
     getBetList = (bets) => {
