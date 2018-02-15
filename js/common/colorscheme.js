@@ -3,14 +3,14 @@ export default {
     logoSecondary:'#ec2226',
     logoSlogan:'rgba(255,255,255,0)',
     mainBackground: '#ffffff',
-    statusBarBackground: '#e0e0e0',
-    headerBackground:'#f8f8f8',
-    headerColor:'#151515',
-    headerIconColor:'#151515',
-    tabsBackground:'#f8f8f8',
-    tabsBorderBottom:'#cbcbcb',
-    tabInactiveColor:'#5a5a5a',
-    tabActiveColor:'#151515',
+    statusBarBackground: '#747474',
+    headerBackground:'#292929',
+    headerColor:'#fff',
+    headerIconColor:'#fff',
+    tabsBackground:'#292929',
+    tabsBorderBottom:'#000000',
+    tabInactiveColor:'#bababa',
+    tabActiveColor:'#fff',
     tabsIndicator:'#ffae00',
     stepActive:'#ffae00',
     stepInactive:'#dddddd',
@@ -20,14 +20,28 @@ export default {
     primaryButton:'#ffae00',
     inputTextColor:'#252525',
     inputBorderColor:'#dddddd',
+
+
+
     win:'#04d54a',
+    halfWin:'#6DD57F',
     loss:'#ff3333',
+    halfLoss:'#ef5a48',
+    draw:'#b1b1b1',
+    cancelled:'#747474',
+    running:'#ffae00',
+
+
+
     listLabelColor: '#212121',
     monthLabelColor: '#afafaf',
     balanceHeaderColor: '#b1b1b1',
     mainCurrencyColor:'#252525',
-    chatBackgroundColor:'#ff3333',
+    chatBackgroundColor:'#f0f0f0',
+    chatIconColor:'#a8a8a8',
+    listHeaderBackground:'#e6e6e6',
     listItemBorderColor:'#f2f2f2',
+    enterPinLabelColor:'#aaa',
 
 
 
@@ -50,8 +64,8 @@ export default {
     EUR: '#fda349',
     P: '#ff775c',
     INR: '#d6bbf5',
-    chartBalance: '#54fc00',
-    chartChange: '#00a2ff',
+    chartBalance: '#00a2ff',
+    chartChange: '#54fc00',
 
     loader:'#555'
 };

@@ -32,7 +32,7 @@ export default {
     },
 
     listHeader: {
-        backgroundColor: ColorScheme.darker,
+        backgroundColor: ColorScheme.listHeaderBackground,
         height: 45,
         justifyContent: 'center',
         paddingLeft: 15,
@@ -40,19 +40,18 @@ export default {
         borderBottomColor: ColorScheme.info
     },
     listHeaderExtended: {
-        backgroundColor: ColorScheme.darker,
         height: 50,
         paddingLeft: 10
     },
     listHeaderLabel: {
         fontSize: 14,
-        color: '#ececec',
+        color: '#292929',
     },
     headerIcon: {
-        color: '#ececec'
+        color: '#292929'
     },
     headerLabel: {
-        color: '#ececec',
+        color: '#292929',
         fontSize: normalize(13),
         marginLeft: 7
     },
@@ -121,25 +120,24 @@ export default {
         fontFamily: 'Roboto_light'
     },
 
-    chatContainer: {
-        position: 'absolute',
-        top:0,
-        left:0,
-        right:0,
-        bottom:0,
-        elevation: 8,
-        backgroundColor: 'blue',
-    },
     chatButton: {
-        width: 80,
-        height: 80,
-        borderRadius: 38,
+        width: 70,
+        height: 70,
+        borderRadius: 35,
         backgroundColor: ColorScheme.chatBackgroundColor,
         elevation: 3,
         shadowColor: "#000",
         shadowOffset: {width: 2, height: 2},
         shadowOpacity: 0.5,
         shadowRadius: 1.2,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+
+    chatButtonIcon: {
+        color:ColorScheme.chatIconColor,
+        backgroundColor:'transparent',
+        fontSize:45
     },
 
     mainBalanceCurrency: {
@@ -203,11 +201,63 @@ export default {
         justifyContent: 'space-between',
         width: '100%'
     },
+    profitHistoryContainer:{
+        paddingTop:12,
+        paddingBottom:12,
+        marginBottom:0,
+        paddingRight:12,
+        borderBottomColor: '#f2f2f2',
+        borderBottomWidth:1,
+        borderLeftWidth:4,
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    betWin: {
+        borderLeftColor: ColorScheme.win
+    },
+    betLoss: {
+        borderLeftColor: ColorScheme.loss
+    },
+    betDraw: {
+        borderLeftColor: ColorScheme.draw
+    },
 
+    profitWin: {
+        color: ColorScheme.win
+    },
+    profitLoss: {
+        color: ColorScheme.loss
+    },
+
+    profitDraw: {
+        color: ColorScheme.draw
+    },
     buttonLabel: {
         textAlign: 'center',
         flex: 1,
         fontSize: 16
+    },
+
+    running: {
+        backgroundColor: ColorScheme.running
+    },
+    win: {
+        backgroundColor: ColorScheme.win
+    },
+    halfWin: {
+        backgroundColor: ColorScheme.halfWin
+    },
+    loss: {
+        backgroundColor: ColorScheme.loss
+    },
+    draw: {
+        backgroundColor: ColorScheme.draw
+    },
+    halfLoss: {
+        backgroundColor: ColorScheme.halfLoss
+    },
+    cancelled: {
+        backgroundColor: ColorScheme.cancelled
     },
 
     stepHeader: {
@@ -227,9 +277,9 @@ export default {
     cardContainer: {
         position: 'relative',
         paddingTop: 15,
-        paddingBottom: 30,
+        paddingBottom: 5,
         width: deviceWidth,
-        minHeight: deviceHeight - 92,
+        minHeight: deviceHeight - 80,
         // minHeight:deviceHeight - 90,
         alignSelf: 'stretch',
         opacity: 1

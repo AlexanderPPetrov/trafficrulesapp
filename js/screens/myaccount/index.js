@@ -27,7 +27,7 @@ import Ui from '../../common/ui';
 import Header from '../../common/header/header';
 import styles from "./styles";
 import Controller from '../../../Controller';
-
+import Balance from './balance';
 
 class MyAccount extends Component {
 
@@ -123,6 +123,8 @@ class MyAccount extends Component {
                 />
 
                 <Tabs loaded={this.state.loaded} balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>
+
+
             </Container>
         );
     }

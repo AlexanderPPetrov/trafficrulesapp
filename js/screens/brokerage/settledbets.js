@@ -161,23 +161,23 @@ class SettledBets extends Component {
     };
 
     getProfitStyle = (profit) => {
-        let style = styles.profitWin;
+        let style = Ui.profitWin;
         if(parseFloat(profit) < 0){
-            style = styles.profitLoss
+            style = Ui.profitLoss
         }
         if(parseFloat(profit) == 0){
-            style = styles.profitTie
+            style = Ui.profitDraw
         }
         return style
     }
 
     getBetStyle = (profit) => {
-        let style = styles.betWin;
+        let style = Ui.betWin;
         if(parseFloat(profit) < 0){
-            style = styles.betLoss
+            style = Ui.betLoss
         }
         if(parseFloat(profit) == 0){
-            style = styles.betTie
+            style = Ui.betDraw
         }
         return style
     }
@@ -191,7 +191,7 @@ class SettledBets extends Component {
             monthAbbr = Api.getMonthAbbr(date.getMonth() + 1).substring(0, 3).toUpperCase();
 
         return <TouchableWithoutFeedback key={i} onPress={()=> this.openModal(bet._date)}>
-            <View style={[styles.settledBetContainer, this.getBetStyle(bet._profit)]}>
+            <View style={[Ui.profitHistoryContainer, this.getBetStyle(bet._profit)]}>
                 <Grid>
                     <Col size={1} style={{justifyContent:'center'}}>
                         <Text style={Ui.dayLabel}>{dayDate}</Text>
@@ -262,7 +262,6 @@ class SettledBets extends Component {
 
         return (
             <View>
-                <Text>{this.state.date}</Text>
                 {betDetails}
             </View>
 

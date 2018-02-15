@@ -24,10 +24,11 @@ class SafeBalance extends Component {
                 </Text>
 
                 <View style={{flexDirection:'row',alignItems:'center',justifyContent: 'center'}}>
-                    <CurrencyIcon color={ColorScheme.mainCurrencyColor} size={26} currency={this.props.currency}/>
+                    {/*<CurrencyIcon color={ColorScheme.mainCurrencyColor} size={26} currency={this.props.currency}/>*/}
                     <Text style={Ui.mainBalanceValue}>
                         {this.props.balance}
                     </Text>
+                    <Text style={{paddingBottom:5, paddingLeft:5}}>{this.props.currency}</Text>
                 </View>
             </View>
 

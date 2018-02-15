@@ -73,7 +73,9 @@ export default class Draggable extends Component {
 
         this.panResponder = PanResponder.create({
             onMoveShouldSetPanResponder: (evt, gestureState) => true,
-            onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+            onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
+                return Math.abs(gestureState.dx) > 5;
+            },
             onPanResponderGrant: (e, gestureState) => {
                 this.state.pan.setOffset({x: this.state._value.x, y: this.state._value.y});
                 this.state.pan.setValue({x: 0, y: 0});
@@ -172,7 +174,7 @@ export default class Draggable extends Component {
                         onPressOut={pressOutDrag}
                     >
                         {this.props.renderComponent}
-                    </TouchableOpacity>
+                    </TouchableOpacity >
                 </Animated.View>
             </View>
         );

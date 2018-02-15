@@ -21,7 +21,9 @@ export default {
     },
     menuHeader: {
         padding: 20,
-        backgroundColor: ColorScheme.dark
+        backgroundColor: ColorScheme.dark,
+        borderBottomWidth:2,
+        borderBottomColor: ColorScheme.info
     },
     listItemContainer: {
         flexDirection: "row",

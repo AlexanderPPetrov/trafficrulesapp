@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Alert} from 'react-native';
+import {View, TouchableOpacity, Alert, Dimensions} from 'react-native';
 import styles from "./styles";
 import I18n from '../../../i18n/i18n';
 import StatusBar from "../header/statusbar"
@@ -20,7 +20,7 @@ import {
     Toast
 } from "native-base";
 import * as Animatable from 'react-native-animatable';
-
+import Logo from '../../common/logo/logo';
 
 const keyBoard = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'reset', '0', 'back'];
 let _success = null;
@@ -30,13 +30,18 @@ class PinModal extends Component {
 
     constructor(props) {
         super(props)
+        let {width, height} = Dimensions.get('window')
+
+        let scale = (width - 200) / 500;
+
         this.state = {
             pinValues: ['-', '-', '-', '-'],
             savedPin: '',
             success: null,
             reset: null,
             currentIndex: 0,
-            visible: false
+            visible: false,
+            scale
         }
     }
 
@@ -77,11 +82,7 @@ class PinModal extends Component {
         });
 
         return <View
-            style={{
-                flex: -1,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-            }}>
+            style={styles.pinBoxContainer}>
             {pinBoxes}
         </View>
     };
@@ -203,8 +204,14 @@ class PinModal extends Component {
 
             <Animatable.View ref="pinModal" style={styles.container} >
                 <StatusBar/>
+
                 <View style={styles.pinView}>
-                    <Text style={styles.pinPromptText}>{I18n.t('enterPin')}</Text>
+                    <View style={styles.welcomeContainer}>
+                        <Logo scale={this.state.scale} arrowOnly={true}/>
+                        <Text style={styles.welcomeBackMessage}>{I18n.t('welcomeBack')}</Text>
+                        <Text style={styles.pinPromptText}>{I18n.t('enterPinMessage')}</Text>
+                    </View>
+
                     {this.getPinBoxList()}
                 </View>
                 {this.getKeyboard()}

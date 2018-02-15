@@ -1,3 +1,5 @@
+import {normalize} from "../../common/ui";
+
 const React = require("react-native");
 
 const {StyleSheet} = React;
@@ -21,23 +23,29 @@ export default {
     },
 
     selectionContainer: {
+        marginTop:15,
+        marginBottom:5,
         marginLeft:15,
         marginRight:15,
-        paddingTop:3,
-        paddingBottom:3
+        paddingTop:5,
+        paddingBottom:5,
+        paddingLeft:15,
+        paddingRight:15,
+        backgroundColor:'#f3f3f3',
+        borderRadius:15
     },
 
     selectionLabel: {
         paddingRight:10,
         fontSize:18,
-        color: ColorScheme.darker,
+        color: '#555',
         fontFamily:'Roboto_medium'
     },
 
     odds: {
         paddingTop:2,
-        backgroundColor: ColorScheme.neutralLight,
         color: ColorScheme.darkest,
+        fontWeight:'700',
         fontFamily:'Roboto_light'
     },
 
@@ -51,7 +59,8 @@ export default {
     infoContainer: {
         paddingLeft:15,
         paddingRight:15,
-        marginBottom:15
+        marginBottom:8,
+        marginTop:5
     },
 
     statusLabel: {
@@ -61,8 +70,9 @@ export default {
         fontSize:12,
         paddingTop:2,
         paddingBottom:2,
-        paddingLeft:5,
-        paddingRight:5
+        paddingLeft:10,
+        paddingRight:10,
+        borderRadius:10
     },
 
     settledBetStatus: {
@@ -75,30 +85,6 @@ export default {
         paddingRight:5,
         minWidth:40,
         textAlign:'center'
-    },
-
-    betWin: {
-        borderLeftColor: ColorScheme.win
-    },
-    betLoss: {
-        borderLeftColor: ColorScheme.loss
-    },
-    betTie: {
-        borderLeftColor: ColorScheme.listLabelColor
-    },
-
-    profitWin: {
-        color: ColorScheme.win
-
-    },
-    profitLoss: {
-        color: ColorScheme.loss
-
-    },
-
-    profitTie: {
-        color: ColorScheme.listLabelColor
-
     },
 
     eventLabel: {
@@ -115,21 +101,11 @@ export default {
         paddingRight:5
     },
     dateLabel: {
-        color: ColorScheme.dark,
-        fontSize: 14,
-        fontFamily:'Roboto_light'
+        textAlign:'right',
+        paddingRight:15,
+        fontSize:normalize(12)
     },
 
-    settledBetContainer:{
-        paddingTop:12,
-        paddingBottom:12,
-        marginBottom:0,
-        borderBottomColor: '#f2f2f2',
-        borderBottomWidth:1,
-        borderLeftWidth:4,
-        alignItems:"center",
-        justifyContent:"center"
-    },
     settledBetLabel: {
         fontSize:13,
         color: ColorScheme.light,

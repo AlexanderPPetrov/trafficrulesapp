@@ -1,3 +1,5 @@
+import {normalize} from "../ui";
+
 const React = require("react-native");
 import { Constants} from 'expo';
 
@@ -19,21 +21,39 @@ export default {
         alignItems: 'center',
         backgroundColor: '#fff',
     },
+    welcomeContainer: {
+        width:'80%',
+        alignItems:'flex-start'
+    },
+    welcomeBackMessage: {
+        paddingTop:45,
+        paddingBottom:5,
+        fontSize:normalize(22),
+        fontWeight:'700'
+    },
     pinView: {
         flex: 1,
         width:'100%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: 'rgb(239, 239, 244)',
+        backgroundColor: '#fff',
+    },
+    pinBoxContainer: {
+        flex: -1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop:45,
+        paddingBottom:45,
+        paddingLeft:30
     },
     pinBox: {
         borderWidth: 1,
         borderColor: '#252525',
-        borderRadius: 30/2,
-        height: 30,
-        width: 30,
-        marginRight: 15
+        borderRadius: 15/2,
+        height: 15,
+        width: 15,
+        marginRight: 30
     },
 
     pinBoxFilled: {
@@ -65,6 +85,8 @@ export default {
     },
     pinPromptText: {
         marginBottom: 10,
+        color:ColorScheme.enterPinLabelColor,
+        fontSize:normalize(13)
     }
 
 };

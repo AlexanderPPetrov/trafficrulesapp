@@ -23,10 +23,29 @@ import styles from "./styles";
 import Api from "../../../Api";
 
 
+const statuses = ['running','win','halfWin','draw','halfLoss','loss','cancelled']
+
+
+
 class BetDetails extends Component {
 
     constructor(props) {
         super(props);
+
+    }
+
+    getStatusLabel = () => {
+        if(this.props.bet){
+            console.log(this.props.bet._status)
+            let status = statuses[this.props.bet._status]
+
+            if(!status) status = 'running';
+            let labelStyles = [styles.statusLabel, Ui[status]];
+            console.log(status);
+
+            return <Text style={labelStyles}>{I18n.t(status).toUpperCase()}</Text>
+        }
+        return null;
     }
 
     render() {
@@ -34,7 +53,12 @@ class BetDetails extends Component {
             <Grid style={{borderBottomWidth:1, borderBottomColor: ColorScheme.listItemBorderColor}}>
                 <Col>
                     <Row style={{marginBottom:5}}>
-                        <Text style={[Ui.cardHeader, styles.betId]}>{I18n.t('betNumber')} {this.props.bet._id}</Text>
+                        <Col>
+                            <Text style={[Ui.cardHeader, styles.betId]}>{I18n.t('betNumber')} {this.props.bet._id}</Text>
+                        </Col>
+                        <Col>
+                            <Text style={[Ui.cardHeader, styles.dateLabel]}>{this.props.bet._event_date.split(' ')[0]}</Text>
+                        </Col>
                     </Row>
                     <Row style={styles.selectionContainer}>
                         <Col size={3}>
@@ -52,7 +76,7 @@ class BetDetails extends Component {
                             <Text style={[styles.betLabel, styles.eventLabel]}>{this.props.bet._event}</Text>
                         </Col>
                         <Col size={2} >
-                            <Text style={[styles.betValue, styles.dateLabel]}>{this.props.bet._event_date.split(' ')[0]}</Text>
+
                         </Col>
                     </Row>
                     <Row style={styles.infoContainer}>
@@ -64,7 +88,7 @@ class BetDetails extends Component {
                             </Row>
                         </Col>
                         <Col size={2} >
-                            <Text style={styles.statusLabel}>{I18n.t('running').toUpperCase()}</Text>
+                            {this.getStatusLabel()}
                         </Col>
                     </Row>
                 </Col>

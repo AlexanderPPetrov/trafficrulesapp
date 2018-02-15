@@ -126,18 +126,18 @@ class PreviousBalanceChart extends Component {
                     />
 
 
-                    <VictoryLine key={1}
-                                 interpolation={"catmullRom"}
-                        style={{
-                            data: {
-                                stroke: ColorScheme.chartChange,
-                                fillOpacity: 0.5
-                            }
-                        }}
-                        data={this.props.change}
-                        y0={() => this.props.minValue}
+                    {/*<VictoryLine key={1}*/}
+                                 {/*interpolation={"catmullRom"}*/}
+                        {/*style={{*/}
+                            {/*data: {*/}
+                                {/*stroke: ColorScheme.chartChange,*/}
+                                {/*fillOpacity: 0.5*/}
+                            {/*}*/}
+                        {/*}}*/}
+                        {/*data={this.props.change}*/}
+                        {/*y0={() => this.props.minValue}*/}
 
-                    />
+                    {/*/>*/}
                     <VictoryScatter data={this.props.balance}
                                     size={3}
                                     style={{
@@ -149,17 +149,17 @@ class PreviousBalanceChart extends Component {
                                     }}
                                     y0={() => this.props.minValue}
                     />
-                    <VictoryScatter data={this.props.change}
-                                    size={3}
-                                    style={{
-                                        data: {
-                                            fill: ColorScheme.neutralLight,
-                                            stroke: ColorScheme.chartChange,
-                                            strokeWidth: 1
-                                        }
-                                    }}
-                                    y0={() => this.props.minValue}
-                    />
+                    {/*<VictoryScatter data={this.props.change}*/}
+                                    {/*size={3}*/}
+                                    {/*style={{*/}
+                                        {/*data: {*/}
+                                            {/*fill: ColorScheme.neutralLight,*/}
+                                            {/*stroke: ColorScheme.chartChange,*/}
+                                            {/*strokeWidth: 1*/}
+                                        {/*}*/}
+                                    {/*}}*/}
+                                    {/*y0={() => this.props.minValue}*/}
+                    {/*/>*/}
 
                 </VictoryChart>
                 <View style={{
@@ -178,15 +178,15 @@ class PreviousBalanceChart extends Component {
                         backgroundColor: ColorScheme.chartBalance
                     }}></View>
                     <Text style={styles.legendLabel}>{I18n.t('balance')}</Text>
-                    <View style={{
-                        width: 10,
-                        height: 10,
-                        marginTop: 5,
-                        marginLeft: 15,
-                        marginRight: 7,
-                        backgroundColor: ColorScheme.chartChange
-                    }}></View>
-                    <Text style={styles.legendLabel}>{I18n.t('change')}</Text>
+                    {/*<View style={{*/}
+                        {/*width: 10,*/}
+                        {/*height: 10,*/}
+                        {/*marginTop: 5,*/}
+                        {/*marginLeft: 15,*/}
+                        {/*marginRight: 7,*/}
+                        {/*backgroundColor: ColorScheme.chartChange*/}
+                    {/*}}></View>*/}
+                    {/*<Text style={styles.legendLabel}>{I18n.t('change')}</Text>*/}
                 </View>
             </View>
 

@@ -8,6 +8,10 @@
       "backgroundColor": "#ffffff",
       "icon": "./img/logo.png"
     },
+    "notification": {
+      "icon": "./img/notification_icon.png",
+      "color": "#000000"
+    },
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "packagerOpts": {
@@ -20,6 +24,9 @@
     "androidStatusBar": {
       "barStyle": "dark-content",
       "backgroundColor": "#e0e0e0"
+    },
+    "android": {
+      "package": "com.apk.prmts"
     }
   }
 }

@@ -79,7 +79,7 @@ class SideBar extends Component {
 
         let {width, height} = Dimensions.get('window')
 
-        let scale = (width - 120) / 500;
+        let scale = (280 - 45) / 500;
         this.state = {
             shadowOffsetWidth: 1,
             shadowRadius: 4,
@@ -136,8 +136,7 @@ class SideBar extends Component {
                 <Content bounces={false} style={{flex: 1, top: -1}}>
 
                     <View style={styles.menuHeader}>
-                        <Logo scale={this.state.scale} primary={ColorScheme.neutralLight} secondary={ColorScheme.action} slogan={ColorScheme.neutralLight}>
-                        </Logo>
+                        <Logo scale={this.state.scale} primary={ColorScheme.neutralLight} secondary={ColorScheme.action} slogan={ColorScheme.neutralLight} />
                     </View>
                     <List style={{paddingTop:15}}>
                         {this.getMenuItems()}

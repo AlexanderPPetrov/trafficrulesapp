@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 
-import {View, Dimensions, Linking} from 'react-native';
+import {View, Dimensions} from 'react-native';
+import AppLink  from './AppLink';
 import I18n from '../../../i18n/i18n';
 import {
     Container,
@@ -21,15 +22,13 @@ import {
 import Draggable from '../../common/draggable/Draggable';
 import {Ionicons} from '@expo/vector-icons';
 import Ui from '../ui'
+import Api from '../../../Api'
 import {Grid, Row, Col} from "react-native-easy-grid";
-import styles from "./styles";
 
 const {
     width: deviceWidth,
     height: deviceHeight,
 } = Dimensions.get('window');
-
-
 
 let chatInstance = null;
 class Chat extends Component {
@@ -65,8 +64,11 @@ class Chat extends Component {
 
     openChat = () => {
         let skypeURL = 'skype:aleksandar.p@delasport.com?chat&topic=Premium%20Tradings%20Support';
-        Linking.openURL(skypeURL).catch(err => {
-            console.log('cannot open skype', err)
+        AppLink.maybeOpenURL(skypeURL, { appName: 'skype', appStoreId:'skype-for-iphone/id304878510', appStoreLocale:Api.locale, playStoreId:'com.skype.raider' }).then(() => {
+            // do stuff
+        })
+        .catch((err) => {
+            console.log()
         });
     }
 
@@ -75,10 +77,10 @@ class Chat extends Component {
 
         return <Draggable reverse={false} renderComponent={
                     <View style={Ui.chatButton}>
-                        <Icon name='ios-chatbubbles' style={{backgroundColor:'transparent'}} />
-                        <Text style={{backgroundColor:'transparent'}}>{I18n.t('contactOperators')}</Text>
+                        <Icon name='ios-chatbubbles' size={45} style={Ui.chatButtonIcon} />
+                        {/*<Text style={{backgroundColor:'transparent'}}>{I18n.t('contactOperators')}</Text>*/}
                     </View>
-                } offsetX={deviceWidth - 150} offsetY={deviceHeight - 150} renderSize={40} renderText='B' pressDrag={()=>this.openChat()}/>
+                } offsetX={deviceWidth - 120} offsetY={deviceHeight - 220} renderSize={40} renderText='B' pressDrag={()=>this.openChat()}/>
     }
 }
 
