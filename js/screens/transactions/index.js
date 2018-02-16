@@ -180,7 +180,9 @@ class Transactions extends Component {
         if(!status) status = 'running';
         let labelStyles = [Ui.statusLabel, Ui[status]];
 
-        return <Text style={labelStyles}>{I18n.t(status).toUpperCase()}</Text>
+        return <View style={labelStyles}>
+                <Text style={Ui.statusLabel}>{I18n.t(status).toUpperCase()}</Text>
+            </View>
 
     }
 

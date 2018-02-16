@@ -9,7 +9,8 @@ export default {
     betLabel: {
         justifyContent: 'flex-start',
         textAlign:'left',
-        alignSelf: "stretch"
+        alignSelf: "stretch",
+        backgroundColor:'transparent'
     },
 
     betValue: {
@@ -19,7 +20,8 @@ export default {
     },
 
     betId: {
-        fontSize:13
+        fontSize:13,
+        backgroundColor:'transparent'
     },
 
     profit: {
@@ -92,7 +94,8 @@ export default {
         fontFamily: 'Roboto_light',
         fontSize:14,
         paddingTop:4,
-        paddingRight:5
+        paddingRight:5,
+        backgroundColor:'transparent'
     },
     dateLabel: {
         textAlign:'right',

@@ -149,7 +149,7 @@ let Api = {
     },
 
     getMonthAbbr: month => {
-        return I18n.t(monthKeys[0])
+        return I18n.t(monthKeys[month])
     },
 
     getDate: date => {

@@ -82,7 +82,7 @@ class Withdraw extends Component {
         }
         return (
                 <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                    <Text style={Ui.buttonLabel}>{I18n.t('continue')}</Text>
+                    <Text style={Ui.buttonLabel}>{I18n.t('continue').toUpperCase()}</Text>
                 </Button>
         )
     };

@@ -75,11 +75,13 @@ export default {
         fontSize: normalize(13),
         fontFamily: 'Roboto_light',
         textAlign: 'left',
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
+        backgroundColor:'transparent'
     },
     balanceValue: {
         textAlign: 'right',
         alignSelf: 'stretch',
+        backgroundColor:'transparent',
         fontSize: normalize(16),
         color: ColorScheme.darkest,
         fontFamily: 'Roboto_light'
@@ -114,7 +116,8 @@ export default {
         fontSize: 15,
         lineHeight: 15,
         paddingTop: 15,
-        paddingLeft: 15
+        paddingLeft: 15,
+        backgroundColor:'transparent'
     },
     mainBalanceHeaderContainer: {
         flex:1,

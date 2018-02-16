@@ -149,14 +149,14 @@ class Deposit extends Component {
                            onPress={() => Controller.navigateTo("FundsTransfer", {
                                paymentData: this.state.paymentData,
                            })}>
-                <Text style={Ui.buttonLabel}>{I18n.t('fundsTransfer')}</Text>
+                <Text style={Ui.buttonLabel}>{I18n.t('fundsTransfer').toUpperCase()}</Text>
             </Button>
         }
 
         if (this.state.depositCompleted == 'error' || this.state.depositCompleted == 'cancel') {
             return <View>
                 <Button primary rounded style={styles.continueButton} onPress={() => this.resetDeposit()}>
-                    <Text style={Ui.buttonLabel}>{I18n.t('startOver')}</Text>
+                    <Text style={Ui.buttonLabel}>{I18n.t('startOver').toUpperCase()}</Text>
                 </Button>
             </View>
 
@@ -167,7 +167,7 @@ class Deposit extends Component {
         }
         return (
             <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                <Text style={Ui.buttonLabel}>{I18n.t('continue')}</Text>
+                <Text style={Ui.buttonLabel}>{I18n.t('continue').toUpperCase()}</Text>
             </Button>
         )
     }

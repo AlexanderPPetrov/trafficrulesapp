@@ -189,7 +189,10 @@ class SettledBets extends Component {
         //
         const date = Api.getDate(bet._date),
             dayDate = date.getDate(),
-            monthAbbr = Api.getMonthAbbr(date.getMonth() + 1).substring(0, 3).toUpperCase();
+            month = date.getMonth() + 1,
+            monthAbbr = Api.getMonthAbbr(month).substring(0, 3).toUpperCase();
+        debugger
+        console.log('######', date.getMonth())
 
         return <TouchableWithoutFeedback key={i} onPress={()=> this.openModal(bet._date)}>
             <View style={[Ui.profitHistoryContainer, this.getBetStyle(bet._profit)]}>
