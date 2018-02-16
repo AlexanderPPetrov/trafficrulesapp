@@ -58,7 +58,7 @@ export default {
     balanceHeader: {
         textAlign: 'center',
         color: ColorScheme.balanceHeaderColor,
-        fontSize: normalize(12)
+        fontSize: normalize(13)
     },
     listItem: {
         paddingLeft: 15,
@@ -84,7 +84,7 @@ export default {
         fontFamily: 'Roboto_light'
     },
     balanceValueSmall: {
-        fontSize: 16,
+        fontSize: normalize(12),
     },
     balanceCurrency: {
         textAlign: 'left',
@@ -94,6 +94,9 @@ export default {
         paddingTop: normalize(10) / 4,
         paddingLeft: 5,
         fontSize: normalize(10)
+    },
+    bold: {
+        fontWeight:'700'
     },
     currencyWidth: {
         width: 30
@@ -106,7 +109,13 @@ export default {
         paddingTop: 15,
         paddingLeft: 15
     },
-
+    mainBalanceHeaderContainer: {
+        flex:1,
+        flexDirection:'row',
+        backgroundColor:'#fff',
+        paddingTop:15,
+        paddingBottom:15
+    },
     mainBalanceContainer: {
         flex: 1,
         height: 80,
@@ -125,13 +134,23 @@ export default {
         height: 70,
         borderRadius: 35,
         backgroundColor: ColorScheme.chatBackgroundColor,
-        elevation: 3,
-        shadowColor: "#000",
-        shadowOffset: {width: 2, height: 2},
-        shadowOpacity: 0.5,
-        shadowRadius: 1.2,
         alignItems:'center',
         justifyContent:'center'
+    },
+
+    dropShadow: {
+        shadowOffset: { width: 10, height: 10 },
+        shadowColor: 'black',
+        shadowOpacity: 1,
+        elevation: 3,
+        zIndex:999
+    },
+
+    verticalSeparator: {
+        width:1,
+        height:45,
+        marginTop:20,
+        backgroundColor: ColorScheme.listItemBorderColor
     },
 
     chatButtonIcon: {
@@ -154,7 +173,10 @@ export default {
         padding: 15,
         paddingTop: 10,
         paddingBottom: 0,
-        marginBottom: 0
+        marginBottom: 0,
+        backgroundColor: ColorScheme.datePickerBackground,
+        borderBottomWidth:1,
+        borderBottomColor: ColorScheme.datePickerBorderColor
     },
     datePickerLabel: {
         fontSize: 13,
@@ -162,23 +184,27 @@ export default {
         fontFamily: 'Roboto_light',
         backgroundColor: 'transparent'
     },
+    datePickerBorder: {
+        borderLeftWidth:1,
+        borderLeftColor: ColorScheme.datePickerBorderColor
+    },
     datePickerStyles: {
-        dateIcon: {
-            // position: 'absolute',
-            // left: 0,
-            // top: 5,
-            marginLeft: 0
-        },
         dateInput: {
-            marginRight: 0,
-            borderWidth: 0
+            // marginRight: 0,
+            borderWidth: 0,
+            marginLeft: 5
         },
         dateText: {
-            color: ColorScheme.dark
+            color: ColorScheme.dark,
+            paddingBottom:7
         }
     },
     calendarIcon: {
-        color: ColorScheme.light
+        color: ColorScheme.light,
+        position: 'absolute',
+        left: 0,
+        top: 2,
+        marginLeft: 0
     },
 
     dayLabel: {
@@ -212,6 +238,25 @@ export default {
         alignItems:"center",
         justifyContent:"center"
     },
+    iconContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 42,
+        height: 42,
+        backgroundColor: ColorScheme.iconContainerBackground,
+        borderRadius: 42
+    },
+
+    transactionsContainer: {
+        paddingTop:12,
+        paddingBottom:12,
+        marginBottom:0,
+        paddingRight:12,
+        borderBottomColor: '#f2f2f2',
+        borderBottomWidth:1,
+        alignItems:"center",
+        justifyContent:"center"
+    },
     betWin: {
         borderLeftColor: ColorScheme.win
     },
@@ -238,6 +283,18 @@ export default {
         fontSize: 16
     },
 
+    statusLabel: {
+        backgroundColor: ColorScheme.info,
+        color: ColorScheme.neutralLight,
+        alignSelf: 'flex-end',
+        fontSize:12,
+        paddingTop:2,
+        paddingBottom:2,
+        paddingLeft:10,
+        paddingRight:10,
+        borderRadius:10
+    },
+
     running: {
         backgroundColor: ColorScheme.running
     },
@@ -259,6 +316,31 @@ export default {
     cancelled: {
         backgroundColor: ColorScheme.cancelled
     },
+    confirmed: {
+        backgroundColor: ColorScheme.confirmed
+    },
+    pending: {
+        backgroundColor: ColorScheme.pending
+    },
+    rejected: {
+        backgroundColor: ColorScheme.rejected
+    },
+    failed: {
+        backgroundColor: ColorScheme.failed
+    },
+    authorized: {
+        backgroundColor: ColorScheme.authorized
+    },
+    changed: {
+        backgroundColor: ColorScheme.changed
+    },
+    inspected: {
+        backgroundColor: ColorScheme.inspected
+    },
+    revoked: {
+        backgroundColor: ColorScheme.revoked
+    },
+
 
     stepHeader: {
         textAlign: 'center',

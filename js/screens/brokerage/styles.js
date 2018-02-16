@@ -63,17 +63,7 @@ export default {
         marginTop:5
     },
 
-    statusLabel: {
-        backgroundColor: ColorScheme.info,
-        color: ColorScheme.neutralLight,
-        alignSelf: 'flex-end',
-        fontSize:12,
-        paddingTop:2,
-        paddingBottom:2,
-        paddingLeft:10,
-        paddingRight:10,
-        borderRadius:10
-    },
+
 
     settledBetStatus: {
         color: ColorScheme.neutralLight,

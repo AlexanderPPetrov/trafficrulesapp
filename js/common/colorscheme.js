@@ -20,8 +20,9 @@ export default {
     primaryButton:'#ffae00',
     inputTextColor:'#252525',
     inputBorderColor:'#dddddd',
-
-
+    iconContainerBackground:'#f1f1f1',
+    datePickerBackground:'#f1f1f1',
+    datePickerBorderColor:'#dadada',
 
     win:'#04d54a',
     halfWin:'#6DD57F',
@@ -31,20 +32,24 @@ export default {
     cancelled:'#747474',
     running:'#ffae00',
 
-
+    confirmed:'#04d54a',
+    pending:'#67a7f7',
+    rejected:'#ff3333',
+    failed:'#e66560',
+    authorized:'#6DD57F',
+    changed:'#ffae00',
+    inspected:'#83a8b5',
+    revoked:'#ff3333',
 
     listLabelColor: '#212121',
     monthLabelColor: '#afafaf',
-    balanceHeaderColor: '#b1b1b1',
+    balanceHeaderColor: '#888',
     mainCurrencyColor:'#252525',
     chatBackgroundColor:'#f0f0f0',
     chatIconColor:'#a8a8a8',
     listHeaderBackground:'#e6e6e6',
     listItemBorderColor:'#f2f2f2',
     enterPinLabelColor:'#aaa',
-
-
-
 
     darkest:'#151515',
     darker:'#252525',

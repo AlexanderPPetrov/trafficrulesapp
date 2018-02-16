@@ -13,7 +13,7 @@ class CommonDatePicker extends Component {
     render() {
         return (
             <View style={Ui.datePickerContainer}>
-                <Text style={Ui.datePickerLabel}>{this.props.title}</Text>
+                {/*<Text style={Ui.datePickerLabel}>{this.props.title}</Text>*/}
                 <DatePicker
                     style={{alignSelf: 'flex-end'}}
                     date={this.props.date}

@@ -28,6 +28,7 @@ import Header from '../../common/header/header';
 import styles from "./styles";
 import Controller from '../../../Controller';
 import Balance from './balance';
+import MainBalance from "./mainbalance";
 
 class MyAccount extends Component {
 
@@ -122,8 +123,13 @@ class MyAccount extends Component {
                     title={I18n.t('myAccount')}
                 />
 
-                <Tabs loaded={this.state.loaded} balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>
-
+                {/*<Tabs loaded={this.state.loaded} balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>*/}
+                <MainBalance
+                    loaded={this.state.loaded}
+                    refreshing={this.state.refreshing}
+                    _payload={this.state._payload}
+                    onRefresh={this.onRefresh}
+                />
 
             </Container>
         );

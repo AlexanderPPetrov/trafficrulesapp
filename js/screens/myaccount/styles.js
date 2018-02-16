@@ -29,14 +29,7 @@ export default {
         borderBottomColor: ColorScheme.neutralDark
     },
 
-    iconContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 42,
-        height: 42,
-        backgroundColor: ColorScheme.neutralLight,
-        borderRadius: 42
-    },
+
 
     pieChartContainer: {
         backgroundColor: ColorScheme.neutralLight

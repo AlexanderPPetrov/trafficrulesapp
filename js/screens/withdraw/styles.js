@@ -29,21 +29,25 @@ export default {
         justifyContent: 'space-between'
     },
     openedRequestsContainer: {
-        position:'absolute',
-        flex:1,
         flexDirection:'row',
-        left:0,
-        right:0,
-        height:30,
-        backgroundColor:'rgba(0,0,0,0.5)'
-    },
+        paddingLeft:15,
+        paddingRight:15,
+        paddingTop:8,
+        paddingBottom:8,
+        marginLeft:20,
+        marginRight:20,
+        marginTop:15,
+        borderRadius:20,
+        backgroundColor:'rgba(0,0,0,0.05)',
 
+    },
     openedRequestsLabel: {
-        color:ColorScheme.neutralLight
+        color:ColorScheme.dark
     },
 
     openedRequestsCount: {
-        color:'#ff9900'
+        color:'#ff9900',
+        paddingLeft:15
     },
 
     formLabel:{

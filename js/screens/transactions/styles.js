@@ -28,9 +28,8 @@ export default {
         justifyContent: 'flex-start',
         width: 30
     },
-
-    headerIcon: {
-        color: ColorScheme.dark
+    paymentTypeLabel: {
+        fontSize:normalize(11)
     },
 
     balanceHeader: {

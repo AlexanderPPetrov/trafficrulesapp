@@ -40,7 +40,7 @@ class BetDetails extends Component {
             let status = statuses[this.props.bet._status]
 
             if(!status) status = 'running';
-            let labelStyles = [styles.statusLabel, Ui[status]];
+            let labelStyles = [Ui.statusLabel, Ui[status]];
             console.log(status);
 
             return <Text style={labelStyles}>{I18n.t(status).toUpperCase()}</Text>

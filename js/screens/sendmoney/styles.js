@@ -36,7 +36,7 @@ export default {
         // padding:0
     },
     currencyPicker: {
-        width:100
+        width:120
     },
     cardContainer:{
         padding:30,

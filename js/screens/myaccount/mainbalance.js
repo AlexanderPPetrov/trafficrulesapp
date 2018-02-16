@@ -9,7 +9,7 @@ class MainBalance extends Component {
     getBalanceList = () => {
         if (this.props.loaded) {
             return <View style={{flexDirection: 'column', flex: 1, alignItems: 'stretch', marginTop: 1}}>
-                <Balance balances={this.props.balances}></Balance>
+                <Balance balances={this.props._payload.balances}></Balance>
             </View>
         }
         return null

@@ -18,7 +18,7 @@ class BalanceItem extends Component {
         return <ListItem style={Ui.listItem}>
 
             <Col style={{width:60}}>
-                <View style={[styles.iconContainer, styles[this.props._currency]]}>
+                <View style={[Ui.iconContainer, styles[this.props._currency]]}>
                     {this.getCurrencyIcon()}
                 </View>
             </Col>

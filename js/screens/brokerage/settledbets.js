@@ -149,7 +149,7 @@ class SettledBets extends Component {
                     onDateChange={this.dateFromChange}
                 />
             </Col>
-            <Col>
+            <Col style={Ui.datePickerBorder}>
                 <DatePicker
                     date={this.state.dateTo}
                     title={I18n.t('to')}

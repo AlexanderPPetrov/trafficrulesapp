@@ -136,7 +136,7 @@ class SideBar extends Component {
                 <Content bounces={false} style={{flex: 1, top: -1}}>
 
                     <View style={styles.menuHeader}>
-                        <Logo scale={this.state.scale} primary={ColorScheme.neutralLight} secondary={ColorScheme.action} slogan={ColorScheme.neutralLight} />
+                        <Logo scale={this.state.scale} primary={ColorScheme.neutralLight} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.neutralLight} />
                     </View>
                     <List style={{paddingTop:15}}>
                         {this.getMenuItems()}

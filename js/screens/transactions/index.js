@@ -20,11 +20,13 @@ import {View, FlatList, RefreshControl} from "react-native";
 import Ui from '../../common/ui';
 import Controller from '../../../Controller';
 import Header from '../../common/header/header';
+import { MaterialCommunityIcons} from '@expo/vector-icons';
 
 import DatePicker from '../../common/datepicker/datepicker'
 
 import styles from "./styles";
 import Api from "../../../Api";
+import ColorScheme from "../../common/colorscheme";
 
 const listOrder = ['_payment_method', '_account', '_fee', '_amount', '_date_created', '_status'];
 const statuses = ['confirmed','pending','rejected','cancelled','failed','authorized','changed','inspected','revoked'];
@@ -151,7 +153,7 @@ class Transactions extends Component {
                         onDateChange={this.dateFromChange}
                     />
                 </Col>
-                <Col>
+                <Col style={Ui.datePickerBorder}>
                     <DatePicker
                         date={this.state.dateTo}
                         title={I18n.t('to')}
@@ -162,41 +164,23 @@ class Transactions extends Component {
         </Grid>
     };
 
-    getListItem = (transaction, property, i) => {
-        let value = transaction[property],
-            valueStyle = Ui.balanceValueSmall;
-
-        if(property == '_status') {
-            value = I18n.t(statuses[transaction[property]])
-        }
-
-        if(property == '_fee' && !transaction[property]){
-            value = '0'
-        }
-        if(property == '_date_created'){
-            value = transaction[property].split(' ')[0]
-        }
-
-        return <ListItem key={i} style={Ui.listItem}>
-            <Col size={2}>
-                <Text style={Ui.itemLabel}>{I18n.t(translationKeys[property])}</Text>
-            </Col>
-            <Col size={3}>
-                <Text style={[Ui.balanceValue, valueStyle]}>{value}</Text>
-            </Col>
-        </ListItem>
-    }
-
-    getWholeAmount = (fee, amount) =>{
-        if(!fee){
-            fee = 0
-        }
-        let wholeAmount = parseFloat(fee) + parseFloat(amount);
-        return parseFloat(wholeAmount).toFixed(2)
-    }
 
     getIcon = (type) =>{
-        return <Icon name="ios-arrow-round-forward-outline" size={28} style={styles.headerIcon}/>
+
+        if(type === '1' || type === '2' || type === '10' || type === '13'){
+            return <MaterialCommunityIcons name={'arrow-bottom-right'} size={28} style={{color: ColorScheme.win}}/>
+        }
+        return <MaterialCommunityIcons name={'arrow-top-left'} size={28} style={{color:ColorScheme.loss}}/>
+
+    }
+
+    getStatusLabel = (statusCode) => {
+        let status = statuses[statusCode]
+
+        if(!status) status = 'running';
+        let labelStyles = [Ui.statusLabel, Ui[status]];
+
+        return <Text style={labelStyles}>{I18n.t(status).toUpperCase()}</Text>
 
     }
 
@@ -205,31 +189,56 @@ class Transactions extends Component {
         if(!transactionTypes[transaction._payment_type]){
             transaction._payment_type = 2;
         }
+        if(!transaction._account){
+            transaction._account = I18n.t('noAccountSelected')
+        }
+        if(!transaction._fee){
+            transaction._fee = 0;
+        }
 
-        let cardListItems = listOrder.map((property, i) =>
-            this.getListItem(transaction, property, i)
-        );
-        return <View key={i}>
-            <List >
-                <ListItem itemDivider style={[Ui.listHeader, Ui.listHeaderExtended]}>
+        return <View key={i} style={Ui.transactionsContainer}>
                     <Grid>
-                        <Col style={{width: 30, justifyContent: 'flex-start'}}>
-                            <View style={styles.headerIconContainer}>
+                        <Col size={1} style={{justifyContent:'center', alignItems:'center'}}>
+                            <View style={Ui.iconContainer}>
                                 {this.getIcon(transaction._payment_type)}
                             </View>
                         </Col>
-                        <Col style={{justifyContent: 'flex-start'}}>
-                            <Text style={styles.headerLabel}>{(I18n.t(transactionTypes[transaction._payment_type]))}</Text>
-                        </Col>
-                        <Col style={{justifyContent: 'flex-end', flexDirection: 'row'}}>
-                            <Text>{this.getWholeAmount(transaction._fee, transaction._amount)}</Text>
+                        <Col size={4} >
+                            <Row>
+                                <Col size={2} style={{justifyContent:'center'}}>
+                                    <Text style={[Ui.itemLabel, styles.paymentTypeLabel]}>{I18n.t(transactionTypes[transaction._payment_type]).toUpperCase()}</Text>
+                                </Col>
+                                <Col size={1} style={{justifyContent:'center'}}>
+                                    <Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{transaction._date_created.split(' ')[0]}</Text>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col size={2} style={{justifyContent:'center'}}>
+                                    <Text style={[Ui.itemLabel, Ui.bold]}>{transaction._payment_method}</Text>
+                                </Col>
+                                <Col size={1} style={{justifyContent:'center'}}>
+                                    <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.bold]}>{transaction._amount} {transaction._currency}</Text>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col size={2} style={{justifyContent:'center'}}>
+                                    <Text style={[Ui.itemLabel, styles.paymentTypeLabel]}>{I18n.t('fee').toUpperCase()}</Text>
+                                </Col>
+                                <Col size={1} style={{justifyContent:'center'}}>
+                                    <Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{transaction._fee} {transaction._currency}</Text>
+                                </Col>
+                            </Row>
+                            <Row style={{marginTop:3}}>
+                                <Col size={2} style={{justifyContent:'center'}}>
+                                    <Text style={Ui.itemLabel}>{transaction._account}</Text>
+                                </Col>
+                                <Col size={1} style={{justifyContent:'center'}}>
+                                    {this.getStatusLabel(transaction._status)}
+                                </Col>
+                            </Row>
                         </Col>
                     </Grid>
-
-                </ListItem>
-                {cardListItems}
-            </List>
-        </View>;
+                </View>
     };
 
     _keyExtractor = (item, index) => index;
@@ -240,7 +249,7 @@ class Transactions extends Component {
                 <Header
                     title={I18n.t('transactions')}
                 />
-                <View style={{height:80}}>
+                <View style={{height:51}}>
                     {this.getFilter()}
                 </View>
                 <FlatList

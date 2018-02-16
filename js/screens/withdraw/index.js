@@ -125,10 +125,9 @@ class Withdraw extends Component {
                 {this.getHeader()}
                 <Content >
                     <View style={Ui.cardContainer}>
-                        {this.getOpenedRequests()}
                         <View style={{flex:1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
-
+                            {this.getOpenedRequests()}
                             <View style={Ui.formContainer}>
                                 <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
                                                onUpdatePage={this.changeHandler}
