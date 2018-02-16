@@ -23,6 +23,7 @@ import Ui from '../../common/ui';
 import DatePicker from '../../common/datepicker/datepicker'
 
 import styles from "./styles";
+import ColorScheme from "../../common/colorscheme";
 import BetDetails from "./betdetails";
 import Api from "../../../Api";
 
@@ -203,7 +204,7 @@ class SettledBets extends Component {
                                 <Text style={Ui.itemLabel}>{I18n.t('turnOver')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={Ui.balanceValue}>{bet._turnover}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue]}>{bet._turnover}</Text>
                             </Col>
                             <Col style={Ui.currencyWidth} >
                                 <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
@@ -216,10 +217,10 @@ class SettledBets extends Component {
                                 <Text style={Ui.itemLabel}>{I18n.t('profit')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={[Ui.balanceValue, this.getProfitStyle(bet._profit)]}>{bet._profit}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue, this.getProfitStyle(bet._profit)]}>{bet._profit}</Text>
                             </Col>
                             <Col style={Ui.currencyWidth}>
-                                <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
+                                <Text style={[Ui.balanceCurrency, this.getProfitStyle(bet._profit)]}>{bet._currency}</Text>
                             </Col>
 
                         </Row>
@@ -228,6 +229,18 @@ class SettledBets extends Component {
             </View>
         </TouchableWithoutFeedback>
     };
+
+    getProfit = (bets) => {
+        let profit = 0;
+        for(let i = 0; i < bets.length; i++){
+            profit += parseFloat(bets[i]._profit)
+        }
+
+        return  <Col>
+                <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(profit)]}>{profit} {Api.accountSettings._currency}</Text>
+            </Col>
+
+    }
 
     getBetList = (bets) => {
         let betList = bets.map((bet, i) =>
@@ -239,6 +252,15 @@ class SettledBets extends Component {
         }
         return (
             <View>
+                <View style={Ui.listItem}>
+                    <Grid>
+                        <Col>
+                            <Text style={Ui.itemLabel}>{I18n.t('totalProfit')}</Text>
+                        </Col>
+                        {this.getProfit(bets)}
+
+                    </Grid>
+                </View>
                 {betList}
             </View>
 
@@ -257,14 +279,21 @@ class SettledBets extends Component {
 
         const betDetails = this.state.settledBetsDetails.map((bet, i) => {
             bet._event_date = bet._date;
-            return <BetDetails bet={bet} key={i}/>
+            return <BetDetails bet={bet} key={i} getHoursOnly={true}/>
         });
 
         return (
             <View>
+                <View style={Ui.listItem}>
+                    <Col>
+                        <Text style={Ui.itemLabel}>{I18n.t('betDetailsFor')}</Text>
+                    </Col>
+                    <Col >
+                        <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold]}>{this.state.date.split(' ')[0]}</Text>
+                    </Col>
+                </View>
                 {betDetails}
             </View>
-
         );
     }
 
@@ -286,13 +315,15 @@ class SettledBets extends Component {
                         {this.getBetsDetails()}
                     </ScrollView>
                 </Modal>
+                <View style={{height:51}}>
+                    {this.getFilter()}
+                </View>
                 <ScrollView refreshControl={
                     <RefreshControl
                         refreshing={this.state.refreshing}
                         onRefresh={this.onRefresh}
                     />
                 }>
-                    {this.getFilter()}
                     {this.getBetList(this.state._payload.bets)}
                 </ScrollView>
             </View>

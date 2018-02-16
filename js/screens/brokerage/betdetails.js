@@ -16,6 +16,8 @@ import {
     Right,
     Body
 } from "native-base";
+
+import {View} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import Ui from '../../common/ui';
 import ColorScheme from '../../common/colorscheme';
@@ -24,8 +26,6 @@ import Api from "../../../Api";
 
 
 const statuses = ['running','win','halfWin','draw','halfLoss','loss','cancelled']
-
-
 
 class BetDetails extends Component {
 
@@ -40,12 +40,38 @@ class BetDetails extends Component {
             let status = statuses[this.props.bet._status]
 
             if(!status) status = 'running';
-            let labelStyles = [Ui.statusLabel, Ui[status]];
+            let labelStyles = [Ui.statusContainer, Ui[status]];
             console.log(status);
 
-            return <Text style={labelStyles}>{I18n.t(status).toUpperCase()}</Text>
+            return <View style={labelStyles}>
+                <Text style={Ui.statusLabel}>{I18n.t(status).toUpperCase()}</Text>
+            </View>
         }
         return null;
+    }
+
+    getProfitStyle = (profit) => {
+        if(!profit) return
+        let style = Ui.profitWin;
+        if(parseFloat(profit) < 0){
+            style = Ui.profitLoss
+        }
+        if(parseFloat(profit) == 0){
+            style = Ui.profitDraw
+        }
+        return style
+    }
+
+    getBetProfit = () => {
+        if(!this.props.bet._profit) return null
+        return <Text style={[styles.profit, Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(this.props.bet._profit)]}>{this.props.bet._profit} {this.props.bet._currency}</Text>
+    }
+    getDate = () => {
+        if(this.props.getHoursOnly){
+            return <Text style={[Ui.cardHeader, styles.dateLabel]}>{this.props.bet._event_date.split(' ')[1]}</Text>
+        }
+        return <Text style={[Ui.cardHeader, styles.dateLabel]}>{this.props.bet._event_date.split(' ')[0]}</Text>
+
     }
 
     render() {
@@ -57,7 +83,7 @@ class BetDetails extends Component {
                             <Text style={[Ui.cardHeader, styles.betId]}>{I18n.t('betNumber')} {this.props.bet._id}</Text>
                         </Col>
                         <Col>
-                            <Text style={[Ui.cardHeader, styles.dateLabel]}>{this.props.bet._event_date.split(' ')[0]}</Text>
+                            {this.getDate()}
                         </Col>
                     </Row>
                     <Row style={styles.selectionContainer}>
@@ -76,7 +102,7 @@ class BetDetails extends Component {
                             <Text style={[styles.betLabel, styles.eventLabel]}>{this.props.bet._event}</Text>
                         </Col>
                         <Col size={2} >
-
+                            {this.getBetProfit()}
                         </Col>
                     </Row>
                     <Row style={styles.infoContainer}>

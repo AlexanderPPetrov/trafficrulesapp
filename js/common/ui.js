@@ -61,13 +61,14 @@ export default {
         fontSize: normalize(13)
     },
     listItem: {
-        paddingLeft: 15,
-        paddingRight: 15,
+        padding: 15,
         backgroundColor: ColorScheme.neutralLight,
         flex: 1,
         flexDirection: 'row',
         maxHeight: 78,
-        minHeight: 40
+        minHeight: 40,
+        borderBottomColor: ColorScheme.listItemBorderColor,
+        borderBottomWidth:1
     },
     itemLabel: {
         color: ColorScheme.darker,
@@ -79,10 +80,15 @@ export default {
     balanceValue: {
         textAlign: 'right',
         alignSelf: 'stretch',
-        fontSize: normalize(18),
+        fontSize: normalize(16),
         color: ColorScheme.darkest,
         fontFamily: 'Roboto_light'
     },
+
+    profitValue: {
+        fontSize: normalize(14)
+    },
+
     balanceValueSmall: {
         fontSize: normalize(12),
     },
@@ -96,7 +102,8 @@ export default {
         fontSize: normalize(10)
     },
     bold: {
-        fontWeight:'700'
+        fontWeight:'700',
+        fontFamily:'Roboto_medium'
     },
     currencyWidth: {
         width: 30
@@ -137,11 +144,10 @@ export default {
         alignItems:'center',
         justifyContent:'center'
     },
-
     dropShadow: {
-        shadowOffset: { width: 10, height: 10 },
+        shadowOffset: { width: 0, height: 2 },
         shadowColor: 'black',
-        shadowOpacity: 1,
+        shadowOpacity: 0.2,
         elevation: 3,
         zIndex:999
     },
@@ -284,15 +290,18 @@ export default {
     },
 
     statusLabel: {
-        backgroundColor: ColorScheme.info,
+        backgroundColor: 'transparent',
         color: ColorScheme.neutralLight,
-        alignSelf: 'flex-end',
         fontSize:12,
+    },
+
+    statusContainer: {
+        alignSelf: 'flex-end',
         paddingTop:2,
         paddingBottom:2,
         paddingLeft:10,
         paddingRight:10,
-        borderRadius:10
+        borderRadius:15
     },
 
     running: {

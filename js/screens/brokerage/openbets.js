@@ -20,6 +20,8 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import { ScrollView, RefreshControl, View } from "react-native";
 import Ui from '../../common/ui';
 import ColorScheme from '../../common/colorscheme';
+import BalanceHeader from "../../common/balanceheader/balanceheader";
+
 import styles from "./styles";
 import BetDetails from "./betdetails";
 import Api from "../../../Api";
@@ -89,14 +91,29 @@ class OpenBets extends Component {
 
     render() {
         return (
-            <ScrollView refreshControl={
-                <RefreshControl
-                    refreshing={this.state.refreshing}
-                    onRefresh={this.onRefresh}
-                />
-            }>
-                {this.getBetList(this.state._payload.bets)}
-            </ScrollView>
+            <View>
+                <View style={{height:110}}>
+                    <BalanceHeader
+                        balanceLeft={Api.accountSettings._brokerage_balance}
+                        currencyLeft={Api.accountSettings._brokerage_currency}
+                        titleLeft={I18n.t('brokerageBalance')}
+                        balanceRight={Api.accountSettings._brokerage_outstanding}
+                        currencyRight={Api.accountSettings._brokerage_currency}
+                        titleRight={I18n.t('totalOutstanding')}
+                    />
+                </View>
+
+                <ScrollView refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.onRefresh}
+                    />
+                }>
+
+                    {this.getBetList(this.state._payload.bets)}
+                </ScrollView>
+            </View>
+
         );
     }
 }

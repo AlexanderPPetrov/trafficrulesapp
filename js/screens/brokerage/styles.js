@@ -22,6 +22,10 @@ export default {
         fontSize:13
     },
 
+    profit: {
+        paddingRight:15
+    },
+
     selectionContainer: {
         marginTop:15,
         marginBottom:5,
@@ -87,7 +91,7 @@ export default {
         color: ColorScheme.light,
         fontFamily: 'Roboto_light',
         fontSize:14,
-        paddingTop:2,
+        paddingTop:4,
         paddingRight:5
     },
     dateLabel: {

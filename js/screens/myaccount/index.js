@@ -37,7 +37,9 @@ class MyAccount extends Component {
 
         this.state = {
             _payload: {
-                balances: []
+                balances: [],
+                _safe_balance:'',
+                _brokerage_balance:''
             },
             pieChartData: [],
             refreshing: false,

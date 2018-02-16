@@ -48,7 +48,7 @@ export default {
     chatBackgroundColor:'#f0f0f0',
     chatIconColor:'#a8a8a8',
     listHeaderBackground:'#e6e6e6',
-    listItemBorderColor:'#f2f2f2',
+    listItemBorderColor:'#e8e8e8',
     enterPinLabelColor:'#aaa',
 
     darkest:'#151515',
