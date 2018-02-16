@@ -148,8 +148,8 @@ let Api = {
         attempt()
     },
 
-    getMonthAbbr: month => {
-        return I18n.t(monthKeys[month])
+    getMonthAbbr: (month) => {
+        return I18n.t(monthKeys[month]).substring(0, 3).toUpperCase()
     },
 
     getDate: date => {

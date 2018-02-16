@@ -183,6 +183,7 @@ export default {
         paddingTop: 10,
         paddingBottom: 0,
         marginBottom: 0,
+        alignItems:'center',
         backgroundColor: ColorScheme.datePickerBackground,
         borderBottomWidth:1,
         borderBottomColor: ColorScheme.datePickerBorderColor
@@ -205,7 +206,9 @@ export default {
         },
         dateText: {
             color: ColorScheme.dark,
-            paddingBottom:7
+            paddingBottom:7,
+            alignSelf:'stretch',
+            textAlign:'right'
         }
     },
     calendarIcon: {

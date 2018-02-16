@@ -15,7 +15,7 @@ class CommonDatePicker extends Component {
             <View style={Ui.datePickerContainer}>
                 {/*<Text style={Ui.datePickerLabel}>{this.props.title}</Text>*/}
                 <DatePicker
-                    style={{alignSelf: 'flex-end'}}
+                    style={{width:105, alignItems:'flex-end'}}
                     date={this.props.date}
                     customStyles={Ui.datePickerStyles}
                     format="YYYY-MM-DD"
@@ -33,7 +33,6 @@ class CommonDatePicker extends Component {
                     btnTextCancel={I18n.t('cancel')}
                 />
             </View>
-
         );
     }
 }

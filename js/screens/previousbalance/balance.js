@@ -13,6 +13,10 @@ import ColorScheme from '../../common/colorscheme';
 class Balance extends Component {
 
 
+    constructor(props){
+        super(props)
+    }
+
     getProfitStyle = (profit) => {
         let style = Ui.profitWin;
         if(parseFloat(profit) < 0){
@@ -36,12 +40,12 @@ class Balance extends Component {
     }
 
     getBalanceItem = (balance, i) => {
-        // const date = new Date(bet._date),
-        //     dayDate = date.getDate();
-        //
-        const date = Api.getDate(balance._date_created),
+
+        let date = Api.getDate(balance._date_created),
             dayDate = date.getDate(),
-            monthAbbr = Api.getMonthAbbr(date.getMonth() + 1).substring(0, 3).toUpperCase();
+            month = date.getMonth(),
+            monthAbbr = Api.getMonthAbbr(month);
+
 
         return  <View  key={i} style={[Ui.profitHistoryContainer, this.getBetStyle(balance._change)]}>
                 <Grid>
@@ -67,7 +71,7 @@ class Balance extends Component {
                                 <Text style={Ui.itemLabel}>{I18n.t('change')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={[Ui.balanceValue,Ui.profitValue, this.getProfitStyle(balance._change)]}>{balance._change}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue, this.getProfitStyle(balance._change)]}>{balance._change}</Text>
                             </Col>
                             <Col style={Ui.currencyWidth}>
                                 <Text style={[Ui.balanceCurrency, this.getProfitStyle(balance._change)]}>{this.props.currency}</Text>

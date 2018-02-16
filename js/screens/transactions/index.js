@@ -178,8 +178,7 @@ class Transactions extends Component {
         let status = statuses[statusCode]
 
         if(!status) status = 'running';
-        let labelStyles = [Ui.statusLabel, Ui[status]];
-
+        let labelStyles = [Ui.statusContainer, Ui[status]];
         return <View style={labelStyles}>
                 <Text style={Ui.statusLabel}>{I18n.t(status).toUpperCase()}</Text>
             </View>
@@ -230,7 +229,7 @@ class Transactions extends Component {
                                     <Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{transaction._fee} {transaction._currency}</Text>
                                 </Col>
                             </Row>
-                            <Row style={{marginTop:3}}>
+                            <Row style={{marginTop:7.5}}>
                                 <Col size={2} style={{justifyContent:'center'}}>
                                     <Text style={Ui.itemLabel}>{transaction._account}</Text>
                                 </Col>
