@@ -56,25 +56,33 @@ class Notifications extends Component {
         })
     }
 
-    handlePressedNotification = () => {
-        console.log('lalala')
+    handlePressedNotification = (notification, i) => {
+        this.onDismiss(notification, i);
+        Controller.navigateTo('Transactions')
     }
 
     getClearButton = () => {
         if(this.state.notifications.length === 0){
             return null;
         }
-        return <Button onPress={()=> this.clearAllNotifications()}>
-            <Text>{I18n.t('clearAll')}</Text>
+        return <Button style={{alignSelf:'flex-end'}}transparent onPress={()=> this.clearAllNotifications()}>
+            <Text>{I18n.t('clearAll').toUpperCase()}</Text>
         </Button>
+    }
+
+    onDismiss = (notification, i) => {
+        this.state.notifications.splice(i, 1);
+        this.setState({
+            notifications: this.state.notifications
+        })
     }
 
     getNotifications = () => {
         if(this.state.notifications.length === 0){
-            return <Text>{I18n.t('noNotifications')}</Text>
+            return <Text style={Ui.noResults}>{I18n.t('noNotifications')}</Text>
         }
         const notificationList = this.state.notifications.map((notification, i) => {
-            return <NotificationMessage key={i} title={i} message={i} onPress={() => this.handlePressedNotification(notification, i)} />
+            return <NotificationMessage key={i} title={notification.data.title} message={notification.data.body} onDismiss={() => this.onDismiss(notification, i)} onPress={() => this.handlePressedNotification(notification, i)} />
         });
 
         return notificationList
@@ -100,8 +108,8 @@ class Notifications extends Component {
                     onBack={this.goBackward}
                     notifications={true}
                 />
-                {this.getClearButton()}
-                <ScrollView>
+                <ScrollView style={{paddingLeft: 15, paddingRight:15}}>
+                    {this.getClearButton()}
                     {this.getNotifications()}
                 </ScrollView>
 

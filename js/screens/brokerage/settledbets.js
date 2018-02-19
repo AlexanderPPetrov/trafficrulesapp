@@ -190,8 +190,8 @@ class SettledBets extends Component {
 
         const date = Api.getDate(bet._date),
             dayDate = date.getDate(),
-            month = date.getMonth() + 1,
-            monthAbbr = 'asd';
+            month = date.getMonth(),
+            monthAbbr = Api.getMonthAbbr(month);
 
         return <TouchableWithoutFeedback key={i} onPress={()=> this.openModal(bet._date)}>
             <View style={[Ui.profitHistoryContainer, this.getBetStyle(bet._profit)]}>
@@ -239,7 +239,7 @@ class SettledBets extends Component {
         }
 
         return  <Col>
-                <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(profit)]}>{profit} {Api.accountSettings._currency}</Text>
+                <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(profit)]}>{profit} {Api.accountSettings._brokerage_currency}</Text>
             </Col>
 
     }
@@ -250,7 +250,7 @@ class SettledBets extends Component {
         );
 
         if (bets.length == 0 && this.state.loaded) {
-            return <Text style={styles.noBets}>{I18n.t('noSettledBets')}</Text>;
+            return <Text style={Ui.noResults}>{I18n.t('noSettledBets')}</Text>;
         }
         return (
             <View>

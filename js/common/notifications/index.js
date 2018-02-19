@@ -57,12 +57,11 @@ class NotificationsHandler extends Component {
                     return;
                 }
 
-                if (receivedNotification.data.type === 0) {
+                if (receivedNotification) {
+                    console.log(receivedNotification)
                     Controller.navigateTo('Transactions')
                 }
-                if (receivedNotification.data.type === 1) {
-                    Controller.navigateTo('Brokerage', {settledBets: true})
-                }
+
             }
 
             if(Controller.currentRoute === 'Notifications'){
@@ -158,9 +157,13 @@ class NotificationsHandler extends Component {
         }, delay + 150);
     };
 
+    onDismiss = (notification) => {
+        this.dismissNotification('fadeOut', notification.notificationId, 100)
+    }
+
     handlePressedNotification = (notificationId) => {
         this.dismissNotification('fadeOut', notificationId, 100, () => {
-            console.log('navigate to');
+            Controller.navigateTo('Transactions')
         })
     };
 
@@ -176,7 +179,7 @@ class NotificationsHandler extends Component {
         const notificationId = notification.notificationId;
         return <Animatable.View key={notificationId} ref={"notification" + notificationId} style={[styles.container,this.getNotificationStyle(i)]} >
             <GestureView style={{alignSelf:'stretch'}}
-                content={ <NotificationMessage title={notificationId} message={i} onPress={() => this.handlePressedNotification(notificationId)} />}
+                content={ <NotificationMessage title={notification.data.title} message={notification.data.body} onDismiss={() => this.onDismiss(notification, i)}  onPress={() => this.handlePressedNotification(notificationId)} />}
                 onSwipeRight={(distance, angle) => this.dismissNotification('fadeOutRight', notificationId)}
                 onSwipeLeft={(distance, angle) => this.dismissNotification('fadeOutLeft', notificationId)}
                 onSwipeUp={(distance, angle) => console.log('asd')}
@@ -190,7 +193,7 @@ class NotificationsHandler extends Component {
         let offsetTop = Platform.OS === "ios" ? 64 : 56;
         offsetTop = offsetTop + Constants.statusBarHeight + 15;
         return {
-            top: offsetTop + i*70
+            top: offsetTop + i*75
         };
     }
     getNotifications = () => {

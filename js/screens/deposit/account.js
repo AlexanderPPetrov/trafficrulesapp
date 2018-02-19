@@ -35,6 +35,14 @@ class Account extends Component {
         }else{
             this.props.disableButton(false)
         }
+        setTimeout(()=> {
+            if(this.accountInput && this.accountInput._root && this.props.account == ''){
+                this.accountInput._root.focus()
+            }
+        }, 500)
+
+        console.log('account did mount')
+
     }
 
     getSecureIdField = () => {
@@ -56,7 +64,7 @@ class Account extends Component {
                 <Text style={Ui.formLabel}>{I18n.t('enterAccount')}</Text>
                 <Form style={Ui.form}>
                     <Item style={Ui.inputContainer}>
-                        <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
+                        <Input style={Ui.inputField} getRef={(input) => this.accountInput = input} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
                     </Item>
                 </Form>
                 {this.getSecureIdField()}

@@ -108,13 +108,7 @@ export default {
         color: ColorScheme.light,
         fontFamily:'Roboto_light',
         marginBottom:10
-    },
-    noBets: {
-        textAlign: 'center',
-        padding: 15,
-        alignSelf: "stretch",
-        fontFamily:'Roboto_light',
-        color: ColorScheme.darker
     }
+
 
 };

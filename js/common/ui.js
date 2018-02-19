@@ -439,7 +439,13 @@ export default {
         textAlign: 'center',
         marginTop: 15
     },
-
+    noResults: {
+        textAlign: 'center',
+        padding: 15,
+        alignSelf: "stretch",
+        fontFamily:'Roboto_light',
+        color: ColorScheme.darker
+    },
     tabsStyle: {
         activeTintColor: ColorScheme.tabActiveColor,
         inactiveTintColor: ColorScheme.tabInactiveColor,

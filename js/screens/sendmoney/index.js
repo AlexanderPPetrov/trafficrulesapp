@@ -27,7 +27,7 @@ import {View, ScrollView} from 'react-native';
 import Ui from '../../common/ui';
 import styles from "./styles";
 import Api from "../../../Api";
-import Controller from '../../../Controller';
+import Chat from '../../common/chat/index';
 
 const Item = Picker.Item;
 
@@ -81,7 +81,7 @@ class SendMoney extends Component {
         }
         return (
             <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                <Text style={Ui.buttonLabel}>{I18n.t('continue').toUpperCase()}</Text>
+                <Text style={Ui.buttonLabel}>{I18n.t('continue')}</Text>
             </Button>
         )
 
@@ -104,6 +104,11 @@ class SendMoney extends Component {
         this.setState({
             currentPage: page
         });
+        if(page === this.state.steps){
+            Chat.hide()
+        }else{
+            Chat.show()
+        }
     };
 
     render() {
@@ -128,6 +133,7 @@ class SendMoney extends Component {
                         </View>
                     </View>
                 </Content>
+                <Chat/>
 
             </Container>
         );

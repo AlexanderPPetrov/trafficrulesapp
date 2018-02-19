@@ -58,10 +58,6 @@ class Withdraw extends Component {
         Chat.show()
     };
 
-    componentWillUnmount = () => {
-        Chat.hide()
-    }
-
     setButtonState = (value) => {
         this.setState({
             buttonDisabled: value
@@ -103,6 +99,11 @@ class Withdraw extends Component {
         this.setState({
             currentPage: page
         });
+        if(page === this.state.steps){
+            Chat.hide()
+        }else{
+            Chat.show()
+        }
     };
 
     render() {
@@ -129,7 +130,7 @@ class Withdraw extends Component {
                         </View>
                     </View>
                 </Content>
-
+                <Chat/>
             </Container>
         );
     }

@@ -24,7 +24,7 @@ import {
 import Ui from '../../common/ui';
 import CommonPicker from '../../common/picker/picker';
 
-import {View, ScrollView} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import ColorScheme from "../../common/colorscheme";
 
@@ -115,7 +115,7 @@ class AddAccount extends Component {
                         <Col style={{width: 60}}>
                             <Text style={Ui.amountCurrency}>{this.props.currency}</Text>
                         </Col>
-                        <Col style={{width: 60}}>
+                        <Col style={{width: 60, alignItems:'center', justifyContent:'center'}}>
                             <Button transparent primary style={styles.removeAccountButton}
                                     onPress={() => this.props.addAccount(this.props.stateKey)}>
                                 <Icon name="ios-add-circle" style={styles.addAccountIcon}/>
@@ -158,11 +158,10 @@ class AddAccount extends Component {
                         <Text
                             style={[Ui.balanceValue, styles.accountAmount]}>{account.amount} {this.props.currency}</Text>
                     </Col>
-                    <Col style={{width: 45}}>
-                        <Button transparent primary style={styles.removeAccountButton}
-                                onPress={() => this.props.removeAccount(this.props.stateKey, account._id)}>
+                    <Col style={{width: 45, alignItems:'flex-end', justifyContent:'flex-end'}}>
+                        <TouchableOpacity onPress={() => this.props.removeAccount(this.props.stateKey, account._id)}>
                             <Icon name="ios-close-circle-outline" style={styles.removeAccountIcon}/>
-                        </Button>
+                        </TouchableOpacity>
                     </Col>
                 </Row>
             </Grid>

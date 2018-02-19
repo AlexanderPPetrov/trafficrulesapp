@@ -145,7 +145,7 @@ class SendMoneySteps extends Component {
             ></SecureId>
 
         }
-        if (this.props.currentPage == 2) {
+        if (this.props.currentPage == 3) {
             return <Verify    secureId={this.state.secureId}
                               email={this.state.account}
                               amount={this.state.amount}

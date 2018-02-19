@@ -70,7 +70,7 @@ class Pin extends React.Component {
         return (
             <ScrollView  contentContainerStyle={styles.formContainer}>
                 <Text style={styles.pinLabel}>{I18n.t('setPinTitle')}</Text>
-                <Text>{I18n.t('setPinHint')}</Text>
+                <Text style={{marginBottom:15}}>{I18n.t('setPinHint')}</Text>
                 <Form>
                     <Text>{I18n.t('enterPin')}</Text>
                     <Item style={[styles.inputContainer, styles.inputMargin]}>

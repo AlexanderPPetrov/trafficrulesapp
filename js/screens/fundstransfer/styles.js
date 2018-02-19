@@ -52,9 +52,14 @@ export default {
     },
 
     accountInList: {
-        marginTop:3,
-        borderWidth: 1,
-        borderColor: ColorScheme.neutralDarker,
+        marginTop:5,
+        flexDirection:'row',
+        paddingLeft:15,
+        paddingRight:15,
+        paddingTop:8,
+        paddingBottom:8,
+        borderRadius:20,
+        backgroundColor:'rgba(0,0,0,0.05)',
     },
 
     accountLabel: {
@@ -75,7 +80,7 @@ export default {
         paddingRight:5
     },
     removeAccountIcon: {
-        fontSize:26
+        fontSize:26,
     },
     amountCurrency: {
         fontFamily:'Roboto_light',

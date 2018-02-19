@@ -55,9 +55,6 @@ class Withdraw extends Component {
         })
         Chat.show()
     }
-    componentWillUnmount = () =>{
-        Chat.hide()
-    }
 
     setOpenedRequests = (response) => {
         this.setState({
@@ -117,6 +114,12 @@ class Withdraw extends Component {
         this.setState({
             currentPage: page
         });
+        console.log(page)
+        if(page === this.state.steps){
+            Chat.hide()
+        }else{
+            Chat.show()
+        }
     }
 
     render() {
@@ -140,7 +143,7 @@ class Withdraw extends Component {
                     </View>
 
                 </Content>
-
+                <Chat/>
             </Container>
         );
     }

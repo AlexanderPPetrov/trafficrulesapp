@@ -15,12 +15,16 @@ class AccountsList extends Component {
 
 
     getListItem = (account, property, i) => {
+        let value = account[property];
+        if(property === '_last_status'){
+            value = value.split(' ')[0]
+        }
         return <ListItem key={i} style={Ui.listItem}>
             <Col size={2}>
                 <Text style={Ui.itemLabel}>{I18n.t(property)}</Text>
             </Col>
             <Col size={3}>
-                <Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{account[property]}</Text>
+                <Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{value}</Text>
             </Col>
         </ListItem>
     }

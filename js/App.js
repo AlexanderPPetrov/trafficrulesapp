@@ -1,5 +1,6 @@
 import React from "react";
 import {StyleProvider, Root, Text} from "native-base";
+import {View} from "react-native";
 import {StackNavigator} from "react-navigation";
 
 import Drawer from "./Drawer";
@@ -12,7 +13,7 @@ import PinModal from "./common/pinmodal/pinmodal";
 
 import Controller from '../Controller';
 import Notifications from "./common/notifications/index";
-import Chat from "./common/chat/index";
+import ChatModal from "./common/chat/chatmodal";
 
 const AppNavigator = StackNavigator(
     {
@@ -47,15 +48,17 @@ class AppRoot extends React.Component {
             <Root>
                 <Loader/>
                 <StyleProvider style={getTheme(material)}>
-                    <AppNavigator ref={navigatorRef => {
-                        Controller.setNavigator(navigatorRef);
-                    }}/>
+                        <AppNavigator ref={navigatorRef => {
+                            Controller.setNavigator(navigatorRef);
+                        }}/>
                 </StyleProvider>
                 <PinModal ref={pinModal => {
                     Controller.setPinModal(pinModal);
                 }}/>
                 <Notifications/>
-                <Chat/>
+                <StyleProvider style={getTheme(material)}>
+                    <ChatModal/>
+                </StyleProvider>
             </Root>
         );
     }

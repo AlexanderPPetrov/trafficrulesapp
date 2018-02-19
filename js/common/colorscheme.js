@@ -28,7 +28,7 @@ export default {
     halfWin:'#6DD57F',
     loss:'#ff3333',
     halfLoss:'#ef5a48',
-    draw:'#b1b1b1',
+    draw:'#606060',
     cancelled:'#747474',
     running:'#ffae00',
 

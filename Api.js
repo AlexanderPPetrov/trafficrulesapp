@@ -78,9 +78,7 @@ let Api = {
                     } else {
 
                         if(responseJson._payload._message === 'user_not_authorized'){
-                            console.log('navigate to home')
                             Controller.navigateTo('Home')
-                            return;
                         }
 
                         if(opts.error){

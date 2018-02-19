@@ -38,6 +38,7 @@ export default {
         borderColor:'rgba(0,0,0,0.1)',
         borderWidth:1,
         height:70,
+        marginBottom:5,
         elevation:1,
         shadowColor: "#000",
         shadowOffset: { width: 1, height: 1 },
@@ -46,15 +47,11 @@ export default {
     },
 
     notificationTitle: {
-        borderBottomWidth:1,
-        borderBottomColor:'rgba(0,0,0,0.1)',
-        paddingLeft:10,
         paddingTop:5,
         paddingBottom:5
     },
 
     notificationMessage: {
-        paddingLeft:10,
         paddingTop:5,
         paddingBottom:5,
         color: '#555'
@@ -93,4 +90,10 @@ export default {
         color:'#fff',
         opacity:1
     },
+    notificationIconContainer: {
+        marginTop:5
+    },
+    withdrawAccepted: {
+        backgroundColor: ColorScheme.win
+    }
 };

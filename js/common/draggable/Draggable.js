@@ -102,9 +102,8 @@ export default class Draggable extends Component {
             x = this.state._value.x,
             y = this.state._value.y,
             offsetTop = StatusBar.currentHeight || 15;
-
-        const minLeft = 0 - offsetX,
-              minTop = offsetTop - offsetY,
+        const minLeft = 5 - offsetX,
+              minTop = offsetTop - offsetY + 35,
               minRight = (Window.width - this.props.renderSize * 2) - offsetX,
               minBottom = (Window.height - this.props.renderSize * 2 - offsetTop) - offsetY
 
@@ -167,6 +166,7 @@ export default class Draggable extends Component {
                     {...this.panResponder.panHandlers}
                     style={[this.state.pan.getLayout()]}>
                     <TouchableOpacity
+                        style={{width:this.props.renderSize * 2}}
                         // style={this._dragItemCss()}
                         onPress={pressDrag}
                         onLongPress={longPressDrag}

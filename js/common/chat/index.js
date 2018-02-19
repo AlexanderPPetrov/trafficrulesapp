@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 
-import {View, Dimensions} from 'react-native';
+import {View, Dimensions, WebView, Modal} from 'react-native';
 import AppLink  from './AppLink';
 import I18n from '../../../i18n/i18n';
 import {
     Container,
-    Header,
     Title,
     Content,
     Text,
@@ -20,7 +19,8 @@ import {
     CardItem
 } from "native-base";
 import Draggable from '../../common/draggable/Draggable';
-import {Ionicons} from '@expo/vector-icons';
+import Header from '../../common/header/header';
+import ChatModal from './chatmodal'
 import Ui from '../ui'
 import Api from '../../../Api'
 import {Grid, Row, Col} from "react-native-easy-grid";
@@ -36,7 +36,8 @@ class Chat extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            chatVisible: false
+            chatVisible: true,
+            modalVisible: false
         };
 
         chatInstance = this;
@@ -63,13 +64,7 @@ class Chat extends Component {
     }
 
     openChat = () => {
-        let skypeURL = 'skype:aleksandar.p@delasport.com?chat&topic=Premium%20Tradings%20Support';
-        AppLink.maybeOpenURL(skypeURL, { appName: 'skype', appStoreId:'skype-for-iphone/id304878510', appStoreLocale:Api.locale, playStoreId:'com.skype.raider' }).then(() => {
-            // do stuff
-        })
-        .catch((err) => {
-            console.log()
-        });
+        ChatModal.show()
     }
 
     render() {

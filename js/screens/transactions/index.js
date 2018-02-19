@@ -185,7 +185,7 @@ class Transactions extends Component {
 
     }
 
-    getCard = (transaction, i) => {
+    getTransactionItem = (transaction, i) => {
 
         if(!transactionTypes[transaction._payment_type]){
             transaction._payment_type = 2;
@@ -242,6 +242,20 @@ class Transactions extends Component {
                 </View>
     };
 
+    getResults = () => {
+        if(this.state._payload.transactions.length == 0 ){
+            return <Text style={Ui.noResults}>{I18n.t('noTransactions')}</Text>
+        }
+        return <FlatList
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+            keyExtractor={this._keyExtractor}
+            removeClippedSubviews={false}
+            data={this.state._payload.transactions}
+            renderItem={({item}) => this.getTransactionItem(item)}
+        />
+    }
+
     _keyExtractor = (item, index) => index;
 
     render() {
@@ -253,14 +267,7 @@ class Transactions extends Component {
                 <View style={{height:51}}>
                     {this.getFilter()}
                 </View>
-                <FlatList
-                    refreshing={this.state.refreshing}
-                    onRefresh={this.onRefresh}
-                    keyExtractor={this._keyExtractor}
-                    removeClippedSubviews={false}
-                    data={this.state._payload.transactions}
-                    renderItem={({item}) => this.getCard(item)}
-                />
+                {this.getResults()}
             </Container>
 
         );

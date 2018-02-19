@@ -50,9 +50,7 @@ class Deposit extends Component {
     componentDidMount = () =>{
         Chat.show()
     }
-    componentWillUnmount = () =>{
-        Chat.hide()
-    }
+
     setRedirectUrl = (value) => {
         this.setState({_redirect_url: value})
     }
@@ -177,7 +175,11 @@ class Deposit extends Component {
         this.setState({
             currentPage: page
         });
-        console.log(page, this.state.steps)
+        if(page === this.state.steps || page === this.state.steps - 1){
+            Chat.hide()
+        }else{
+            Chat.show()
+        }
     }
 
 
@@ -273,6 +275,7 @@ class Deposit extends Component {
                     </View>
                     {this.getWebView()}
                 </Content>
+                <Chat/>
 
             </Container>
         );
