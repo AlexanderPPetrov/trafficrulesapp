@@ -56,6 +56,11 @@ class AddAccount extends Component {
                 this.props.disableButton(false)
             }
 
+            if(this.props.account == ''){
+                if(this.refs.emailInput){
+                    this.refs.emailInput._root.focus()
+                }
+            }
     }
 
     dataLoaded = (response) => {
@@ -116,7 +121,7 @@ class AddAccount extends Component {
                             <Col>
                                 <Form style={Ui.form}>
                                     <View style={Ui.inputContainer}>
-                                        <Input style={Ui.inputField} placeholder={I18n.t('enterEmail')} value={this.props.account}
+                                        <Input ref="emailInput" style={Ui.inputField} placeholder={I18n.t('enterEmail')} value={this.props.account}
                                                placeholderTextColor={ColorScheme.lighter}
                                                onChangeText={(text) => this.props.changeValue('account', text)}
                                                 />
@@ -131,7 +136,7 @@ class AddAccount extends Component {
                             <Col style={{paddingLeft:15}}>
                                 <Form style={[Ui.inputContainer]}>
 
-                                    <Input style={[Ui.inputField, Ui.amountInput]} placeholder="1" value={this.props.amount}
+                                    <Input style={[Ui.inputField, Ui.amountInput]} placeholder="" value={this.props.amount}
                                            placeholderTextColor={ColorScheme.lighter}
                                            onChangeText={(amount) => this.props.changeValue('amount', amount)}
                                            keyboardType='numeric'/>

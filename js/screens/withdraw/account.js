@@ -35,7 +35,13 @@ class Account extends Component {
         }else{
             this.props.disableButton(false)
         }
+
+        if(this.refs.accountInput && this.props.account == ''){
+            this.refs.accountInput._root.focus()
+        }
     }
+
+
 
     render() {
         return (
@@ -44,7 +50,7 @@ class Account extends Component {
                 <Text style={Ui.formLabel}>{I18n.t('accountSettings')}</Text>
                 <Form style={Ui.form}>
                     <Item style={Ui.inputContainer}>
-                        <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
+                        <Input ref="accountInput" style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
                     </Item>
                 </Form>
             </View>

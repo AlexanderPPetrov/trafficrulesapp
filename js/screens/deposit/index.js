@@ -29,6 +29,7 @@ import Header from '../../common/header/header';
 import styles from "./styles";
 import Controller from '../../../Controller';
 import Chat from '../../common/chat/index';
+import Confirmation from '../../common/confirmation/confirmation';
 
 class Deposit extends Component {
 
@@ -112,31 +113,18 @@ class Deposit extends Component {
 
     getErrorMessage = () => {
         if (this.state.depositCompleted == 'error') {
-            return <View>
-                <View style={[Ui.confirmationHeader, Ui.centered]}>
-                    {/*<Icon active name='ios-close-circle' style={styles.errorIcon}/>*/}
-                    <MaterialIcons name="error" size={30} style={styles.errorIcon}></MaterialIcons>
-                    <Text style={{textAlign: 'center', fontSize: 20}}>{I18n.t('depositError')}</Text>
-                </View>
-
-                <Text style={Ui.confirmationText}>
-                    {I18n.t('depositErrorMessage')}
-                </Text>
-
-            </View>
+            return <Confirmation
+                status={this.state.depositCompleted}
+                statusMessage={I18n.t('depositError')}
+                description={I18n.t('depositErrorMessage')}
+            />
         }
         if (this.state.depositCompleted == 'cancel') {
-            return <View>
-                <View style={[Ui.confirmationHeader, Ui.centered]}>
-                    <MaterialCommunityIcons name="cancel" size={30} style={styles.cancelIcon}></MaterialCommunityIcons>
-                    <Text style={{textAlign: 'center', fontSize: 20}}>{I18n.t('depositCancel')}</Text>
-                </View>
-
-                <Text style={Ui.confirmationText}>
-                    {I18n.t('depositCancelMessage')}
-                </Text>
-
-            </View>
+            return <Confirmation
+                status={this.state.depositCompleted}
+                statusMessage={I18n.t('depositCancel')}
+                description={I18n.t('depositCancelMessage')}
+            />
         }
         return null;
     }

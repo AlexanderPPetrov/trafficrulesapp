@@ -32,10 +32,10 @@ const {
 } = Dimensions.get('window');
 
 let chatInstance = null;
-const jsForInjection = `
-  var el = document.getElementsByTagName('body')[0];
-  el.style.height = '${Dimensions.get('window').height}px';
-`
+// const jsForInjection = `
+//   var el = document.getElementsByTagName('body')[0];
+//   el.style.height = '${Dimensions.get('window').height}px';
+// `
 class ChatModal extends Component {
 
     constructor(props) {
@@ -88,7 +88,7 @@ class ChatModal extends Component {
                         source={{uri: 'https://www.premiumtradings.com/chat.html'}}
                         javaScriptEnabled={true}
                         domStorageEnabled={true}
-                        ignoreSslError={true}
+                        // ignoreSslError={true}
                         startInLoadingState={true}
                         // injectedJavaScript={jsForInjection}
                         onNavigationStateChange={()=> console.log('chat ')}

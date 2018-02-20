@@ -162,12 +162,12 @@ class SettledBets extends Component {
     };
 
     getProfitStyle = (profit) => {
-        let style = Ui.profitWin;
+        let style = Ui.textWin;
         if(parseFloat(profit) < 0){
-            style = Ui.profitLoss
+            style = Ui.textLoss
         }
         if(parseFloat(profit) == 0){
-            style = Ui.profitDraw
+            style = Ui.textDraw
         }
         return style
     }

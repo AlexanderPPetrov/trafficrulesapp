@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import I18n from '../../../i18n/i18n';
 import {
     Container,
     Card,
@@ -21,46 +20,46 @@ import {
     Body,
     Input
 } from "native-base";
-
-import {View, ScrollView, AsyncStorage} from 'react-native';
+import {View} from 'react-native';
 import ColorScheme from "../../common/colorscheme";
+import Ui from '../../common/ui';
 
 import {Grid, Row, Col} from "react-native-easy-grid";
+import Api from "../../../Api";
 
-import styles from "./styles";
-import Ui from '../../common/ui';
-import Api from '../../../Api';
 
 class Amount extends Component {
 
     constructor(props) {
-        super(props);
-
+        super(props)
         this.state = {
-            currency: ''
+            currency:Api.accountSettings._currency
         }
     }
-    componentDidMount = () => {
-        if (this.props.amount == '') {
-            this.props.disableButton(true)
-        }
 
-            this.setState({
-                currency:Api.accountSettings._currency
-            })
+    componentDidMount = () => {
+        if(this.props.amount == ''){
+            this.focus()
+        }
+    }
+
+    focus = () => {
+        if(this.refs.amountInput){
+            this.refs.amountInput._root.focus()
+        }
     }
 
     render() {
         return (
 
             <View>
-                <Text style={Ui.formLabel}>{I18n.t('withdrawAmount')}</Text>
+                <Text style={Ui.formLabel}>{this.props.label}</Text>
                 <Grid>
                     <Row>
                         <Col>
                             <Form style={Ui.form}>
                                 <Item style={Ui.inputContainer}>
-                                    <Input style={[Ui.inputField, Ui.amountInput]} placeholder="0" value={this.props.amount}
+                                    <Input ref="amountInput"  style={[Ui.inputField, Ui.amountInput]} placeholder="" value={this.props.amount}
                                            placeholderTextColor={ColorScheme.lighter}
                                            onChangeText={(text) => this.props.onValueChange('amount', text)}
                                            keyboardType='numeric'/>

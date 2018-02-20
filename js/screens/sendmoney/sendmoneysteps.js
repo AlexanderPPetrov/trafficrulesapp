@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {Animated, Easing, View, Text, AsyncStorage} from 'react-native';
-import styles from "./styles";
-// Import the transition library
 import Api from "../../../Api";
 import I18n from '../../../i18n/i18n';
 
@@ -24,12 +21,11 @@ import {
     Right,
     Body,
 } from "native-base";
-import _ from 'lodash'
 import {Toast} from "native-base";
 import Account from './account'
 import Verify from './verify'
 import SecureId from './secureid'
-import Confirmation from './confirmation'
+import Confirmation from '../../common/confirmation/confirmation'
 import * as Animatable from 'react-native-animatable';
 
 
@@ -134,7 +130,7 @@ class SendMoneySteps extends Component {
                              disableButton={this.props.disableButton}
                              notesVisible={this.state.notesVisible}
                              notes={this.state.notes}
-            ></Account>
+            />
         }
 
         if (this.props.currentPage == 1) {
@@ -142,7 +138,7 @@ class SendMoneySteps extends Component {
             return <SecureId  changeValue={this.changeValue}
                               secureId={this.state.secureId}
                               disableButton={this.props.disableButton}
-            ></SecureId>
+            />
 
         }
         if (this.props.currentPage == 3) {
@@ -153,10 +149,14 @@ class SendMoneySteps extends Component {
                               fee={this.state.fee}
 
 
-            ></Verify>
+            />
         }
         if (this.props.currentPage == 4) {
-            return <Confirmation></Confirmation>
+            return <Confirmation
+                status={'success'}
+                statusMessage={I18n.t('sendMoneyConfirmation')}
+                description={I18n.t('sendMoneySuccess')}
+            />
         }
         return null;
     }

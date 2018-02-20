@@ -31,6 +31,9 @@ class SecureId extends Component {
 
     componentDidMount = () => {
         if(this.props.secureId === '' ){
+            if(this.refs.secureIdInput){
+                this.refs.secureIdInput._root.focus()
+            }
             this.props.disableButton(true)
         }else{
             this.props.disableButton(false)
@@ -43,7 +46,7 @@ class SecureId extends Component {
                 <Text style={Ui.formLabel}>{I18n.t('enterSecureId')}</Text>
                 <Form style={Ui.form}>
                     <Item style={Ui.inputContainer}>
-                        <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('yourSecureId')} value={this.props.secureId} onChangeText={(text) => this.props.changeValue('secureId', text)}/>
+                        <Input ref="secureIdInput" style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('yourSecureId')} value={this.props.secureId} onChangeText={(text) => this.props.changeValue('secureId', text)}/>
                     </Item>
                 </Form>
             </View>

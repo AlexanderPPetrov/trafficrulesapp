@@ -279,14 +279,13 @@ export default {
         borderLeftColor: ColorScheme.draw
     },
 
-    profitWin: {
+    textWin: {
         color: ColorScheme.win
     },
-    profitLoss: {
+    textLoss: {
         color: ColorScheme.loss
     },
-
-    profitDraw: {
+    textDraw: {
         color: ColorScheme.draw
     },
     buttonLabel: {
@@ -415,6 +414,10 @@ export default {
         justifyContent: 'center',
         alignItems: 'center'
     },
+    confirmMessage: {
+        textAlign: 'center',
+        fontSize: 20
+    },
     successIcon: {
         color: ColorScheme.win,
         fontSize: 45,
@@ -426,7 +429,7 @@ export default {
         marginBottom: 10
     },
     cancelIcon: {
-        color: ColorScheme.neutralDarkest,
+        color: ColorScheme.draw,
         fontSize: 45,
         marginBottom: 10
     },

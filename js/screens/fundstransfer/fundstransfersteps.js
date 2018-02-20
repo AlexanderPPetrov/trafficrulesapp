@@ -28,7 +28,7 @@ import _ from 'lodash'
 import {Toast} from "native-base";
 import AddAccount from './addaccount'
 import Notes from './notes'
-import Confirmation from './confirmation'
+import Confirmation from '../../common/confirmation/confirmation'
 import * as Animatable from 'react-native-animatable';
 
 
@@ -44,17 +44,17 @@ class FundsTransferSteps extends Component {
         this.state = {
             existing: {
                 selectedAccount: 'none',
-                accountAmount:'1',
-                selectedAccounts:[],
-                accounts:[],
-                loadedAccounts:[]
+                amount: '',
+                selectedAccounts: [],
+                accounts: [],
+                loadedAccounts: []
             },
             new: {
                 selectedAccount: 'none',
-                accountAmount:'1',
-                selectedAccounts:[],
-                accounts:[],
-                loadedAccounts:[]
+                amount: '',
+                selectedAccounts: [],
+                accounts: [],
+                loadedAccounts: []
             },
             empty: [{
                 _id: 'none',
@@ -62,36 +62,57 @@ class FundsTransferSteps extends Component {
             }],
             minAmount: '1',
             notes: '',
-            currency:''
+            currency: '',
+            loaded: false
         }
     }
 
     componentDidMount() {
         this.props.onRef(this)
         this.setState({
-            currency:Api.accountSettings._currency
+            currency: Api.accountSettings._currency
         })
+
+        if (this.props.paymentData.amount) {
+            let existingAccounts = {...this.state.existing},
+                newAccounts = {...this.state.new};
+            existingAccounts.amount = this.props.paymentData.amount;
+            newAccounts.amount = this.props.paymentData.amount;
+            this.setState({
+                existing: existingAccounts,
+                new: newAccounts,
+                loaded: true
+            })
+
+        } else {
+            this.setState({
+                loaded: true
+            })
+        }
     }
 
     addAccount = (stateKey) => {
 
         const current = this.state[stateKey];
-        if(current.selectedAccount == 'none'){
+        if (current.selectedAccount == 'none') {
             return;
         }
         let remainingAccounts = current.accounts.filter((account) => {
             if (account._id !== current.selectedAccount) return account;
         });
 
-        const account = _.filter(current.accounts, { _id: current.selectedAccount})[0];
-        let selectedAccount = {_id: account._id, amount: current.accountAmount, username: account._username};
+        const account = _.filter(current.accounts, {_id: current.selectedAccount})[0];
+        let selectedAccount = {_id: account._id, amount: current.amount, username: account._username};
         current.selectedAccounts.push(selectedAccount);
-        this.setState({ [stateKey]: { ...current,
-            selectedAccounts: this.state[stateKey].selectedAccounts,
-            selectedAccount: 'none',
-            accountAmount: this.state.minAmount,
-            accounts: remainingAccounts
-        } });
+        this.setState({
+            [stateKey]: {
+                ...current,
+                selectedAccounts: this.state[stateKey].selectedAccounts,
+                selectedAccount: 'none',
+                amount: '',
+                accounts: remainingAccounts
+            }
+        });
 
     };
 
@@ -104,7 +125,7 @@ class FundsTransferSteps extends Component {
         let accountsList = [...this.state.empty, ...this.state[stateKey].loadedAccounts];
 
         let accounts = _.without(accountsList, ...remainingAccounts);
-        this.setState({ [stateKey]: { ...this.state[stateKey], selectedAccounts: remainingAccounts, accounts: accounts} });
+        this.setState({[stateKey]: {...this.state[stateKey], selectedAccounts: remainingAccounts, accounts: accounts}});
     };
 
     setAccounts = (stateKey, accounts) => {
@@ -113,7 +134,7 @@ class FundsTransferSteps extends Component {
         let selectedAccounts = this.state[stateKey].selectedAccounts;
         let remainingAccounts = _.differenceBy(accountsList, selectedAccounts, '_id');
 
-        this.setState({ [stateKey]: { ...this.state[stateKey], accounts: remainingAccounts, loadedAccounts: accounts} });
+        this.setState({[stateKey]: {...this.state[stateKey], accounts: remainingAccounts, loadedAccounts: accounts}});
 
     };
 
@@ -127,17 +148,14 @@ class FundsTransferSteps extends Component {
 
     changeAccountValue = (stateKey, key, value) => {
 
-        if(key === 'accountAmount'){
+        if (key === 'amount') {
             value = value.replace(/[^0-9.]/g, '');
-            if(value == ''){
-                value = this.state.minAmount
-            }
             if (Number.parseFloat(value) < Number.parseFloat(this.state.minAmount)) {
                 value = this.state.minAmount
             }
         }
 
-        this.setState({ [stateKey]: { ...this.state[stateKey], [key]: value} });
+        this.setState({[stateKey]: {...this.state[stateKey], [key]: value}});
 
     };
 
@@ -154,26 +172,26 @@ class FundsTransferSteps extends Component {
             notes: this.state.notes
         };
 
-        if(!_.isEmpty(this.props.paymentData)){
+        if (!_.isEmpty(this.props.paymentData)) {
             data = {...data, ...this.props.paymentData}
         }
 
         const existingAccounts = this.state.existing.selectedAccounts;
-        if(existingAccounts.length > 0){
-            data.existing_accounts_site = existingAccounts.map((account)=>{
+        if (existingAccounts.length > 0) {
+            data.existing_accounts_site = existingAccounts.map((account) => {
                 return account._id
             });
-            data.existing_accounts_amount = existingAccounts.map((account)=>{
+            data.existing_accounts_amount = existingAccounts.map((account) => {
                 return account._id
             });
         }
 
         const newAccounts = this.state.new.selectedAccounts;
-        if(newAccounts.length > 0){
-            data.new_accounts_site = newAccounts.map((account)=>{
+        if (newAccounts.length > 0) {
+            data.new_accounts_site = newAccounts.map((account) => {
                 return account._id
             });
-            data.new_accounts_amount = newAccounts.map((account)=>{
+            data.new_accounts_amount = newAccounts.map((account) => {
                 return account.amount
             })
         }
@@ -191,58 +209,64 @@ class FundsTransferSteps extends Component {
 
     renderStep = () => {
 
+        if(!this.state.loaded) return null
+
         if (this.props.currentPage == 0) {
 
-            return <AddAccount       key={0}
-                                     changeAccountValue={this.changeAccountValue}
-                                     label={I18n.t('transferToExistingAccount')}
-                                     stateKey='existing'
-                                     fetchUrl='get-member-accounts'
-                                     setAccounts={this.setAccounts}
-                                     addAccount={this.addAccount}
-                                     removeAccount={this.removeAccount}
-                                     accountAmount={this.state.existing.accountAmount}
-                                     selectedAccount={this.state.existing.selectedAccount}
-                                     selectedAccounts={this.state.existing.selectedAccounts}
-                                     currency={this.state.currency}
-                                     accounts={this.state.existing.accounts}
-            ></AddAccount>
+            return <AddAccount key={0}
+                               changeAccountValue={this.changeAccountValue}
+                               label={I18n.t('transferToExistingAccount')}
+                               stateKey='existing'
+                               fetchUrl='get-member-accounts'
+                               setAccounts={this.setAccounts}
+                               addAccount={this.addAccount}
+                               removeAccount={this.removeAccount}
+                               amount={this.state.existing.amount}
+                               selectedAccount={this.state.existing.selectedAccount}
+                               selectedAccounts={this.state.existing.selectedAccounts}
+                               currency={this.state.currency}
+                               accounts={this.state.existing.accounts}
+            />
         }
         if (this.props.currentPage == 1) {
 
-            return <AddAccount       key={1}
-                                     changeAccountValue={this.changeAccountValue}
-                                     label={I18n.t('transferToNewAccount')}
-                                     stateKey='new'
-                                     fetchUrl='get-member-accounts'
-                                     setAccounts={this.setAccounts}
-                                     addAccount={this.addAccount}
-                                     removeAccount={this.removeAccount}
-                                     accountAmount={this.state.new.accountAmount}
-                                     selectedAccount={this.state.new.selectedAccount}
-                                     selectedAccounts={this.state.new.selectedAccounts}
-                                     currency={this.state.currency}
-                                     accounts={this.state.new.accounts}
-            ></AddAccount>
+            return <AddAccount key={1}
+                               changeAccountValue={this.changeAccountValue}
+                               label={I18n.t('transferToNewAccount')}
+                               stateKey='new'
+                               fetchUrl='get-member-accounts'
+                               setAccounts={this.setAccounts}
+                               addAccount={this.addAccount}
+                               removeAccount={this.removeAccount}
+                               amount={this.state.new.amount}
+                               selectedAccount={this.state.new.selectedAccount}
+                               selectedAccounts={this.state.new.selectedAccounts}
+                               currency={this.state.currency}
+                               accounts={this.state.new.accounts}
+            />
         }
         if (this.props.currentPage == 2) {
 
             return <Notes setNotes={this.setNotes} disableButton={this.props.disableButton}
-                          notes={this.state.notes}></Notes>
+                          notes={this.state.notes}/>
         }
         if (this.props.currentPage == 3) {
             console.log('currentPage', this.props.currentPage)
         }
         if (this.props.currentPage == 4) {
-            return <Confirmation></Confirmation>
+            return <Confirmation
+                status={'success'}
+                statusMessage={I18n.t('fundsTransferConfirmation')}
+                description={I18n.t('fundsTransferSuccess')}
+            />
         }
         return null;
     }
 
     checkButton = () => {
-        if(this.state.notes === '' && this.state.new.selectedAccounts.length === 0 && this.state.existing.selectedAccounts.length === 0){
+        if (this.state.notes === '' && this.state.new.selectedAccounts.length === 0 && this.state.existing.selectedAccounts.length === 0) {
             this.props.disableButton(true)
-        }else{
+        } else {
             this.props.disableButton(false)
         }
     }

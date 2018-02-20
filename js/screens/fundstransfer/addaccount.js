@@ -30,7 +30,7 @@ import ColorScheme from "../../common/colorscheme";
 
 import styles from "./styles";
 import Api from "../../../Api";
-
+import Amount from "../../common/amount/amount"
 const Item = Picker.Item;
 
 const newAccounts = {
@@ -80,50 +80,65 @@ const newAccounts = {
 class AddAccount extends Component {
 
 
+    constructor(props){
+        super(props)
+    }
     componentDidMount = () => {
-        //Hardcoded for now
+
         if (this.props.stateKey == 'new') {
             this.dataLoaded(newAccounts)
+
         } else {
             Api.get({
                 url: this.props.fetchUrl,
                 success: this.dataLoaded
             })
         }
-
+        this.checkButton(this.props.amount)
     };
 
     dataLoaded = (response) => {
         this.props.setAccounts(this.props.stateKey, response.accounts)
     };
 
+    checkButton = (amount) => {
+        console.log('££££££££££££££',amount)
+        let buttonDisabled = false;
+        if(!amount) {
+            buttonDisabled = true;
+        }
+        this.setState({
+            buttonDisabled
+        })
+    }
+
     getAmountField = () => {
         if (this.props.selectedAccount != 'none') {
-            return <View>
-                <Text style={Ui.formLabel}>{I18n.t('amount')}</Text>
-                <Grid>
+            return <Grid>
                     <Row>
                         <Col>
-                            <Form style={[Ui.inputContainer]}>
-                                <Input style={[Ui.inputField, Ui.amountInput]} placeholder="0"
-                                       value={this.props.accountAmount}
-                                       placeholderTextColor={ColorScheme.lighter}
-                                       onChangeText={(amount) => this.props.changeAccountValue(this.props.stateKey, 'accountAmount', amount)}
-                                       keyboardType='numeric'/>
-                            </Form>
-                        </Col>
-                        <Col style={{width: 60}}>
-                            <Text style={Ui.amountCurrency}>{this.props.currency}</Text>
+                            <Amount label={I18n.t('amount')}
+                                    onValueChange={(key, value) => {
+                                        this.props.changeAccountValue(this.props.stateKey, key, value)
+                                        this.checkButton(value)
+                                    }}
+                                    amount={this.props.amount} />
                         </Col>
                         <Col style={{width: 60, alignItems:'center', justifyContent:'center'}}>
                             <Button transparent primary style={styles.removeAccountButton}
-                                    onPress={() => this.props.addAccount(this.props.stateKey)}>
+                                    disabled={this.state.buttonDisabled}
+                                    onPress={() => {
+                                        this.setState({
+                                            buttonDisabled:true
+                                        })
+                                        this.props.addAccount(this.props.stateKey)
+                                    }}>
                                 <Icon name="ios-add-circle" style={styles.addAccountIcon}/>
                             </Button>
                         </Col>
                     </Row>
                 </Grid>
-            </View>
+
         }
         return null
 

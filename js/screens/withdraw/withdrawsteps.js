@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {Animated, Easing, View, Text} from 'react-native';
-import styles from "./styles";
-// Import the transition library
 import * as Animatable from 'react-native-animatable';
 import Api from "../../../Api";
+import {View, Text} from 'react-native';
 
 import {
     Container,
@@ -27,14 +25,11 @@ import {
 
 import PaymentMethod from './paymentmethod'
 import Account from "./account"
-import Amount from './amount'
+import Amount from '../../common/amount/amount'
 import Notes from './notes'
-import Confirmation from './confirmation'
-
-
-// Just helper method to get one of the random colors
-
-// Create Transition component using FlipX transition
+import Confirmation from '../../common/confirmation/confirmation'
+import I18n from '../../../i18n/i18n'
+import Ui from '../../common/ui'
 
 class WithdrawSteps extends Component {
 
@@ -44,7 +39,7 @@ class WithdrawSteps extends Component {
         this.state = {
             paymentMethod: '',
             account: '',
-            amount: '0',
+            amount: '',
             minAmount: 0,
             maxAmount: 0,
             notes: '',
@@ -61,13 +56,6 @@ class WithdrawSteps extends Component {
             paymentMethod: paymentMethod._key,
             maxAmount: paymentMethod._max_amount,
             minAmount: paymentMethod._min_amount
-        }, function () {
-            if (Number.parseFloat(this.state.amount) < Number.parseFloat(this.state.minAmount)) {
-                this.setState({
-                    amount: this.state.minAmount
-                })
-            }
-
         });
 
         this.props.disableButton(false)
@@ -117,25 +105,29 @@ class WithdrawSteps extends Component {
 
         if (this.props.currentPage == 0) {
             return <PaymentMethod setPayment={this.setPayment} disableButton={this.props.disableButton}
-                                  paymentMethod={this.state.paymentMethod}></PaymentMethod>
+                                  paymentMethod={this.state.paymentMethod}/>
         }
         if (this.props.currentPage == 1) {
             return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton}
-                            account={this.state.account}></Account>
+                            account={this.state.account}/>
         }
         if (this.props.currentPage == 2) {
-            return <Amount onValueChange={this.changeValue} disableButton={this.props.disableButton}
-                           minAmount={this.state.minAmount} maxAmount={this.state.maxAmount}
-                           amount={this.state.amount}></Amount>
+            return <Amount label={I18n.t('withdrawAmount')}
+                            onValueChange={this.changeValue}
+                            amount={this.state.amount} />
         }
         if (this.props.currentPage == 3) {
             return <Notes onValueChange={this.changeValue} disableButton={this.props.disableButton}
-                          notes={this.state.notes}></Notes>
+                          notes={this.state.notes}/>
         }
         if (this.props.currentPage == 4) {
         }
         if (this.props.currentPage == 5) {
-            return <Confirmation status={this.state.status}></Confirmation>
+            return <Confirmation
+                        status={'success'}
+                        statusMessage={I18n.t('withdrawConfirmation')}
+                        description={I18n.t('withdrawSuccess')}
+                    />
         }
         return null;
     }

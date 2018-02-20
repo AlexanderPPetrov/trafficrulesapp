@@ -44,7 +44,8 @@ class Withdraw extends Component {
             currentPage: 0,
             steps:4,
             buttonDisabled: false,
-            paymentData: {}
+            paymentData: {},
+            loaded:false
         }
     }
 
@@ -52,7 +53,12 @@ class Withdraw extends Component {
         const {state} = this.props.navigation;
         if(state.params && state.params.paymentData){
             this.setState({
-                paymentData: state.params.paymentData
+                paymentData: state.params.paymentData,
+                loaded:true
+            })
+        }else{
+            this.setState({
+                loaded:true
             })
         }
         Chat.show()
@@ -106,6 +112,13 @@ class Withdraw extends Component {
         }
     };
 
+    getFundsTransferSteps = () => {
+        if(!this.state.loaded) return null
+        return <FundsTransferSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
+                                   setPage={this.setPage}
+                                   paymentData={this.state.paymentData}
+                                   disableButton={this.setButtonState}></FundsTransferSteps>
+    }
     render() {
         return (
             <Container style={Ui.container}>
@@ -117,12 +130,7 @@ class Withdraw extends Component {
                             <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
 
                             <View style={Ui.formContainer}>
-                                {console.log('FundsTransferSteps')}
-                                    <FundsTransferSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
-                                                        setPage={this.setPage}
-                                                        paymentData={this.state.paymentData}
-                                                        disableButton={this.setButtonState}></FundsTransferSteps>
-
+                                {this.getFundsTransferSteps()}
                                 <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
                                 </View>

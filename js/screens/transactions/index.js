@@ -168,9 +168,9 @@ class Transactions extends Component {
     getIcon = (type) =>{
 
         if(type === '1' || type === '2' || type === '10' || type === '13'){
-            return <MaterialCommunityIcons name={'arrow-bottom-right'} size={28} style={{color: ColorScheme.win}}/>
+            return <MaterialCommunityIcons name={'arrow-top-right'} size={28} style={{color: ColorScheme.win}}/>
         }
-        return <MaterialCommunityIcons name={'arrow-top-left'} size={28} style={{color:ColorScheme.loss}}/>
+        return <MaterialCommunityIcons name={'arrow-bottom-left'} size={28} style={{color:ColorScheme.loss}}/>
 
     }
 

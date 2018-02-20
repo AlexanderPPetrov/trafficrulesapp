@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, Easing, View, Text} from 'react-native';
-import styles from "./styles";
-// Import the transition library
+import { View, Text} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Api from "../../../Api";
 
@@ -27,16 +25,12 @@ import {
 
 import DepositMethod from './depositmethod'
 import Account from "./account"
-import Amount from './amount'
-import Notes from './notes'
-import Confirmation from './confirmation'
+import Amount from '../../common/amount/amount'
+import I18n from '../../../i18n/i18n'
+import Ui from '../../common/ui'
+import Confirmation from '../../common/confirmation/confirmation'
 
-
-// Just helper method to get one of the random colors
-
-// Create Transition component using FlipX transition
-
-class WithdrawSteps extends Component {
+class DepositSteps extends Component {
 
     constructor(props) {
         super(props);
@@ -44,7 +38,7 @@ class WithdrawSteps extends Component {
         this.state = {
             paymentMethod: '',
             account: '',
-            amount: '0',
+            amount: '',
             minAmount: 0,
             maxAmount: 0,
             notes: '',
@@ -63,13 +57,6 @@ class WithdrawSteps extends Component {
             paymentMethod: paymentMethod._key,
             maxAmount: paymentMethod._max_amount,
             minAmount: paymentMethod._min_amount
-        }, function () {
-            if (Number.parseFloat(this.state.amount) < Number.parseFloat(this.state.minAmount)) {
-                this.setState({
-                    amount: this.state.minAmount
-                })
-            }
-
         });
 
         if(paymentMethod._key == 'ECOPAYZ'){
@@ -87,6 +74,11 @@ class WithdrawSteps extends Component {
             value = value.replace(/[^0-9.]/g, '')
             if (Number.parseFloat(value) < Number.parseFloat(this.state.minAmount)) {
                 value = this.state.minAmount
+            }
+            if(this.state.maxAmount > this.state.minAmount){
+                if(Number.parseFloat(value) > Number.parseFloat(this.state.maxAmount)){
+                    value = this.state.maxAmount
+                }
             }
         }
 
@@ -130,19 +122,23 @@ class WithdrawSteps extends Component {
     }
 
     depositMoney = () => {
+        let postData = {
+            payment_method: this.state.paymentMethod,
+            account: this.state.account,
+            amount: this.state.amount,
+            secure_id: this.state.secureId,
+            response_url: 'http://api-prmts.dev.cc/v1/payment-response',
+            success_url: 'https://mytest2.premiumtradings.com/#success',
+            error_url: 'https://mytest2.premiumtradings.com/#error',
+            fail_url: 'https://mytest2.premiumtradings.com/#error',
+            cancel_url: 'https://mytest2.premiumtradings.com/#cancel'
+        }
+        if(this.state.paymentMethod === 'MB_1TAP' && Api.accountSettings._skrill_1tap_token){
+            postData.onetap_token = Api.accountSettings._skrill_1tap_token
+        }
         Api.post({
             url: 'deposit',
-            data: {
-                payment_method: this.state.paymentMethod,
-                account: this.state.account,
-                amount: this.state.amount,
-                secure_id: this.state.secureId,
-                response_url: 'http://api-prmts.dev.cc/v1/payment-response',
-                success_url: 'https://mytest2.premiumtradings.com/#success',
-                error_url: 'https://mytest2.premiumtradings.com/#error',
-                fail_url: 'https://mytest2.premiumtradings.com/#error',
-                cancel_url: 'https://mytest2.premiumtradings.com/#cancel'
-            },
+            data: postData,
             success: this.depositSuccess
         })
     }
@@ -176,23 +172,37 @@ class WithdrawSteps extends Component {
 
         if (currentStep == 'method') {
             return <DepositMethod setPayment={this.setPayment} disableButton={this.props.disableButton}
-                                  paymentMethod={this.state.paymentMethod}></DepositMethod>
+                                  paymentMethod={this.state.paymentMethod}/>
         }
         if (currentStep == 'account') {
             return <Account onValueChange={this.changeValue} disableButton={this.props.disableButton} paymentMethod={this.state.paymentMethod}
-                            account={this.state.account} secureId={this.state.secureId}></Account>
+                            account={this.state.account} secureId={this.state.secureId}/>
         }
         if (currentStep == 'amount') {
-            return <Amount onValueChange={this.changeValue} disableButton={this.props.disableButton}
-                           minAmount={this.state.minAmount} maxAmount={this.state.maxAmount}
-                           amount={this.state.amount}></Amount>
+            return <View>
+                    <Text style={Ui.stepHeader}>{I18n.t('depositAmount')}</Text>
+                    <Amount label={I18n.t('enterDepositAmount')}
+                            onValueChange={this.changeValue}
+                            amount={this.state.amount} />
+                </View>
+
         }
         if (currentStep == 'process') {
 
         }
 
         if (currentStep == 'deposit') {
-            return <Confirmation _payload={this.state._payload} depositCompleted={this.props.depositCompleted}></Confirmation>
+            return <Confirmation
+                        status={this.props.depositCompleted}
+                        currency={this.state._payload._currency}
+                        statusMessage={I18n.t('depositConfirmation')}
+                        description={I18n.t('depositSuccess')}
+                        additionalText={I18n.t('requestFundsTransfer')}
+                        amount={this.state._payload._amount}
+                        fee={this.state._payload._fee}
+                        netAmount={this.state._payload._net_amount}
+            />
+
         }
         return null;
     }
@@ -222,4 +232,4 @@ class WithdrawSteps extends Component {
     }
 }
 
-export default WithdrawSteps;
+export default DepositSteps;
