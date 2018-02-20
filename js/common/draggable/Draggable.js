@@ -2,6 +2,7 @@
  *    * https://github.com/tongyy/react-native-draggable
  *
  */
+import variable from "../../themes/variables";
 
 import React, {Component} from 'react';
 import {
@@ -23,6 +24,7 @@ const Window = Dimensions.get('window');
 let _previousLeft = 0;
 let _previousTop = 0;
 let chatSize = 40;
+const touchThreshold = 20;
 export default class Draggable extends Component {
     static propTypes = {
         renderText: PropTypes.string,
@@ -72,7 +74,10 @@ export default class Draggable extends Component {
         };
 
         this.panResponder = PanResponder.create({
-            onMoveShouldSetPanResponder: (evt, gestureState) => true,
+            onMoveShouldSetPanResponder : (e, gestureState) => {
+                const {dx, dy} = gestureState;
+                return (Math.abs(dx) > touchThreshold) || (Math.abs(dy) > touchThreshold);
+            },
             onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
                 return Math.abs(gestureState.dx) > 5;
             },
@@ -98,14 +103,19 @@ export default class Draggable extends Component {
     restrictMovement = (moveX, moveY, dx, dy) => {
         const { offsetX, offsetY} = this.props;
 
+        let barHeight = 35;
+        if(Platform.OS === 'ios'){
+            barHeight = 64
+        }
+
         let shouldMove = false,
             x = this.state._value.x,
             y = this.state._value.y,
             offsetTop = StatusBar.currentHeight || 15;
         const minLeft = 5 - offsetX,
-              minTop = offsetTop - offsetY + 35,
+              minTop = offsetTop - offsetY + barHeight,
               minRight = (Window.width - this.props.renderSize * 2) - offsetX,
-              minBottom = (Window.height - this.props.renderSize * 2 - offsetTop) - offsetY
+              minBottom = (Window.height - this.props.renderSize * 2 - offsetTop + barHeight*0.3) - offsetY
 
         if (this.state._value.x < minLeft) {
             x = minLeft;
@@ -154,7 +164,6 @@ export default class Draggable extends Component {
                 left: offsetX
             },
         });
-        console.log(css)
         return css
     }
 

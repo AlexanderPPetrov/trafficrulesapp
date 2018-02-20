@@ -79,7 +79,6 @@ class ChatModal extends Component {
                         title={I18n.t('contactUs')}
                         cancel={false}
                     />
-
                     <WebView
                         style={{
                             width: deviceWidth,
@@ -88,7 +87,7 @@ class ChatModal extends Component {
                         source={{uri: 'https://www.premiumtradings.com/chat.html'}}
                         javaScriptEnabled={true}
                         domStorageEnabled={true}
-                        // ignoreSslError={true}
+                        ignoreSslError={true}
                         startInLoadingState={true}
                         // injectedJavaScript={jsForInjection}
                         // onNavigationStateChange={()=> console.log('chat ')}

@@ -40,6 +40,7 @@ class AppRoot extends React.Component {
         super(props);
     }
     render() {
+        console.log(this.props.exp.unreadNotifications)
         // if(this.props.exp.unreadNotifications){
         //     Controller.unreadNotifications = this.props.exp.unreadNotifications;
         //     Controller.unseenNotifications = Controller.unreadNotifications.length;

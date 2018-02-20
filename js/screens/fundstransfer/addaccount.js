@@ -102,7 +102,6 @@ class AddAccount extends Component {
     };
 
     checkButton = (amount) => {
-        console.log('££££££££££££££',amount)
         let buttonDisabled = false;
         if(!amount) {
             buttonDisabled = true;
