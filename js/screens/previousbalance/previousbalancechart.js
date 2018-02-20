@@ -44,7 +44,6 @@ class PreviousBalanceChart extends Component {
         //     selectedDomain: { x: [this.props.balance[0], this.props.balance[this.props.balance.length - 1]] }
         // };
 
-        console.log(this.props.maxValue, this.props.minValue)
     }
 
     componentDidMount = () => {

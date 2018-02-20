@@ -36,7 +36,6 @@ class BetDetails extends Component {
 
     getStatusLabel = () => {
         if(this.props.bet){
-            console.log(this.props.bet._status)
             let status = statuses[this.props.bet._status]
 
             if(!status) status = 'running';

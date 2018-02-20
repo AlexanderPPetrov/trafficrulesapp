@@ -52,8 +52,10 @@ class NotificationsHandler extends Component {
                 // Check if application was closed
                 if (!Api.auth) {
                     //Save notification data for further navigate
-                    Controller.redirectScreen = notificationScreens[receivedNotification.data.type];
+                    //TODO add types handling with real data from push notifications
+                    Controller.redirectScreen = 'Transactions';
                     Controller.notificationData = receivedNotification.data;
+                    console.log(Controller.redirectScreen )
                     return;
                 }
 

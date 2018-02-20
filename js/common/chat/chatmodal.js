@@ -91,7 +91,7 @@ class ChatModal extends Component {
                         // ignoreSslError={true}
                         startInLoadingState={true}
                         // injectedJavaScript={jsForInjection}
-                        onNavigationStateChange={()=> console.log('chat ')}
+                        // onNavigationStateChange={()=> console.log('chat ')}
                     >
                     </WebView>
                 </Modal>

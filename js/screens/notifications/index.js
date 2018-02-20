@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import _ from "lodash";
-
 import {
     Container,
     Title,
@@ -21,11 +19,8 @@ import Expo from "expo";
 import Header from '../../common/header/header';
 
 import {ScrollView} from "react-native"
-import Api from "../../../Api";
 import Ui from '../../common/ui';
 import NotificationMessage from '../../common/notifications/notification';
-import NotificationsButton from '../../common/notifications/notificationsbutton';
-import styles from "./styles";
 import Controller from '../../../Controller';
 
 let NotificationsList = null;

@@ -24,7 +24,6 @@ import Header from '../../common/header/header';
 import Ui from '../../common/ui';
 
 import Balance from "./balance";
-import styles from "./styles";
 import Api from "../../../Api";
 
 class PreviousBalance extends Component {

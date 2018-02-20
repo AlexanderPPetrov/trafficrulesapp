@@ -197,6 +197,7 @@ class Landing extends Component {
         NotificationsHandler.startListen();
         if (this.state.pin) {
 
+            console.log(Controller.redirectScreen)
             if (Controller.redirectScreen) {
                 Controller.navigateTo(Controller.redirectScreen, Controller.notificationData)
             } else {

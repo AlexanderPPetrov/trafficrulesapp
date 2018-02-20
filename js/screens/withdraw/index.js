@@ -114,7 +114,6 @@ class Withdraw extends Component {
         this.setState({
             currentPage: page
         });
-        console.log(page)
         if(page === this.state.steps){
             Chat.hide()
         }else{
