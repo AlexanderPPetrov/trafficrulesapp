@@ -6,6 +6,7 @@ const {
     width: deviceWidth,
     height: deviceHeight,
 } = Dimensions.get('window');
+import { Constants} from 'expo';
 
 const scale = deviceWidth / 320;
 
@@ -32,7 +33,6 @@ export default {
     },
 
     listHeader: {
-        backgroundColor: ColorScheme.listHeaderBackground,
         height: 45,
         justifyContent: 'center',
         paddingLeft: 15,
@@ -57,8 +57,8 @@ export default {
     },
     balanceHeader: {
         textAlign: 'center',
-        color: ColorScheme.balanceHeaderColor,
-        fontSize: normalize(13)
+        color: ColorScheme.light,
+        fontSize: normalize(12)
     },
     listItem: {
         padding: 15,
@@ -71,20 +71,31 @@ export default {
         borderBottomWidth:1
     },
     itemLabel: {
-        color: ColorScheme.darker,
+        color: ColorScheme.regular,
         fontSize: normalize(13),
         fontFamily: 'Roboto_light',
         textAlign: 'left',
         alignSelf: 'stretch',
         backgroundColor:'transparent'
     },
+    itemLabelDark: {
+        color: ColorScheme.darkest,
+    },
+    itemLabelLight: {
+        color: ColorScheme.light
+    },
+
     balanceValue: {
         textAlign: 'right',
         alignSelf: 'stretch',
         backgroundColor:'transparent',
         fontSize: normalize(16),
-        color: ColorScheme.darkest,
+        color: ColorScheme.regular,
         fontFamily: 'Roboto_light'
+    },
+
+    balanceValueDark: {
+        color: ColorScheme.listItemValueDark
     },
 
     profitValue: {
@@ -98,13 +109,11 @@ export default {
         textAlign: 'left',
         alignSelf: 'flex-start',
         fontFamily: 'Roboto_light',
-        color: ColorScheme.darker,
         paddingTop: normalize(10) / 4,
         paddingLeft: 5,
         fontSize: normalize(10)
     },
     bold: {
-        fontWeight:'700',
         fontFamily:'Roboto_medium'
     },
     currencyWidth: {
@@ -134,8 +143,8 @@ export default {
         justifyContent: 'center'
     },
     mainBalanceValue: {
-        color: ColorScheme.mainCurrencyColor,
-        fontSize: normalize(22),
+        color: ColorScheme.darkest,
+        fontSize: normalize(26),
         fontFamily: 'Roboto_light'
     },
 
@@ -205,17 +214,19 @@ export default {
             marginLeft: 5
         },
         dateText: {
-            color: ColorScheme.dark,
+            color: ColorScheme.calendarLabelColor,
             paddingBottom:7,
             alignSelf:'stretch',
             textAlign:'right'
         }
     },
+
     calendarIcon: {
-        color: ColorScheme.light,
+        color: ColorScheme.calendarIconColor,
         position: 'absolute',
         left: 0,
-        top: 2,
+        top: 3,
+        fontSize:36,
         marginLeft: 0
     },
 
@@ -297,12 +308,15 @@ export default {
     statusLabel: {
         backgroundColor: 'transparent',
         color: ColorScheme.neutralLight,
-        fontSize:12,
+        fontSize:10,
+        fontFamily:'Roboto_medium'
     },
 
     statusContainer: {
         alignSelf: 'flex-end',
-        paddingTop:2,
+        alignItems:'center',
+        justifyContent:'center',
+        paddingTop:1,
         paddingBottom:2,
         paddingLeft:10,
         paddingRight:10,
@@ -461,6 +475,74 @@ export default {
         indicatorStyle: {
             backgroundColor: ColorScheme.tabsIndicator
         }
+    },
+    welcomeContainer: {
+        width:'80%',
+        alignItems:'flex-start'
+    },
+    welcomeBackMessage: {
+        paddingTop:45,
+        paddingBottom:5,
+        fontSize:normalize(22),
+        fontWeight:'700',
+        color: ColorScheme.darkest
+    },
+    pinView: {
+        flex: 1,
+        width:'100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: Constants.statusBarHeight,
+        backgroundColor: '#fff',
+    },
+    pinBoxContainer: {
+        flex: -1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop:45,
+        paddingBottom:45,
+        paddingLeft:30
+    },
+    pinBox: {
+        borderWidth: 1,
+        borderColor: ColorScheme.darkest,
+        borderRadius: 15/2,
+        height: 15,
+        width: 15,
+        marginRight: 30
+    },
+
+    pinBoxFilled: {
+        backgroundColor: ColorScheme.darkest
+    },
+
+    pinKeyboard: {
+        flex: -1,
+        flexShrink: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    pinKey: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: deviceWidth/3,
+        height: 70,
+        borderWidth: 1,
+        borderColor: '#e5e5e5',
+        flexGrow: 1
+    },
+
+    pinKeyAction: {
+        backgroundColor:'#f8f8f8'
+    },
+
+    pinKeyEmpty: {
+        backgroundColor: 'rgb(239, 239, 244)',
+    },
+    pinPromptText: {
+        marginBottom: 10,
+        color:ColorScheme.regular,
+        fontSize:normalize(13)
     }
 
 

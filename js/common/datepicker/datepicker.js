@@ -2,11 +2,8 @@ import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {View} from "react-native";
 import Ui from '../../common/ui';
-import {
-    Text,
-    Icon
-} from "native-base";
 import DatePicker from 'react-native-datepicker'
+import {EvilIcons} from '@expo/vector-icons';
 
 class CommonDatePicker extends Component {
 
@@ -15,12 +12,12 @@ class CommonDatePicker extends Component {
             <View style={Ui.datePickerContainer}>
                 {/*<Text style={Ui.datePickerLabel}>{this.props.title}</Text>*/}
                 <DatePicker
-                    style={{width:105, alignItems:'flex-end'}}
+                    style={{width:118, alignItems:'flex-end'}}
                     date={this.props.date}
                     customStyles={Ui.datePickerStyles}
                     format="YYYY-MM-DD"
                     mode="date"
-                    iconComponent={<Icon active name='ios-calendar-outline' style={Ui.calendarIcon}/>}
+                    iconComponent={<EvilIcons active name='calendar' style={Ui.calendarIcon}/>}
                     // minDate={new Date('2017-1-1')}
                     maxDate={new Date()}
                     placeholder={I18n.t('from')}

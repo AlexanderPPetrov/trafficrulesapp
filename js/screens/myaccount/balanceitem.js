@@ -23,16 +23,16 @@ class BalanceItem extends Component {
                 </View>
             </Col>
             <Col >
-                <Row><Text style={Ui.itemLabel}>{I18n.t('cashBalance')}</Text></Row>
+                <Row><Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('cashBalance')}</Text></Row>
                 <Row><Text style={Ui.itemLabel}>{I18n.t('moneyInAccounts')}</Text></Row>
             </Col>
             <Col style={{minWidth:60}}>
                 <Row>
                     <Col >
-                        <Text style={Ui.balanceValue}>{this.props._cash_balance}</Text>
+                        <Text style={[Ui.balanceValue, Ui.itemLabelDark]}>{this.props._cash_balance}</Text>
                     </Col>
                     <Col style={Ui.currencyWidth}>
-                        <Text style={Ui.balanceCurrency}>{this.props._currency}</Text>
+                        <Text style={[Ui.balanceCurrency, Ui.itemLabelDark]}>{this.props._currency}</Text>
                     </Col>
 
                 </Row>

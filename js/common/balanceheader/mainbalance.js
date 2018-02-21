@@ -9,7 +9,7 @@ import Ui from '../ui';
 import CurrencyIcon from '../currency/currency';
 import ColorScheme from '../colorscheme';
 
-class SafeBalance extends Component {
+class MainBalance extends Component {
 
     constructor(props) {
         super(props);
@@ -28,7 +28,7 @@ class SafeBalance extends Component {
                     <Text style={Ui.mainBalanceValue}>
                         {this.props.balance}
                     </Text>
-                    <Text style={{paddingBottom:5, paddingLeft:5}}>{this.props.currency}</Text>
+                    <Text style={{paddingBottom:5, paddingLeft:5, color: ColorScheme.darkest}}>{this.props.currency}</Text>
                 </View>
             </View>
 
@@ -36,4 +36,4 @@ class SafeBalance extends Component {
     }
 }
 
-export default SafeBalance;
+export default MainBalance;

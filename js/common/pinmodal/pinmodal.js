@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Alert, Dimensions} from 'react-native';
-import styles from "./styles";
 import I18n from '../../../i18n/i18n';
+import Ui from '../../common/ui';
 import StatusBar from "../header/statusbar"
 import {
     Container,
@@ -21,6 +21,8 @@ import {
 } from "native-base";
 import * as Animatable from 'react-native-animatable';
 import Logo from '../../common/logo/logo';
+import ColorScheme from '../../common/colorscheme';
+import style from "./styles";
 
 const keyBoard = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'reset', '0', 'back'];
 let _success = null;
@@ -70,9 +72,9 @@ class PinModal extends Component {
 
     getPinBox = (pinValue, i) => {
         if (pinValue === '-') {
-            return <View key={i} style={styles.pinBox}/>
+            return <View key={i} style={Ui.pinBox}/>
         }
-        return <View key={i} style={[styles.pinBox, styles.pinBoxFilled]}/>
+        return <View key={i} style={[Ui.pinBox, Ui.pinBoxFilled]}/>
     };
 
     getPinBoxList = () => {
@@ -82,7 +84,7 @@ class PinModal extends Component {
         });
 
         return <View
-            style={styles.pinBoxContainer}>
+            style={Ui.pinBoxContainer}>
             {pinBoxes}
         </View>
     };
@@ -161,9 +163,9 @@ class PinModal extends Component {
 
     getKey = (keyValue, i) => {
 
-        let keyStyle = styles.pinKey
+        let keyStyle = Ui.pinKey
         if(keyValue === 'back' || keyValue === 'reset'){
-            keyStyle = [styles.pinKey, styles.pinKeyAction]
+            keyStyle = [Ui.pinKey, Ui.pinKeyAction]
         }
         let fontSize = 26;
         let label = keyValue;
@@ -174,11 +176,11 @@ class PinModal extends Component {
 
         if (keyValue === 'back') {
             return <TouchableOpacity key={i} style={keyStyle} onPress={() => this.enterValue(keyValue)}>
-                <Icon style={{fontSize}} name='ios-backspace'></Icon>
+                <Icon style={{fontSize, color:ColorScheme.darkest}} name='ios-backspace'></Icon>
             </TouchableOpacity>
         }
         return <TouchableOpacity key={i} style={keyStyle} onPress={() => this.enterValue(keyValue)}>
-            <Text style={{fontSize}}>{label}</Text>
+            <Text style={{fontSize, color:ColorScheme.darkest}}>{label}</Text>
         </TouchableOpacity>
 
     };
@@ -189,7 +191,7 @@ class PinModal extends Component {
         });
 
         return (
-            <View style={styles.pinKeyboard}>
+            <View style={Ui.pinKeyboard}>
                 {keys}
             </View>
         );
@@ -202,14 +204,14 @@ class PinModal extends Component {
         }
         return (
 
-            <Animatable.View ref="pinModal" style={styles.container} >
+            <Animatable.View ref="pinModal" style={style.container} >
                 <StatusBar/>
 
-                <View style={styles.pinView}>
-                    <View style={styles.welcomeContainer}>
+                <View style={Ui.pinView}>
+                    <View style={Ui.welcomeContainer}>
                         <Logo scale={this.state.scale} arrowOnly={true}/>
-                        <Text style={styles.welcomeBackMessage}>{I18n.t('welcomeBack')}</Text>
-                        <Text style={styles.pinPromptText}>{I18n.t('enterPinMessage')}</Text>
+                        <Text style={Ui.welcomeBackMessage}>{I18n.t('welcomeBack')}</Text>
+                        <Text style={Ui.pinPromptText}>{I18n.t('enterPinMessage')}</Text>
                     </View>
 
                     {this.getPinBoxList()}

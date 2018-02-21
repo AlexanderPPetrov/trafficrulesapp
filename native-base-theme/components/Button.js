@@ -463,10 +463,10 @@ export default (variables = variable) => {
     borderRadius: variables.borderRadiusBase,
     borderColor: variables.btnPrimaryBg,
     borderWidth: null,
-    height: 50,
+    height: 52,
     alignSelf: "flex-start",
     flexDirection: "row",
-    elevation: 2,
+    elevation: 0,
     shadowColor: platformStyle === "material" ? "#000" : undefined,
     shadowOffset:
       platformStyle === "material" ? { width: 0, height: 2 } : undefined,

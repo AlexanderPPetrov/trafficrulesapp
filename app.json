@@ -23,7 +23,7 @@
     "androidStatusBarColor": "#222c34",
     "androidStatusBar": {
       "barStyle": "dark-content",
-      "backgroundColor": "#e0e0e0"
+      "backgroundColor": "#000000"
     },
     "android": {
       "package": "com.apk.prmts"

@@ -244,7 +244,7 @@ export default {
   tabTextColor: "#222222",
 
   // Text
-  textColor: "#02121b",
+  textColor: ColorScheme.regular,
   inputTextColor: ColorScheme.inputTextColor,
   inverseTextColor: "#fff",
   noteFontSize: 14,
