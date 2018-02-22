@@ -98,14 +98,7 @@ export default {
         marginLeft:0,
         minHeight:50
     },
-    amountCurrency: {
-        fontFamily:'Roboto_light',
-        color: ColorScheme.darker,
-        fontSize:20,
-        paddingTop:8,
-        lineHeight:20,
-        marginLeft:10
-    },
+
     confirmationText: {
         fontFamily:'Roboto_light',
         fontSize:16,

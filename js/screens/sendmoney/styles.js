@@ -119,14 +119,7 @@ export default {
     removeAccountIcon: {
         fontSize:26
     },
-    amountCurrency: {
-        fontFamily:'Roboto_light',
-        color: ColorScheme.darker,
-        fontSize:20,
-        paddingTop:8,
-        lineHeight:20,
-        marginLeft:10
-    },
+
     confirmationText: {
         fontFamily:'Roboto_light',
         fontSize:16,

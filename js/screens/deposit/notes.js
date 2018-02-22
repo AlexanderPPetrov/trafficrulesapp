@@ -41,7 +41,7 @@ class Notes extends Component {
                 <Text style={styles.formLabel}>{I18n.t('additionalInformation')}</Text>
                 <Form style={styles.form}>
                     <Item style={styles.inputContainer}>
-                    <Input style={styles.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('writeNotes')}
+                    <Input style={styles.inputField} multiline={true} numberOfLines={2} blurOnSubmit={false}
                            value={this.props.notes} onChangeText={(text) => this.props.onValueChange('notes', text)} />
                     </Item>
                 </Form>

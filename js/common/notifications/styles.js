@@ -58,9 +58,8 @@ export default {
     },
     notificationButton: {
         position:'relative',
-        alignItems:'flex-start',
+        alignItems:'flex-end',
         justifyContent: 'flex-end',
-        paddingLeft:30
     },
     toggleNotification: {
         position:'absolute',
@@ -71,10 +70,11 @@ export default {
         color:'grey'
     },
     notificationsBadge: {
-        backgroundColor:'red',
-        paddingBottom:3,
-        paddingHorizontal:5,
-        color:'#fff'
+        position:'absolute',
+        borderRadius:2,
+        width:4,
+        height:4,
+        backgroundColor:'red'
     },
     notificationsBadgeInactive: {
         opacity:0

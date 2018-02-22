@@ -98,7 +98,7 @@ class AddAccount extends Component {
         if(this.props.notesVisible) {
             return <Form style={Ui.form}>
                 <Item style={Ui.inputContainer}>
-                    <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('message')}
+                    <Input style={Ui.inputField} multiline={true} numberOfLines={2} blurOnSubmit={false}
                            value={this.props.notes} onChangeText={(text) => this.props.changeValue('notes', text)} />
                 </Item>
             </Form>
@@ -121,8 +121,7 @@ class AddAccount extends Component {
                             <Col>
                                 <Form style={Ui.form}>
                                     <View style={Ui.inputContainer}>
-                                        <Input ref="emailInput" style={Ui.inputField} placeholder={I18n.t('enterEmail')} value={this.props.account}
-                                               placeholderTextColor={ColorScheme.lighter}
+                                        <Input ref="emailInput" style={Ui.inputField} value={this.props.account}
                                                onChangeText={(text) => this.props.changeValue('account', text)}
                                                 />
                                     </View>
@@ -136,8 +135,7 @@ class AddAccount extends Component {
                             <Col style={{paddingLeft:15}}>
                                 <Form style={[Ui.inputContainer]}>
 
-                                    <Input style={[Ui.inputField, Ui.amountInput]} placeholder="" value={this.props.amount}
-                                           placeholderTextColor={ColorScheme.lighter}
+                                    <Input style={[Ui.inputField, Ui.amountInput]} value={this.props.amount}
                                            onChangeText={(amount) => this.props.changeValue('amount', amount)}
                                            keyboardType='numeric'/>
                                 </Form>

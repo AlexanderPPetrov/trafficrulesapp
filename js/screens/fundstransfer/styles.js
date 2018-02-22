@@ -1,3 +1,5 @@
+import {normalize} from "../../common/ui";
+
 const React = require("react-native");
 import ColorScheme from "../../common/colorscheme";
 
@@ -47,49 +49,50 @@ export default {
     },
 
     accountsList: {
-        paddingTop:15,
-        paddingBottom:15
+        marginTop:30,
+        borderTopColor: ColorScheme.listItemBorderColor,
+        borderTopWidth:1,
+        marginBottom:15
     },
 
     accountInList: {
-        marginTop:5,
         flexDirection:'row',
-        paddingLeft:15,
-        paddingRight:15,
-        paddingTop:8,
-        paddingBottom:8,
-        borderRadius:20,
-        backgroundColor:'rgba(0,0,0,0.05)',
+        paddingTop:10,
+        paddingBottom:10,
+        borderBottomColor: ColorScheme.listItemBorderColor,
+        borderBottomWidth:1
     },
 
     accountLabel: {
-
+        fontSize: normalize(14),
+        color:ColorScheme.darkest
     },
     addAccountButton: {
         paddingLeft:5,
         paddingRight:5
     },
     addAccountIcon: {
-        fontSize:42
+        fontSize:normalize(26),
+        color:ColorScheme.darkest,
+        textAlign:'center'
+    },
+    addMoreLabel: {
+        fontSize:normalize(14),
+        color:ColorScheme.darkest
     },
     accountAmount: {
-
+        fontSize: normalize(14),
+        color:ColorScheme.darkest
     },
     removeAccountButton: {
         paddingLeft:5,
         paddingRight:5
     },
     removeAccountIcon: {
-        fontSize:26,
+        fontSize:24,
+        color:ColorScheme.loss
     },
-    amountCurrency: {
-        fontFamily:'Roboto_light',
-        color: ColorScheme.darker,
-        fontSize:20,
-        paddingTop:8,
-        lineHeight:20,
-        marginLeft:10
-    },
+
     confirmationText: {
         fontFamily:'Roboto_light',
         fontSize:16,

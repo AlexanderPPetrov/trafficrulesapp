@@ -133,9 +133,9 @@ class DepositSteps extends Component {
             fail_url: 'https://mytest2.premiumtradings.com/#error',
             cancel_url: 'https://mytest2.premiumtradings.com/#cancel'
         }
-        if(this.state.paymentMethod === 'MB_1TAP' && Api.accountSettings._skrill_1tap_token){
-            postData.onetap_token = Api.accountSettings._skrill_1tap_token
-        }
+        // if(this.state.paymentMethod === 'MB_1TAP' && Api.accountSettings._skrill_1tap_token){
+        //     postData.onetap_token = Api.accountSettings._skrill_1tap_token
+        // }
         Api.post({
             url: 'deposit',
             data: postData,
@@ -225,7 +225,7 @@ class DepositSteps extends Component {
 
     render() {
         return (
-            <Animatable.View ref="view">
+            <Animatable.View ref="view" >
                 {this.renderStep()}
             </Animatable.View>
         );

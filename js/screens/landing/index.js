@@ -17,6 +17,7 @@ import Api from '../../../Api';
 import Controller from '../../../Controller';
 import {AsyncStorage} from "react-native";
 
+let locale = 'en';
 
 class Landing extends Component {
 
@@ -37,12 +38,82 @@ class Landing extends Component {
         }
     }
 
-    componentDidMount = () => {
+    getLocale = async () => {
+        try {
+            locale = await AsyncStorage.getItem('locale');
+            if (!locale) {
+                locale = 'en';
+                await this.detectLocale()
+            }else{
+                await this.loadTranslations()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    loadTranslations = async () => {
+        try {
+            let response = await fetch(
+                'http://prmts-translations.dev.cc/locales/' + locale + '.json'
+            );
+            let responseJson = await response.json();
+            I18n.translations[locale] = responseJson;
+            I18n.locale = locale;
+
+        } catch (error) {
+            I18n.locale = 'back';
+            console.log(error)
+        }
+    };
+
+    detectLocale = async () => {
+
+        try {
+            let localeString = await Expo.Util.getCurrentLocaleAsync();
+            const language = localeString.split('_')[0];
+            if (language != 'en') {
+                await this.showChangeLocaleConfirm(localeString, language)
+                console.log('showChangeLocaleConfirm')
+
+            }else{
+                await this.loadTranslations()
+            }
+        } catch (error){
+
+        }
+
+
+    };
+
+    showChangeLocaleConfirm = (localeString, language) => {
+        Alert.alert(
+            I18n.t('confirm'),
+            I18n.t('confirmLocaleQuestion') + localeString,
+            [
+                {text: I18n.t('cancel'), onPress: ()=> this.setLocale('en', false)},
+                {text: I18n.t('ok'), onPress: () => this.setLocale(language, true)},
+
+            ],
+            { onDismiss: () => this.setLocale('en', false) }
+
+        )
+    };
+
+    setLocale = async (language, localeChanged) => {
+        locale = language;
+        AsyncStorage.setItem('locale', language, () => {
+            Api.setLocale = localeChanged
+        });
+        await this.loadTranslations()
+    };
+
+    componentDidMount = async () => {
+        await this.getLocale();
         this.setDeviceToken()
         this.readSecureItem('username')
         this.readSecureItem('password')
         this.readSecureItem('pin')
-        this.readLocale()
     };
 
     setDeviceToken = async () => {
@@ -51,44 +122,8 @@ class Landing extends Component {
 
     };
 
-    readLocale = () => {
-        AsyncStorage.getItem('locale', (err, result) => {
-            if (!result) {
-                this.detectLocale()
-            }else{
-                I18n.locale = result;
-                this.forceUpdate()
-            }
-        });
-    };
 
-    detectLocale = async () => {
 
-        let locale = await Expo.Util.getCurrentLocaleAsync();
-        const language = locale.split('_')[0];
-        if (language != 'en') {
-            this.showChangeLocaleConfirm(locale, language)
-        }
-
-    };
-
-    showChangeLocaleConfirm = (locale, language) => {
-        Alert.alert(
-            I18n.t('confirm'),
-            I18n.t('confirmLocaleQuestion') + locale,
-            [
-                {text: I18n.t('cancel')},
-                {text: I18n.t('ok'), onPress: () => this.setLocale(language)}
-            ]
-        )
-    };
-
-    setLocale = (language) => {
-        AsyncStorage.setItem('locale', language, () => {
-            I18n.locale = language;
-            Api.setLocale = true
-        });
-    };
 
     readSecureItem = (key) => {
         Expo.SecureStore.getItemAsync(key)

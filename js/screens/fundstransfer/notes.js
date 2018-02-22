@@ -38,7 +38,7 @@ class Notes extends Component {
                 <Text style={Ui.formLabel}>{I18n.t('additionalInformation')}</Text>
                 <Form style={Ui.form}>
                     <Item style={Ui.inputContainer}>
-                    <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} multiline={true} numberOfLines={2} blurOnSubmit={false} placeholder={I18n.t('writeNotes')}
+                    <Input style={Ui.inputField} multiline={true} numberOfLines={2} blurOnSubmit={false}
                            value={this.props.notes} onChangeText={(text) => this.props.setNotes(text)} />
                     </Item>
                 </Form>

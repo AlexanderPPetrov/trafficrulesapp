@@ -93,6 +93,7 @@ class FundsTransferSteps extends Component {
 
     addAccount = (stateKey) => {
 
+        this.props.hideChat()
         const current = this.state[stateKey];
         if (current.selectedAccount == 'none') {
             return;
@@ -226,6 +227,8 @@ class FundsTransferSteps extends Component {
                                selectedAccounts={this.state.existing.selectedAccounts}
                                currency={this.state.currency}
                                accounts={this.state.existing.accounts}
+                               disableButton={this.props.disableButton}
+                               hideChat={this.props.hideChat}
             />
         }
         if (this.props.currentPage == 1) {
@@ -243,6 +246,8 @@ class FundsTransferSteps extends Component {
                                selectedAccounts={this.state.new.selectedAccounts}
                                currency={this.state.currency}
                                accounts={this.state.new.accounts}
+                               disableButton={this.props.disableButton}
+                               hideChat={this.props.hideChat}
             />
         }
         if (this.props.currentPage == 2) {
@@ -258,6 +263,7 @@ class FundsTransferSteps extends Component {
                 status={'success'}
                 statusMessage={I18n.t('fundsTransferConfirmation')}
                 description={I18n.t('fundsTransferSuccess')}
+                additionalText={I18n.t('fundsTransferSuccessAdditional')}
             />
         }
         return null;

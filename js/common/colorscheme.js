@@ -26,7 +26,7 @@ export default {
     calendarIconColor:'#6d6d6d',
     calendarLabelColor:'#222222',
 
-    win:'#04d54a',
+    win:'#18bf77',
     halfWin:'#6DD57F',
     loss:'#ff3333',
     halfLoss:'#ef5a48',
@@ -34,7 +34,7 @@ export default {
     cancelled:'#747474',
     running:'#ffae00',
 
-    confirmed:'#04d54a',
+    confirmed:'#18bf77',
     pending:'#67a7f7',
     rejected:'#ff3333',
     failed:'#e66560',

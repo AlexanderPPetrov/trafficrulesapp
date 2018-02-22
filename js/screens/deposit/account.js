@@ -43,12 +43,19 @@ class Account extends Component {
 
     }
 
+    focusNext = () => {
+        if(this.props.paymentMethod == 'NT' && !this.props.secureId && this.props.account !== ''){
+            this.refs.secureId._root.focus()
+        }
+    }
+
     getSecureIdField = () => {
 
         if(this.props.paymentMethod == 'NT'){
-            return <Form style={Ui.form}>
-                <Item style={[Ui.inputContainer, styles.inputSecureId]}>
-                    <Input style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('secureId')} value={this.props.secureId} keyboardType='numeric' onChangeText={(text) => this.props.onValueChange('secureId', text) }/>
+            return <Form style={[Ui.form, {marginTop:25}]}>
+                <Text style={Ui.formLabel}>{I18n.t('secureId')}</Text>
+                <Item style={Ui.inputContainer}>
+                    <Input ref="secureId" style={Ui.inputField} value={this.props.secureId} keyboardType='numeric' onChangeText={(text) => this.props.onValueChange('secureId', text) }/>
                 </Item>
             </Form>
         }
@@ -59,10 +66,10 @@ class Account extends Component {
         return (
             <View >
                 <Text style={Ui.stepHeader}>{I18n.t('accountSettings')}</Text>
-                <Text style={Ui.formLabel}>{I18n.t('enterAccount')}</Text>
                 <Form style={Ui.form}>
+                    <Text style={Ui.formLabel}>{I18n.t('emailOrId')}</Text>
                     <Item style={Ui.inputContainer}>
-                        <Input ref="accountInput" style={Ui.inputField} placeholderTextColor={ColorScheme.lighter} placeholder={I18n.t('emailOrId')} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
+                        <Input ref="accountInput" onBlur={()=> this.focusNext()}style={Ui.inputField} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
                     </Item>
                 </Form>
                 {this.getSecureIdField()}

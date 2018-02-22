@@ -1,12 +1,12 @@
 import I18n from 'ex-react-native-i18n';
-import en from './locales/en';
-import fr from './locales/fr';
+import back from './locales/back';
+// import fr from './locales/fr';
 
 I18n.fallbacks = true;
 
 I18n.translations = {
-    en,
-    fr
+    back
+    // fr
 };
 
 export default I18n;

@@ -21,6 +21,7 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import StatusBar from './statusbar'
 import NotificationsButton from '../notifications/notificationsbutton';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 import Controller from '../../../Controller';
 
@@ -64,7 +65,7 @@ class HeaderWrapper extends Component {
         }
         if(this.props.onBack && !this.props.notifications){
         return <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
-                <Text style={{textAlign: 'right'}}>{I18n.t('cancel')}</Text>
+                <MaterialCommunityIcons name="close" style={{fontSize: 22, textAlign: 'right', color:'#fff'}}/>
             </Button>
         }
         return <NotificationsButton/>

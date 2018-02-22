@@ -72,7 +72,6 @@ class PreviousBalance extends Component {
             _payload: response,
             loaded: true
         })
-
         this.prepareChartData(response)
     };
 
@@ -134,18 +133,18 @@ class PreviousBalance extends Component {
     };
 
     getChart = () => {
-        if (this.state.balance.length >= 2) {
-            return <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance}
-                                      maxBalance={this.state.maxBalance}
-                                      minBalance={this.state.minBalance}
-                                      maxChange={this.state.maxChange}
-                                      minChange={this.state.minChange}
-                                      maxValue={this.state.maxValue}
-                                      minValue={this.state.minValue}
-                                      change={this.state.change} currency={this.props.navigation.state.params._currency}
-                                      currentBalance={this.props.navigation.state.params._balance}/>
-
-        }
+        // if (this.state.balance.length >= 2) {
+        //     return <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance}
+        //                               maxBalance={this.state.maxBalance}
+        //                               minBalance={this.state.minBalance}
+        //                               maxChange={this.state.maxChange}
+        //                               minChange={this.state.minChange}
+        //                               maxValue={this.state.maxValue}
+        //                               minValue={this.state.minValue}
+        //                               change={this.state.change} currency={this.props.navigation.state.params._currency}
+        //                               currentBalance={this.props.navigation.state.params._balance}/>
+        //
+        // }
         return null
     }
 

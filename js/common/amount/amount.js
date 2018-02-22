@@ -20,7 +20,7 @@ import {
     Body,
     Input
 } from "native-base";
-import {View} from 'react-native';
+import {View, Platform} from 'react-native';
 import ColorScheme from "../../common/colorscheme";
 import Ui from '../../common/ui';
 
@@ -49,6 +49,10 @@ class Amount extends Component {
         }
     }
 
+    getCurrencyContainerStyle = () => {
+        let style = {width:115,paddingLeft: 15, paddingRight:50}
+        return style
+    }
     render() {
         return (
 
@@ -59,14 +63,13 @@ class Amount extends Component {
                         <Col>
                             <Form style={Ui.form}>
                                 <Item style={Ui.inputContainer}>
-                                    <Input ref="amountInput"  style={[Ui.inputField, Ui.amountInput]} placeholder="" value={this.props.amount}
-                                           placeholderTextColor={ColorScheme.lighter}
+                                    <Input ref="amountInput"  style={[Ui.inputField, Ui.amountInput]} value={this.props.amount}
                                            onChangeText={(text) => this.props.onValueChange('amount', text)}
                                            keyboardType='numeric'/>
                                 </Item>
                             </Form>
                         </Col>
-                        <Col style={{width:60}}>
+                        <Col style={this.getCurrencyContainerStyle()}>
                             <Text style={Ui.amountCurrency}>{this.state.currency}</Text>
                         </Col>
                     </Row>

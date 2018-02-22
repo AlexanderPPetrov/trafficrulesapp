@@ -14,7 +14,9 @@ import {
 import {View} from 'react-native';
 
 import Ui from '../../common/ui';
+import ColorScheme from '../../common/colorscheme';
 import StatusBar from '../../common/header/statusbar';
+import style from "../../screens/sidebar/style";
 
 class CommonPicker extends Component {
 
@@ -27,10 +29,11 @@ class CommonPicker extends Component {
 
         return <View style={Ui.inputContainer}>
                 <Picker
-                    style={{width:'100%'}}
+                    style={Ui.pickerStyle}
                     mode="dropdown"
                     placeholder=""
                     iosHeader=" "
+                    textStyle={{color:ColorScheme.darkest}}
                     iosIcon={<Icon name="ios-arrow-down-outline"/>}
                     selectedValue={this.props.selectedValue}
                     onValueChange={(value) => this.props.onValueChange(value)}

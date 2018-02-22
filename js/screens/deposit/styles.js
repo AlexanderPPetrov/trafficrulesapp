@@ -26,12 +26,6 @@ export default {
         paddingBottom:0,
         marginTop:0,
         marginBottom:0
-    },
-
-
-    inputSecureId: {
-        marginTop:15,
-        marginBottom:30
-    },
+    }
 
 };

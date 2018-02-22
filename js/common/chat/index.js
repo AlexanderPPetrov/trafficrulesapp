@@ -75,7 +75,7 @@ class Chat extends Component {
                         <Icon name='ios-chatbubbles' size={45} style={Ui.chatButtonIcon} />
                         {/*<Text style={{backgroundColor:'transparent'}}>{I18n.t('contactOperators')}</Text>*/}
                     </View>
-                } offsetX={deviceWidth - 120} offsetY={deviceHeight - 220} renderSize={40} renderText='B' pressDrag={()=>this.openChat()}/>
+                } offsetX={deviceWidth/2 - 35} offsetY={deviceHeight - 200} renderSize={40} renderText='B' pressDrag={()=>this.openChat()}/>
     }
 }
 

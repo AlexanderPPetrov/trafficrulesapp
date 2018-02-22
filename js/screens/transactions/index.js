@@ -229,7 +229,7 @@ class Transactions extends Component {
                                     {/*<Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{transaction._fee} {transaction._currency}</Text>*/}
                                 {/*</Col>*/}
                             {/*</Row>*/}
-                            <Row style={{marginTop:5, marginBottom:5}}>
+                            <Row style={{marginTop:5, marginBottom:0}}>
                                 <Col size={2} style={{justifyContent:'center'}}>
                                     <Text style={Ui.itemLabel}>{transaction._account}</Text>
                                 </Col>

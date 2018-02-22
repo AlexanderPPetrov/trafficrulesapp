@@ -24,9 +24,10 @@ import {
 import Ui from '../../common/ui';
 import CommonPicker from '../../common/picker/picker';
 
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Platform} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import ColorScheme from "../../common/colorscheme";
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 import styles from "./styles";
 import Api from "../../../Api";
@@ -82,6 +83,9 @@ class AddAccount extends Component {
 
     constructor(props){
         super(props)
+        this.state = {
+            buttonDisabled: true
+        }
     }
     componentDidMount = () => {
 
@@ -94,7 +98,6 @@ class AddAccount extends Component {
                 success: this.dataLoaded
             })
         }
-        this.checkButton(this.props.amount)
     };
 
     dataLoaded = (response) => {
@@ -109,41 +112,55 @@ class AddAccount extends Component {
         this.setState({
             buttonDisabled
         })
+
+       this.props.disableButton(buttonDisabled)
     }
 
     getAmountField = () => {
         if (this.props.selectedAccount != 'none') {
-            return <Grid>
-                    <Row>
-                        <Col>
-                            <Amount label={I18n.t('amount')}
-                                    onValueChange={(key, value) => {
-                                        this.props.changeAccountValue(this.props.stateKey, key, value)
-                                        this.checkButton(value)
-                                    }}
-                                    amount={this.props.amount} />
-                        </Col>
-                        <Col style={{width: 60, alignItems:'center', justifyContent:'center'}}>
-                            <Button transparent primary style={styles.removeAccountButton}
-                                    disabled={this.state.buttonDisabled}
-                                    onPress={() => {
-                                        this.setState({
-                                            buttonDisabled:true
-                                        })
-                                        this.props.addAccount(this.props.stateKey)
-                                    }}>
-                                <Icon name="ios-add-circle" style={styles.addAccountIcon}/>
-                            </Button>
-                        </Col>
-                    </Row>
-                </Grid>
-
+            return <View style={{marginTop:25}}>
+                        <Amount label={I18n.t('amount')}
+                                onValueChange={(key, value) => {
+                                    this.props.changeAccountValue(this.props.stateKey, key, value)
+                                    this.checkButton(value)
+                                }}
+                                amount={this.props.amount} />
+                </View>
         }
         return null
 
     };
 
+    getAddMoreButton = () => {
+        if (this.props.selectedAccount != 'none') {
+            return <View style={{alignItems:'center', justifyContent:'center', width:'100%', paddingTop:25, paddingBottom:40}}>
+                <TouchableOpacity transparent primary style={styles.removeAccountButton}
+                        disabled={this.state.buttonDisabled}
+                        onPress={() => {
+                            this.setState({
+                                buttonDisabled:true
+                            })
+                            this.props.addAccount(this.props.stateKey)
+
+                        }}>
+                    <MaterialCommunityIcons name="plus" style={styles.addAccountIcon}/>
+                    <Text style={styles.addMoreLabel}>{I18n.t('moreAccounts')}</Text>
+                </TouchableOpacity>
+            </View>
+        }
+        return null;
+
+    }
+
     pickChangeHandler = (value) => {
+        if(value != 'none'){
+            this.props.hideChat()
+        }
+        if(value != 'none' && !this.props.amount){
+            this.props.disableButton(true)
+        }else{
+            this.props.disableButton(false)
+        }
         this.props.changeAccountValue(this.props.stateKey, 'selectedAccount', value)
     };
 
@@ -161,18 +178,25 @@ class AddAccount extends Component {
 
     };
 
+    getRemoveContainerStyle = () => {
+        let style = {width: 50, alignItems:'flex-end', justifyContent:'flex-end', paddingRight:14}
+        if (Platform.OS === 'ios') {
+            style.paddingRight = 3
+        }
+        return style
+    }
     getAccount = (account, i) => {
-        return <View key={i} style={styles.accountInList}>
+        return <View key={i} >
             <Grid>
-                <Row>
-                    <Col>
+                <Row style={styles.accountInList}>
+                    <Col style={{justifyContent:'center'}}>
                         <Text style={[Ui.itemLabel, styles.accountLabel]}>{account.username}</Text>
                     </Col>
-                    <Col>
+                    <Col style={{justifyContent:'center'}}>
                         <Text
-                            style={[Ui.balanceValue, styles.accountAmount]}>{account.amount} {this.props.currency}</Text>
+                            style={[Ui.balanceValue, styles.accountAmount, Ui.bold]}>{account.amount} {this.props.currency}</Text>
                     </Col>
-                    <Col style={{width: 45, alignItems:'flex-end', justifyContent:'flex-end'}}>
+                    <Col style={this.getRemoveContainerStyle()}>
                         <TouchableOpacity onPress={() => this.props.removeAccount(this.props.stateKey, account._id)}>
                             <Icon name="ios-close-circle-outline" style={styles.removeAccountIcon}/>
                         </TouchableOpacity>
@@ -183,11 +207,12 @@ class AddAccount extends Component {
     };
 
     getAccounts = () => {
+        if(this.props.selectedAccounts.length == 0) return null;
         let accounts = this.props.selectedAccounts.map((account, i) =>
             this.getAccount(account, i)
         );
 
-        return <View>
+        return <View style={styles.accountsList}>
             {accounts}
         </View>
     };
@@ -201,9 +226,8 @@ class AddAccount extends Component {
                         {this.getPicker()}
                         {this.getAmountField()}
                     </Form>
-                    <View style={styles.accountsList}>
                         {this.getAccounts()}
-                    </View>
+                        {this.getAddMoreButton()}
                 </View>
             </View>
         );

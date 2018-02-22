@@ -25,11 +25,11 @@ export default {
         backgroundColor: ColorScheme.mainBackground
     },
     inputLabel: {
-        fontSize: normalize(14),
+        fontSize: normalize(18),
     },
     inputLabelFocused: {
         width: 0,
-        fontSize: normalize(10),
+        fontSize: normalize(13),
     },
 
     listHeader: {
@@ -52,13 +52,13 @@ export default {
     },
     headerLabel: {
         color: '#292929',
-        fontSize: normalize(13),
+        fontSize: normalize(14),
         marginLeft: 7
     },
     balanceHeader: {
         textAlign: 'center',
         color: ColorScheme.light,
-        fontSize: normalize(12)
+        fontSize: normalize(13)
     },
     listItem: {
         padding: 15,
@@ -72,7 +72,7 @@ export default {
     },
     itemLabel: {
         color: ColorScheme.regular,
-        fontSize: normalize(13),
+        fontSize: normalize(14),
         fontFamily: 'Roboto_light',
         textAlign: 'left',
         alignSelf: 'stretch',
@@ -103,7 +103,7 @@ export default {
     },
 
     balanceValueSmall: {
-        fontSize: normalize(12),
+        fontSize: normalize(13),
     },
     balanceCurrency: {
         textAlign: 'left',
@@ -144,7 +144,7 @@ export default {
     },
     mainBalanceValue: {
         color: ColorScheme.darkest,
-        fontSize: normalize(26),
+        fontSize: normalize(24),
         fontFamily: 'Roboto_light'
     },
 
@@ -181,7 +181,7 @@ export default {
         textAlign: 'left',
         alignSelf: 'flex-start',
         fontFamily: 'Roboto_light',
-        color: ColorScheme.darker,
+        color: ColorScheme.regular,
         paddingTop: normalize(13) / 5,
         paddingLeft: 5,
         fontSize: normalize(13),
@@ -198,7 +198,7 @@ export default {
         borderBottomColor: ColorScheme.datePickerBorderColor
     },
     datePickerLabel: {
-        fontSize: 13,
+        fontSize: normalize(13),
         color: ColorScheme.light,
         fontFamily: 'Roboto_light',
         backgroundColor: 'transparent'
@@ -238,12 +238,14 @@ export default {
     monthLabel: {
         textAlign: 'center',
         color: ColorScheme.monthLabelColor,
-        fontSize: normalize(10)
+        fontSize: normalize(13)
     },
     formContainer: {
         flex: 1,
         justifyContent: 'space-between',
-        padding: 30
+        padding: 30,
+        paddingLeft:45,
+        paddingRight:45
     },
     buttonsContainer: {
         alignSelf: 'flex-end',
@@ -372,17 +374,14 @@ export default {
 
     stepHeader: {
         textAlign: 'center',
-        fontSize: normalize(20),
+        fontSize: normalize(24),
         fontWeight: '700',
-        padding: 10,
-        paddingBottom: 45,
+        paddingBottom: 50,
         color: ColorScheme.stepHeader
     },
     formLabel: {
-        color: ColorScheme.light,
         fontFamily: 'Roboto_light',
-        marginBottom: 10,
-        fontSize: 14
+        fontSize: normalize(13)
     },
     cardContainer: {
         position: 'relative',
@@ -399,28 +398,38 @@ export default {
         borderBottomWidth: 1,
         borderBottomColor: ColorScheme.neutralDarker,
         marginLeft: 0,
-        padding: 5,
-        minHeight: 50
+        minHeight: 45
+    },
+    pickerStyle: {
+        width:'100%',
+        height:45,
+        paddingLeft:0,
+        paddingRight:0,
+        opacity:1
     },
     form: {
-        minHeight: 50,
+        minHeight: 45,
         padding: 0
     },
     inputField: {
         flex: 1,
-        fontSize: 18,
+        fontSize: normalize(18),
+        paddingLeft:0,
+        paddingBottom:5,
+        paddingRight:0,
         lineHeight: 24,
         color: ColorScheme.darkest
     },
     amountInput: {
-        textAlign: 'right',
-        fontSize: 36
+        textAlign: 'left',
+        paddingRight:15
     },
     amountCurrency: {
         fontFamily: 'Roboto_light',
-        color: ColorScheme.darker,
-        fontSize: 20,
-        paddingTop: 8,
+        color: ColorScheme.dark,
+        fontSize: normalize(18),
+        textAlign:'right',
+        paddingTop: 10,
         lineHeight: 20,
         marginLeft: 10
     },
@@ -430,44 +439,44 @@ export default {
     },
     confirmMessage: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: normalize(22),
+        fontFamily:'Roboto_bold'
     },
     successIcon: {
         color: ColorScheme.win,
-        fontSize: 45,
+        fontSize: normalize(45),
         marginBottom: 10
     },
     errorIcon: {
         color: ColorScheme.loss,
-        fontSize: 45,
+        fontSize: normalize(45),
         marginBottom: 10
     },
     cancelIcon: {
         color: ColorScheme.draw,
-        fontSize: 45,
+        fontSize: normalize(45),
         marginBottom: 10
     },
     confirmationHeader: {},
 
     confirmationText: {
         fontFamily: 'Roboto_light',
-        fontSize: 16,
-        color: ColorScheme.light,
+        fontSize: normalize(14),
+        color: ColorScheme.regular,
         textAlign: 'center',
-        marginTop: 15
+        marginTop: 12
     },
     noResults: {
         textAlign: 'center',
         padding: 15,
         alignSelf: "stretch",
         fontFamily:'Roboto_light',
-        color: ColorScheme.darker
     },
     tabsStyle: {
         activeTintColor: ColorScheme.tabActiveColor,
         inactiveTintColor: ColorScheme.tabInactiveColor,
         labelStyle: {
-            fontSize: 12,
+            fontSize: normalize(13),
         },
         style: {
             backgroundColor: ColorScheme.tabsBackground,
@@ -506,10 +515,10 @@ export default {
     pinBox: {
         borderWidth: 1,
         borderColor: ColorScheme.darkest,
-        borderRadius: 15/2,
-        height: 15,
-        width: 15,
-        marginRight: 30
+        borderRadius: 18/2,
+        height: 18,
+        width: 18,
+        marginRight: 32
     },
 
     pinBoxFilled: {
@@ -542,7 +551,7 @@ export default {
     pinPromptText: {
         marginBottom: 10,
         color:ColorScheme.regular,
-        fontSize:normalize(13)
+        fontSize:normalize(14)
     }
 
 

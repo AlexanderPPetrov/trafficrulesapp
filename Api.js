@@ -1,6 +1,8 @@
 import FormData from 'FormData';
 
 const baseUrl = 'http://api-prmts.dev.cc/v1/';
+const translationsUrl = 'https://prmts-translations.dev.cc/'
+
 const appKey = '122$sads1CCssa@$%AScccaas552112';
 import fetch from 'react-native-fetch-polyfill';
 import {Alert} from 'react-native';
@@ -29,7 +31,7 @@ let Api = {
         Api.executeRequest(opts, 'GET')
     },
 
-    executeRequest: (opts, type) => {
+    executeRequest: (opts, type, domain = baseUrl) => {
 
         let loader = true,
             retries = 2;
@@ -52,7 +54,8 @@ let Api = {
 
         var _data = Api.prepareData(data, type);
 
-        var _url = baseUrl + opts.url;
+        var _url = domain + opts.url;
+
 
         if (type === 'GET' && Object.keys(data).length > 0) {
             _url = _url + '?' + Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
@@ -67,6 +70,7 @@ let Api = {
             return fetch(_url, _data)
                 .then(response => response.json())
                 .then(responseJson => {
+                    console.log(responseJson)
 
                     if (opts.success && responseJson._status == 'success') {
                         if (opts.url === 'login') {

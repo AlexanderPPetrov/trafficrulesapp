@@ -92,9 +92,9 @@ class NotificationsButton extends Component {
 
     getNotificationCount = () => {
         if(this.state.unseenNotifications){
-            return <Text style={styles.notificationsBadge}>{this.state.unseenNotifications}</Text>
+            return <View style={styles.notificationsBadge}>{this.state.unseenNotifications}</View>
         }
-        return <Text style={[styles.notificationsBadge, styles.notificationsBadgeInactive]}>{this.state.unseenNotifications}</Text>
+        return <View style={[styles.notificationsBadge, styles.notificationsBadgeInactive]}>{this.state.unseenNotifications}</View>
     };
 
     render() {

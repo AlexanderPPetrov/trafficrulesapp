@@ -105,17 +105,19 @@ class Withdraw extends Component {
         this.setState({
             currentPage: page
         });
-        if(page === this.state.steps){
+        if(page > 0){
             Chat.hide()
-        }else{
-            Chat.show()
         }
     };
 
+    hideChat = () => {
+        Chat.hide()
+    }
     getFundsTransferSteps = () => {
         if(!this.state.loaded) return null
         return <FundsTransferSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
                                    setPage={this.setPage}
+                                   hideChat={this.hideChat}
                                    paymentData={this.state.paymentData}
                                    disableButton={this.setButtonState}></FundsTransferSteps>
     }
