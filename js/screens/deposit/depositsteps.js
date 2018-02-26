@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text} from 'react-native';
+import { View, Text, AsyncStorage} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Api from "../../../Api";
 
@@ -48,8 +48,16 @@ class DepositSteps extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
         this.props.onRef(this)
+        try {
+            let paymentMethod = await AsyncStorage.getItem('depositMethod');
+            if (paymentMethod) {
+                this.setPayment(paymentMethod)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     setPayment = (paymentMethod) => {
@@ -143,7 +151,7 @@ class DepositSteps extends Component {
         })
     }
 
-    depositSuccess = (response) => {
+    depositSuccess = async (response) => {
         this.setState({
             _payload: response
         })
@@ -155,14 +163,26 @@ class DepositSteps extends Component {
             amount:this.state.amount,
             payment_id: response._payment_num
         });
+
+        try {
+            await AsyncStorage.setItem('depositMethod', this.state.paymentMethod);
+        } catch (error) {
+            console.log(error)
+        }
+
         if(response._status == 'confirmed'){
             this.props.setDepositCompleted('success')
             this.props.onUpdatePage(this.props.currentPage + 1)
         }
+
+
+
         this.refs.view.fadeInRight(300);
         if(response._redirect_url){
             this.props.setRedirectUrl(response._redirect_url)
         }
+
+
     }
 
     renderStep = () => {

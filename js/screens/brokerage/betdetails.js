@@ -35,6 +35,11 @@ class BetDetails extends Component {
     }
 
     getStatusLabel = () => {
+
+        if(this.props.bet._profit) {
+            return <Text style={[styles.profit, Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(this.props.bet._profit)]}>{this.props.bet._profit} {this.props.bet._currency}</Text>
+        }
+
         if(this.props.bet){
             let status = statuses[this.props.bet._status]
 
@@ -61,10 +66,6 @@ class BetDetails extends Component {
         return style
     }
 
-    getBetProfit = () => {
-        if(!this.props.bet._profit) return null
-        return <Text style={[styles.profit, Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(this.props.bet._profit)]}>{this.props.bet._profit} {this.props.bet._currency}</Text>
-    }
     getDate = () => {
         if(this.props.getHoursOnly){
             return <Text style={[Ui.cardHeader, styles.dateLabel]}>{this.props.bet._event_date.split(' ')[1]}</Text>
@@ -101,15 +102,13 @@ class BetDetails extends Component {
                             <Text style={[styles.betLabel, styles.eventLabel]}>{this.props.bet._event}</Text>
                         </Col>
                         <Col size={2} >
-                            {this.getBetProfit()}
                         </Col>
                     </Row>
                     <Row style={styles.infoContainer}>
                         <Col size={3} >
                             <Row>
                                 <Text style={styles.stakeLabel}>{I18n.t('stake')}:</Text>
-                                <Text style={styles.betLabel}>{this.props.bet._stake}</Text>
-                                <Text style={styles.betLabel}>{this.props.bet._currency}</Text>
+                                <Text style={styles.betLabel}>{this.props.bet._stake} {this.props.bet._currency}</Text>
                             </Row>
                         </Col>
                         <Col size={2} >

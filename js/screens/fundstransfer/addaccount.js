@@ -179,10 +179,7 @@ class AddAccount extends Component {
     };
 
     getRemoveContainerStyle = () => {
-        let style = {width: 50, alignItems:'flex-end', justifyContent:'flex-end', paddingRight:14}
-        if (Platform.OS === 'ios') {
-            style.paddingRight = 3
-        }
+        let style = {width: 50, alignItems:'flex-end', justifyContent:'flex-end', paddingRight:15}
         return style
     }
     getAccount = (account, i) => {

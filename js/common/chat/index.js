@@ -71,7 +71,7 @@ class Chat extends Component {
         if(!this.state.chatVisible) return null;
 
         return <Draggable reverse={false} renderComponent={
-                    <View style={Ui.chatButton}>
+                    <View style={[Ui.chatButton, Ui.dropShadow]}>
                         <Icon name='ios-chatbubbles' size={45} style={Ui.chatButtonIcon} />
                         {/*<Text style={{backgroundColor:'transparent'}}>{I18n.t('contactOperators')}</Text>*/}
                     </View>

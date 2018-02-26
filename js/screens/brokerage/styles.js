@@ -10,7 +10,9 @@ export default {
         justifyContent: 'flex-start',
         textAlign:'left',
         alignSelf: "stretch",
-        backgroundColor:'transparent'
+        backgroundColor:'transparent',
+        color:ColorScheme.darkest,
+        fontSize:16
     },
 
     betValue: {
@@ -24,9 +26,6 @@ export default {
         backgroundColor:'transparent'
     },
 
-    profit: {
-        paddingRight:15
-    },
 
     selectionContainer: {
         marginTop:15,
@@ -44,15 +43,13 @@ export default {
     selectionLabel: {
         paddingRight:10,
         fontSize:18,
-        color: '#555',
-        fontFamily:'Roboto_medium'
+        color: ColorScheme.darkest,
+        fontFamily:'Roboto_light'
     },
 
     odds: {
-        paddingTop:2,
         color: ColorScheme.darkest,
-        fontWeight:'700',
-        fontFamily:'Roboto_light'
+        fontFamily:'Roboto_medium'
     },
 
     matchContainer: {
@@ -84,16 +81,15 @@ export default {
     },
 
     eventLabel: {
-        color: ColorScheme.darker,
         fontSize: 14,
         fontFamily:'Roboto_light'
     },
 
     stakeLabel: {
-        color: ColorScheme.light,
+        color: ColorScheme.regular,
         fontFamily: 'Roboto_light',
         fontSize:14,
-        paddingTop:4,
+        lineHeight: 22,
         paddingRight:5,
         backgroundColor:'transparent'
     },

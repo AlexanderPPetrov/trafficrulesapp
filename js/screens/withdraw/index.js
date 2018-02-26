@@ -30,7 +30,7 @@ import {View, ScrollView} from 'react-native';
 import styles from "./styles";
 import Api from "../../../Api";
 import Ui from '../../common/ui';
-
+import {Grid, Row, Col} from "react-native-easy-grid";
 const Item = Picker.Item;
 
 
@@ -102,9 +102,17 @@ class Withdraw extends Component {
 
     getOpenedRequests = () => {
         if(this.state.openedRequests) {
-            return <View style={styles.openedRequestsContainer}>
-                <Text style={styles.openedRequestsLabel}>{I18n.t('openedWithdrawRequests')}</Text>
-                <Text style={styles.openedRequestsCount}>{this.state.openedRequests}</Text>
+            return <View>
+                <Grid style={styles.openedRequestsContainer}>
+                    <Row >
+                        <Col size={4}>
+                            <Text style={styles.openedRequestsLabel}>{I18n.t('openedWithdrawRequests')}</Text>
+                        </Col>
+                        <Col size={1}>
+                            <Text style={styles.openedRequestsCount}>{this.state.openedRequests}</Text>
+                        </Col>
+                    </Row>
+                </Grid>
             </View>
         }
         return null;

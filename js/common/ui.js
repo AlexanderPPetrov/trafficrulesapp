@@ -162,7 +162,7 @@ export default {
         justifyContent: 'center'
     },
     dropShadow: {
-        shadowOffset: {width: 0, height: 2},
+        shadowOffset: {width: 0, height: 3},
         shadowColor: 'black',
         shadowOpacity: 0.2,
         elevation: 3,
@@ -551,7 +551,10 @@ export default {
         height: 70,
         borderWidth: 1,
         borderColor: '#e5e5e5',
-        flexGrow: 1
+        flexGrow: 1,
+        paddingLeft:0,
+        paddingRight:0,
+        marginLeft:0
     },
 
     pinKeyAction: {

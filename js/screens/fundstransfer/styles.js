@@ -50,17 +50,18 @@ export default {
 
     accountsList: {
         marginTop:30,
-        borderTopColor: ColorScheme.listItemBorderColor,
-        borderTopWidth:1,
         marginBottom:15
     },
 
     accountInList: {
         flexDirection:'row',
-        paddingTop:10,
-        paddingBottom:10,
-        borderBottomColor: ColorScheme.listItemBorderColor,
-        borderBottomWidth:1
+        marginBottom:5,
+        paddingTop:5,
+        paddingBottom:5,
+        paddingLeft:15,
+        backgroundColor:'#f3f3f3',
+        borderRadius:15
+
     },
 
     accountLabel: {

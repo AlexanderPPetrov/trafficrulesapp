@@ -59,11 +59,11 @@ class Balance extends Component {
                                 <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('_balance')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={[Ui.balanceValue, Ui.profitValue, Ui.itemLabelDark]}>{balance._balance}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue, Ui.itemLabelDark]}>{balance._balance} {this.props.currency}</Text>
                             </Col>
-                            <Col style={Ui.currencyWidth} >
-                                <Text style={[Ui.balanceCurrency, Ui.itemLabelDark]}>{this.props.currency}</Text>
-                            </Col>
+                            {/*<Col style={Ui.currencyWidth} >*/}
+                                {/*<Text style={[Ui.balanceCurrency, Ui.itemLabelDark]}>{this.props.currency}</Text>*/}
+                            {/*</Col>*/}
                         </Row>
                         <Row>
 
@@ -71,11 +71,11 @@ class Balance extends Component {
                                 <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('change')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={[Ui.balanceValue, Ui.profitValue, this.getProfitStyle(balance._change)]}>{balance._change}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue, this.getProfitStyle(balance._change)]}>{balance._change} {this.props.currency}</Text>
                             </Col>
-                            <Col style={Ui.currencyWidth}>
-                                <Text style={[Ui.balanceCurrency, this.getProfitStyle(balance._change)]}>{this.props.currency}</Text>
-                            </Col>
+                            {/*<Col style={Ui.currencyWidth}>*/}
+                                {/*<Text style={[Ui.balanceCurrency, this.getProfitStyle(balance._change)]}>{this.props.currency}</Text>*/}
+                            {/*</Col>*/}
 
                         </Row>
                     </Col>

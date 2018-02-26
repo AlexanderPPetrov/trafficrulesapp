@@ -5,10 +5,10 @@ import ColorScheme from "../colorscheme";
 
 export default {
     customStyles : {
-        stepIndicatorSize: 15,
-        currentStepIndicatorSize:15,
+        stepIndicatorSize: 14,
+        currentStepIndicatorSize:18,
         separatorStrokeWidth: 1,
-        currentStepStrokeWidth: 1,
+        currentStepStrokeWidth: 2,
         stepStrokeCurrentColor: ColorScheme.stepActive,
         stepStrokeWidth: 1,
         stepStrokeFinishedColor: ColorScheme.stepActive,

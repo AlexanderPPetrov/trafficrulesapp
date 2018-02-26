@@ -206,11 +206,11 @@ class SettledBets extends Component {
                                 <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('turnOver')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={[Ui.balanceValue, Ui.profitValue,  Ui.itemLabelDark]}>{bet._turnover}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue,  Ui.itemLabelDark]}>{bet._turnover} {bet._currency}</Text>
                             </Col>
-                            <Col style={Ui.currencyWidth} >
-                                <Text style={[Ui.balanceCurrency,  Ui.itemLabelDark]}>{bet._currency}</Text>
-                            </Col>
+                            {/*<Col style={Ui.currencyWidth} >*/}
+                                {/*<Text style={[Ui.balanceCurrency,  Ui.itemLabelDark]}>{bet._currency}</Text>*/}
+                            {/*</Col>*/}
 
                         </Row>
                         <Row>
@@ -219,11 +219,11 @@ class SettledBets extends Component {
                                 <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('profit')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={[Ui.balanceValue, Ui.profitValue, this.getProfitStyle(bet._profit)]}>{bet._profit}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue, this.getProfitStyle(bet._profit)]}>{bet._profit} {bet._currency}</Text>
                             </Col>
-                            <Col style={Ui.currencyWidth}>
-                                <Text style={[Ui.balanceCurrency, this.getProfitStyle(bet._profit)]}>{bet._currency}</Text>
-                            </Col>
+                            {/*<Col style={Ui.currencyWidth}>*/}
+                                {/*<Text style={[Ui.balanceCurrency, this.getProfitStyle(bet._profit)]}>{bet._currency}</Text>*/}
+                            {/*</Col>*/}
 
                         </Row>
                     </Col>
@@ -241,11 +241,11 @@ class SettledBets extends Component {
         return  <Col size={1}>
             <Row>
                 <Col>
-                    <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(profit)]}>{profit}</Text>
+                    <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(profit)]}>{profit} {Api.accountSettings._brokerage_currency}</Text>
                 </Col>
-                <Col style={Ui.currencyWidth}>
-                    <Text style={[Ui.balanceCurrency,Ui.bold, this.getProfitStyle(profit)]}>{Api.accountSettings._brokerage_currency}</Text>
-                </Col>
+                {/*<Col style={Ui.currencyWidth}>*/}
+                    {/*<Text style={[Ui.balanceCurrency,Ui.bold, this.getProfitStyle(profit)]}>{Api.accountSettings._brokerage_currency}</Text>*/}
+                {/*</Col>*/}
             </Row>
         </Col>
     }

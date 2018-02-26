@@ -29,7 +29,6 @@ export default {
         justifyContent: 'space-between'
     },
     openedRequestsContainer: {
-        flexDirection:'row',
         paddingLeft:15,
         paddingRight:15,
         paddingTop:8,
@@ -47,7 +46,8 @@ export default {
 
     openedRequestsCount: {
         color:'#ff9900',
-        paddingLeft:15
+        textAlign: 'right',
+        alignSelf: 'stretch'
     },
 
     formLabel:{

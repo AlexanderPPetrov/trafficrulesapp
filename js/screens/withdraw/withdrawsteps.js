@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as Animatable from 'react-native-animatable';
 import Api from "../../../Api";
-import {View, Text} from 'react-native';
+import {View, Text, AsyncStorage} from 'react-native';
 
 import {
     Container,
@@ -47,8 +47,18 @@ class WithdrawSteps extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
         this.props.onRef(this)
+
+        try {
+            let paymentMethod = await AsyncStorage.getItem('withdrawMethod');
+            if (paymentMethod) {
+                this.setPayment(paymentMethod)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     setPayment = (paymentMethod) => {
@@ -93,10 +103,17 @@ class WithdrawSteps extends Component {
         })
     }
 
-    withdrawSuccess = (response) => {
+    withdrawSuccess = async (response) => {
         this.setState({
             status: response._status
         })
+
+        try {
+            await AsyncStorage.setItem('withdrawMethod', this.state.paymentMethod);
+        } catch (error) {
+            console.log(error)
+        }
+
         this.props.onUpdatePage(5)
         this.refs.view.fadeInRight(300);
     }
