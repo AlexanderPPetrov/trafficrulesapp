@@ -32,7 +32,6 @@ import Api from "../../../Api";
 
 const Item = Picker.Item;
 
-const labels = [I18n.t('existing'), I18n.t('new'), I18n.t('notes'), I18n.t('transfer')];
 import Ui from '../../common/ui';
 
 class Withdraw extends Component {
@@ -45,6 +44,7 @@ class Withdraw extends Component {
             steps:4,
             buttonDisabled: false,
             paymentData: {},
+            labels:[I18n.t('existing'), I18n.t('new'), I18n.t('notes'), I18n.t('transfer')],
             loaded:false
         }
     }
@@ -119,7 +119,7 @@ class Withdraw extends Component {
                                    setPage={this.setPage}
                                    hideChat={this.hideChat}
                                    paymentData={this.state.paymentData}
-                                   disableButton={this.setButtonState}></FundsTransferSteps>
+                                   disableButton={this.setButtonState}/>
     }
     render() {
         return (
@@ -129,7 +129,7 @@ class Withdraw extends Component {
                 <Content >
                     <View style={Ui.cardContainer}>
                         <View style={{flex:1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
+                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={this.state.labels}/>
 
                             <View style={Ui.formContainer}>
                                 {this.getFundsTransferSteps()}

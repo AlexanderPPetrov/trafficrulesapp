@@ -15,9 +15,10 @@ const indicatorStyle = (props, alignSelf) => ({
 
 
 class OpenBetsTab extends React.Component {
-    static navigationOptions = {
+
+    static navigationOptions = () =>({
         tabBarLabel: I18n.t('openBets')
-    };
+    });
 
     render() {
         return (
@@ -27,9 +28,9 @@ class OpenBetsTab extends React.Component {
 }
 
 class SettledBetsTab extends React.Component {
-    static navigationOptions = {
+    static navigationOptions = () => ({
         tabBarLabel: I18n.t('settledBets')
-    };
+    });
 
     render() {
         return (

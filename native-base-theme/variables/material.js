@@ -195,7 +195,7 @@ export default {
   },
 
   // Line Height
-  btnLineHeight: 19,
+  btnLineHeight: 21,
   lineHeightH1: 32,
   lineHeightH2: 27,
   lineHeightH3: 22,

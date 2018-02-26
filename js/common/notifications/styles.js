@@ -60,20 +60,27 @@ export default {
         position:'relative',
         alignItems:'flex-end',
         justifyContent: 'flex-end',
+        backgroundColor:'transparent',
+        width:45,
+        paddingLeft:0,
+        marginRight:0,
+        paddingRight:0
     },
     toggleNotification: {
         position:'absolute',
-        fontSize:30,
-        top:8,
-        left:15,
-        opacity:0.5,
-        color:'grey'
+        fontSize:26,
+        top:13,
+        left:22,
+        opacity:0.3,
+        color:'#fff'
     },
     notificationsBadge: {
         position:'absolute',
-        borderRadius:2,
-        width:4,
-        height:4,
+        borderRadius:4,
+        top:17,
+        right:5,
+        width:8,
+        height:8,
         backgroundColor:'red'
     },
     notificationsBadgeInactive: {

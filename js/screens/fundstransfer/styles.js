@@ -71,15 +71,7 @@ export default {
         paddingLeft:5,
         paddingRight:5
     },
-    addAccountIcon: {
-        fontSize:normalize(26),
-        color:ColorScheme.darkest,
-        textAlign:'center'
-    },
-    addMoreLabel: {
-        fontSize:normalize(14),
-        color:ColorScheme.darkest
-    },
+
     accountAmount: {
         fontSize: normalize(14),
         color:ColorScheme.darkest

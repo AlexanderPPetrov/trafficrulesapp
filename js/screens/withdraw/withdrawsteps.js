@@ -112,10 +112,14 @@ class WithdrawSteps extends Component {
                             account={this.state.account}/>
         }
         if (this.props.currentPage == 2) {
-            return <Amount label={I18n.t('withdrawAmount')}
-                            onValueChange={this.changeValue}
-                            amount={this.state.amount} />
+            return <View>
+                    <Text style={Ui.stepHeader}>{I18n.t('depositAmount')}</Text>
+                    <Amount label={I18n.t('withdrawAmount')}
+                                    onValueChange={this.changeValue}
+                                    amount={this.state.amount} />
+            </View>
         }
+
         if (this.props.currentPage == 3) {
             return <Notes onValueChange={this.changeValue} disableButton={this.props.disableButton}
                           notes={this.state.notes}/>

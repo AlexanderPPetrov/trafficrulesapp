@@ -33,7 +33,6 @@ import Ui from '../../common/ui';
 
 const Item = Picker.Item;
 
-const labels = [I18n.t('method'), I18n.t('account'), I18n.t('amount'), I18n.t('notes'), I18n.t('withdraw')];
 
 class Withdraw extends Component {
 
@@ -44,7 +43,8 @@ class Withdraw extends Component {
             currentPage: 0,
             steps:5,
             buttonDisabled: true,
-            openedRequests: 0
+            openedRequests: 0,
+            labels:[I18n.t('method'), I18n.t('account'), I18n.t('amount'), I18n.t('notes'), I18n.t('withdraw')]
         }
     }
 
@@ -128,12 +128,12 @@ class Withdraw extends Component {
                 <Content >
                     <View style={Ui.cardContainer}>
                         <View style={{flex:1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
+                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={this.state.labels}/>
                             {this.getOpenedRequests()}
                             <View style={Ui.formContainer}>
                                 <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
                                                onUpdatePage={this.changeHandler}
-                                               disableButton={this.setButtonState}></WithdrawSteps>
+                                               disableButton={this.setButtonState}/>
                                 <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
                                 </View>

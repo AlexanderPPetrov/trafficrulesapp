@@ -84,17 +84,23 @@ class NotificationsButton extends Component {
     }
 
     getNotificationButton = () => {
-        return <Button transparent style={styles.notificationButton} onPress={() => this.goToNotifications()}>
-            <Ionicons name="md-notifications-outline" style={[styles.toggleNotification]}/>
+        let buttonDisabled = true;
+        let iconStyle = [styles.toggleNotification]
+        if(this.state.unseenNotifications){
+            buttonDisabled = false
+            iconStyle = [styles.toggleNotification, {opacity:1}]
+        }
+        return <Button transparent disabled={buttonDisabled} style={styles.notificationButton} onPress={() => this.goToNotifications()}>
+            <Ionicons name="md-notifications-outline" style={iconStyle}/>
             {this.getNotificationCount()}
         </Button>
     }
 
     getNotificationCount = () => {
         if(this.state.unseenNotifications){
-            return <View style={styles.notificationsBadge}>{this.state.unseenNotifications}</View>
+            return <View style={styles.notificationsBadge}/>
         }
-        return <View style={[styles.notificationsBadge, styles.notificationsBadgeInactive]}>{this.state.unseenNotifications}</View>
+        return <View style={[styles.notificationsBadge, styles.notificationsBadgeInactive]}/>
     };
 
     render() {

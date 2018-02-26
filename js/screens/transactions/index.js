@@ -199,7 +199,7 @@ class Transactions extends Component {
 
         return <View key={i} style={Ui.transactionsContainer}>
                     <Grid>
-                        <Col size={1} style={{alignItems:'center'}}>
+                        <Col size={1} style={{alignItems:'center', minWidth:15}}>
                             <View style={Ui.iconContainer}>
                                 {this.getIcon(transaction._payment_type)}
                             </View>
@@ -207,13 +207,13 @@ class Transactions extends Component {
                         <Col size={4} >
                             <Row>
                                 <Col size={2} style={{justifyContent:'center'}}>
-                                    <Text style={[Ui.itemLabel, styles.paymentTypeLabel, Ui.itemLabelLight]}>{I18n.t(transactionTypes[transaction._payment_type]).toUpperCase()}</Text>
+                                    <Text style={[Ui.itemLabel, Ui.labelSmallest, Ui.itemLabelLight]}>{I18n.t(transactionTypes[transaction._payment_type]).toUpperCase()}</Text>
                                 </Col>
                                 <Col size={1} style={{justifyContent:'center'}}>
-                                    <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.itemLabelLight]}>{transaction._date_created.split(' ')[0]}</Text>
+                                    <Text style={[Ui.balanceValue, Ui.labelSmallest, Ui.itemLabelLight]}>{transaction._date_created.split(' ')[0]}</Text>
                                 </Col>
                             </Row>
-                            <Row style={{marginTop:3}}>
+                            <Row style={{marginTop:5}}>
                                 <Col size={2} style={{justifyContent:'center'}}>
                                     <Text style={[Ui.itemLabel, Ui.itemLabelDark, Ui.bold]}>{transaction._payment_method}</Text>
                                 </Col>

@@ -27,17 +27,6 @@ import Controller from "../../../Controller";
 import Api from "../../../Api";
 
 const Item = Picker.Item;
-
-
-
-const languages = [{
-    code: 'en',
-    label: 'English'
-}, {
-    code: 'fr',
-    label: 'Français'
-}];
-
 const switches = ['withdraw_and_deposit', 'funds_transfer', 'weekly_status', 'brokerage_activity', 'betting_tips', 'ad_hoc_messages']
 
 class Transactions extends Component {
@@ -141,15 +130,17 @@ class Transactions extends Component {
         </List>
     };
 
-    changeLanguage = (value) => {
+    changeLanguage = async (value) => {
         this.setState({
             languageCode: value
         });
 
-        I18n.locale = value;
         Controller.updateSideBar(value)
+        await this.loadTranslations(value)
+
         AsyncStorage.setItem('locale', value);
 
+        console.log(I18n.locale)
         Api.post({
             url: 'set-member-language',
             success: (response)=> console.log('language changed to', response._language),
@@ -157,11 +148,30 @@ class Transactions extends Component {
         })
     };
 
+    loadTranslations = async (value) => {
+
+        try {
+            let response = await fetch(
+                'http://prmts-translations.dev.cc/locales/' + value + '.json'
+            );
+            let responseJson = await response.json();
+            I18n.translations[value] = responseJson;
+            I18n.locale = value;
+
+        } catch (error) {
+            I18n.locale = 'back';
+            console.log(error)
+        }
+    };
+
+
     getLanguagePicker = () => {
+
         if(!this.state.languageLoaded) return null;
-        const listItems = languages.map((language, i) =>
-            <Item key={i} value={language.code} label={language.label}></Item>
-        );
+        let listItems = []
+        for(let [key, value] of Object.entries(I18n.availableLocales)){
+            listItems.push(<Item key={key} value={key} label={value}></Item>)
+        }
         return <CommonPicker
             title={I18n.t('language')}
             selectedValue={this.state.languageCode}

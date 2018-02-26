@@ -23,10 +23,11 @@ import {
 } from "native-base";
 import Ui from '../../common/ui';
 
-import {View, ScrollView} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import ColorScheme from "../../common/colorscheme";
 import CommonPicker from '../../common/picker/picker';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 import styles from "./styles";
 import Api from "../../../Api";
@@ -39,37 +40,43 @@ class AddAccount extends Component {
         super(props);
 
         this.state = {
-            currencies:[]
+            currencies: []
         }
     }
+
     componentDidMount = () => {
 
-            Api.get({
-                url: 'get-currencies',
-                success: this.dataLoaded
-            })
+        Api.get({
+            url: 'get-currencies',
+            success: this.dataLoaded
+        })
 
 
-            if(this.props.account === '' ){
-                this.props.disableButton(true)
-            }else{
-                this.props.disableButton(false)
+        if (this.props.account === '') {
+            this.props.disableButton(true)
+            if (this.refs.emailInput) {
+                this.refs.emailInput._root.focus()
             }
+        } else {
+            this.props.disableButton(false)
+        }
 
-            if(this.props.account == ''){
-                if(this.refs.emailInput){
-                    this.refs.emailInput._root.focus()
-                }
-            }
+    }
+
+
+    focusNext = () => {
+        if (this.props.account && this.props.amount === '') {
+            this.refs.amount._root.focus()
+        }
     }
 
     dataLoaded = (response) => {
 
-        if(response.currencies.length > 0){
+        if (response.currencies.length > 0) {
             this.setState({
-                currencies:response.currencies
-            }, function(){
-                this.props.changeValue('currency',response.currencies[0]._code)
+                currencies: response.currencies
+            }, function () {
+                this.props.changeValue('currency', response.currencies[0]._code)
             })
         }
 
@@ -83,64 +90,76 @@ class AddAccount extends Component {
         return (
 
             <CommonPicker
-        title={I18n.t('selectCurrency')}
-        selectedValue={this.props.currency}
-        onValueChange={(value) =>
-        this.props.changeValue('currency', value)}
-        listItems={listItems}
-        />
+                title={I18n.t('selectCurrency')}
+                selectedValue={this.props.currency}
+                onValueChange={(value) =>
+                    this.props.changeValue('currency', value)}
+                listItems={listItems}
+            />
 
         );
     };
 
 
     getMessageField = () => {
-        if(this.props.notesVisible) {
-            return <Form style={Ui.form}>
+        if (this.props.notesVisible) {
+            let autoFocus = true;
+            if(this.props.notes){
+                autoFocus = false;
+            }
+            return <Form style={[Ui.form, {marginTop: 25}]}>
+                <Text style={Ui.formLabel}>{I18n.t('addMessage')}</Text>
                 <Item style={Ui.inputContainer}>
-                    <Input style={Ui.inputField} multiline={true} numberOfLines={2} blurOnSubmit={false}
-                           value={this.props.notes} onChangeText={(text) => this.props.changeValue('notes', text)} />
+                    <Input autoFocus={autoFocus} style={Ui.inputField} multiline={true} numberOfLines={2} blurOnSubmit={false}
+                           value={this.props.notes} onChangeText={(text) => this.props.changeValue('notes', text)}/>
                 </Item>
             </Form>
         }
-        return <Button transparent primary style={styles.removeAccountButton} onPress={() => this.props.changeValue('notesVisible', true)}>
-                    <Text>{I18n.t('addMessage')}</Text>
-                </Button>
-
+        return <View style={Ui.addContainer}>
+            <TouchableOpacity transparent primary onPress={() => this.props.changeValue('notesVisible', true)}>
+                <MaterialCommunityIcons name="plus" style={Ui.addAccountIcon}/>
+                <Text style={Ui.addMoreLabel}>{I18n.t('addMessage')}</Text>
+            </TouchableOpacity>
+        </View>
     }
 
     render() {
 
-
         return (
             <View>
-                <Text style={Ui.formLabel}>{I18n.t('sendMoneyTo')}</Text>
+                <Text style={Ui.stepHeader}>{I18n.t('selectAccount')}</Text>
                 <View>
                     <Grid>
                         <Row>
                             <Col>
                                 <Form style={Ui.form}>
+                                    <Text style={Ui.formLabel}>{I18n.t('sendMoneyTo')}</Text>
                                     <View style={Ui.inputContainer}>
                                         <Input ref="emailInput" style={Ui.inputField} value={this.props.account}
+                                               onBlur={() => this.focusNext()}
                                                onChangeText={(text) => this.props.changeValue('account', text)}
-                                                />
+                                        />
                                     </View>
                                 </Form>
                             </Col>
                         </Row>
+                        <Row style={{marginTop: 25}}>
+                            <Text style={Ui.formLabel}>{I18n.t('amount')}</Text>
+                        </Row>
                         <Row>
-                            <Col style={styles.currencyPicker}>
-                                {this.getPicker()}
-                            </Col>
-                            <Col style={{paddingLeft:15}}>
+                            <Col>
                                 <Form style={[Ui.inputContainer]}>
-
-                                    <Input style={[Ui.inputField, Ui.amountInput]} value={this.props.amount}
+                                    <Input ref="amount" style={[Ui.inputField, Ui.amountInput]}
+                                           value={this.props.amount}
                                            onChangeText={(amount) => this.props.changeValue('amount', amount)}
                                            keyboardType='numeric'/>
                                 </Form>
                             </Col>
+                            <Col style={[styles.currencyPicker, {paddingLeft: 15}]}>
+                                {this.getPicker()}
+                            </Col>
                         </Row>
+
                         <Row>
                             <Col>
                                 {this.getMessageField()}

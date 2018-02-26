@@ -90,9 +90,9 @@ class PaymentMethod extends Component {
 
     render() {
 
-
         return (
             <View >
+                <Text style={Ui.stepHeader}>{I18n.t('paymentMethod')}</Text>
                 <Text style={Ui.formLabel}>{I18n.t('selectPaymentMethod')}</Text>
                 <View >
                     <Form style={Ui.form}>

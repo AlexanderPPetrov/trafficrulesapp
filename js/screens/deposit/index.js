@@ -163,6 +163,7 @@ class Deposit extends Component {
         this.setState({
             currentPage: page
         });
+        console.log(page, this.state.steps)
         if(page === this.state.steps || page === this.state.steps - 1){
             Chat.hide()
         }else{
@@ -243,7 +244,7 @@ class Deposit extends Component {
                 <Content>
                     <View style={this.getStyle()}>
                         <Steps currentPage={this.state.currentPage} stepCount={this.state.steps}
-                               labels={this.state.labels}></Steps>
+                               labels={this.state.labels}/>
                         <View style={Ui.formContainer}>
                             <DepositSteps currentPage={this.state.currentPage}
                                           onRef={ref => (this.tabs = ref)} {...this.props}
@@ -254,7 +255,7 @@ class Deposit extends Component {
                                           depositCompleted={this.state.depositCompleted}
                                           setPages={this.setPages}
                                           stepsNames={this.state.stepsNames}
-                                          disableButton={this.setButtonState}></DepositSteps>
+                                          disableButton={this.setButtonState}/>
                             {this.getErrorMessage()}
                             <View style={Ui.buttonsContainer}>
                                 {this.getButton()}

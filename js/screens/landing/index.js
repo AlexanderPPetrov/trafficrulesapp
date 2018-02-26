@@ -38,6 +38,19 @@ class Landing extends Component {
         }
     }
 
+
+    getAvailableLocales = async () => {
+        try {
+            let response = await fetch(
+                'http://prmts-translations.dev.cc/available_locales.json'
+            );
+            let responseJson = await response.json();
+            I18n.availableLocales = responseJson;
+        } catch (error) {
+            console.log('unable to get available locales')
+        }
+    };
+
     getLocale = async () => {
         try {
             locale = await AsyncStorage.getItem('locale');
@@ -53,6 +66,7 @@ class Landing extends Component {
     };
 
     loadTranslations = async () => {
+
         try {
             let response = await fetch(
                 'http://prmts-translations.dev.cc/locales/' + locale + '.json'
@@ -68,22 +82,17 @@ class Landing extends Component {
     };
 
     detectLocale = async () => {
-
         try {
             let localeString = await Expo.Util.getCurrentLocaleAsync();
             const language = localeString.split('_')[0];
-            if (language != 'en') {
+            if (language != 'en' && I18n.availableLocales.language) {
                 await this.showChangeLocaleConfirm(localeString, language)
-                console.log('showChangeLocaleConfirm')
-
             }else{
                 await this.loadTranslations()
             }
         } catch (error){
-
+            console.log('Could not read device locale')
         }
-
-
     };
 
     showChangeLocaleConfirm = (localeString, language) => {
@@ -93,10 +102,8 @@ class Landing extends Component {
             [
                 {text: I18n.t('cancel'), onPress: ()=> this.setLocale('en', false)},
                 {text: I18n.t('ok'), onPress: () => this.setLocale(language, true)},
-
             ],
             { onDismiss: () => this.setLocale('en', false) }
-
         )
     };
 
@@ -109,6 +116,7 @@ class Landing extends Component {
     };
 
     componentDidMount = async () => {
+        await this.getAvailableLocales()
         await this.getLocale();
         this.setDeviceToken()
         this.readSecureItem('username')

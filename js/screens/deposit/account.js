@@ -69,7 +69,7 @@ class Account extends Component {
                 <Form style={Ui.form}>
                     <Text style={Ui.formLabel}>{I18n.t('emailOrId')}</Text>
                     <Item style={Ui.inputContainer}>
-                        <Input ref="accountInput" onBlur={()=> this.focusNext()}style={Ui.inputField} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
+                        <Input ref="accountInput" onBlur={()=> this.focusNext()} style={Ui.inputField} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
                     </Item>
                 </Form>
                 {this.getSecureIdField()}

@@ -216,6 +216,7 @@ class FundsTransferSteps extends Component {
 
             return <AddAccount key={0}
                                changeAccountValue={this.changeAccountValue}
+                               header={I18n.t('existingAccounts')}
                                label={I18n.t('transferToExistingAccount')}
                                stateKey='existing'
                                fetchUrl='get-member-accounts'
@@ -235,6 +236,7 @@ class FundsTransferSteps extends Component {
 
             return <AddAccount key={1}
                                changeAccountValue={this.changeAccountValue}
+                               header={I18n.t('transferToNewAccount')}
                                label={I18n.t('transferToNewAccount')}
                                stateKey='new'
                                fetchUrl='get-member-accounts'

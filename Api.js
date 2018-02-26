@@ -189,6 +189,7 @@ let Api = {
                 'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data',
                 'App-Key': appKey,
+                'Cache-Control': 'no-cache',
                 'Accept-Language': 'en-US,en;q=0.5',
                 'Authorization': Api.auth
             },

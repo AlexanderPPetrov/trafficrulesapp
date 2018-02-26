@@ -133,25 +133,25 @@ class PreviousBalance extends Component {
     };
 
     getChart = () => {
-        // if (this.state.balance.length >= 2) {
-        //     return <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance}
-        //                               maxBalance={this.state.maxBalance}
-        //                               minBalance={this.state.minBalance}
-        //                               maxChange={this.state.maxChange}
-        //                               minChange={this.state.minChange}
-        //                               maxValue={this.state.maxValue}
-        //                               minValue={this.state.minValue}
-        //                               change={this.state.change} currency={this.props.navigation.state.params._currency}
-        //                               currentBalance={this.props.navigation.state.params._balance}/>
-        //
-        // }
+        if (this.state.balance.length >= 2) {
+            return <PreviousBalanceChart onRef={ref => (this.chart = ref)} balance={this.state.balance}
+                                      maxBalance={this.state.maxBalance}
+                                      minBalance={this.state.minBalance}
+                                      maxChange={this.state.maxChange}
+                                      minChange={this.state.minChange}
+                                      maxValue={this.state.maxValue}
+                                      minValue={this.state.minValue}
+                                      change={this.state.change} currency={this.props.navigation.state.params._currency}
+                                      currentBalance={this.props.navigation.state.params._balance}/>
+
+        }
         return null
     }
 
     getBalances = () => {
         if (this.state.loaded && this.state._payload.balances.length > 0) {
             return <Balance navigation={this.props.navigation} balances={this.state._payload.balances}
-                         currency={this.props.navigation.state.params._currency}></Balance>
+                         currency={this.props.navigation.state.params._currency}/>
         }
         return null
 
@@ -177,7 +177,7 @@ class PreviousBalance extends Component {
                     />
                 }>
 
-                    {this.getChart()}
+                    {/*{this.getChart()}*/}
                     {this.getBalances()}
 
 

@@ -6,7 +6,7 @@ const {
     width: deviceWidth,
     height: deviceHeight,
 } = Dimensions.get('window');
-import { Constants} from 'expo';
+import {Constants} from 'expo';
 
 const scale = deviceWidth / 320;
 
@@ -57,6 +57,7 @@ export default {
     },
     balanceHeader: {
         textAlign: 'center',
+        fontFamily:'Roboto_light',
         color: ColorScheme.light,
         fontSize: normalize(13)
     },
@@ -65,10 +66,9 @@ export default {
         backgroundColor: ColorScheme.neutralLight,
         flex: 1,
         flexDirection: 'row',
-        maxHeight: 78,
         minHeight: 40,
         borderBottomColor: ColorScheme.listItemBorderColor,
-        borderBottomWidth:1
+        borderBottomWidth: 1
     },
     itemLabel: {
         color: ColorScheme.regular,
@@ -76,7 +76,7 @@ export default {
         fontFamily: 'Roboto_light',
         textAlign: 'left',
         alignSelf: 'stretch',
-        backgroundColor:'transparent'
+        backgroundColor: 'transparent'
     },
     itemLabelDark: {
         color: ColorScheme.darkest,
@@ -88,7 +88,7 @@ export default {
     balanceValue: {
         textAlign: 'right',
         alignSelf: 'stretch',
-        backgroundColor:'transparent',
+        backgroundColor: 'transparent',
         fontSize: normalize(16),
         color: ColorScheme.regular,
         fontFamily: 'Roboto_light'
@@ -105,16 +105,21 @@ export default {
     balanceValueSmall: {
         fontSize: normalize(13),
     },
+
+    labelSmallest: {
+        fontSize:normalize(11)
+    },
+
     balanceCurrency: {
         textAlign: 'left',
         alignSelf: 'flex-start',
         fontFamily: 'Roboto_light',
-        paddingTop: normalize(10) / 4,
+        lineHeight: normalize(15.5),
         paddingLeft: 5,
         fontSize: normalize(10)
     },
     bold: {
-        fontFamily:'Roboto_medium'
+        fontFamily: 'Roboto_medium'
     },
     currencyWidth: {
         width: 30
@@ -126,14 +131,14 @@ export default {
         lineHeight: 15,
         paddingTop: 15,
         paddingLeft: 15,
-        backgroundColor:'transparent'
+        backgroundColor: 'transparent'
     },
     mainBalanceHeaderContainer: {
-        flex:1,
-        flexDirection:'row',
-        backgroundColor:'#fff',
-        paddingTop:15,
-        paddingBottom:15
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        paddingTop: 15,
+        paddingBottom: 15
     },
     mainBalanceContainer: {
         flex: 1,
@@ -153,28 +158,28 @@ export default {
         height: 70,
         borderRadius: 35,
         backgroundColor: ColorScheme.chatBackgroundColor,
-        alignItems:'center',
-        justifyContent:'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     dropShadow: {
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {width: 0, height: 2},
         shadowColor: 'black',
         shadowOpacity: 0.2,
         elevation: 3,
-        zIndex:999
+        zIndex: 999
     },
 
     verticalSeparator: {
-        width:1,
-        height:45,
-        marginTop:20,
+        width: 1,
+        height: 45,
+        marginTop: 20,
         backgroundColor: ColorScheme.listItemBorderColor
     },
 
     chatButtonIcon: {
-        color:ColorScheme.chatIconColor,
-        backgroundColor:'transparent',
-        fontSize:45
+        color: ColorScheme.chatIconColor,
+        backgroundColor: 'transparent',
+        fontSize: 45
     },
 
     mainBalanceCurrency: {
@@ -185,16 +190,16 @@ export default {
         paddingTop: normalize(13) / 5,
         paddingLeft: 5,
         fontSize: normalize(13),
-        paddingRight: 15
     },
+
     datePickerContainer: {
         padding: 15,
         paddingTop: 10,
         paddingBottom: 0,
         marginBottom: 0,
-        alignItems:'center',
+        alignItems: 'center',
         backgroundColor: ColorScheme.datePickerBackground,
-        borderBottomWidth:1,
+        borderBottomWidth: 1,
         borderBottomColor: ColorScheme.datePickerBorderColor
     },
     datePickerLabel: {
@@ -204,7 +209,7 @@ export default {
         backgroundColor: 'transparent'
     },
     datePickerBorder: {
-        borderLeftWidth:1,
+        borderLeftWidth: 1,
         borderLeftColor: ColorScheme.datePickerBorderColor
     },
     datePickerStyles: {
@@ -215,9 +220,9 @@ export default {
         },
         dateText: {
             color: ColorScheme.calendarLabelColor,
-            paddingBottom:7,
-            alignSelf:'stretch',
-            textAlign:'right'
+            paddingBottom: 7,
+            alignSelf: 'stretch',
+            textAlign: 'right'
         }
     },
 
@@ -226,42 +231,43 @@ export default {
         position: 'absolute',
         left: 0,
         top: 3,
-        fontSize:36,
+        fontSize: 36,
         marginLeft: 0
     },
 
     dayLabel: {
         textAlign: 'center',
         fontWeight: '700',
-        fontSize: normalize(16)
+        fontSize: normalize(16),
+        color: ColorScheme.darkest
     },
     monthLabel: {
         textAlign: 'center',
-        color: ColorScheme.monthLabelColor,
-        fontSize: normalize(13)
+        color: ColorScheme.light,
+        fontSize: normalize(12)
     },
     formContainer: {
         flex: 1,
         justifyContent: 'space-between',
         padding: 30,
-        paddingLeft:45,
-        paddingRight:45
+        paddingLeft: 30,
+        paddingRight: 30
     },
     buttonsContainer: {
         alignSelf: 'flex-end',
         justifyContent: 'space-between',
         width: '100%'
     },
-    profitHistoryContainer:{
-        paddingTop:12,
-        paddingBottom:12,
-        marginBottom:0,
-        paddingRight:12,
+    profitHistoryContainer: {
+        paddingTop: 15,
+        paddingBottom: 15,
+        marginBottom: 0,
+        paddingRight: 15,
         borderBottomColor: '#f2f2f2',
-        borderBottomWidth:1,
-        borderLeftWidth:4,
-        alignItems:"center",
-        justifyContent:"center"
+        borderBottomWidth: 1,
+        borderLeftWidth: 4,
+        alignItems: "center",
+        justifyContent: "center"
     },
     iconContainer: {
         alignItems: 'center',
@@ -273,14 +279,16 @@ export default {
     },
 
     transactionsContainer: {
-        paddingTop:12,
-        paddingBottom:12,
-        marginBottom:0,
-        paddingRight:12,
+        paddingTop: 15,
+        paddingBottom: 15,
+        marginBottom: 0,
+        marginLeft:0,
+        paddingLeft:0,
+        paddingRight: 15,
         borderBottomColor: '#f2f2f2',
-        borderBottomWidth:1,
-        alignItems:"center",
-        justifyContent:"center"
+        borderBottomWidth: 1,
+        alignItems: "center",
+        justifyContent: "center"
     },
     betWin: {
         borderLeftColor: ColorScheme.win
@@ -310,19 +318,19 @@ export default {
     statusLabel: {
         backgroundColor: 'transparent',
         color: ColorScheme.neutralLight,
-        fontSize:10,
-        fontFamily:'Roboto_medium'
+        fontSize: 10,
+        fontFamily: 'Roboto_medium'
     },
 
     statusContainer: {
         alignSelf: 'flex-end',
-        alignItems:'center',
-        justifyContent:'center',
-        paddingTop:1,
-        paddingBottom:2,
-        paddingLeft:10,
-        paddingRight:10,
-        borderRadius:15
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 1,
+        paddingBottom: 2,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderRadius: 15
     },
 
     running: {
@@ -401,11 +409,11 @@ export default {
         minHeight: 45
     },
     pickerStyle: {
-        width:'100%',
-        height:45,
-        paddingLeft:0,
-        paddingRight:0,
-        opacity:1
+        width: '100%',
+        height: 45,
+        paddingLeft: 0,
+        paddingRight: 0,
+        opacity: 1
     },
     form: {
         minHeight: 45,
@@ -414,21 +422,21 @@ export default {
     inputField: {
         flex: 1,
         fontSize: normalize(18),
-        paddingLeft:0,
-        paddingBottom:5,
-        paddingRight:0,
+        paddingLeft: 0,
+        paddingBottom: 5,
+        paddingRight: 0,
         lineHeight: 24,
         color: ColorScheme.darkest
     },
     amountInput: {
         textAlign: 'left',
-        paddingRight:15
+        paddingRight: 15
     },
     amountCurrency: {
         fontFamily: 'Roboto_light',
         color: ColorScheme.dark,
         fontSize: normalize(18),
-        textAlign:'right',
+        textAlign: 'right',
         paddingTop: 10,
         lineHeight: 20,
         marginLeft: 10
@@ -437,10 +445,14 @@ export default {
         justifyContent: 'center',
         alignItems: 'center'
     },
+    textCenter: {
+        alignSelf: 'stretch',
+        textAlign: 'center'
+    },
     confirmMessage: {
         textAlign: 'center',
         fontSize: normalize(22),
-        fontFamily:'Roboto_bold'
+        fontFamily: 'Roboto_bold'
     },
     successIcon: {
         color: ColorScheme.win,
@@ -470,13 +482,14 @@ export default {
         textAlign: 'center',
         padding: 15,
         alignSelf: "stretch",
-        fontFamily:'Roboto_light',
+        fontFamily: 'Roboto_light',
     },
     tabsStyle: {
         activeTintColor: ColorScheme.tabActiveColor,
         inactiveTintColor: ColorScheme.tabInactiveColor,
         labelStyle: {
-            fontSize: normalize(13),
+            fontSize: normalize(12),
+            fontFamily: 'Roboto_medium'
         },
         style: {
             backgroundColor: ColorScheme.tabsBackground,
@@ -486,19 +499,19 @@ export default {
         }
     },
     welcomeContainer: {
-        width:'80%',
-        alignItems:'flex-start'
+        width: '80%',
+        alignItems: 'flex-start'
     },
     welcomeBackMessage: {
-        paddingTop:45,
-        paddingBottom:5,
-        fontSize:normalize(22),
-        fontWeight:'700',
+        paddingTop: 45,
+        paddingBottom: 5,
+        fontSize: normalize(22),
+        fontWeight: '700',
         color: ColorScheme.darkest
     },
     pinView: {
         flex: 1,
-        width:'100%',
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
@@ -508,14 +521,14 @@ export default {
         flex: -1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop:45,
-        paddingBottom:45,
-        paddingLeft:30
+        paddingTop: 45,
+        paddingBottom: 45,
+        paddingLeft: 30
     },
     pinBox: {
         borderWidth: 1,
         borderColor: ColorScheme.darkest,
-        borderRadius: 18/2,
+        borderRadius: 18 / 2,
         height: 18,
         width: 18,
         marginRight: 32
@@ -534,7 +547,7 @@ export default {
     pinKey: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: deviceWidth/3,
+        width: deviceWidth / 3,
         height: 70,
         borderWidth: 1,
         borderColor: '#e5e5e5',
@@ -542,7 +555,7 @@ export default {
     },
 
     pinKeyAction: {
-        backgroundColor:'#f8f8f8'
+        backgroundColor: '#f8f8f8'
     },
 
     pinKeyEmpty: {
@@ -550,9 +563,25 @@ export default {
     },
     pinPromptText: {
         marginBottom: 10,
-        color:ColorScheme.regular,
-        fontSize:normalize(14)
-    }
+        color: ColorScheme.regular,
+        fontSize: normalize(14)
+    },
+    addContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        paddingTop: 25,
+        paddingBottom: 40
+    },
+    addAccountIcon: {
+        fontSize: normalize(26),
+        color: ColorScheme.darkest,
+        textAlign: 'center'
+    },
+    addMoreLabel: {
+        fontSize: normalize(14),
+        color: ColorScheme.darkest
+    },
 
 
 };

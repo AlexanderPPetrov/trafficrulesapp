@@ -39,6 +39,7 @@ class Notes extends Component {
         return (
 
             <View >
+                <Text style={Ui.stepHeader}>{I18n.t('notes')}</Text>
                 <Text style={Ui.formLabel}>{I18n.t('additionalInformation')}</Text>
                 <Form style={Ui.form}>
                     <Item style={Ui.inputContainer}>

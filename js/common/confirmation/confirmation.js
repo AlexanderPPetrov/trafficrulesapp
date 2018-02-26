@@ -24,6 +24,9 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View} from 'react-native';
 import Ui from '../../common/ui';
+import ColorScheme from '../../common/colorscheme';
+import AmountTable from './amounttable';
+import {normalize} from "../ui";
 
 class Confirmation extends Component {
 
@@ -51,11 +54,11 @@ class Confirmation extends Component {
 
     getResult = () => {
         if(this.props.amount) {
-            return <View>
-                <Text>{I18n.t('amount')} {this.props.amount} {this.props.currency}</Text>
-                <Text>{I18n.t('fee')} {this.props.fee} {this.props.currency}</Text>
-                <Text>{I18n.t('netAmount')} {this.props.netAmount} {this.props.currency}</Text>
-            </View>
+            let fee = this.props.fee;
+            if(fee === null || fee === ''){
+                fee = 0
+            }
+            return <AmountTable amount={this.props.amount} netAmount={this.props.netAmount} currency={this.props.currency} fee={fee}/>
         }
         return null;
     }

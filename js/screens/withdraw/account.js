@@ -47,8 +47,9 @@ class Account extends Component {
         return (
 
             <View >
-                <Text style={Ui.formLabel}>{I18n.t('accountSettings')}</Text>
+                <Text style={Ui.stepHeader}>{I18n.t('accountSettings')}</Text>
                 <Form style={Ui.form}>
+                    <Text style={Ui.formLabel}>{I18n.t('emailOrId')}</Text>
                     <Item style={Ui.inputContainer}>
                         <Input ref="accountInput" style={Ui.inputField} value={this.props.account} onChangeText={(text) => this.props.onValueChange('account', text)}/>
                     </Item>

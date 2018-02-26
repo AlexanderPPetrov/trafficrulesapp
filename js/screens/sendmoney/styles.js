@@ -36,7 +36,7 @@ export default {
         // padding:0
     },
     currencyPicker: {
-        width:120
+        maxWidth:110
     },
     cardContainer:{
         padding:30,
@@ -101,13 +101,6 @@ export default {
 
     accountLabel: {
 
-    },
-    addAccountButton: {
-        paddingLeft:5,
-        paddingRight:5
-    },
-    addAccountIcon: {
-        fontSize:42
     },
     accountAmount: {
 

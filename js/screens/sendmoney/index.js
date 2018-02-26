@@ -31,8 +31,6 @@ import Chat from '../../common/chat/index';
 
 const Item = Picker.Item;
 
-const labels = [I18n.t('account'), I18n.t('yourSecureId'), I18n.t('confirmation'), I18n.t('sendMoney')];
-
 class SendMoney extends Component {
 
     constructor(props) {
@@ -42,7 +40,8 @@ class SendMoney extends Component {
             currentPage: 0,
             steps:4,
             buttonDisabled: true,
-            loaded: false
+            loaded: false,
+            labels:[I18n.t('account'), I18n.t('yourSecureId'), I18n.t('confirmation'), I18n.t('sendMoney')]
         }
     }
 
@@ -76,12 +75,13 @@ class SendMoney extends Component {
     };
 
     getButton = () => {
+        console.log('££££££££3', this.state.currentPage, this.state.steps)
         if (this.state.currentPage == this.state.steps) {
             return null;
         }
         return (
             <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
-                <Text style={Ui.buttonLabel}>{I18n.t('continue')}</Text>
+                <Text style={Ui.buttonLabel}>{I18n.t('continue').toUpperCase()}</Text>
             </Button>
         )
 
@@ -104,11 +104,11 @@ class SendMoney extends Component {
         this.setState({
             currentPage: page
         });
-        if(page === this.state.steps){
-            Chat.hide()
-        }else{
-            Chat.show()
-        }
+        // if(page === this.state.steps){
+        //     Chat.hide()
+        // }else{
+        //     Chat.show()
+        // }
     };
 
     render() {
@@ -118,13 +118,13 @@ class SendMoney extends Component {
                 <Content>
                     <View style={Ui.cardContainer}>
                         <View style={{flex: 1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={labels}></Steps>
+                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={this.state.labels}/>
 
                             <View style={Ui.formContainer}>
                                 <SendMoneySteps currentPage={this.state.currentPage}
                                                 onRef={ref => (this.tabs = ref)} {...this.props}
                                                 setPage={this.setPage}
-                                                disableButton={this.setButtonState}></SendMoneySteps>
+                                                disableButton={this.setButtonState}/>
 
                                 <View style={Ui.buttonsContainer}>
                                     {this.getButton()}
@@ -133,7 +133,7 @@ class SendMoney extends Component {
                         </View>
                     </View>
                 </Content>
-                <Chat/>
+                {/*<Chat/>*/}
 
             </Container>
         );

@@ -26,11 +26,12 @@ import {
 import {View, ScrollView} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import ColorScheme from "../../common/colorscheme";
-
+import AmountTable from '../../common/confirmation/amounttable'
 import styles from "./styles";
 import Api from "../../../Api";
 
 import Ui from '../../common/ui';
+import {normalize} from '../../common/ui';
 
 class Confirmation extends Component {
 
@@ -38,39 +39,31 @@ class Confirmation extends Component {
         super(props);
     }
 
+    getAmountTable = () => {
+        let fee = this.props.fee;
+        if(fee === null || fee === ''){
+            fee = 0
+        }
+        const netAmount = parseFloat(this.props.amount - fee)
+        return <AmountTable amount={this.props.amount} netAmount={netAmount} fee={fee} currency={this.props.currency}/>
+
+    }
     render() {
         return (
 
-            <View>
-                <Text style={Ui.formLabel}>{I18n.t('confirmSendMoney')}</Text>
+            <View >
+                <Text style={Ui.stepHeader}>{I18n.t('confirmation')}</Text>
                 <View>
                     <Grid>
-                        <Row>
-                            <Col>
-                                <Text>{I18n.t('recipient')}</Text>
-                            </Col>
-                            <Col>
-                                <Text>{this.props.email}</Text>
-                            </Col>
+                        <Row style={[Ui.centered, {marginBottom:5}]}>
+                            <Text>{I18n.t('recipient')}</Text>
                         </Row>
-                        <Row>
-                            <Col>
-                                <Text>{I18n.t('amount')}</Text>
-                            </Col>
-                            <Col>
-                                <Text>{this.props.amount} {this.props.currency}</Text>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Text>{I18n.t('fee')}</Text>
-                            </Col>
-                            <Col>
-                                <Text>{this.props.fee} {this.props.currency}</Text>
-                            </Col>
+                        <Row style={Ui.centered}>
+                            <Text style={[Ui.bold, Ui.itemLabelDark, {fontSize: normalize(18)}]}>{this.props.email}</Text>
                         </Row>
                     </Grid>
                 </View>
+                {this.getAmountTable()}
             </View>
 
         );

@@ -203,20 +203,20 @@ class SettledBets extends Component {
                     <Col size={4} >
                         <Row>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={Ui.itemLabel}>{I18n.t('turnOver')}</Text>
+                                <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('turnOver')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={[Ui.balanceValue, Ui.profitValue]}>{bet._turnover}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue,  Ui.itemLabelDark]}>{bet._turnover}</Text>
                             </Col>
                             <Col style={Ui.currencyWidth} >
-                                <Text style={Ui.balanceCurrency}>{bet._currency}</Text>
+                                <Text style={[Ui.balanceCurrency,  Ui.itemLabelDark]}>{bet._currency}</Text>
                             </Col>
 
                         </Row>
                         <Row>
 
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={Ui.itemLabel}>{I18n.t('profit')}</Text>
+                                <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('profit')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
                                 <Text style={[Ui.balanceValue, Ui.profitValue, this.getProfitStyle(bet._profit)]}>{bet._profit}</Text>
@@ -238,10 +238,16 @@ class SettledBets extends Component {
             profit += parseFloat(bets[i]._profit)
         }
 
-        return  <Col>
-                <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(profit)]}>{profit} {Api.accountSettings._brokerage_currency}</Text>
-            </Col>
-
+        return  <Col size={1}>
+            <Row>
+                <Col>
+                    <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold, this.getProfitStyle(profit)]}>{profit}</Text>
+                </Col>
+                <Col style={Ui.currencyWidth}>
+                    <Text style={[Ui.balanceCurrency,Ui.bold, this.getProfitStyle(profit)]}>{Api.accountSettings._brokerage_currency}</Text>
+                </Col>
+            </Row>
+        </Col>
     }
 
     getBetList = (bets) => {
@@ -256,8 +262,8 @@ class SettledBets extends Component {
             <View>
                 <View style={Ui.listItem}>
                     <Grid>
-                        <Col>
-                            <Text style={Ui.itemLabel}>{I18n.t('totalProfit')}</Text>
+                        <Col size={2}>
+                            <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('totalProfit')}</Text>
                         </Col>
                         {this.getProfit(bets)}
 

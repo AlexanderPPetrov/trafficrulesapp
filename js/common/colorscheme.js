@@ -43,7 +43,6 @@ export default {
     inspected:'#83a8b5',
     revoked:'#ff3333',
 
-    monthLabelColor: '#afafaf',
     balanceHeaderColor: '#919191',
     chatBackgroundColor:'#f0f0f0',
     chatIconColor:'#a8a8a8',

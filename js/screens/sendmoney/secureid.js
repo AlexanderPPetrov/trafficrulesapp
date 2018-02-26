@@ -43,6 +43,7 @@ class SecureId extends Component {
     render() {
         return (
             <View >
+                <Text style={Ui.stepHeader}>{I18n.t('yourSecureId')}</Text>
                 <Text style={Ui.formLabel}>{I18n.t('enterSecureId')}</Text>
                 <Form style={Ui.form}>
                     <Item style={Ui.inputContainer}>

@@ -133,7 +133,7 @@ class AddAccount extends Component {
 
     getAddMoreButton = () => {
         if (this.props.selectedAccount != 'none') {
-            return <View style={{alignItems:'center', justifyContent:'center', width:'100%', paddingTop:25, paddingBottom:40}}>
+            return <View style={Ui.addContainer}>
                 <TouchableOpacity transparent primary style={styles.removeAccountButton}
                         disabled={this.state.buttonDisabled}
                         onPress={() => {
@@ -143,8 +143,8 @@ class AddAccount extends Component {
                             this.props.addAccount(this.props.stateKey)
 
                         }}>
-                    <MaterialCommunityIcons name="plus" style={styles.addAccountIcon}/>
-                    <Text style={styles.addMoreLabel}>{I18n.t('moreAccounts')}</Text>
+                    <MaterialCommunityIcons name="plus" style={Ui.addAccountIcon}/>
+                    <Text style={Ui.addMoreLabel}>{I18n.t('moreAccounts')}</Text>
                 </TouchableOpacity>
             </View>
         }
@@ -220,6 +220,7 @@ class AddAccount extends Component {
     render() {
         return (
             <View>
+                <Text style={Ui.stepHeader}>{this.props.header}</Text>
                 <Text style={Ui.formLabel}>{this.props.label}</Text>
                 <View>
                     <Form style={Ui.form}>
