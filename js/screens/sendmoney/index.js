@@ -22,6 +22,7 @@ import {
     Body,
 } from "native-base";
 import Header from '../../common/header/header';
+import {Grid, Row, Col} from "react-native-easy-grid";
 
 import {View, ScrollView} from 'react-native';
 import Ui from '../../common/ui';
@@ -41,6 +42,7 @@ class SendMoney extends Component {
             steps:4,
             buttonDisabled: true,
             loaded: false,
+            isAllowed:false,
             labels:[I18n.t('account'), I18n.t('yourSecureId'), I18n.t('confirmation'), I18n.t('sendMoney')]
         }
     }
@@ -56,7 +58,8 @@ class SendMoney extends Component {
 
     dataLoaded = (response) => {
         this.setState({
-            loaded: true
+            loaded: true,
+            isAllowed:response._is_allowed
         })
     };
 
@@ -111,6 +114,44 @@ class SendMoney extends Component {
         // }
     };
 
+    getSteps = () => {
+        if(!this.state.loaded || this.state.isAllowed) return null
+        return <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={this.state.labels}/>
+
+    }
+
+    getSendMoney = () => {
+        if(!this.state.loaded) return null
+
+        if(!this.state.isAllowed){
+            return <View style={Ui.formContainer}>
+                <SendMoneySteps currentPage={this.state.currentPage}
+                                onRef={ref => (this.tabs = ref)} {...this.props}
+                                setPage={this.setPage}
+                                disableButton={this.setButtonState}/>
+
+                <View style={Ui.buttonsContainer}>
+                    {this.getButton()}
+                </View>
+            </View>
+        }
+
+        return <View style={[Ui.formContainer, {justifyContent: 'flex-start'}]}>
+                    <Text style={Ui.stepHeader}>{I18n.t('transferFundsPro')}</Text>
+                    <Text> {I18n.t('transferFundsProDescription')}</Text>
+                    <Text> {I18n.t('transferFundsProDescriptionTwo')}</Text>
+                    <Text> {I18n.t('transferFundsProDescriptionThree')}</Text>
+                    <Text> {I18n.t('transferFundsProDescriptionFour')}</Text>
+
+        </View>
+    }
+
+    getChat = () => {
+        if(this.state.loaded && this.state.isAllowed) {
+            return <Chat/>
+        }
+    }
+
     render() {
         return (
             <Container style={Ui.container}>
@@ -118,22 +159,14 @@ class SendMoney extends Component {
                 <Content>
                     <View style={Ui.cardContainer}>
                         <View style={{flex: 1}}>
-                            <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={this.state.labels}/>
+                            {this.getSteps()}
+                                {this.getSendMoney()}
 
-                            <View style={Ui.formContainer}>
-                                <SendMoneySteps currentPage={this.state.currentPage}
-                                                onRef={ref => (this.tabs = ref)} {...this.props}
-                                                setPage={this.setPage}
-                                                disableButton={this.setButtonState}/>
-
-                                <View style={Ui.buttonsContainer}>
-                                    {this.getButton()}
-                                </View>
-                            </View>
                         </View>
                     </View>
                 </Content>
-                {/*<Chat/>*/}
+
+                {this.getChat()}
 
             </Container>
         );

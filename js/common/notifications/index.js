@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {View, Text, TouchableHighlight, Platform} from "react-native";
 import {Constants, Permissions, Notifications} from 'expo';
 import Api from '../../../Api';
+import I18n from '../../../i18n/i18n';
 import Controller from '../../../Controller';
 import styles from "./styles";
 import NotificationMessage from "./notification";
@@ -30,6 +31,14 @@ class NotificationsHandler extends Component {
             notifications: [],
             receivedNotification: null,
             lastNotificationId: null,
+            titles:{
+                deposit: I18n.t('deposit_notification_title'),
+                withdraw: I18n.t('withdraw_notification_title'),
+                weekly_status: I18n.t('weekly_staus_notification_title'),
+                funds_transfer: I18n.t('funds_transfer_notification_title'),
+                brokerage_activity: I18n.t('brokerage_activity_notification_title'),
+                bop_activity: I18n.t('bop_activity_notification_title')
+            }
         };
         notificationsInstance = this;
 
@@ -71,6 +80,8 @@ class NotificationsHandler extends Component {
                 NotificationsList.getUnreadNotifications()
 
             }else{
+
+                // console.log('Notification: ', receivedNotification, 'Notification Data: ', receivedNotification.data, 'Decrypted data: ', Api.decrypt(receivedNotification.data.data))
                 this.state.notifications.push(receivedNotification);
 
                 this.setState({
@@ -148,7 +159,7 @@ class NotificationsHandler extends Component {
         setTimeout(() => {
 
             let remainingNotifications = this.state.notifications.filter((notification) => {
-                if (notification.notificationId !== notificationId) return notification;
+                if (notification.data.id !== notificationId) return notification;
             });
 
             this.setState({
@@ -160,7 +171,7 @@ class NotificationsHandler extends Component {
     };
 
     onDismiss = (notification) => {
-        this.dismissNotification('fadeOut', notification.notificationId, 100)
+        this.dismissNotification('fadeOut', notification.data.id, 100)
     }
 
     handlePressedNotification = (notificationId) => {
@@ -173,29 +184,33 @@ class NotificationsHandler extends Component {
     getNotification = (notification, i) => {
         // Auto dismiss on 5 seconds
         setTimeout(() => {
-            this.dismissNotification('fadeOut', notification.notificationId);
+            this.dismissNotification('fadeOut', notification.data.id);
             Controller.unreadNotifications.push(notification);
             NotificationsButton.addUnseenNotification();
         }, 5000);
 
-        const notificationId = notification.notificationId;
+        const notificationId = notification.data.id;
+
+        if(notification.data.data){
+            console.log('Notification: ', notification, 'Notification Data: ', notification.data, 'Decrypted data: ', Api.decrypt(notification.data.data))
+        }
+
         return <Animatable.View key={notificationId} ref={"notification" + notificationId} style={[styles.container,this.getNotificationStyle(i)]} >
             <GestureView style={{alignSelf:'stretch'}}
-                content={ <NotificationMessage title={notification.data.title} message={notification.data.body} onDismiss={() => this.onDismiss(notification, i)}  onPress={() => this.handlePressedNotification(notificationId)} />}
+                content={ <NotificationMessage title={this.state.titles[notification.data.type]} message={notification.data.body} date={notification.data.created_at} onDismiss={() => this.onDismiss(notification, i)}  onPress={() => this.handlePressedNotification(notificationId)} />}
                 onSwipeRight={(distance, angle) => this.dismissNotification('fadeOutRight', notificationId)}
                 onSwipeLeft={(distance, angle) => this.dismissNotification('fadeOutLeft', notificationId)}
                 onSwipeUp={(distance, angle) => console.log('asd')}
                 onSwipeDown={(distance, angle) => console.log('asd')}
                 onUnhanledSwipe={(distance, angle) => console.log('asd')} />
-
         </Animatable.View>
     };
 
     getNotificationStyle(i) {
         let offsetTop = Platform.OS === "ios" ? 64 : 56;
-        offsetTop = offsetTop + Constants.statusBarHeight + 15;
+        offsetTop = offsetTop + Constants.statusBarHeight;
         return {
-            top: offsetTop + i*75
+            top: offsetTop + i*69
         };
     }
     getNotifications = () => {

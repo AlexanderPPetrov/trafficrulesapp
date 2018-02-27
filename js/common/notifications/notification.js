@@ -25,22 +25,30 @@ class Notification extends Component {
     render() {
         return <Button transparent style={styles.notification} onPress={() => this.props.onPress()}>
             <Grid>
-                <Row>
-                    <Col style={{width:60}}>
-                        <View style={this.getNotificationStyle()}>
-                            {this.getNotificationIcon()}
-                        </View>
-                    </Col>
-                    <Col>
-                        <Text style={styles.notificationTitle}>{this.props.title}</Text>
+                <Col style={{width:60}}>
+                    <View style={this.getNotificationStyle()}>
+                        {this.getNotificationIcon()}
+                    </View>
+                </Col>
+                <Col>
+                    <Row>
+                        <Col size={2}>
+                            <Text style={styles.notificationTitle}>{this.props.title}</Text>
+                        </Col>
+                        <Col size={1}>
+                            <Text style={styles.notificationDate}>{this.props.date}</Text>
+                        </Col>
+                        <Col style={{width:40}}>
+                            <TouchableOpacity style={{alignItems:'center', justifyContent:'center', height:'100%'}} onPress={()=> this.props.onDismiss()}>
+                                <Icon name={'ios-close-circle-outline'} style={{color:'gray', fontSize:30}}/>
+                            </TouchableOpacity>
+                        </Col>
+                    </Row>
+                    <Row>
                         <Text style={styles.notificationMessage}>{this.props.message}</Text>
-                    </Col>
-                    <Col style={{width:40}}>
-                        <TouchableOpacity style={{alignItems:'center', justifyContent:'center', height:'100%'}} onPress={()=> this.props.onDismiss()}>
-                            <Icon name={'ios-close-circle-outline'} style={{color:'gray', fontSize:30}}/>
-                        </TouchableOpacity>
-                    </Col>
-                </Row>
+                    </Row>
+                </Col>
+
             </Grid>
 
         </Button>

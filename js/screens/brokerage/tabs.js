@@ -11,6 +11,7 @@ import Ui from '../../common/ui';
 const indicatorStyle = (props, alignSelf) => ({
     backgroundColor: props.indicatorStyle.backgroundColor,
     alignSelf: 'flex-end',
+    height:2
 });
 
 

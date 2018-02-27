@@ -18,7 +18,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import Expo from "expo";
 import Header from '../../common/header/header';
 
-import {ScrollView} from "react-native"
+import {ScrollView, TouchableOpacity, View} from "react-native"
 import Ui from '../../common/ui';
 import NotificationMessage from '../../common/notifications/notification';
 import Controller from '../../../Controller';
@@ -60,9 +60,22 @@ class Notifications extends Component {
         if(this.state.notifications.length === 0){
             return null;
         }
-        return <Button style={{alignSelf:'flex-end'}}transparent onPress={()=> this.clearAllNotifications()}>
-            <Text>{I18n.t('clearAll').toUpperCase()}</Text>
-        </Button>
+        return <View style={Ui.listItem}>
+                <Grid>
+                    <Col size={2}>
+                        {/*<Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('totalProfit')}</Text>*/}
+                    </Col>
+                    <Col>
+                        <TouchableOpacity style={{alignSelf:'flex-end', flexDirection:'column', paddingRight:20}} transparent onPress={()=> this.clearAllNotifications()}>
+                            <Text>{I18n.t('clearAll')}</Text>
+                            <Icon style={{position:'absolute', right:0}} name="ios-close-circle" />
+                        </TouchableOpacity>
+                    </Col>
+                </Grid>
+            </View>
+
+
+
     }
 
     onDismiss = (notification, i) => {
@@ -103,7 +116,7 @@ class Notifications extends Component {
                     onBack={this.goBackward}
                     notifications={true}
                 />
-                <ScrollView style={{paddingLeft: 15, paddingRight:15}}>
+                <ScrollView>
                     {this.getClearButton()}
                     {this.getNotifications()}
                 </ScrollView>

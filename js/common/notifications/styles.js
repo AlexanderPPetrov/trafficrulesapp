@@ -26,35 +26,32 @@ export default {
         justifyContent: 'center',
         alignItems: 'center',
         zIndex:1000,
-        left: 15,
-        right: 15,
+        left: 0,
+        right: 0,
     },
 
     notification: {
         alignSelf:'stretch',
         flex:1,
         backgroundColor: "#fff",
-        borderRadius: 5,
         borderColor:'rgba(0,0,0,0.1)',
         borderWidth:1,
         height:70,
-        marginBottom:5,
-        elevation:1,
-        shadowColor: "#000",
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.1,
-        shadowRadius: 1.5,
     },
 
     notificationTitle: {
         paddingTop:5,
-        paddingBottom:5
+        paddingBottom:5,
+        color:ColorScheme.darkest
+    },
+    notificationDate: {
+        color:ColorScheme.light
     },
 
     notificationMessage: {
         paddingTop:5,
         paddingBottom:5,
-        color: '#555'
+        color: ColorScheme.regular
     },
     notificationButton: {
         position:'relative',

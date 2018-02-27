@@ -84,7 +84,7 @@ class AddAccount extends Component {
     constructor(props){
         super(props)
         this.state = {
-            buttonDisabled: true
+            buttonDisabled: false
         }
     }
     componentDidMount = () => {
@@ -98,6 +98,7 @@ class AddAccount extends Component {
                 success: this.dataLoaded
             })
         }
+        this.props.disableButton(false)
     };
 
     dataLoaded = (response) => {

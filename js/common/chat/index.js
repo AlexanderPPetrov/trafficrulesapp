@@ -48,20 +48,16 @@ class Chat extends Component {
     };
 
     static hide = () => {
+        console.log('static hide')
         if(chatInstance) chatInstance.showChat(false)
     };
 
     showChat = (chatVisible) => {
+        console.log('showChat', chatVisible)
         this.setState({
             chatVisible
         })
     };
-    componentWillMount = () => {
-        chatInstance = this;
-    }
-    componentWillUnmount = () => {
-        chatInstance = null;
-    }
 
     openChat = () => {
         ChatModal.show()

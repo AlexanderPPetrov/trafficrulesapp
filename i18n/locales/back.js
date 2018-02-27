@@ -95,6 +95,11 @@ export default {
     selectAccount: 'Select Account',
     noAccountSelected: 'No Account Selected',
     fundsTransfer: 'Funds Transfer',
+    transferFundsPro: 'Transfer Funds PRO',
+    transferFundsProDescription: 'Here you are able to make instant transfers to other PremiumTradings account holders with just one click!',
+    transferFundsProDescriptionTwo: "Just enter your secure ID, your friend's email, specify the amount and the recipient's account will be funded within seconds",
+    transferFundsProDescriptionThree: "Most easiest, cheapest and reliable method to fund accounts!",
+    transferFundsProDescriptionFour: "To join the service, contact our support team.",
     moreAccounts: 'More Accounts',
     existingAccounts: 'Existing Accounts',
     transferToExistingAccount: 'Transfer to Existing Account',
@@ -193,5 +198,11 @@ export default {
     september:'September',
     october:'October',
     november:'November',
-    december:'December'
+    december:'December',
+    deposit_notification_title:'Deposit handled',
+    withdraw_notification_title:'Withdraw handled',
+    weekly_staus_notification_title:'Weekly Status',
+    funds_transfer_notification_title:'Funds Transfer',
+    brokerage_activity_notification_title:'Brokerage Activity',
+    bop_activity_notification_title:'Brokerage Activity'
 };

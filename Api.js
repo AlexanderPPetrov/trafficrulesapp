@@ -1,4 +1,5 @@
 import FormData from 'FormData';
+import CryptoJS from 'crypto-js';
 
 const baseUrl = 'http://api-prmts.dev.cc/v1/';
 const translationsUrl = 'https://prmts-translations.dev.cc/'
@@ -14,7 +15,7 @@ import Controller from './Controller'
 import {Toast} from "native-base";
 import Loader from "./js/common/loader/index";
 import I18n from './i18n/i18n';
-
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 const monthKeys =  ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
 
 
@@ -30,6 +31,50 @@ let Api = {
     get: (opts = {}) => {
         Api.executeRequest(opts, 'GET')
     },
+
+
+    atob: (input:string = '') => {
+        let str = input.replace(/=+$/, '');
+        let output = '';
+
+        if (str.length % 4 == 1) {
+            throw new Error("'atob' failed: The string to be decoded is not correctly encoded.");
+        }
+        for (let bc = 0, bs = 0, buffer, i = 0;
+             buffer = str.charAt(i++);
+
+             ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
+             bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0
+        ) {
+            buffer = chars.indexOf(buffer);
+        }
+
+        return output;
+    },
+
+    decrypt: (encryptedString = '') => {
+
+        var key256Bits  = CryptoJS.PBKDF2("0000", Api.key, { keySize: 256/32, iterations: 1000, hasher: CryptoJS.algo.SHA256 });
+
+        var rawData = Api.atob(encryptedString);
+        var rawPieces = rawData.split(":");
+
+        var crypttext = rawPieces[0];
+        var iv = CryptoJS.enc.Hex.parse(rawPieces[1]);
+
+        var cipherParams = CryptoJS.lib.CipherParams.create({ciphertext: CryptoJS.enc.Base64.parse(crypttext)});
+
+        var plaintextArray = CryptoJS.AES.decrypt(
+            cipherParams,
+            key256Bits,
+            { iv: iv }
+        );
+
+        var output = CryptoJS.enc.Utf8.stringify(plaintextArray);
+        return output
+    },
+
+
 
     executeRequest: (opts, type, domain = baseUrl) => {
 
@@ -75,6 +120,7 @@ let Api = {
                     if (opts.success && responseJson._status == 'success') {
                         if (opts.url === 'login') {
                             Api.auth = responseJson._payload._userLoginHash;
+                            Api.key = responseJson._payload._key;
                         }
 
                         opts.success(responseJson._payload)
@@ -82,7 +128,7 @@ let Api = {
                     } else {
 
                         if(responseJson._payload._message === 'user_not_authorized'){
-                            Controller.navigateTo('Home')
+                            Controller.navigateTo('Landing')
                         }
 
                         if(opts.error){
@@ -122,7 +168,9 @@ let Api = {
                     if (count < retries) {
                         console.log('retry fetch')
                         count++
-                        attempt()
+                        setTimeout(() => {
+                            attempt()
+                        },500)
                     } else {
                         let message = error.message;
                         if (message === 'Network request failed') {
@@ -133,7 +181,11 @@ let Api = {
                             I18n.t('error_title'),
                             message,
                             [
-                                {text: 'OK'},
+                                {text: I18n.t('ok'), onPress: () => {
+
+                                }
+
+                                } ,
                             ]
                         )
                         if (opts.always) {

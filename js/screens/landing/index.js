@@ -238,6 +238,7 @@ class Landing extends Component {
     loginSuccess = (response) => {
 
         NotificationsHandler.startListen();
+
         if (this.state.pin) {
 
             console.log(Controller.redirectScreen)
