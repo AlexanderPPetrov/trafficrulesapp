@@ -72,5 +72,12 @@ export default {
     chartBalance: '#00a2ff',
     chartChange: '#54fc00',
 
-    loader:'#555'
+    notificationDeposit: '#a5d461',
+    notificationWithdraw: '#facd49',
+    notificationWeeklyStatus: '#64c2eb',
+    notificationFundsTransfer: '#52dbb9',
+    notificationBrokerageActivity: '#a5d461',
+    notificationBopActivity: '#a5d461',
+    notificationBettingTips: '#e587c2',
+
 };

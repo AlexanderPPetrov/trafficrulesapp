@@ -3,7 +3,6 @@ import {ScrollView, View, Dimensions, Alert} from "react-native";
 import NotificationsHandler from "../../common/notifications/index";
 import {Toast} from "native-base";
 import Expo, {Notifications} from 'expo';
-
 import I18n from '../../../i18n/i18n';
 import Logo from '../../common/logo/logo';
 import ColorScheme from "../../common/colorscheme";

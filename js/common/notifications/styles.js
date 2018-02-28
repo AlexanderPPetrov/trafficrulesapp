@@ -1,3 +1,5 @@
+import {normalize} from "../ui";
+
 const React = require("react-native");
 
 const {StyleSheet, Dimensions, Platform} = React;
@@ -23,9 +25,8 @@ export default {
 
     container: {
         position: "absolute",
-        justifyContent: 'center',
-        alignItems: 'center',
         zIndex:1000,
+        elevation:3,
         left: 0,
         right: 0,
     },
@@ -34,9 +35,19 @@ export default {
         alignSelf:'stretch',
         flex:1,
         backgroundColor: "#fff",
-        borderColor:'rgba(0,0,0,0.1)',
-        borderWidth:1,
-        height:70,
+        paddingRight:0,
+        paddingLeft:0,
+        paddingTop:0,
+        paddingBottom:0,
+        borderRadius:0,
+        height:null
+    },
+    notificationPadding : {
+        minHeight:75,
+        paddingLeft:17,
+        paddingRight:17,
+        paddingTop:15,
+        paddingBottom:15
     },
 
     notificationTitle: {
@@ -49,9 +60,9 @@ export default {
     },
 
     notificationMessage: {
-        paddingTop:5,
-        paddingBottom:5,
-        color: ColorScheme.regular
+        color: ColorScheme.regular,
+        fontSize:normalize(14),
+        paddingRight:12
     },
     notificationButton: {
         position:'relative',
@@ -67,7 +78,7 @@ export default {
         position:'absolute',
         fontSize:26,
         top:13,
-        left:22,
+        left:19,
         opacity:0.3,
         color:'#fff'
     },
@@ -75,10 +86,20 @@ export default {
         position:'absolute',
         borderRadius:4,
         top:17,
-        right:5,
+        right:8,
         width:8,
         height:8,
         backgroundColor:'red'
+    },
+
+    unreadIndicator: {
+        position:'absolute',
+        borderRadius:4,
+        bottom:0,
+        right:0,
+        width:8,
+        height:8,
+        backgroundColor:ColorScheme.info
     },
     notificationsBadgeInactive: {
         opacity:0
@@ -93,9 +114,6 @@ export default {
     notificationsActive: {
         color:'#fff',
         opacity:1
-    },
-    notificationIconContainer: {
-        marginTop:5
     },
     withdrawAccepted: {
         backgroundColor: ColorScheme.win

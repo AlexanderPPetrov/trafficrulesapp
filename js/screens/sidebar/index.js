@@ -63,7 +63,7 @@ const menuData = [
     {
         name: 'sendMoney',
         route: "SendMoney",
-        icon: "ios-share-alt-outline",
+        icon: "ios-send-outline",
     },
     {
         name: 'settings',
@@ -100,17 +100,22 @@ class SideBar extends Component {
     }
     iconStyle = (icon) => {
         let marginLeft = 0,
-            marginRight = 0
+            marginRight = 0,
+            fontSize = 26;
         if (icon == 'ios-person-outline') {
             marginLeft = 4,
                 marginRight = -4
         }
+        if (icon == 'ios-send-outline') {
+            fontSize = 30
+            marginRight = 1
+        }
         return {
             color: ColorScheme.dark,
-            fontSize: 26,
+            fontSize,
             width: 30,
-            marginLeft: marginLeft,
-            marginRight: marginRight
+            marginLeft,
+            marginRight
         }
     };
 

@@ -199,10 +199,8 @@ export default {
     october:'October',
     november:'November',
     december:'December',
-    deposit_notification_title:'Deposit handled',
-    withdraw_notification_title:'Withdraw handled',
-    weekly_staus_notification_title:'Weekly Status',
-    funds_transfer_notification_title:'Funds Transfer',
-    brokerage_activity_notification_title:'Brokerage Activity',
-    bop_activity_notification_title:'Brokerage Activity'
+
+    unread:'Unread',
+    clear:'Clear',
+    just_now:'just now'
 };

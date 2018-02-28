@@ -13,6 +13,7 @@ import {
     Left,
     Right,
     Body,
+    SwipeRow
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import Expo from "expo";
@@ -20,6 +21,7 @@ import Header from '../../common/header/header';
 
 import {ScrollView, TouchableOpacity, View} from "react-native"
 import Ui from '../../common/ui';
+import ColorScheme from '../../common/colorscheme';
 import NotificationMessage from '../../common/notifications/notification';
 import Controller from '../../../Controller';
 
@@ -52,7 +54,8 @@ class Notifications extends Component {
     }
 
     handlePressedNotification = (notification, i) => {
-        this.onDismiss(notification, i);
+        this.onDismiss(notification, i)
+        Controller.removeNotification(notification.data.id)
         Controller.navigateTo('Transactions')
     }
 
@@ -63,12 +66,12 @@ class Notifications extends Component {
         return <View style={Ui.listItem}>
                 <Grid>
                     <Col size={2}>
-                        {/*<Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('totalProfit')}</Text>*/}
+                        <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('unread')} ({this.state.notifications.length})</Text>
                     </Col>
                     <Col>
-                        <TouchableOpacity style={{alignSelf:'flex-end', flexDirection:'column', paddingRight:20}} transparent onPress={()=> this.clearAllNotifications()}>
-                            <Text>{I18n.t('clearAll')}</Text>
-                            <Icon style={{position:'absolute', right:0}} name="ios-close-circle" />
+                        <TouchableOpacity style={{alignSelf:'flex-end', flexDirection:'column', paddingRight:30}} transparent onPress={()=> this.clearAllNotifications()}>
+                            <Text style={Ui.itemLabelLight}>{I18n.t('clearAll')}</Text>
+                            <Icon style={{position:'absolute', right:0, top: -2, color:ColorScheme.regular, fontSize:26}} name="ios-close-circle" />
                         </TouchableOpacity>
                     </Col>
                 </Grid>
@@ -79,6 +82,7 @@ class Notifications extends Component {
     }
 
     onDismiss = (notification, i) => {
+        Controller.removeNotification(notification.data.id)
         this.state.notifications.splice(i, 1);
         this.setState({
             notifications: this.state.notifications
@@ -90,14 +94,40 @@ class Notifications extends Component {
             return <Text style={Ui.noResults}>{I18n.t('noNotifications')}</Text>
         }
         const notificationList = this.state.notifications.map((notification, i) => {
-            return <NotificationMessage key={i} title={notification.data.title} message={notification.data.body} onDismiss={() => this.onDismiss(notification, i)} onPress={() => this.handlePressedNotification(notification, i)} />
+            return <SwipeRow key={i}
+                             leftOpenValue={0}
+                             rightOpenValue={-80}
+                             style={{padding:0}}
+                             body={
+                    <NotificationMessage data={notification.data} onDismiss={() => this.onDismiss(notification, i)} onPress={() => this.handlePressedNotification(notification, i)} />
+                }
+                right={
+                    <Button danger onPress={() => this.onDismiss(notification, i)}>
+                        <Grid>
+                            <Row >
+                                <Col style={{justifyContent:'flex-end', alignItems:'center', marginBottom: -2}}>
+                                    <Icon name="ios-close-circle"/>
+                                </Col>
+                            </Row>
+                            <Row >
+                                <Col>
+                                    <Text style={Ui.textCenter}>{I18n.t('clear')}</Text>
+                                </Col>
+                            </Row>
+                        </Grid>
+
+
+                    </Button>
+                }
+                />
+
         });
 
         return notificationList
     };
 
     clearAllNotifications = () => {
-        Controller.unreadNotifications = [];
+        Controller.removeAllNotifications()
         this.setState({
             notifications:Controller.unreadNotifications
         });
@@ -117,8 +147,12 @@ class Notifications extends Component {
                     notifications={true}
                 />
                 <ScrollView>
-                    {this.getClearButton()}
-                    {this.getNotifications()}
+                <Content scrollEnabled={false}>
+
+                        {this.getClearButton()}
+                        {this.getNotifications()}
+
+                </Content>
                 </ScrollView>
 
             </Container>

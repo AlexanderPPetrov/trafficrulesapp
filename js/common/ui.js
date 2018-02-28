@@ -66,7 +66,7 @@ export default {
         backgroundColor: ColorScheme.neutralLight,
         flex: 1,
         flexDirection: 'row',
-        minHeight: 40,
+        minHeight: 45,
         borderBottomColor: ColorScheme.listItemBorderColor,
         borderBottomWidth: 1
     },

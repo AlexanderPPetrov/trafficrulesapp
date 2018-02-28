@@ -113,7 +113,7 @@ export default {
   brandPrimary: ColorScheme.primaryButton,
   brandInfo: "#3F57D3",
   brandSuccess: "#5cb85c",
-  brandDanger: "#d9534f",
+  brandDanger: ColorScheme.loss,
   brandWarning: "#f0ad4e",
   brandSidebar: "#252932",
 

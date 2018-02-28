@@ -56,7 +56,13 @@ class NotificationsButton extends Component {
         NotificationsButtonInstance.addUnseenNotification()
     };
 
-    setNotifications = count => {
+    static  setUnseenNotifications = count => {
+        if(!NotificationsButtonInstance || !NotificationsButtonInstance.mounted) return;
+        NotificationsButtonInstance.setUnseenNotifications(count)
+        console.log(count)
+    };
+
+    setUnseenNotifications = count => {
         this.setState({
             unseenNotifications:count
         })
@@ -67,14 +73,7 @@ class NotificationsButton extends Component {
         this.setState({
             unseenNotifications
         })
-    };
-
-    static clearUnseenNotifications = () => {
-        if(!NotificationsButtonInstance) return;
-        Controller.unseenNotifications = 0;
-        NotificationsButtonInstance.setState({
-            unseenNotifications:0
-        })
+        console.log(unseenNotifications)
     };
 
     goToNotifications = () => {
