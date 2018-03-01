@@ -55,16 +55,12 @@ class NotificationsHandler extends Component {
                 // Check if application was closed
                 if (!Api.auth) {
                     //Save notification data for further navigate
-                    //TODO add types handling with real data from push notifications
-                    Controller.redirectScreen = 'Transactions';
                     Controller.notificationData = receivedNotification.data;
-                    console.log(Controller.redirectScreen )
                     return;
                 }
 
                 if (receivedNotification) {
-                    console.log(receivedNotification)
-                    Controller.navigateTo('Transactions')
+                    Controller.handleNotification(receivedNotification)
                 }
 
             }
@@ -84,8 +80,6 @@ class NotificationsHandler extends Component {
                 });
             }
 
-
-            console.log(receivedNotification.notificationId)
         });
     }
 
@@ -169,9 +163,8 @@ class NotificationsHandler extends Component {
     }
 
     handlePressedNotification = (notificationId) => {
-        this.dismissNotification('fadeOut', notificationId, 100, () => {
+        this.dismissNotification('fadeOut', notificationId, 50, () => {
             Controller.removeNotification(notificationId)
-            Controller.navigateTo('Transactions')
         })
     };
 
@@ -185,7 +178,7 @@ class NotificationsHandler extends Component {
         const notificationId = notification.data.id;
         return <Animatable.View key={notificationId} ref={"notification" + notificationId} style={Ui.dropShadow} >
             <GestureView style={{alignSelf:'stretch', borderBottomColor:ColorScheme.listItemBorderColor, borderBottomWidth:1}}
-                content={ <NotificationMessage paddingStyle={styles.notificationPadding} data={notification.data} onDismiss={() => this.onDismiss(notification, i)}  onPress={() => this.handlePressedNotification(notificationId)} />}
+                content={ <NotificationMessage data={notification.data} onDismiss={() => this.onDismiss(notification, i)}  onPress={() => this.handlePressedNotification(notificationId)} />}
                 onSwipeRight={(distance, angle) => this.dismissNotification('fadeOutRight', notificationId)}
                 onSwipeLeft={(distance, angle) => this.dismissNotification('fadeOutLeft', notificationId)}
                 onSwipeUp={(distance, angle) => console.log('onSwipeUp')}

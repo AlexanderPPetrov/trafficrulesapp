@@ -33,11 +33,7 @@ export default {
     },
 
     listHeader: {
-        height: 45,
-        justifyContent: 'center',
-        paddingLeft: 15,
-        borderBottomWidth: 2,
-        borderBottomColor: ColorScheme.info
+        backgroundColor:ColorScheme.listItemHeader
     },
     listHeaderExtended: {
         height: 50,
@@ -585,6 +581,24 @@ export default {
         fontSize: normalize(14),
         color: ColorScheme.darkest
     },
+    BTC: {
+        backgroundColor:ColorScheme.BTC
+    },
+    USD: {
+        backgroundColor:ColorScheme.USD
+    },
+    GBP: {
+        backgroundColor:ColorScheme.GBP
+    },
+    EUR: {
+        backgroundColor:ColorScheme.EUR
+    },
+    P: {
+        backgroundColor:ColorScheme.P
+    },
+    INR: {
+        backgroundColor:ColorScheme.INR
+    }
 
 
 };

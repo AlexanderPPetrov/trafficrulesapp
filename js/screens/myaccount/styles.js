@@ -33,23 +33,6 @@ export default {
 
     pieChartContainer: {
         backgroundColor: ColorScheme.neutralLight
-    },
-    BTC: {
-        backgroundColor:ColorScheme.BTC
-    },
-    USD: {
-        backgroundColor:ColorScheme.USD
-    },
-    GBP: {
-        backgroundColor:ColorScheme.GBP
-    },
-    EUR: {
-        backgroundColor:ColorScheme.EUR
-    },
-    P: {
-        backgroundColor:ColorScheme.P
-    },
-    INR: {
-        backgroundColor:ColorScheme.INR
-    },
+    }
+
 };

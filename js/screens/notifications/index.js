@@ -56,7 +56,6 @@ class Notifications extends Component {
     handlePressedNotification = (notification, i) => {
         this.onDismiss(notification, i)
         Controller.removeNotification(notification.data.id)
-        Controller.navigateTo('Transactions')
     }
 
     getClearButton = () => {
@@ -97,7 +96,7 @@ class Notifications extends Component {
             return <SwipeRow key={i}
                              leftOpenValue={0}
                              rightOpenValue={-80}
-                             style={{padding:0}}
+                             list={true}
                              body={
                     <NotificationMessage data={notification.data} onDismiss={() => this.onDismiss(notification, i)} onPress={() => this.handlePressedNotification(notification, i)} />
                 }

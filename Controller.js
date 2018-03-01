@@ -5,9 +5,8 @@ let _navigator;
 let _pinModal;
 let _sidebar;
 
-const notifications = {
-
-}
+import ColorScheme from './js/common/colorscheme'
+import Api from "./Api";
 
 let Controller = {
 
@@ -16,7 +15,44 @@ let Controller = {
     currentRoute:'',
     previousRoute:'',
     unreadNotifications: [],
-    unseenNotifications:0,
+    notificationTypes: {
+        deposit:{
+            name: 'ios-card',
+            backgroundColor: ColorScheme.notificationDeposit,
+            action:'Transactions'
+        },
+        withdraw: {
+            name: 'ios-cash',
+            backgroundColor: ColorScheme.notificationWithdraw,
+            action:'Transactions'
+        },
+        weekly_status: {
+            name: 'ios-stats',
+            backgroundColor: ColorScheme.notificationWeeklyStatus,
+            action:'WeeklyStatus'
+        },
+        funds_transfer: {
+            name: 'ios-swap',
+            backgroundColor: ColorScheme.notificationFundsTransfer
+        },
+        brokerage_activity: {
+            name: 'ios-briefcase',
+            backgroundColor: ColorScheme.notificationBrokerageActivity,
+            action:'Brokerage'
+        },
+        bop_activity: {
+            name: 'ios-briefcase',
+            backgroundColor: ColorScheme.notificationBopActivity
+        },
+        betting_tips: {
+            name: 'ios-bulb',
+            backgroundColor: ColorScheme.notificationBettingTips
+        },
+        ad_hoc: {
+            name:'ios-information-circle',
+            backgroundColor: ColorScheme.notificationAdHoc
+        }
+    },
 
     setPinModal: pinModal => {
         _pinModal = pinModal;
@@ -39,10 +75,9 @@ let Controller = {
     },
 
     addNotification: notification => {
-        //TODO
         Controller.unreadNotifications.push(notification)
         Controller.unreadNotifications = _.uniqBy(Controller.unreadNotifications, 'data.id')
-        NotificationsButton.addUnseenNotification();
+        NotificationsButton.setUnreadNotifications(Controller.unreadNotifications.length);
 
     },
 
@@ -51,18 +86,20 @@ let Controller = {
             if (notification.data.id !== id) return notification;
         });
         Controller.unreadNotifications = remainingNotifications;
-        Controller.unseenNotifications = remainingNotifications.length;
-        NotificationsButton.setUnseenNotifications(Controller.unseenNotifications)
+        NotificationsButton.setUnreadNotifications(Controller.unreadNotifications.length)
     },
 
     removeAllNotifications: () => {
         Controller.unreadNotifications = [];
-        Controller.unseenNotifications = 0;
-        NotificationsButton.setUnseenNotifications(Controller.unseenNotifications)
+        NotificationsButton.setUnreadNotifications(Controller.unreadNotifications.length)
     },
 
     handleNotification: notification => {
-
+        let data = notification;
+        if(notification.data) {
+            data = Api.decrypt(notification.data)
+        }
+        Controller.navigateTo(Controller.notificationTypes[notification.type].action, data)
     },
 
     updateSideBar: language => {
@@ -82,6 +119,7 @@ let Controller = {
             Controller.currentRoute = routeName;
         }
 
+        console.log(params)
         _navigator.dispatch(
             NavigationActions.navigate({
                 type: 'Navigation/NAVIGATE',

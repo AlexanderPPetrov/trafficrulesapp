@@ -78,7 +78,6 @@ class SendMoney extends Component {
     };
 
     getButton = () => {
-        console.log('££££££££3', this.state.currentPage, this.state.steps)
         if (this.state.currentPage == this.state.steps) {
             return null;
         }
@@ -115,7 +114,7 @@ class SendMoney extends Component {
     };
 
     getSteps = () => {
-        if(!this.state.loaded || this.state.isAllowed) return null
+        if(!this.state.loaded || !this.state.isAllowed) return null
         return <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={this.state.labels}/>
 
     }
@@ -123,7 +122,7 @@ class SendMoney extends Component {
     getSendMoney = () => {
         if(!this.state.loaded) return null
 
-        if(!this.state.isAllowed){
+        if(this.state.isAllowed){
             return <View style={Ui.formContainer}>
                 <SendMoneySteps currentPage={this.state.currentPage}
                                 onRef={ref => (this.tabs = ref)} {...this.props}
@@ -138,16 +137,16 @@ class SendMoney extends Component {
 
         return <View style={[Ui.formContainer, {justifyContent: 'flex-start'}]}>
                     <Text style={Ui.stepHeader}>{I18n.t('transferFundsPro')}</Text>
-                    <Text> {I18n.t('transferFundsProDescription')}</Text>
-                    <Text> {I18n.t('transferFundsProDescriptionTwo')}</Text>
-                    <Text> {I18n.t('transferFundsProDescriptionThree')}</Text>
-                    <Text> {I18n.t('transferFundsProDescriptionFour')}</Text>
+                    <Text style={Ui.textCenter}>{I18n.t('transferFundsProDescription')}</Text>
+                    <Text style={[Ui.textCenter,{marginTop:15}]}>{I18n.t('transferFundsProDescriptionTwo')}</Text>
+                    <Text style={[Ui.textCenter,{marginTop:15}]}>{I18n.t('transferFundsProDescriptionThree')}</Text>
+                    <Text style={[Ui.textCenter,{marginTop:15}]}>{I18n.t('transferFundsProDescriptionFour')}</Text>
 
         </View>
     }
 
     getChat = () => {
-        if(this.state.loaded && this.state.isAllowed) {
+        if(this.state.loaded && !this.state.isAllowed) {
             return <Chat/>
         }
     }

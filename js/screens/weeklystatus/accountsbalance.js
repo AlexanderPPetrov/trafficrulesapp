@@ -10,8 +10,7 @@ import Ui from '../../common/ui';
 const listOrder = ['_site', '_username', '_currency', '_credit', '_balance', '_last_status']
 import Controller from '../../../Controller';
 
-class AccountsList extends Component {
-
+class AccountsBalance extends Component {
 
     getIcon = (account) => {
 
@@ -32,68 +31,36 @@ class AccountsList extends Component {
         return I18n.t(accountType).toUpperCase()
     }
 
-    getCard = (account, i) => {
-
-        return <ListItem button key={i} style={Ui.transactionsContainer}    onPress={() => Controller.navigateTo("PreviousBalance", {
-                                             _id: account._id,
-                                            _username: account._username,
-                                          _currency: account._currency,
-                                           _balance: account._balance
-                                    })}>
+    render() {
+        return <ListItem style={Ui.transactionsContainer} >
             <Grid>
                 <Col size={1} style={{alignItems:'center'}}>
                     <View style={Ui.iconContainer}>
-                        {this.getIcon(account)}
-
+                        {this.getIcon(this.props.account)}
                     </View>
                 </Col>
                 <Col size={4} >
                     <Row>
                         <Col size={2} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.itemLabel, Ui.labelSmallest, Ui.itemLabelLight]}>{this.getAccountType(account)}</Text>
+                            <Text style={[Ui.itemLabel, Ui.labelSmallest, Ui.itemLabelLight]}>{this.getAccountType(this.props.account)}</Text>
                         </Col>
                         <Col size={1} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.balanceValue, Ui.labelSmallest, Ui.itemLabelLight]}>{account._last_status.split(' ')[0]}</Text>
+                            <Text style={[Ui.balanceValue, Ui.labelSmallest, Ui.itemLabelLight]}>{this.props.account._site}</Text>
                         </Col>
                     </Row>
                     <Row style={{marginTop:5}}>
                         <Col size={2} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.itemLabel, Ui.itemLabelDark, Ui.bold]}>{account._site}</Text>
+                            <Text style={[Ui.itemLabel, Ui.itemLabelDark, Ui.bold]}>{this.props.account._username}</Text>
                         </Col>
                         <Col size={1} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.itemLabelDark, Ui.bold]}>{account._credit} {account._currency}</Text>
+                            <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.itemLabelDark, Ui.bold]}>{this.props.account._balance} {this.props.account._currency}</Text>
                         </Col>
                     </Row>
-                    <Row style={{marginTop:5, marginBottom:0}}>
-                        <Col size={2} style={{justifyContent:'center'}}>
-                            <Text style={Ui.itemLabel}>{account._username}</Text>
-                        </Col>
-                        <Col size={1} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.balanceValue, Ui.profitValue]}>{account._balance} {account._currency}</Text>
 
-                        </Col>
-                    </Row>
                 </Col>
             </Grid>
         </ListItem>
-    };
-
-    getAccountCards = (accounts) => {
-        let cardsList = accounts.map((account, i) =>
-            this.getCard(account, i)
-        );
-        return (
-            <List>
-                {cardsList}
-            </List>
-        );
-    };
-
-    render() {
-        return (
-            this.getAccountCards(this.props.accounts)
-        );
     }
 }
 
-export default AccountsList;
+export default AccountsBalance;

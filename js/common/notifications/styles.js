@@ -34,7 +34,6 @@ export default {
     notification: {
         alignSelf:'stretch',
         flex:1,
-        backgroundColor: "#fff",
         paddingRight:0,
         paddingLeft:0,
         paddingTop:0,

@@ -201,6 +201,11 @@ export default {
     december:'December',
 
     unread:'Unread',
+    agent:'Agent',
     clear:'Clear',
-    just_now:'just now'
+    just_now:'just now',
+    totalForAccounts:'Total for accounts',
+    statusReportFor:'Status report for',
+    weeklyBalanceText: 'Please kindly check and confirm.\nThank you for your kind attention.',
+    premiumTradingsTeam: 'PremiumTradings team'
 };

@@ -12,39 +12,7 @@ import Api from "../../../Api";
 import I18n from "../../../i18n/i18n";
 import moment from 'moment/min/moment-with-locales'
 import {Grid, Row, Col} from "react-native-easy-grid";
-const types = {
-    deposit:{
-        name: 'ios-card',
-        backgroundColor: ColorScheme.notificationDeposit
-    },
-    withdraw: {
-        name: 'ios-cash',
-        backgroundColor: ColorScheme.notificationWithdraw
-    },
-    weekly_status: {
-        name: 'ios-stats',
-        backgroundColor: ColorScheme.notificationWeeklyStatus
-    },
-    funds_transfer: {
-        name: 'ios-swap',
-        backgroundColor: ColorScheme.notificationFundsTransfer
-    },
-    brokerage_activity: {
-        name: 'ios-briefcase',
-        backgroundColor: ColorScheme.notificationBrokerageActivity
-    },
-    bop_activity: {
-        name: 'ios-briefcase',
-        backgroundColor: ColorScheme.notificationBopActivity
-    },
-    betting_tips: {
-        name: 'ios-bulb',
-        backgroundColor: ColorScheme.notificationBopActivity
-    },
-    ad_hoc: {
-        name:''
-    }
-}
+import Controller from "../../../Controller";
 
 moment.fn.fromNowOrNow = function (a) {
     if (Math.abs(moment().diff(this)) < 25000) { // 1000 milliseconds
@@ -79,16 +47,39 @@ class Notification extends Component {
         }
     }
 
+    getBackground = () => {
+       let backgroundColor = "#fff";
+       if(Controller.notificationTypes[this.props.data.type].action){
+           backgroundColor = '#f2f2f2'
+       }
+       return {backgroundColor}
+    }
+
+    getPointerEvents = () => {
+        let pointerEvents = 'none';
+        if(Controller.notificationTypes[this.props.data.type].action){
+            pointerEvents = 'auto'
+        }
+        return pointerEvents;
+    }
+
     getNotificationIcon = () => {
 
-        return <Icon name={types[this.props.data.type].name} size={26} style={{color:'#fff'}}/>
+        return <Icon name={Controller.notificationTypes[this.props.data.type].name} size={26} style={{color:'#fff'}}/>
     }
     getNotificationStyle = () => {
-        return [Ui.iconContainer, {backgroundColor:types[this.props.data.type].backgroundColor}]
+        return [Ui.iconContainer, {backgroundColor:Controller.notificationTypes[this.props.data.type].backgroundColor}]
+    }
+
+    handlePress = () => {
+        this.props.onPress()
+        setTimeout(()=> {
+            Controller.handleNotification(this.props.data)
+        }, 100)
     }
 
     render() {
-        return <Button  style={[styles.notification, this.props.paddingStyle]} onPress={() => this.props.onPress()}>
+        return <Button pointerEvents={this.getPointerEvents()} style={[styles.notification, styles.notificationPadding, this.getBackground()]} onPress={() => this.handlePress()}>
             <Grid>
                 <Col style={{width:60}}>
                     <View style={this.getNotificationStyle()}>
@@ -112,7 +103,7 @@ class Notification extends Component {
                     <Row>
                         <Col>
                             <Text style={styles.notificationMessage}>{this.props.data.message}</Text>
-                            <View style={styles.unreadIndicator}></View>
+                            <View style={styles.unreadIndicator}/>
                         </Col>
                     </Row>
                 </Col>

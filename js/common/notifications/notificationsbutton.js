@@ -37,7 +37,7 @@ class NotificationsButton extends Component {
         super(props);
 
         this.state = {
-            unseenNotifications:Controller.unseenNotifications
+            unreadNotifications:Controller.unreadNotifications.length
         };
 
         NotificationsButtonInstance = this;
@@ -51,29 +51,16 @@ class NotificationsButton extends Component {
         NotificationsButtonInstance.mounted = false;
     }
 
-    static addUnseenNotification = () => {
+    static  setUnreadNotifications = count => {
         if(!NotificationsButtonInstance || !NotificationsButtonInstance.mounted) return;
-        NotificationsButtonInstance.addUnseenNotification()
-    };
-
-    static  setUnseenNotifications = count => {
-        if(!NotificationsButtonInstance || !NotificationsButtonInstance.mounted) return;
-        NotificationsButtonInstance.setUnseenNotifications(count)
+        NotificationsButtonInstance.setUnreadNotifications(count)
         console.log(count)
     };
 
-    setUnseenNotifications = count => {
+    setUnreadNotifications = count => {
         this.setState({
-            unseenNotifications:count
+            unreadNotifications:count
         })
-    };
-
-    addUnseenNotification = () => {
-        const unseenNotifications = this.state.unseenNotifications + 1;
-        this.setState({
-            unseenNotifications
-        })
-        console.log(unseenNotifications)
     };
 
     goToNotifications = () => {
@@ -85,7 +72,7 @@ class NotificationsButton extends Component {
     getNotificationButton = () => {
         let buttonDisabled = true;
         let iconStyle = [styles.toggleNotification]
-        if(this.state.unseenNotifications){
+        if(this.state.unreadNotifications){
             buttonDisabled = false
             iconStyle = [styles.toggleNotification, {opacity:1}]
         }
@@ -96,7 +83,7 @@ class NotificationsButton extends Component {
     }
 
     getNotificationCount = () => {
-        if(this.state.unseenNotifications){
+        if(this.state.unreadNotifications){
             return <View style={styles.notificationsBadge}/>
         }
         return <View style={[styles.notificationsBadge, styles.notificationsBadgeInactive]}/>

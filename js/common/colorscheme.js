@@ -25,7 +25,7 @@ export default {
     datePickerBorderColor:'#c9c9c9',
     calendarIconColor:'#6d6d6d',
     calendarLabelColor:'#222222',
-
+    listItemHeader:'#f3f3f3',
     win:'#18bf77',
     halfWin:'#6DD57F',
     loss:'#ff3333',
@@ -46,7 +46,7 @@ export default {
     balanceHeaderColor: '#919191',
     chatBackgroundColor:'#f0f0f0',
     chatIconColor:'#a8a8a8',
-    listItemBorderColor:'#e8e8e8',
+    listItemBorderColor:'#e6e6e6',
     listItemValueDark:'#424242',
     enterPinLabelColor:'#aaa',
 
@@ -76,8 +76,9 @@ export default {
     notificationWithdraw: '#facd49',
     notificationWeeklyStatus: '#64c2eb',
     notificationFundsTransfer: '#52dbb9',
-    notificationBrokerageActivity: '#a5d461',
-    notificationBopActivity: '#a5d461',
+    notificationBrokerageActivity: '#FDA349',
+    notificationBopActivity: '#FDA349',
     notificationBettingTips: '#e587c2',
+    notificationAdHoc: '#00a2ff'
 
 };

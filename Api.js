@@ -71,7 +71,7 @@ let Api = {
         );
 
         var output = CryptoJS.enc.Utf8.stringify(plaintextArray);
-        return output
+        return JSON.parse(output)
     },
 
 

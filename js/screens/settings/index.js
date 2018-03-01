@@ -188,15 +188,15 @@ class Transactions extends Component {
                 />
                 <Content>
                     <List>
-                        <ListItem itemDivider>
+                        <ListItem style={[Ui.listItem,Ui.listHeader]}>
                             <Text>{I18n.t('language')}</Text>
                         </ListItem>
-                        <ListItem style={Ui.listItem}>
+                        <ListItem >
                             <Col>
                                 {this.getLanguagePicker()}
                             </Col>
                         </ListItem>
-                        <ListItem itemDivider>
+                        <ListItem style={[Ui.listItem,Ui.listHeader]}>
                             <Text>{I18n.t('notifications')}</Text>
                         </ListItem>
                         {this.getSwitches()}

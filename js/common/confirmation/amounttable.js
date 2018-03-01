@@ -27,36 +27,31 @@ import {normalize} from "../ui";
 class AmountTable extends Component {
 
     render() {
-        return <Grid style={{paddingTop: 45, paddingBottom: 45}}>
-            <Col>
-                <Row style={Ui.centered}>
-                    <Text style={[Ui.textCenter, Ui.itemLabelLight, {fontSize:normalize(13)}]}>{I18n.t('amount')}</Text>
+        return <Grid style={{paddingTop: 45, paddingBottom: 45, paddingLeft:25, paddingRight:25}}>
+                <Row >
+                    <Col>
+                        <Text style={[{fontSize:normalize(13)}]}>{I18n.t('amount')}</Text>
+                    </Col>
+                    <Col>
+                        <Text style={[{fontSize: normalize(16), textAlign:'right'}]}>{this.props.amount} {this.props.currency}</Text>
+                    </Col>
                 </Row>
-                <Row style={Ui.centered}>
-                    <Text style={[Ui.textCenter, Ui.itemLabelDark, {fontSize: normalize(18)}]}>{this.props.amount}</Text>
-                    <Text style={[Ui.mainBalanceCurrency, Ui.itemLabelDark]}>{this.props.currency}</Text>
+                <Row >
+                    <Col>
+                        <Text style={[Ui.itemLabelLight, {fontSize:normalize(13)}]}>{I18n.t('fee')}</Text>
+                    </Col>
+                    <Col>
+                        <Text style={[Ui.itemLabelLight, {fontSize: normalize(14), textAlign:'right'}]}>{this.props.fee} {this.props.currency}</Text>
+                    </Col>
                 </Row>
-            </Col>
-            <Col style={{marginLeft:10, marginRight:10, height: 25, marginTop:10, width: 1, backgroundColor: ColorScheme.listItemBorderColor}}></Col>
-            <Col>
-                <Row style={Ui.centered}>
-                    <Text style={[Ui.textCenter, Ui.itemLabelLight, {fontSize:normalize(13)}]}>{I18n.t('fee')}</Text>
+                <Row>
+                    <Col>
+                        <Text style={[Ui.itemLabelDark, {fontSize:normalize(13)}]}>{I18n.t('netAmount')}</Text>
+                    </Col>
+                    <Col>
+                        <Text style={[Ui.itemLabelDark, {fontSize:normalize(16), textAlign:'right'}]}>{this.props.netAmount} {this.props.currency}</Text>
+                    </Col>
                 </Row>
-                <Row style={Ui.centered}>
-                    <Text style={[Ui.textCenter, Ui.itemLabelDark, {fontSize: normalize(18)}]}>{this.props.fee}</Text>
-                    <Text style={[Ui.mainBalanceCurrency, Ui.itemLabelDark]}>{this.props.currency}</Text>
-                </Row>
-            </Col>
-            <Col style={{marginLeft:10, marginRight:10, height: 25, marginTop:10, width: 1, backgroundColor: ColorScheme.listItemBorderColor}}></Col>
-            <Col>
-                <Row style={Ui.centered}>
-                    <Text style={[Ui.textCenter, Ui.itemLabelLight, {fontSize:normalize(13)}]}>{I18n.t('netAmount')}</Text>
-                </Row>
-                <Row style={Ui.centered}>
-                    <Text style={[Ui.textCenter, Ui.itemLabelDark, Ui.bold, {fontSize: normalize(18)}]}>{this.props.netAmount}</Text>
-                    <Text style={[Ui.mainBalanceCurrency, Ui.itemLabelDark]}>{this.props.currency}</Text>
-                </Row>
-            </Col>
         </Grid>
     }
 }
