@@ -102,18 +102,13 @@ class Withdraw extends Component {
 
     getOpenedRequests = () => {
         if(this.state.openedRequests) {
-            return <View>
-                <Grid style={styles.openedRequestsContainer}>
-                    <Row >
-                        <Col size={4}>
-                            <Text style={styles.openedRequestsLabel}>{I18n.t('openedWithdrawRequests')}</Text>
-                        </Col>
-                        <Col size={1}>
-                            <Text style={styles.openedRequestsCount}>{this.state.openedRequests}</Text>
-                        </Col>
+            return <Grid style={styles.openedRequestsContainer}>
+                    <Row style={Ui.centered}>
+                        <Text style={styles.openedRequestsLabel}>{I18n.t('openedWithdrawRequests')} </Text>
+                        <Text style={styles.openedRequestsCount}> {this.state.openedRequests}</Text>
                     </Row>
                 </Grid>
-            </View>
+
         }
         return null;
     }
@@ -135,15 +130,16 @@ class Withdraw extends Component {
             <Container style={Ui.container}>
                 {this.getHeader()}
                 <Content >
+                    {this.getOpenedRequests()}
                     <View style={Ui.cardContainer}>
                         <View style={{flex:1}}>
                             <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={this.state.labels}/>
-                            {this.getOpenedRequests()}
                             <View style={Ui.formContainer}>
                                 <WithdrawSteps currentPage={this.state.currentPage} onRef={ref => (this.tabs = ref)} {...this.props}
                                                onUpdatePage={this.changeHandler}
                                                disableButton={this.setButtonState}/>
                                 <View style={Ui.buttonsContainer}>
+                                    <Chat/>
                                     {this.getButton()}
                                 </View>
                             </View>
@@ -151,7 +147,6 @@ class Withdraw extends Component {
                     </View>
 
                 </Content>
-                <Chat/>
             </Container>
         );
     }

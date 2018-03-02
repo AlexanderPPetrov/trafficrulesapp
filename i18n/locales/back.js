@@ -8,10 +8,9 @@ export default {
     logOut: 'Log out',
     ok: 'OK',
     setPinFirstHint: 'Set up a PIN for your account',
-    setPinSecondHint: 'Remember your PIN and use it \n as a quick and secure log in',
+    setPinSecondHint: 'Remember your PIN and use it as a quick and secure log in',
     back: 'Back',
     welcomeBack: 'Welcome Back,',
-    enterPinMessage: 'Enter your 4-digit PIN to continue',
     enterPin: 'Enter PIN',
     confirmPin: 'Confirm PIN',
     pinNotMatching: 'Confirmation does not match',
@@ -48,7 +47,6 @@ export default {
     deposit: 'Deposit',
     depositAmount: 'Deposit Amount',
     withdraw: 'Withdraw',
-    openedWithdrawRequests: 'Opened Withdraw Requests',
     method:'Method',
     amount:'Amount',
     fee:'Fee',
@@ -200,12 +198,16 @@ export default {
     november:'November',
     december:'December',
 
+    openedWithdrawRequests: 'You currently have open withdraw requests',
+    enterPinMessage: 'Enter your 4-digit PIN',
+    setPinSecondHint: 'Confirm your PIN',
+
     unread:'Unread',
     agent:'Agent',
     clear:'Clear',
     just_now:'just now',
     totalForAccounts:'Total for accounts',
     statusReportFor:'Status report for',
-    weeklyBalanceText: 'Please kindly check and confirm.\nThank you for your kind attention.',
+    weeklyBalanceText: 'Please kindly check and confirm. Thank you for your kind attention.',
     premiumTradingsTeam: 'PremiumTradings team'
 };

@@ -134,13 +134,13 @@ class Withdraw extends Component {
                             <View style={Ui.formContainer}>
                                 {this.getFundsTransferSteps()}
                                 <View style={Ui.buttonsContainer}>
+                                    <Chat/>
                                     {this.getButton()}
                                 </View>
                             </View>
                         </View>
                     </View>
                 </Content>
-                <Chat/>
             </Container>
         );
     }

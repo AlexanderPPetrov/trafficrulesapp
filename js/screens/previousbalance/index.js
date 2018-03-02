@@ -168,6 +168,7 @@ class PreviousBalance extends Component {
                 <Header
                     onBack={this.goBack}
                     title={I18n.t('_balance') + ' ' + I18n.t('for') + ' ' + this.props.navigation.state.params._username}
+                    cancel={false}
                 />
 
                 <ScrollView refreshControl={

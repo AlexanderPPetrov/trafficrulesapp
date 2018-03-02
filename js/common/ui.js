@@ -465,7 +465,9 @@ export default {
         fontSize: normalize(45),
         marginBottom: 10
     },
-    confirmationHeader: {},
+    confirmationHeader: {
+        paddingBottom:30
+    },
 
     confirmationText: {
         fontFamily: 'Roboto_light',
@@ -495,12 +497,13 @@ export default {
         }
     },
     welcomeContainer: {
-        width: '80%',
-        alignItems: 'flex-start'
+        width: '100%',
+        justifyContent:'center',
+        alignItems: 'center'
     },
     welcomeBackMessage: {
-        paddingTop: 45,
-        paddingBottom: 5,
+        paddingTop: 15,
+        paddingBottom: 15,
         fontSize: normalize(22),
         fontWeight: '700',
         color: ColorScheme.darkest
@@ -517,8 +520,8 @@ export default {
         flex: -1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: 45,
-        paddingBottom: 45,
+        paddingTop: 15,
+        paddingBottom: 15,
         paddingLeft: 30
     },
     pinBox: {
@@ -561,8 +564,9 @@ export default {
         backgroundColor: 'rgb(239, 239, 244)',
     },
     pinPromptText: {
-        marginBottom: 10,
+        marginTop: 45,
         color: ColorScheme.regular,
+        marginBottom:15,
         fontSize: normalize(14)
     },
     addContainer: {

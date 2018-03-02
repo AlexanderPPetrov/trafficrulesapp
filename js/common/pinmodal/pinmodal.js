@@ -35,7 +35,7 @@ class PinModal extends Component {
         super(props)
         let {width, height} = Dimensions.get('window')
 
-        let scale = (width - 200) / 500;
+        let scale = (width - 120) / 500;
 
         this.state = {
             pinValues: ['-', '-', '-', '-'],
@@ -206,13 +206,15 @@ class PinModal extends Component {
         return (
 
             <Animatable.View ref="pinModal" style={style.container} >
-                <StatusBar/>
+                <StatusBar />
 
                 <View style={Ui.pinView}>
                     <View style={Ui.welcomeContainer}>
-                        <Logo scale={this.state.scale} arrowOnly={true}/>
-                        <Text style={Ui.welcomeBackMessage}>{I18n.t('welcomeBack')}</Text>
-                        <Text style={Ui.pinPromptText}>{I18n.t('enterPinMessage')}</Text>
+                        {/*<Logo scale={this.state.scale} />*/}
+                        <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.neutralLight} />
+
+                        {/*<Text style={Ui.welcomeBackMessage}>{I18n.t('welcomeBack')}</Text>*/}
+                        <Text style={Ui.pinPromptText}>{I18n .t('enterPinMessage')}</Text>
                     </View>
 
                     {this.getPinBoxList()}

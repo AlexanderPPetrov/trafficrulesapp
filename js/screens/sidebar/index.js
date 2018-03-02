@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Dimensions} from "react-native";
+import {Dimensions, Image} from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
 import {
     Content,
@@ -79,11 +79,11 @@ class SideBar extends Component {
 
         let {width, height} = Dimensions.get('window')
 
-        let scale = (280 - 45) / 500;
+        let logoScale = (280 - 50) / 500;
         this.state = {
             shadowOffsetWidth: 1,
             shadowRadius: 4,
-            scale:scale,
+            logoScale,
             language:'en',
             translatedLabels:[]
         };
@@ -139,11 +139,14 @@ class SideBar extends Component {
         return (
             <Container>
                 <Content bounces={false} style={{flex: 1, top: -1}}>
+                    <Image style={{width:280, height:197.12, position:'absolute', top:62}}
+                        source={require('../../../img/menu_background.png')}
+                    />
 
                     <View style={styles.menuHeader}>
-                        <Logo scale={this.state.scale} primary={ColorScheme.neutralLight} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.neutralLight} />
+                        <Logo scale={this.state.logoScale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.neutralLight} />
                     </View>
-                    <List style={{paddingTop:15}}>
+                    <List style={{paddingTop:42}}>
                         {this.getMenuItems()}
                     </List>
                 </Content>

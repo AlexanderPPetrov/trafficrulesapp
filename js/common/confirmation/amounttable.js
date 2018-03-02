@@ -20,6 +20,7 @@ import {
     Body,
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
+import {View} from "react-native"
 import Ui from '../../common/ui';
 import ColorScheme from '../../common/colorscheme';
 import {normalize} from "../ui";
@@ -27,32 +28,29 @@ import {normalize} from "../ui";
 class AmountTable extends Component {
 
     render() {
-        return <Grid style={{paddingTop: 45, paddingBottom: 45, paddingLeft:25, paddingRight:25}}>
+        return <View style={{paddingTop: 45, paddingBottom: 45, paddingLeft:25, paddingRight:25}}>
+            <Grid style={{padding:15, borderColor:ColorScheme.listItemBorderColor, borderWidth:1}}>
                 <Row >
                     <Col>
-                        <Text style={[{fontSize:normalize(13)}]}>{I18n.t('amount')}</Text>
+                        <Text style={Ui.itemLabelLight}>{I18n.t('amount')}</Text>
                     </Col>
                     <Col>
-                        <Text style={[{fontSize: normalize(16), textAlign:'right'}]}>{this.props.amount} {this.props.currency}</Text>
+                        <Text style={[Ui.itemLabelDark,{textAlign:'right'}]}>{this.props.amount} {this.props.currency}</Text>
                     </Col>
                 </Row>
-                <Row >
+                <Row style={{marginTop:15}}>
                     <Col>
-                        <Text style={[Ui.itemLabelLight, {fontSize:normalize(13)}]}>{I18n.t('fee')}</Text>
+                        <Text style={Ui.itemLabelLight}>{I18n.t('fee')}</Text>
                     </Col>
                     <Col>
-                        <Text style={[Ui.itemLabelLight, {fontSize: normalize(14), textAlign:'right'}]}>{this.props.fee} {this.props.currency}</Text>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Text style={[Ui.itemLabelDark, {fontSize:normalize(13)}]}>{I18n.t('netAmount')}</Text>
-                    </Col>
-                    <Col>
-                        <Text style={[Ui.itemLabelDark, {fontSize:normalize(16), textAlign:'right'}]}>{this.props.netAmount} {this.props.currency}</Text>
+                        <Text style={[Ui.itemLabelDark, {textAlign:'right'}]}>{this.props.fee} {this.props.currency}</Text>
                     </Col>
                 </Row>
-        </Grid>
+            </Grid>
+              <View style={[Ui.listItem, Ui.listHeader, {justifyContent:'center',alignItems:'center', borderRightWidth:1, borderRightColor:ColorScheme.listItemBorderColor, borderLeftWidth:1, borderLeftColor: ColorScheme.listItemBorderColor}]}>
+                  <Text style={[Ui.itemLabelDark, {fontSize:normalize(20)}]}>{this.props.netAmount} {this.props.currency}</Text>
+              </View>
+        </View>
     }
 }
 

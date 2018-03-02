@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ScrollView, View, Dimensions, Alert} from "react-native";
+import {ScrollView, View, Dimensions, Alert, Image} from "react-native";
 import NotificationsHandler from "../../common/notifications/index";
 import {Toast} from "native-base";
 import Expo, {Notifications} from 'expo';
@@ -30,9 +30,9 @@ class Landing extends Component {
             pin: '',
             pinEntered: '',
             setPin: false,
-            scale: scale,
-            width: width,
-            height: height
+            scale,
+            width,
+            height
 
         }
     }
@@ -288,6 +288,14 @@ class Landing extends Component {
                 {/*<Text style={styles.helloMessage}>Hello John!</Text>*/}
                 {/*</View>*/}
             </View>
+                <Image style={{
+                    bottom: 0,
+                    position: "absolute",
+                    width: this.state.width,
+                    height: this.state.width*0.27965}}
+                       source={require('../../../img/login_background.png')}
+                />
+
             <Login ref="login" navigation={this.props.navigation} username={this.state.username} password={this.state.password}
                    setValue={this.setValue} loginHandler={this.loginHandler}></Login>
         </ScrollView>

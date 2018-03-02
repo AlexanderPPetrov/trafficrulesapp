@@ -208,12 +208,12 @@ class Pin extends React.Component {
         if(!this.state.pinEntered){
             return <View style={[Ui.welcomeContainer, Ui.centered]}>
                 <Text style={Ui.welcomeBackMessage}>{I18n.t('enterPin')}</Text>
-                <Text style={[Ui.pinPromptText, {textAlign:'center', minHeight:50}]}>{I18n.t('setPinFirstHint')}</Text>
+                <Text style={[Ui.pinPromptText, {textAlign:'center'}]}>{I18n.t('setPinFirstHint')}</Text>
             </View>
         }
         return <View style={[Ui.welcomeContainer, Ui.centered]}>
             <Text style={Ui.welcomeBackMessage}>{I18n.t('confirmPin')}</Text>
-            <Text style={[Ui.pinPromptText, {textAlign:'center', minHeight:50}]}>{I18n.t('setPinSecondHint')}</Text>
+            <Text style={[Ui.pinPromptText, {textAlign:'center'}]}>{I18n.t('setPinSecondHint')}</Text>
         </View>
 
     }

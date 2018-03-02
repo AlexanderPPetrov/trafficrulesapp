@@ -258,13 +258,13 @@ class Deposit extends Component {
                                           disableButton={this.setButtonState}/>
                             {this.getErrorMessage()}
                             <View style={Ui.buttonsContainer}>
+                                <Chat/>
                                 {this.getButton()}
                             </View>
                         </View>
                     </View>
                     {this.getWebView()}
                 </Content>
-                <Chat/>
 
             </Container>
         );

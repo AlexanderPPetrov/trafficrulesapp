@@ -20,10 +20,7 @@ export default {
         marginBottom: 10
     },
     menuHeader: {
-        padding: 20,
-        backgroundColor: ColorScheme.dark,
-        borderBottomWidth:2,
-        borderBottomColor: ColorScheme.info
+        padding: 25
     },
     listItemContainer: {
         flexDirection: "row",
@@ -48,7 +45,7 @@ export default {
         fontWeight: Platform.OS === "ios" ? "500" : "400",
         fontSize: 16,
         marginLeft: 20,
-        color:ColorScheme.light
+        color:ColorScheme.darkest
     },
     badgeText: {
         fontSize: Platform.OS === "ios" ? 13 : 11,

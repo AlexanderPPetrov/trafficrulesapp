@@ -1,6 +1,6 @@
 export default {
-    logoPrimary:'#231f20',
-    logoSecondary:'#ec2226',
+    logoPrimary:'#060606',
+    logoSecondary:'#fd1030',
     logoSlogan:'rgba(255,255,255,0)',
     mainBackground: '#ffffff',
     statusBarBackground: '#000000',

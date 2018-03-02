@@ -39,7 +39,7 @@ class CommonPicker extends Component {
                     onValueChange={(value) => this.props.onValueChange(value)}
                     renderHeader={backAction =>
                         <Header >
-                            <StatusBar/>
+                            <StatusBar />
                             <Left>
                                 <Button transparent onPress={backAction}>
                                     <Icon name="arrow-back"  />

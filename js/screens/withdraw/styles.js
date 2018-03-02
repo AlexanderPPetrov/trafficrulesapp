@@ -1,3 +1,5 @@
+import {normalize} from "../../common/ui";
+
 const React = require("react-native");
 import ColorScheme from "../../common/colorscheme";
 
@@ -31,23 +33,25 @@ export default {
     openedRequestsContainer: {
         paddingLeft:15,
         paddingRight:15,
-        paddingTop:8,
-        paddingBottom:8,
-        marginLeft:20,
-        marginRight:20,
-        marginTop:15,
-        borderRadius:20,
-        backgroundColor:'rgba(0,0,0,0.05)',
+        paddingTop:2,
+        paddingBottom:3,
+        left:0,
+        right:0,
+        position:'absolute',
+        top:0,
+        backgroundColor:'rgba(255,153,0,0.2)',
 
     },
     openedRequestsLabel: {
-        color:ColorScheme.dark
+        color:ColorScheme.dark,
+        fontSize:normalize(11)
     },
 
     openedRequestsCount: {
         color:'#ff9900',
         textAlign: 'right',
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
+        fontSize:normalize(11)
     },
 
     formLabel:{

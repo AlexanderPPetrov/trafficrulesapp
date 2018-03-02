@@ -3,6 +3,7 @@ import React from "react";
 import {AsyncStorage, Alert} from "react-native";
 import App from "./js/App";
 import I18n from './i18n/i18n';
+
 import Api from './Api';
 export default class App1 extends React.Component {
     constructor() {
@@ -12,6 +13,16 @@ export default class App1 extends React.Component {
         };
     }
 
+
+    cacheImages = (images) =>{
+        return images.map(image => {
+            if (typeof image === 'string') {
+                return Image.prefetch(image);
+            } else {
+                return Expo.Asset.fromModule(image).downloadAsync();
+            }
+        });
+    }
 
 
     componentDidMount = async () => {
@@ -23,6 +34,13 @@ export default class App1 extends React.Component {
             Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
             Roboto_light: require('./fonts/Roboto-Light.ttf'),
         });
+
+        const imageAssets = this.cacheImages([
+            require('./img/menu_background.png'),
+            require('./img/login_background.png')
+        ]);
+
+        await Promise.all([...imageAssets]);
 
        this.setState({isReady: true});
     }

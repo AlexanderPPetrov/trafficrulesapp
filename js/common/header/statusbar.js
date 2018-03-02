@@ -5,7 +5,7 @@ import ColorScheme from "../colorscheme";
 class StatusBarWrapper extends Component {
 
     render() {
-        return <StatusBar barStyle="light-content" backgroundColor={ColorScheme.statusBarBackground}/>
+        return <StatusBar hidden={true} barStyle="light-content" backgroundColor={ColorScheme.statusBarBackground}/>
     }
 }
 
