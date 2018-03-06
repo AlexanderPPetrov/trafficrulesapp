@@ -196,14 +196,12 @@ class FundsTransferSteps extends Component {
             })
         }
 
-        console.log(data)
         //this.props.screenProps
 
         return data;
     }
 
     fundsTransferSuccess = () => {
-        console.log('success')
         this.props.setPage(4)
     }
 

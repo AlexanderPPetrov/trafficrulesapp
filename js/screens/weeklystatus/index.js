@@ -128,7 +128,7 @@ class WeeklyStatus extends Component {
                     {this.getAccountsBalance()}
                     {this.getCashBalance('totals','total')}
                     <View style={[Ui.centered, {padding:15, paddingTop:20}]}>
-                            <Text style={{fontSize:normalize(14)}}>{I18n.t('weeklyBalanceText')}</Text>
+                            <Text style={{fontSize:normalize(14), textAlign:'center'}}>{I18n.t('weeklyBalanceText')}</Text>
                     </View>
                     <View style={[Ui.centered,  {marginTop:5, marginBottom:15, padding:15}]}>
                         <Text style={Ui.bold}>{I18n.t('premiumTradingsTeam')}</Text>

@@ -68,9 +68,9 @@ class Transactions extends Component {
         });
 
         AsyncStorage.getItem('locale', (err, result) => {
-            let languageCode = result;
+            let languageCode = result.split('-')[0].split('_')[0];
             if(!result){
-                languageCode = I18n.locale
+                languageCode = 'en'
             }
             this.setState({
                 languageCode

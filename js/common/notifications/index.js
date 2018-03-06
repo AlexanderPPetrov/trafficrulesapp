@@ -55,12 +55,12 @@ class NotificationsHandler extends Component {
                 // Check if application was closed
                 if (!Api.auth) {
                     //Save notification data for further navigate
-                    Controller.notificationData = receivedNotification.data;
+                    Controller.selectedNotification = receivedNotification;
                     return;
                 }
 
                 if (receivedNotification) {
-                    Controller.handleNotification(receivedNotification)
+                    Controller.handleNotification(receivedNotification.data)
                 }
 
             }

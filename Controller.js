@@ -6,12 +6,12 @@ let _pinModal;
 let _sidebar;
 
 import ColorScheme from './js/common/colorscheme'
+import BetDetailsModal from './js/common/betdetails/betdetailsmodal'
 import Api from "./Api";
 
 let Controller = {
 
-    redirectScreen: '',
-    notificationData: {},
+    selectedNotification: null,
     currentRoute:'',
     previousRoute:'',
     unreadNotifications: [],
@@ -96,10 +96,16 @@ let Controller = {
 
     handleNotification: notification => {
         let data = notification;
-        if(notification.data) {
+        if(notification.data && notification.data.length > 0) {
             data = Api.decrypt(notification.data)
         }
-        Controller.navigateTo(Controller.notificationTypes[notification.type].action, data)
+        const action = Controller.notificationTypes[notification.type].action;
+        if(action === 'Brokerage'){
+            Controller.navigateTo('MyAccount')
+            BetDetailsModal.show(notification.created_at)
+        }else{
+            Controller.navigateTo(Controller.notificationTypes[notification.type].action, data)
+        }
     },
 
     updateSideBar: language => {
@@ -119,7 +125,6 @@ let Controller = {
             Controller.currentRoute = routeName;
         }
 
-        console.log(params)
         _navigator.dispatch(
             NavigationActions.navigate({
                 type: 'Navigation/NAVIGATE',

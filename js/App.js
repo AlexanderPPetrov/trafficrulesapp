@@ -14,6 +14,7 @@ import PinModal from "./common/pinmodal/pinmodal";
 import Controller from '../Controller';
 import Notifications from "./common/notifications/index";
 import ChatModal from "./common/chat/chatmodal";
+import BetDetailsModal from "./common/betdetails/betdetailsmodal";
 
 const AppNavigator = StackNavigator(
     {
@@ -60,6 +61,10 @@ class AppRoot extends React.Component {
                 <StyleProvider style={getTheme(material)}>
                     <ChatModal/>
                 </StyleProvider>
+                <StyleProvider style={getTheme(material)}>
+                    <BetDetailsModal/>
+                </StyleProvider>
+
             </Root>
         );
     }

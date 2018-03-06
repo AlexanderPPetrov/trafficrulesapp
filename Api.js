@@ -115,7 +115,6 @@ let Api = {
             return fetch(_url, _data)
                 .then(response => response.json())
                 .then(responseJson => {
-                    console.log(responseJson)
 
                     if (opts.success && responseJson._status == 'success') {
                         if (opts.url === 'login') {
@@ -164,7 +163,6 @@ let Api = {
 
                 })
                 .catch(error => {
-                    console.log(count, retries)
                     if (count < retries) {
                         console.log('retry fetch')
                         count++

@@ -70,7 +70,6 @@ class Deposit extends Component {
             stepsNames = ['method', 'amount', 'process', 'deposit'];
         }
         this.setState({steps: number, labels: labels, stepsNames: stepsNames})
-        console.log('steps ', number)
     }
 
     setPaymentData = (value) => {
@@ -179,11 +178,9 @@ class Deposit extends Component {
     }
 
     webViewChanged = (webViewState) => {
-        console.log(webViewState)
 
         if (webViewState.url.indexOf('#success') != -1) {
             let params = this.getUrlParameters(webViewState.url);
-            console.log(params)
             this.setDepositCompleted('success')
             this.setState({
                 currentPage: this.state.steps
@@ -192,14 +189,12 @@ class Deposit extends Component {
         }
         if (webViewState.url.indexOf('#error') != -1) {
             let params = this.getUrlParameters(webViewState.url);
-            console.log(params)
             this.setDepositCompleted('error')
             this.setRedirectUrl('')
         }
 
         if (webViewState.url.indexOf('#cancel') != -1) {
             let params = this.getUrlParameters(webViewState.url);
-            console.log(params)
             this.setDepositCompleted('cancel')
             this.setRedirectUrl('')
         }

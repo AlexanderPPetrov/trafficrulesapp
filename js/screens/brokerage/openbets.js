@@ -23,7 +23,7 @@ import ColorScheme from '../../common/colorscheme';
 import BalanceHeader from "../../common/balanceheader/balanceheader";
 
 import styles from "./styles";
-import BetDetails from "./betdetails";
+import BetDetails from "../../common/betdetails/betdetails";
 import Api from "../../../Api";
 
 

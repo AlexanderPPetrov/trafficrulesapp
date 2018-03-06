@@ -27,6 +27,10 @@ export default class App1 extends React.Component {
 
     componentDidMount = async () => {
 
+        //suppress warnings and errors
+        console.disableYellowBox = true;
+        console.error = (error) => error.apply;
+
         await Expo.Font.loadAsync({
             Roboto: require("native-base/Fonts/Roboto.ttf"),
             Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),

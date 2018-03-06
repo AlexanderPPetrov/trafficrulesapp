@@ -83,8 +83,8 @@ class Landing extends Component {
     detectLocale = async () => {
         try {
             let localeString = await Expo.Util.getCurrentLocaleAsync();
-            const language = localeString.split('_')[0];
-            if (language != 'en' && I18n.availableLocales.language) {
+            const language = localeString.split('_')[0].split('-')[0];
+            if (language != 'en' && I18n.availableLocales[language]) {
                 await this.showChangeLocaleConfirm(localeString, language)
             }else{
                 await this.loadTranslations()
@@ -239,10 +239,10 @@ class Landing extends Component {
         NotificationsHandler.startListen();
 
         if (this.state.pin) {
-
-            console.log(Controller.redirectScreen)
-            if (Controller.redirectScreen) {
-                Controller.navigateTo(Controller.redirectScreen, Controller.notificationData)
+            // Controller.selectedNotification
+            if (Controller.selectedNotification) {
+                console.log(Controller.selectedNotification)
+                Controller.handleNotification(Controller.selectedNotification.data)
             } else {
                 Controller.navigateTo("MyAccount")
             }

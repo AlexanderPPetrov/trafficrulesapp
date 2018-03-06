@@ -54,7 +54,6 @@ class NotificationsButton extends Component {
     static  setUnreadNotifications = count => {
         if(!NotificationsButtonInstance || !NotificationsButtonInstance.mounted) return;
         NotificationsButtonInstance.setUnreadNotifications(count)
-        console.log(count)
     };
 
     setUnreadNotifications = count => {

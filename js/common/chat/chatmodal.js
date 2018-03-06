@@ -1,4 +1,3 @@
-
 import React, {Component} from "react";
 
 import {View, Dimensions, WebView, Modal} from 'react-native';
@@ -21,7 +20,6 @@ import {
 } from "native-base";
 import Draggable from '../../common/draggable/Draggable';
 import Header from '../../common/header/header';
-import {Ionicons} from '@expo/vector-icons';
 import Ui from '../ui'
 import Api from '../../../Api'
 import {Grid, Row, Col} from "react-native-easy-grid";

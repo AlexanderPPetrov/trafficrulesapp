@@ -24,7 +24,7 @@ import DatePicker from '../../common/datepicker/datepicker'
 
 import styles from "./styles";
 import ColorScheme from "../../common/colorscheme";
-import BetDetails from "./betdetails";
+import BetDetailsModal from "../../common/betdetails/betdetailsmodal";
 import Api from "../../../Api";
 
 
@@ -36,7 +36,6 @@ class SettledBets extends Component {
             _payload: {
                 bets: []
             },
-            settledBetsDetails: [],
             refreshing: false,
             date:'',
             dateFrom: null,
@@ -61,27 +60,6 @@ class SettledBets extends Component {
             },
             always: this.setRefreshing,
             loader
-        })
-    };
-
-    loadSettledBetsData = (date) => {
-        Api.get({
-            url: 'get-brokerage-daily-balances',
-            success: this.settledBetsLoaded,
-            data: {
-                date_to: date,
-                date_from: date,
-            }
-        })
-        this.setState({
-            date
-        })
-    };
-
-    settledBetsLoaded = (response) => {
-        console.log(response)
-        this.setState({
-            settledBetsDetails: response.bets
         })
     };
 
@@ -274,55 +252,14 @@ class SettledBets extends Component {
 
         );
     };
+
     openModal = (date) =>{
-        this.setState({modalVisible:true});
-        this.loadSettledBetsData(date);
-    }
-
-    closeModal = () => {
-        this.setState({modalVisible:false});
-    }
-
-    getBetsDetails = () => {
-
-        const betDetails = this.state.settledBetsDetails.map((bet, i) => {
-            bet._event_date = bet._date;
-            return <BetDetails bet={bet} key={i} getHoursOnly={true}/>
-        });
-
-        return (
-            <View>
-                <View style={Ui.listItem}>
-                    <Col>
-                        <Text style={Ui.itemLabel}>{I18n.t('betDetailsFor')}</Text>
-                    </Col>
-                    <Col >
-                        <Text style={[Ui.balanceValue, Ui.profitValue, Ui.bold]}>{this.state.date.split(' ')[0]}</Text>
-                    </Col>
-                </View>
-                {betDetails}
-            </View>
-        );
+        BetDetailsModal.show(date)
     }
 
     render() {
         return (
             <View>
-                <Modal
-                    visible={this.state.modalVisible}
-                    animationType={'slide'}
-                    onRequestClose={() => this.closeModal()}
-                >
-                    <Header
-                        onBack={this.closeModal}
-                        title={I18n.t('settledBets')}
-                        cancel={false}
-                    />
-
-                    <ScrollView>
-                        {this.getBetsDetails()}
-                    </ScrollView>
-                </Modal>
                 <View style={{height:51}}>
                     {this.getFilter()}
                 </View>
