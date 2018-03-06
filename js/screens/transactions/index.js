@@ -64,13 +64,34 @@ class Transactions extends Component {
             refreshing: false,
             dateFrom: null,
             dateTo: null,
-            loaded: false
+            loaded: false,
+            paymentMethods:{}
         }
     }
 
     componentDidMount = () => {
-        this.setDates();
+        this.getPaymentNames()
+    }
 
+    getPaymentNames = () => {
+        Api.get({
+            url: 'get-all-payment-methods-names',
+            success: this.setPaymentMethodNames,
+            always: this.setDates
+        })
+    }
+
+    setPaymentMethodNames = (response) => {
+        this.setState({
+            paymentMethods: response.paymentMethods
+        })
+    }
+
+    getPaymentMethod = (key) => {
+        if(this.state.paymentMethods[key]){
+            return this.state.paymentMethods[key]
+        }
+        return key
     }
 
     loadData = (loader = true) => {
@@ -214,8 +235,8 @@ class Transactions extends Component {
                                 </Col>
                             </Row>
                             <Row style={{marginTop:5}}>
-                                <Col size={2} style={{justifyContent:'center'}}>
-                                    <Text style={[Ui.itemLabel, Ui.itemLabelDark, Ui.bold]}>{transaction._payment_method}</Text>
+                                <Col size={1} style={{justifyContent:'center'}}>
+                                    <Text style={[Ui.itemLabel, Ui.itemLabelDark, Ui.bold]}>{this.getPaymentMethod(transaction._payment_method)}</Text>
                                 </Col>
                                 <Col size={1} style={{justifyContent:'center'}}>
                                     <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.itemLabelDark, Ui.bold]}>{transaction._amount} {transaction._currency}</Text>

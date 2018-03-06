@@ -170,7 +170,7 @@ let Api = {
                         count++
                         setTimeout(() => {
                             attempt()
-                        },500)
+                        },50)
                     } else {
                         let message = error.message;
                         if (message === 'Network request failed') {

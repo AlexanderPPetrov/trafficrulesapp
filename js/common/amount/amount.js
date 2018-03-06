@@ -49,27 +49,23 @@ class Amount extends Component {
         }
     }
 
-    getCurrencyContainerStyle = () => {
-        let style = {width:115,paddingLeft: 15, paddingRight:50}
-        return style
-    }
     render() {
         return (
 
             <View>
                 <Text style={Ui.formLabel}>{this.props.label}</Text>
                 <Grid>
-                    <Row>
+                    <Row style={Ui.inputContainer}>
                         <Col>
                             <Form style={Ui.form}>
-                                <Item style={Ui.inputContainer}>
+                                <Item style={{borderBottomWidth:0, marginLeft: 0}}>
                                     <Input ref="amountInput"  style={[Ui.inputField, Ui.amountInput]} value={this.props.amount}
                                            onChangeText={(text) => this.props.onValueChange('amount', text)}
                                            keyboardType='numeric'/>
                                 </Item>
                             </Form>
                         </Col>
-                        <Col style={this.getCurrencyContainerStyle()}>
+                        <Col style={{width:50}}>
                             <Text style={Ui.amountCurrency}>{this.state.currency}</Text>
                         </Col>
                     </Row>

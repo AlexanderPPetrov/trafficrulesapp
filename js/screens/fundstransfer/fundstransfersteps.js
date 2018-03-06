@@ -124,9 +124,8 @@ class FundsTransferSteps extends Component {
         });
 
         let accountsList = [...this.state.empty, ...this.state[stateKey].loadedAccounts];
-
-        let accounts = _.without(accountsList, ...remainingAccounts);
-        this.setState({[stateKey]: {...this.state[stateKey], selectedAccounts: remainingAccounts, accounts: accounts}});
+        let accounts = _.differenceBy(accountsList, remainingAccounts, '_id');
+        this.setState({[stateKey]: {...this.state[stateKey], selectedAccounts: remainingAccounts, accounts}});
     };
 
     setAccounts = (stateKey, accounts) => {

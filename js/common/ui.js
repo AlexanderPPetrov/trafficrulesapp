@@ -44,7 +44,7 @@ export default {
         color: '#292929',
     },
     headerIcon: {
-        color: '#292929'
+        color: ColorScheme.regular
     },
     headerLabel: {
         color: '#292929',
@@ -246,8 +246,8 @@ export default {
         flex: 1,
         justifyContent: 'space-between',
         padding: 30,
-        paddingLeft: 30,
-        paddingRight: 30
+        paddingLeft: 40,
+        paddingRight: 40
     },
     buttonsContainer: {
         alignSelf: 'flex-end',
@@ -392,7 +392,7 @@ export default {
         paddingTop: 15,
         paddingBottom: 5,
         width: deviceWidth,
-        minHeight: deviceHeight - 80,
+        minHeight: deviceHeight - 62,
         // minHeight:deviceHeight - 90,
         alignSelf: 'stretch',
         opacity: 1
@@ -434,8 +434,7 @@ export default {
         fontSize: normalize(18),
         textAlign: 'right',
         paddingTop: 10,
-        lineHeight: 20,
-        marginLeft: 10
+        lineHeight: 20
     },
     centered: {
         justifyContent: 'center',
