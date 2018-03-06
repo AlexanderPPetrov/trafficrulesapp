@@ -162,7 +162,6 @@ class Deposit extends Component {
         this.setState({
             currentPage: page
         });
-        console.log(page, this.state.steps)
         if(page === this.state.steps || page === this.state.steps - 1){
             Chat.hide()
         }else{

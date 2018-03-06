@@ -20,7 +20,7 @@ export default {
         marginBottom: 10
     },
     menuHeader: {
-        padding: 25
+        padding: 25,
     },
     listItemContainer: {
         flexDirection: "row",

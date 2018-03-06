@@ -79,7 +79,7 @@ class SideBar extends Component {
 
         let {width, height} = Dimensions.get('window')
 
-        let logoScale = (280 - 50) / 500;
+        let logoScale = (280 - 70) / 500;
         this.state = {
             shadowOffsetWidth: 1,
             shadowRadius: 4,
@@ -139,14 +139,14 @@ class SideBar extends Component {
         return (
             <Container>
                 <Content bounces={false} style={{flex: 1, top: -1}}>
-                    <Image style={{width:280, height:197.12, position:'absolute', top:62}}
+                    <Image style={{width:280, height:197.12, position:'absolute', top:60}}
                         source={require('../../../img/menu_background.png')}
                     />
 
                     <View style={styles.menuHeader}>
                         <Logo scale={this.state.logoScale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.neutralLight} />
                     </View>
-                    <List style={{paddingTop:42}}>
+                    <List style={{paddingTop:40}}>
                         {this.getMenuItems()}
                     </List>
                 </Content>

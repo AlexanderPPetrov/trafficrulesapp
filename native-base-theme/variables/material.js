@@ -154,7 +154,7 @@ export default {
   // Header
   toolbarBtnColor: ColorScheme.headerIconColor,
   toolbarDefaultBg: ColorScheme.headerBackground,
-  toolbarHeight: platform === "ios" ? 76 : 56,
+  toolbarHeight: platform === "ios" ? 56 : 56,
   toolbarIconSize: platform === "ios" ? 20 : 22,
   toolbarSearchIconSize: platform === "ios" ? 20 : 23,
   toolbarInputColor: "#fff",

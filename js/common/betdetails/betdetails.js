@@ -98,10 +98,8 @@ class BetDetails extends Component {
                         </Col>
                     </Row>
                     <Row style={styles.matchContainer}>
-                        <Col size={3} >
+                        <Col >
                             <Text style={[styles.betLabel, styles.eventLabel]}>{this.props.bet._event}</Text>
-                        </Col>
-                        <Col size={2} >
                         </Col>
                     </Row>
                     <Row style={styles.infoContainer}>

@@ -252,7 +252,8 @@ export default {
     buttonsContainer: {
         alignSelf: 'flex-end',
         justifyContent: 'space-between',
-        width: '100%'
+        width: '100%',
+        marginTop:15
     },
     profitHistoryContainer: {
         paddingTop: 15,
