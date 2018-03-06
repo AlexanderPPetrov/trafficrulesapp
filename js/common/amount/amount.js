@@ -21,7 +21,6 @@ import {
     Input
 } from "native-base";
 import {View, Platform} from 'react-native';
-import ColorScheme from "../../common/colorscheme";
 import Ui from '../../common/ui';
 
 import {Grid, Row, Col} from "react-native-easy-grid";

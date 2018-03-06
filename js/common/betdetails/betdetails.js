@@ -22,8 +22,6 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import Ui from '../../common/ui';
 import ColorScheme from '../../common/colorscheme';
 import styles from "./styles";
-import Api from "../../../Api";
-
 
 const statuses = ['running','win','halfWin','draw','halfLoss','loss','cancelled']
 

@@ -16,29 +16,17 @@ import {
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-import {View, FlatList, RefreshControl} from "react-native";
+import {View, FlatList} from "react-native";
 import Ui from '../../common/ui';
-import Controller from '../../../Controller';
 import Header from '../../common/header/header';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 
 import DatePicker from '../../common/datepicker/datepicker'
 
-import styles from "./styles";
 import Api from "../../../Api";
 import ColorScheme from "../../common/colorscheme";
 
-const listOrder = ['_payment_method', '_account', '_fee', '_amount', '_date_created', '_status'];
 const statuses = ['confirmed','pending','rejected','cancelled','failed','authorized','changed','inspected','revoked'];
-
-const translationKeys = {
-    _payment_method:'paymentMethod',
-    _account: 'account',
-    _fee:'fee',
-    _amount:'amount',
-    _date_created:'dateCreated',
-    _status:'status'
-}
 
 const transactionTypes = {
     1: 'safeDeposit',

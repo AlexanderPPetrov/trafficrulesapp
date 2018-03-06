@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import Steps from '../../common/steps/index';
 import {
     Container,
     Card,
@@ -23,12 +22,9 @@ import {
     Body,
 } from "native-base";
 
-import {View, ScrollView} from 'react-native';
+import {View} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
-import ColorScheme from "../../common/colorscheme";
 import AmountTable from '../../common/confirmation/amounttable'
-import styles from "./styles";
-import Api from "../../../Api";
 
 import Ui from '../../common/ui';
 import {normalize} from '../../common/ui';

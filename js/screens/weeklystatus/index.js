@@ -25,10 +25,6 @@ import MainBalance from "../../common/balanceheader/mainbalance";
 import CashBalance from "./cashbalance";
 import AccountsBalance from "./accountsbalance";
 
-import styles from "./styles";
-import Api from "../../../Api";
-
-
 class WeeklyStatus extends Component {
 
     constructor(props) {

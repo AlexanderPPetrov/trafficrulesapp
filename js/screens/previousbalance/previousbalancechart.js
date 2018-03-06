@@ -13,7 +13,6 @@ import I18n from '../../../i18n/i18n';
 import styles from "./styles";
 import ColorScheme from "../../common/colorscheme";
 import Ui from '../../common/ui';
-import Api from '../../../Api';
 
 import {Svg} from 'expo';
 

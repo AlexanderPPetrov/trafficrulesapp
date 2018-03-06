@@ -21,8 +21,7 @@ import {
     Body,
 } from "native-base";
 
-import {View, ScrollView, WebView} from 'react-native';
-import {MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
+import {View, WebView} from 'react-native';
 import Ui from '../../common/ui';
 import Header from '../../common/header/header';
 

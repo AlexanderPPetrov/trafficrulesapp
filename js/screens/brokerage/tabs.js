@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {View} from "react-native";
 import I18n from '../../../i18n/i18n';
-import {SimpleLineIcons, FontAwesome} from '@expo/vector-icons';
 import {TabNavigator, TabBarTop} from "react-navigation";
 import OpenBets from "./openbets";
 import SettledBets from "./settledbets";

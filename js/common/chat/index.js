@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 
-import {View, Dimensions, WebView, Modal, TouchableOpacity} from 'react-native';
-import AppLink  from './AppLink';
+import {View, Dimensions, TouchableOpacity} from 'react-native';
 import I18n from '../../../i18n/i18n';
 import {
     Container,
@@ -18,14 +17,10 @@ import {
     Body,
     CardItem
 } from "native-base";
-import Draggable from '../../common/draggable/Draggable';
-import Header from '../../common/header/header';
 import ColorScheme from '../../common/colorscheme';
 import ChatModal from './chatmodal'
 import Ui, {normalize} from '../ui'
-import Api from '../../../Api'
 import {Grid, Row, Col} from "react-native-easy-grid";
-import {SimpleLineIcons, MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
 
 const {
     width: deviceWidth,

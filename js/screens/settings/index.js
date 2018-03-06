@@ -29,7 +29,7 @@ import Api from "../../../Api";
 const Item = Picker.Item;
 const switches = ['withdraw_and_deposit', 'funds_transfer', 'weekly_status', 'brokerage_activity', 'betting_tips', 'ad_hoc_messages']
 
-class Transactions extends Component {
+class Settings extends Component {
 
     constructor(props) {
         super(props);
@@ -208,4 +208,4 @@ class Transactions extends Component {
     }
 }
 
-export default Transactions;
+export default Settings;

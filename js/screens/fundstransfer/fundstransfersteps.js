@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {Animated, Easing, View, Text, AsyncStorage} from 'react-native';
-import styles from "./styles";
-// Import the transition library
 import Api from "../../../Api";
 import I18n from '../../../i18n/i18n';
 
@@ -30,11 +27,6 @@ import AddAccount from './addaccount'
 import Notes from './notes'
 import Confirmation from '../../common/confirmation/confirmation'
 import * as Animatable from 'react-native-animatable';
-
-
-// Just helper method to get one of the random colors
-
-// Create Transition component using FlipX transition
 
 class FundsTransferSteps extends Component {
 

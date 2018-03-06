@@ -24,7 +24,7 @@ import {
 import Header from '../../common/header/header';
 import {Grid, Row, Col} from "react-native-easy-grid";
 
-import {View, ScrollView} from 'react-native';
+import {View} from 'react-native';
 import Ui from '../../common/ui';
 import styles from "./styles";
 import Api from "../../../Api";

@@ -1,14 +1,10 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import {AppRegistry, SectionList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import styles from "./styles";
-import {SimpleLineIcons, MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
+import {Text, View} from 'react-native';
+import {MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {Button, Content,  List, ListItem, Separator, Right, Left, Body} from "native-base";
 import Ui from '../../common/ui';
-
-const listOrder = ['_site', '_username', '_currency', '_credit', '_balance', '_last_status']
-import Controller from '../../../Controller';
 
 class AccountsBalance extends Component {
 

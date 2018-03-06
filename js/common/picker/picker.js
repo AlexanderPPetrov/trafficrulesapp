@@ -16,7 +16,6 @@ import {View} from 'react-native';
 import Ui from '../../common/ui';
 import ColorScheme from '../../common/colorscheme';
 import StatusBar from '../../common/header/statusbar';
-import style from "../../screens/sidebar/style";
 
 class CommonPicker extends Component {
 

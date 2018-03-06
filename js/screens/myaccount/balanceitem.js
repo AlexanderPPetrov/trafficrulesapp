@@ -1,10 +1,8 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import styles from "./styles";
 import {View} from 'react-native';
 import {Container, Header, Content, Card, CardItem, Text, Right, ListItem} from 'native-base';
 import {Col, Row, Grid} from 'react-native-easy-grid';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
 import Ui from '../../common/ui';
 import CurrencyIcon from '../../common/currency/currency';
 

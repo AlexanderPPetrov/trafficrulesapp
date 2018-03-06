@@ -1,5 +1,4 @@
 const React = require("react-native");
-import ColorScheme from "../../common/colorscheme";
 
 const {StyleSheet, Dimensions} = React;
 const deviceHeight = Dimensions.get("window").height;

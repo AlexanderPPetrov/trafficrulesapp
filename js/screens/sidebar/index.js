@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Dimensions, Image} from "react-native";
-import LinearGradient from 'react-native-linear-gradient';
 import {
     Content,
     Text,

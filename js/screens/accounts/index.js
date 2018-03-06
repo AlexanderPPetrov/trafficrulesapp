@@ -15,12 +15,10 @@ import {
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-import {View, ScrollView, RefreshControl} from "react-native";
+import {ScrollView, RefreshControl} from "react-native";
 import SportAccount from "./accountslist";
-import styles from "./styles";
 import Api from "../../../Api";
 import Ui from '../../common/ui';
-import Controller from '../../../Controller';
 import Header from '../../common/header/header';
 
 

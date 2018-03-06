@@ -1,14 +1,9 @@
 import React, {Component} from "react";
-import {View, TouchableHighlight, Platform} from "react-native";
-import {Constants, Permissions, Notifications} from 'expo';
-import Api from '../../../Api';
+import {View} from "react-native";
+import {Notifications} from 'expo';
 import Controller from '../../../Controller';
 import styles from "./styles";
-import Notification from "./notification";
-import GestureView from './GestureView';
-import * as Animatable from 'react-native-animatable';
 
-import ColorScheme from "../colorscheme";
 import {Ionicons} from '@expo/vector-icons';
 
 import {

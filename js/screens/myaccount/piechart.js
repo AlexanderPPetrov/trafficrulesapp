@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {VictoryPie,VictoryContainer, VictoryPortal, VictoryLabel} from 'victory-native';
+import {VictoryPie, VictoryPortal, VictoryLabel} from 'victory-native';
 import {View, Text, Dimensions} from 'react-native';
 import I18n from '../../../i18n/i18n';
 import styles from "./styles";

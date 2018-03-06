@@ -22,14 +22,11 @@ import {
     Right,
     Body,
 } from "native-base";
-import Controller from '../../../Controller';
 import Header from '../../common/header/header';
 
-import {View, ScrollView} from 'react-native';
+import {View} from 'react-native';
 
 import styles from "./styles";
-import Api from "../../../Api";
-
 const Item = Picker.Item;
 
 import Ui from '../../common/ui';

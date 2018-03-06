@@ -18,8 +18,6 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import { ScrollView, RefreshControl, View } from "react-native";
-import Ui from '../../common/ui';
-import ColorScheme from '../../common/colorscheme';
 import BalanceHeader from "../../common/balanceheader/balanceheader";
 
 import styles from "./styles";

@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-import {View, Modal, ViewPropTypes, Animated, Text, TouchableOpacity} from "react-native";
+import {View, Text} from "react-native";
 import styles from "./styles";
-import ColorScheme from '../colorscheme';
-
 import {
     Button,
     Icon
@@ -94,11 +92,6 @@ class Notification extends Component {
                         <Col size={1}>
                             <Text style={[Ui.itemLabelLight, Ui.labelSmallest, {textAlign:'right'}]}>{this.state.date}</Text>
                         </Col>
-                        {/*<Col style={{width:40}}>*/}
-                            {/*<TouchableOpacity style={{alignItems:'center', justifyContent:'center', height:'100%'}} onPress={()=> this.props.onDismiss()}>*/}
-                                {/*<Icon name={'ios-close-circle-outline'} style={{color:'gray', fontSize:30}}/>*/}
-                            {/*</TouchableOpacity>*/}
-                        {/*</Col>*/}
                     </Row>
                     <Row>
                         <Col>

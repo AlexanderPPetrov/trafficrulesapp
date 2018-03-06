@@ -1,4 +1,3 @@
-
 import React, {Component} from "react";
 
 import {View, Dimensions, ScrollView, Modal} from 'react-native';
@@ -31,10 +30,7 @@ const {
 } = Dimensions.get('window');
 
 let modalInstance = null;
-// const jsForInjection = `
-//   var el = document.getElementsByTagName('body')[0];
-//   el.style.height = '${Dimensions.get('window').height}px';
-// `
+
 class BetDetailsModal extends Component {
 
     constructor(props) {

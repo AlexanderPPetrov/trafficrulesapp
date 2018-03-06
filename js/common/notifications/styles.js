@@ -2,11 +2,6 @@ import {normalize} from "../ui";
 
 const React = require("react-native");
 
-const {StyleSheet, Dimensions, Platform} = React;
-const deviceHeight = Dimensions.get("window").height;
-
-const deviceWidth = Dimensions.get("window").width;
-
 import ColorScheme from "../../common/colorscheme";
 export default {
 

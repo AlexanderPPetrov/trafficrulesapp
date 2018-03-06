@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import I18n from '../../../i18n/i18n';
 import {MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
 import {
     Container,
@@ -24,9 +23,7 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View} from 'react-native';
 import Ui from '../../common/ui';
-import ColorScheme from '../../common/colorscheme';
 import AmountTable from './amounttable';
-import {normalize} from "../ui";
 
 class Confirmation extends Component {
 

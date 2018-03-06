@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-
 import {
     Container,
     Header,

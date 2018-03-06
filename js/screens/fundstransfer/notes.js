@@ -23,9 +23,7 @@ import {
     Body,
 } from "native-base";
 
-import {View, ScrollView} from 'react-native';
-import ColorScheme from "../../common/colorscheme";
-import styles from "./styles";
+import {View} from 'react-native';
 import Ui from '../../common/ui';
 
 class Notes extends Component {

@@ -1,6 +1,5 @@
 import React from "react";
-import {StyleProvider, Root, Text} from "native-base";
-import {View} from "react-native";
+import {StyleProvider, Root} from "native-base";
 import {StackNavigator} from "react-navigation";
 
 import Drawer from "./Drawer";

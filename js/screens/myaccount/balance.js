@@ -1,7 +1,5 @@
 import React, {Component} from "react";
-import I18n from '../../../i18n/i18n';
-import Ui from '../../common/ui';
-import {AppRegistry, SectionList, StyleSheet, View, ScrollView} from 'react-native';
+import {View} from 'react-native';
 
 import styles from "./styles";
 import BalanceItem from "./balanceitem";
@@ -22,7 +20,6 @@ class Balance extends Component {
         );
         return (
             <View>
-                {/*<View style={Ui.listHeader}><Text style={Ui.listHeaderLabel}>{I18n.t('balances')}</Text></View>*/}
                 <List style={styles.mainBalanceContainer}>
                     {listItems}
                 </List>

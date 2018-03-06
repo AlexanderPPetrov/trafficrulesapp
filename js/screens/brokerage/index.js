@@ -15,10 +15,8 @@ import {
     Body
 } from "native-base";
 import Ui from '../../common/ui';
-import Controller from '../../../Controller';
 import Header from '../../common/header/header';
 
-import styles from "./styles";
 import Tabs from "./tabs";
 
 class Brokerage extends Component {

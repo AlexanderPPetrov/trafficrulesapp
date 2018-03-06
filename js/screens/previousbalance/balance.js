@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import {AppRegistry, SectionList, StyleSheet, Text, View, ScrollView} from 'react-native';
-import styles from "./styles";
+import {Text, View} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {Button, List, ListItem, Card, Content} from "native-base";
 import Ui from '../../common/ui';

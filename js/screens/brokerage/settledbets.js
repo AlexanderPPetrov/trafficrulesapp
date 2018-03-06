@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import Header from '../../common/header/header';
 import {
     Container,
     Title,
@@ -21,9 +20,6 @@ import {View, ScrollView, RefreshControl, TouchableWithoutFeedback, Modal} from 
 import Ui from '../../common/ui';
 
 import DatePicker from '../../common/datepicker/datepicker'
-
-import styles from "./styles";
-import ColorScheme from "../../common/colorscheme";
 import BetDetailsModal from "../../common/betdetails/betdetailsmodal";
 import Api from "../../../Api";
 

@@ -25,7 +25,6 @@ import Ui from '../../common/ui';
 
 import {View, TouchableOpacity} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
-import ColorScheme from "../../common/colorscheme";
 import CommonPicker from '../../common/picker/picker';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 

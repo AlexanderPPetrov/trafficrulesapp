@@ -20,14 +20,10 @@ import {
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
 
-import {AsyncStorage, BackHandler, Alert} from "react-native"
-import Tabs from "./tabs";
+import {BackHandler, Alert} from "react-native"
 import Api from "../../../Api";
 import Ui from '../../common/ui';
 import Header from '../../common/header/header';
-import styles from "./styles";
-import Controller from '../../../Controller';
-import Balance from './balance';
 import MainBalance from "./mainbalance";
 
 class MyAccount extends Component {

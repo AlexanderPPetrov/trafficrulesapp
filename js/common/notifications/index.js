@@ -1,13 +1,11 @@
 import React, {Component} from "react";
-import {View, Text, TouchableHighlight, Platform} from "react-native";
+import {View, Platform} from "react-native";
 import {Constants, Permissions, Notifications} from 'expo';
 import Api from '../../../Api';
-import I18n from '../../../i18n/i18n';
 import Controller from '../../../Controller';
 import styles from "./styles";
 import NotificationMessage from "./notification";
 import NotificationsList from "../../screens/notifications/index";
-import NotificationsButton from "./notificationsbutton";
 import GestureView from './GestureView';
 import * as Animatable from 'react-native-animatable';
 

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import {View} from "react-native";
-import ColorScheme from "../../common/colorscheme";
 import {
     Container,
     Header,

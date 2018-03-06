@@ -2,20 +2,9 @@ import React, {Component} from "react";
 
 import { Svg } from 'expo';
 const {
-    Circle,
-    Ellipse,
     G,
     LinearGradient,
-    RadialGradient,
-    Line,
     Path,
-    Polygon,
-    Polyline,
-    Rect,
-    Symbol,
-    Text,
-    Use,
-    Defs,
     Stop
 } = Svg;
 

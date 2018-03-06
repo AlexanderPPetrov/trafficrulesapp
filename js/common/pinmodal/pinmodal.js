@@ -210,10 +210,7 @@ class PinModal extends Component {
 
                 <View style={Ui.pinView}>
                     <View style={Ui.welcomeContainer}>
-                        {/*<Logo scale={this.state.scale} />*/}
                         <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.neutralLight} />
-
-                        {/*<Text style={Ui.welcomeBackMessage}>{I18n.t('welcomeBack')}</Text>*/}
                         <Text style={Ui.pinPromptText}>{I18n .t('enterPinMessage')}</Text>
                     </View>
 

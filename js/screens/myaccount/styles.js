@@ -3,7 +3,6 @@ const React = require("react-native");
 const {StyleSheet} = React;
 
 import ColorScheme from "../../common/colorscheme";
-import Ui from '../../common/ui';
 
 export default {
 

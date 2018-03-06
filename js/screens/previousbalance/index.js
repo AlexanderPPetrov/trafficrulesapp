@@ -16,7 +16,7 @@ import {
     Body
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-import {View, ScrollView, RefreshControl} from 'react-native';
+import {ScrollView, RefreshControl} from 'react-native';
 import PreviousBalanceChart from './previousbalancechart'
 import Controller from '../../../Controller';
 import Header from '../../common/header/header';

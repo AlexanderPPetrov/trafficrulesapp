@@ -10,7 +10,6 @@ class CommonDatePicker extends Component {
     render() {
         return (
             <View style={Ui.datePickerContainer}>
-                {/*<Text style={Ui.datePickerLabel}>{this.props.title}</Text>*/}
                 <DatePicker
                     style={{width:118, alignItems:'flex-end'}}
                     date={this.props.date}

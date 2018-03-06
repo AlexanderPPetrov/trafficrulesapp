@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import Steps from '../../common/steps/index';
-import Chat from '../../common/chat/index';
 import CommonPicker from '../../common/picker/picker';
 import {
     Container,
@@ -24,9 +22,8 @@ import {
     Body,
 } from "native-base";
 
-import {View, ScrollView} from 'react-native';
+import {View} from 'react-native';
 
-import styles from "./styles";
 import Ui from '../../common/ui';
 
 import Api from "../../../Api";

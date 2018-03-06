@@ -1,7 +1,5 @@
 import React, {Component} from "react";
-
 import {View, Dimensions, WebView, Modal} from 'react-native';
-import AppLink  from './AppLink';
 import I18n from '../../../i18n/i18n';
 import {
     Container,
@@ -18,10 +16,7 @@ import {
     Body,
     CardItem
 } from "native-base";
-import Draggable from '../../common/draggable/Draggable';
 import Header from '../../common/header/header';
-import Ui from '../ui'
-import Api from '../../../Api'
 import {Grid, Row, Col} from "react-native-easy-grid";
 
 const {
@@ -30,10 +25,6 @@ const {
 } = Dimensions.get('window');
 
 let chatInstance = null;
-// const jsForInjection = `
-//   var el = document.getElementsByTagName('body')[0];
-//   el.style.height = '${Dimensions.get('window').height}px';
-// `
 class ChatModal extends Component {
 
     constructor(props) {
