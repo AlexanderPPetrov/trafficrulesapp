@@ -73,11 +73,11 @@ class FundsTransferSteps extends Component {
             currency: Api.accountSettings._currency
         })
 
-        if (this.props.paymentData.amount) {
+        if (this.props.paymentData._net_amount) {
             let existingAccounts = {...this.state.existing},
                 newAccounts = {...this.state.new};
-            existingAccounts.amount = this.props.paymentData.amount;
-            newAccounts.amount = this.props.paymentData.amount;
+            existingAccounts.amount = this.props.paymentData._net_amount.toString();
+            newAccounts.amount = this.props.paymentData._net_amount.toString();
             this.setState({
                 existing: existingAccounts,
                 new: newAccounts,
@@ -155,6 +155,8 @@ class FundsTransferSteps extends Component {
             }
         }
 
+        console.log('##########################', key, value)
+
         this.setState({[stateKey]: {...this.state[stateKey], [key]: value}});
 
     };
@@ -230,6 +232,7 @@ class FundsTransferSteps extends Component {
             />
         }
         if (this.props.currentPage == 1) {
+            console.log(this.state.new.amount)
 
             return <AddAccount key={1}
                                changeAccountValue={this.changeAccountValue}

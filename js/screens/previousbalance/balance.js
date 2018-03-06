@@ -59,7 +59,7 @@ class Balance extends Component {
                                 <Text style={[Ui.itemLabel, Ui.itemLabelDark]}>{I18n.t('_balance')}</Text>
                             </Col>
                             <Col size={3} style={{justifyContent:'center'}}>
-                                <Text style={[Ui.balanceValue, Ui.profitValue, Ui.itemLabelDark]}>{balance._balance} {this.props.currency}</Text>
+                                <Text style={[Ui.balanceValue, Ui.profitValue, Ui.itemLabelDark, this.getProfitStyle(balance._balance)]}>{balance._balance} {this.props.currency}</Text>
                             </Col>
                             {/*<Col style={Ui.currencyWidth} >*/}
                                 {/*<Text style={[Ui.balanceCurrency, Ui.itemLabelDark]}>{this.props.currency}</Text>*/}

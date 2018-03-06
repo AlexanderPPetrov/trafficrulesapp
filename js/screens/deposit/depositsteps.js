@@ -161,7 +161,8 @@ class DepositSteps extends Component {
             payment_method: this.state.paymentMethod,
             account: this.state.account,
             amount:this.state.amount,
-            payment_id: response._payment_num
+            payment_id: response._payment_num,
+            _net_amount:this.state._payload._net_amount
         });
 
         try {

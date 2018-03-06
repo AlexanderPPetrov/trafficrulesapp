@@ -28,7 +28,7 @@ import {normalize} from "../ui";
 class AmountTable extends Component {
 
     render() {
-        return <View style={{paddingTop: 45, paddingBottom: 45, paddingLeft:25, paddingRight:25}}>
+        return <View style={{paddingTop: 15, paddingBottom: 15, paddingLeft:25, paddingRight:25, flex:1}}>
             <Grid style={{padding:15, borderColor:ColorScheme.listItemBorderColor, borderWidth:1}}>
                 <Row >
                     <Col>

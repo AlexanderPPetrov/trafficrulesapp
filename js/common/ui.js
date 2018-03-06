@@ -473,7 +473,8 @@ export default {
         fontSize: normalize(14),
         color: ColorScheme.regular,
         textAlign: 'center',
-        marginTop: 12
+        marginTop: 12,
+        marginBottom:12,
     },
     noResults: {
         textAlign: 'center',

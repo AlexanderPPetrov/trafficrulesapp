@@ -59,6 +59,7 @@ class Amount extends Component {
                         <Col>
                             <Form style={Ui.form}>
                                 <Item style={{borderBottomWidth:0, marginLeft: 0}}>
+
                                     <Input ref="amountInput"  style={[Ui.inputField, Ui.amountInput]} value={this.props.amount}
                                            onChangeText={(text) => this.props.onValueChange('amount', text)}
                                            keyboardType='numeric'/>
