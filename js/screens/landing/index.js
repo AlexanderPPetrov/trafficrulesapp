@@ -297,7 +297,7 @@ class Landing extends Component {
             return  <SetPin navigation={this.props.navigation}>
                 </SetPin>
         }
-        return  <ScrollView style={{flex:1}} contentContainerStyle={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+        return  <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}} >
 
                 <KeyboardAvoidingView behavior="padding" style={styles.loginContainer}>
                     <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary}
@@ -305,18 +305,18 @@ class Landing extends Component {
                     <Login ref="login" navigation={this.props.navigation} username={this.state.username} password={this.state.password}
                            setValue={this.setValue} loginHandler={this.loginHandler}></Login>
                 </KeyboardAvoidingView>
-            </ScrollView>
+            </View>
 
 
     }
 
     render() {
 
-        return <View style={{flex:1,alignItems:'center', backgroundColor:ColorScheme.mainBackground}}>
+        return <ScrollView contentContainerStyle={{flex:1,alignItems:'center', backgroundColor:ColorScheme.mainBackground}} keyboardShouldPersistTaps="never">
             <StatusBar/>
             {this.getLandingScreen()}
             {this.getImage()}
-        </View>
+        </ScrollView>
     }
 }
 
