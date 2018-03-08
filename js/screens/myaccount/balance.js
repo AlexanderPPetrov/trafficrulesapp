@@ -3,14 +3,21 @@ import {View} from 'react-native';
 
 import styles from "./styles";
 import BalanceItem from "./balanceitem";
+import ColorScheme from "../../common/colorscheme";
 import {Container, Header, Content, Card, CardItem, Text, Icon, Right, List, ListItem} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+
+let colorIndex = 0;
 
 class Balance extends Component {
 
 
     getListItem = (balance, i) => {
-        return <BalanceItem key={i} _cash_balance={balance._cash_balance} _money_in_accounts={balance._money_in_accounts}
+        colorIndex++;
+        if(colorIndex > ColorScheme.currencyColors.length -1){
+            colorIndex = 0;
+        }
+        return <BalanceItem key={i} colorIndex={colorIndex} _cash_balance={balance._cash_balance} _money_in_accounts={balance._money_in_accounts}
                          _currency={balance._currency}></BalanceItem>;
     };
 

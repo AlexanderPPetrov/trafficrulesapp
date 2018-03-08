@@ -603,6 +603,9 @@ export default {
     },
     INR: {
         backgroundColor:ColorScheme.INR
+    },
+    CNY: {
+        backgroundColor:ColorScheme.CNY
     }
 
 

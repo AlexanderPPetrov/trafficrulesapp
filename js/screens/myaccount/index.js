@@ -101,8 +101,11 @@ class MyAccount extends Component {
 
     dataLoaded = (response) => {
 
+        if(!response._brokerage_balance){
+            response._brokerage_balance = '-'
+        }
+
         let pieChartData = _.reject(response.balances, {_total_in_eur:0})
-        console.log('pieChartData', pieChartData)
         var result = pieChartData.map(balance => ({ x: balance._currency, y: balance._total_in_eur }));
         this.setState({
             _payload: response,

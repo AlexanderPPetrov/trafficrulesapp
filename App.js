@@ -29,7 +29,7 @@ export default class App1 extends React.Component {
 
         //suppress warnings and errors
         console.disableYellowBox = true;
-        console.error = (error) => error.apply;
+        // console.error = (error) => error.apply;
 
         await Expo.Font.loadAsync({
             Roboto: require("native-base/Fonts/Roboto.ttf"),

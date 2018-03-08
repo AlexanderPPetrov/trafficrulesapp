@@ -29,14 +29,7 @@ class Notification extends Component {
     }
     componentDidMount = async () => {
 
-        if(this.props.data && this.props.data.data.length > 0){
-
-            console.log(this.props.data.data)
-            console.log('Decrypted data: ', Api.decrypt(this.props.data.data))
-        }
         moment.locale(I18n.locale)
-
-
 
         if(this.props.data.received_date){
             this.setState({

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Text} from 'native-base';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
-let currencies = ['usd', 'btc', 'eur', 'inr', 'gbp'];
+let currencies = ['usd', 'btc', 'eur', 'inr', 'gbp', 'cny'];
 
 class CurrencyIcon extends Component {
 
@@ -19,7 +19,7 @@ class CurrencyIcon extends Component {
             return <MaterialCommunityIcons name={iconName} size={this.props.size} color={this.props.color}/>
         }
 
-        return <Text style={{color: this.props.color, fontSize: this.props.size*0.9}}>{this.props.currency}</Text>
+        return <Text style={{color: this.props.color, fontSize: this.props.size*0.9}}>{this.props.currency.charAt(0)}</Text>
 
     }
 

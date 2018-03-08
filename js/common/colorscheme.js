@@ -69,6 +69,8 @@ export default {
     EUR: '#fda349',
     P: '#ff775c',
     INR: '#d6bbf5',
+    CNY: '#00a2ff',
+
     chartBalance: '#00a2ff',
     chartChange: '#54fc00',
 
@@ -79,6 +81,8 @@ export default {
     notificationBrokerageActivity: '#FDA349',
     notificationBopActivity: '#FDA349',
     notificationBettingTips: '#e587c2',
-    notificationAdHoc: '#00a2ff'
+    notificationAdHoc: '#00a2ff',
+
+    currencyColors: ['#67a7f7','#52dbb9','#ffd862', '#fda349', '#ff775c', '#d6bbf5', '#00a2ff']
 
 };

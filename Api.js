@@ -121,6 +121,8 @@ let Api = {
                         if (opts.url === 'login') {
                             Api.auth = responseJson._payload._userLoginHash;
                             Api.key = responseJson._payload._key;
+
+                            console.log(responseJson._payload)
                         }
 
                         opts.success(responseJson._payload)

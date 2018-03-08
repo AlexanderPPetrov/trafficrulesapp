@@ -4,7 +4,9 @@ import {View} from 'react-native';
 import {Container, Header, Content, Card, CardItem, Text, Right, ListItem} from 'native-base';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import Ui from '../../common/ui';
+import ColorScheme from '../../common/colorscheme';
 import CurrencyIcon from '../../common/currency/currency';
+
 
 class BalanceItem extends Component {
 
@@ -13,10 +15,12 @@ class BalanceItem extends Component {
     };
 
     render() {
+
+        console.log(this.props.colorIndex,'£££££££', ColorScheme.currencyColors[this.props.colorIndex])
         return <ListItem style={Ui.listItem}>
 
             <Col style={{width:60}}>
-                <View style={[Ui.iconContainer, Ui[this.props._currency]]}>
+                <View style={[Ui.iconContainer, {backgroundColor:ColorScheme.currencyColors[this.props.colorIndex]}]}>
                     {this.getCurrencyIcon()}
                 </View>
             </Col>
