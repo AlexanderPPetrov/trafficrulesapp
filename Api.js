@@ -1,7 +1,7 @@
 import FormData from 'FormData';
 import CryptoJS from 'crypto-js';
 
-const baseUrl = 'http://api-prmts.dev.cc/v1/';
+const baseUrl = 'https://api.premiumtradings.com/index.php/v1/';
 const translationsUrl = 'https://prmts-translations.dev.cc/'
 
 const appKey = '122$sads1CCssa@$%AScccaas552112';
@@ -110,6 +110,7 @@ let Api = {
         if(loader){
             Loader.show();
         }
+        console.log(_url)
         const attempt = () => {
 
             return fetch(_url, _data)
