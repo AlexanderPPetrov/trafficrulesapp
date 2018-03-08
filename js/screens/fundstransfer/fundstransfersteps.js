@@ -147,8 +147,6 @@ class FundsTransferSteps extends Component {
             }
         }
 
-        console.log('##########################', key, value)
-
         this.setState({[stateKey]: {...this.state[stateKey], [key]: value}});
 
     };

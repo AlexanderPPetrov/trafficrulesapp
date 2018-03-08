@@ -197,11 +197,9 @@ export default {
     october:'October',
     november:'November',
     december:'December',
-
     openedWithdrawRequests: 'You currently have open withdraw requests',
     enterPinMessage: 'Enter your 4-digit PIN',
     setPinSecondHint: 'Confirm your PIN',
-
     unread:'Unread',
     agent:'Agent',
     clear:'Clear',
@@ -209,5 +207,6 @@ export default {
     totalForAccounts:'Total for accounts',
     statusReportFor:'Status report for',
     weeklyBalanceText: 'Please kindly check and confirm. Thank you for your kind attention.',
-    premiumTradingsTeam: 'PremiumTradings team'
+    premiumTradingsTeam: 'PremiumTradings team',
+    userPassMandatory:'Username and Password are mandatory'
 };

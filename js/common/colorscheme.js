@@ -83,6 +83,6 @@ export default {
     notificationBettingTips: '#e587c2',
     notificationAdHoc: '#00a2ff',
 
-    currencyColors: ['#67a7f7','#52dbb9','#ffd862', '#fda349', '#ff775c', '#d6bbf5', '#00a2ff']
+    currencyColors: ['#00a2ff','#67a7f7','#52dbb9','#ffd862', '#fda349', '#ff775c', '#d6bbf5']
 
 };

@@ -16,7 +16,6 @@ class BalanceItem extends Component {
 
     render() {
 
-        console.log(this.props.colorIndex,'£££££££', ColorScheme.currencyColors[this.props.colorIndex])
         return <ListItem style={Ui.listItem}>
 
             <Col style={{width:60}}>

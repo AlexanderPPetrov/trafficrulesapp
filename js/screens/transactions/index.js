@@ -206,6 +206,9 @@ class Transactions extends Component {
             transaction._fee = 0;
         }
 
+        let amount = parseFloat(transaction._fee) + parseFloat(transaction._amount);
+        amount = parseFloat(amount).toFixed(2)
+
         return <View key={i} style={Ui.transactionsContainer}>
                     <Grid>
                         <Col size={1} style={{alignItems:'center', minWidth:15}}>
@@ -227,7 +230,7 @@ class Transactions extends Component {
                                     <Text style={[Ui.itemLabel, Ui.itemLabelDark, Ui.bold]}>{this.getPaymentMethod(transaction._payment_method)}</Text>
                                 </Col>
                                 <Col size={1} style={{justifyContent:'center'}}>
-                                    <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.itemLabelDark, Ui.bold]}>{transaction._amount} {transaction._currency}</Text>
+                                    <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.itemLabelDark, Ui.bold]}>{amount} {transaction._currency}</Text>
                                 </Col>
                             </Row>
                             {/*<Row>*/}

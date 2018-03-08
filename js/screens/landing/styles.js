@@ -38,17 +38,9 @@ export default {
     },
     formContainer: {
         marginTop:45,
-        padding:45,
         alignSelf: "stretch"
     },
-    logo: {
-        // position: "absolute",
-        // left: Platform.OS === "android" ? 40 : 50,
-        // top: Platform.OS === "android" ? 35 : 60,
-        // width: 247,
-        // height: 67
-        marginTop:30
-    },
+
     helloMessage: {
         fontSize:20,
         fontWeight:'bold',

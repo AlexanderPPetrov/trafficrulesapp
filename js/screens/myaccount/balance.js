@@ -7,11 +7,17 @@ import ColorScheme from "../../common/colorscheme";
 import {Container, Header, Content, Card, CardItem, Text, Icon, Right, List, ListItem} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
-let colorIndex = 0;
+let colorIndex = -1;
 
 class Balance extends Component {
 
 
+    componentWillMount = () => {
+        colorIndex = -1;
+    }
+    componentWillReceiveProps = () => {
+        colorIndex = -1;
+    }
     getListItem = (balance, i) => {
         colorIndex++;
         if(colorIndex > ColorScheme.currencyColors.length -1){

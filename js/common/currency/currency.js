@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Text} from 'native-base';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
-let currencies = ['usd', 'btc', 'eur', 'inr', 'gbp', 'cny'];
+let currencies = ['usd', 'btc', 'eur', 'inr', 'gbp', 'cny', 'chf', 'rub','try','krw','jpy'];
 
 class CurrencyIcon extends Component {
 

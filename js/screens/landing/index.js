@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ScrollView, View, Dimensions, Alert, Image} from "react-native";
+import {ScrollView, View, Dimensions, Alert, Image, KeyboardAvoidingView} from "react-native";
 import NotificationsHandler from "../../common/notifications/index";
 import {Toast} from "native-base";
 import Expo, {Notifications} from 'expo';
@@ -176,7 +176,8 @@ class Landing extends Component {
     errorMessage = (message) => {
         Toast.show({
             text: message,
-            buttonText: I18n.t('ok')
+            buttonText: I18n.t('ok'),
+            duration:4000
         })
     };
 
@@ -185,6 +186,15 @@ class Landing extends Component {
     };
 
     login = () => {
+
+        if(!this.state.username || !this.state.password){
+            Toast.show({
+                text: I18n.t('userPassMandatory'),
+                buttonText: I18n.t('ok'),
+                duration:4000
+            })
+            return
+        }
 
         let loginData = {
             username: this.state.username,
@@ -268,45 +278,45 @@ class Landing extends Component {
 
     };
 
+    getImage = () => {
+        if (this.state.pin === '' || this.state.setPin)  return null;
+        return <Image style={{
+            bottom: 0,
+            position: "absolute",
+            width: this.state.width,
+            height: this.state.width*0.27965}}
+                      source={require('../../../img/login_background.png')}
+        />
+    }
     getLandingScreen = () => {
         if (this.state.pin === '') {
             return null;
         }
 
         if (this.state.setPin) {
-            return <ScrollView contentContainerStyle={styles.loginContainer}>
-                <SetPin navigation={this.props.navigation}>
+            return  <SetPin navigation={this.props.navigation}>
                 </SetPin>
-            </ScrollView>
         }
-        return <ScrollView contentContainerStyle={styles.loginContainer}>
-            <View style={styles.imageContainer}>
-                <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary}
-                      slogan={ColorScheme.logoSlogan}></Logo>
-                {/*<View>*/}
-                {/*<MaterialCommunityIcons name="account-box" size={100} style={styles.avatar}></MaterialCommunityIcons>*/}
-                {/*<Text style={styles.helloMessage}>Hello John!</Text>*/}
-                {/*</View>*/}
-            </View>
-                <Image style={{
-                    bottom: 0,
-                    position: "absolute",
-                    width: this.state.width,
-                    height: this.state.width*0.27965}}
-                       source={require('../../../img/login_background.png')}
-                />
+        return  <ScrollView style={{flex:1}} contentContainerStyle={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
 
-            <Login ref="login" navigation={this.props.navigation} username={this.state.username} password={this.state.password}
-                   setValue={this.setValue} loginHandler={this.loginHandler}></Login>
-        </ScrollView>
+                <KeyboardAvoidingView behavior="padding" style={styles.loginContainer}>
+                    <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary}
+                          slogan={ColorScheme.logoSlogan}></Logo>
+                    <Login ref="login" navigation={this.props.navigation} username={this.state.username} password={this.state.password}
+                           setValue={this.setValue} loginHandler={this.loginHandler}></Login>
+                </KeyboardAvoidingView>
+            </ScrollView>
+
+
     }
 
     render() {
 
-        return <Container>
+        return <View style={{flex:1,alignItems:'center', backgroundColor:ColorScheme.mainBackground}}>
             <StatusBar/>
             {this.getLandingScreen()}
-        </Container>
+            {this.getImage()}
+        </View>
     }
 }
 

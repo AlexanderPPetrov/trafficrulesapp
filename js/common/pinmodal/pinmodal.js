@@ -148,7 +148,7 @@ class PinModal extends Component {
                         Toast.show({
                             text: I18n.t('wrongPin'),
                             buttonText: I18n.t('ok'),
-
+                            duration:4000
                         })
                         return;
                     }

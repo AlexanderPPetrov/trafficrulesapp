@@ -153,7 +153,8 @@ let Api = {
 
                         Toast.show({
                             text: message,
-                            buttonText: I18n.t('ok')
+                            buttonText: I18n.t('ok'),
+                            duration:4000
                         })
 
                     }

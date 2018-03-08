@@ -141,6 +141,7 @@ class Pin extends React.Component {
                             Toast.show({
                                 text: I18n.t('pinNotMatching'),
                                 buttonText: I18n.t('ok'),
+                                duration:4000
 
                             })
                             return;
