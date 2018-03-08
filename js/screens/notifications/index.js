@@ -145,7 +145,7 @@ class Notifications extends Component {
                     onBack={this.goBackward}
                     notifications={true}
                 />
-                <ScrollView>
+                <ScrollView bounces={false}>
                 <Content scrollEnabled={false}>
 
                         {this.getClearButton()}
