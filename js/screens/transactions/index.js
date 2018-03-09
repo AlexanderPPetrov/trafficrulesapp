@@ -275,6 +275,8 @@ class Transactions extends Component {
             <Container style={Ui.container}>
                 <Header
                     title={I18n.t('transactions')}
+                    indicatorRoute={'Transactions'}
+                    navigation={this.props.navigation}
                 />
                 <View style={{height:51}}>
                     {this.getFilter()}

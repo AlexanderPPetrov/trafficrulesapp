@@ -69,6 +69,8 @@ class Accounts extends Component {
             <Container style={Ui.container}>
                 <Header
                     title={I18n.t('accounts')}
+                    indicatorRoute={'Accounts'}
+                    navigation={this.props.navigation}
                 />
                 <ScrollView refreshControl={
                     <RefreshControl

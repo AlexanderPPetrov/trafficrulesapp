@@ -68,9 +68,11 @@ class Settings extends Component {
         });
 
         AsyncStorage.getItem('locale', (err, result) => {
-            let languageCode = result.split('-')[0].split('_')[0];
-            if(!result){
+            let languageCode = result;
+            if(!languageCode){
                 languageCode = 'en'
+            }else{
+                languageCode = languageCode.split('-')[0].split('_')[0];
             }
             this.setState({
                 languageCode
@@ -191,7 +193,7 @@ class Settings extends Component {
                         <ListItem style={[Ui.listItem,Ui.listHeader]}>
                             <Text>{I18n.t('language')}</Text>
                         </ListItem>
-                        <ListItem >
+                        <ListItem style={{height:76}}>
                             <Col>
                                 {this.getLanguagePicker()}
                             </Col>

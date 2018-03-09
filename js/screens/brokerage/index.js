@@ -33,6 +33,8 @@ class Brokerage extends Component {
                 <Header
                     hasTabs
                     title={I18n.t('brokerage')}
+                    indicatorRoute={'Brokerage'}
+                    navigation={this.props.navigation}
                 />
 
                 <Tabs></Tabs>

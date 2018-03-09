@@ -25,7 +25,7 @@ export default class GestureView extends Component {
 
     static get defaultProps () {
         return {
-            swipeThreshold: 120,
+            swipeThreshold: 60,
             quadrantThreshold: 30
         }
     }

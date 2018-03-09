@@ -49,7 +49,6 @@ class PinModal extends Component {
     }
 
     show = (savedPin, success, reset) => {
-        if(!this.refs.pinModal) return
         _success = success;
         _reset = reset;
         this.setState({
@@ -64,7 +63,6 @@ class PinModal extends Component {
     };
 
     hide = () => {
-        if(!this.refs.pinModal) return
         this.refs.pinModal.fadeOutDown(500)
         setTimeout(() => {
             this.setState({

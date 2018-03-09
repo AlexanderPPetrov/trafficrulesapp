@@ -6,7 +6,7 @@ import Controller from '../../../Controller';
 import styles from "./styles";
 import NotificationMessage from "./notification";
 import NotificationsList from "../../screens/notifications/index";
-import GestureView from './GestureView';
+import GestureView from '../../common/gestureview/GestureView';
 import * as Animatable from 'react-native-animatable';
 
 import ColorScheme from "../colorscheme";
@@ -62,7 +62,7 @@ class NotificationsHandler extends Component {
                 }
 
             }
-
+            if(!this.state.renderNotificationsContainer) return;
             receivedNotification.data.received_date = new Date()
             Controller.addNotification(receivedNotification)
 

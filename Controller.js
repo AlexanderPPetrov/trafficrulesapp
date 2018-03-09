@@ -118,6 +118,14 @@ let Controller = {
         Controller.navigateTo(Controller.previousRoute)
     },
 
+    drawerNavigateTo: (routeName, params) => {
+        Controller.navigateTo('DrawerClose')
+
+        setTimeout(function(){
+            Controller.navigateTo(routeName, params)
+        }, 500);
+    },
+
     navigateTo: (routeName, params) => {
         //Skip drawer open
         if(routeName !== 'DrawerOpen') {

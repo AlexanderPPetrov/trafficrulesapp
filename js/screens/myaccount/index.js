@@ -122,6 +122,8 @@ class MyAccount extends Component {
                 <Header
                     hasTabs
                     title={I18n.t('myAccount')}
+                    indicatorRoute={'MyAccount'}
+                    navigation={this.props.navigation}
                 />
 
                 {/*<Tabs loaded={this.state.loaded} balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>*/}
