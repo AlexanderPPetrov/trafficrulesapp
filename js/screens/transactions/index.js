@@ -59,6 +59,18 @@ class Transactions extends Component {
 
     componentDidMount = () => {
         this.getPaymentNames()
+
+        Header.setNavigation(this.props.navigation)
+        this.navigationSubscribe = this.props.navigation.addListener(
+            'willFocus',
+            () => {
+                Header.setRoute('Transactions')
+            }
+        );
+    }
+
+    componentWillUnmount = () => {
+        this.navigationSubscribe.remove();
     }
 
     getPaymentNames = () => {
@@ -273,11 +285,10 @@ class Transactions extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header
-                    title={I18n.t('transactions')}
-                    indicatorRoute={'Transactions'}
-                    navigation={this.props.navigation}
-                />
+                {/*<Header*/}
+                    {/*title={I18n.t('transactions')}*/}
+                    {/*indicatorRoute={'Transactions'}*/}
+                {/*/>*/}
                 <View style={{height:51}}>
                     {this.getFilter()}
                 </View>

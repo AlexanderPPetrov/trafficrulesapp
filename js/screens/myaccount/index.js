@@ -46,7 +46,18 @@ class MyAccount extends Component {
     componentDidMount = () => {
         this.loadData()
         this.checkIfLocaleSet()
+        Header.setNavigation(this.props.navigation)
+        this.navigationSubscribe = this.props.navigation.addListener(
+            'willFocus',
+            () => {
+                Header.setRoute('MyAccount')
+            }
+        );
     };
+
+    componentWillUnmount = () => {
+        this.navigationSubscribe.remove();
+    }
 
     checkIfLocaleSet = () => {
         if(Api.setLocale){
@@ -119,14 +130,6 @@ class MyAccount extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header
-                    hasTabs
-                    title={I18n.t('myAccount')}
-                    indicatorRoute={'MyAccount'}
-                    navigation={this.props.navigation}
-                />
-
-                {/*<Tabs loaded={this.state.loaded} balances={this.state._payload.balances} data={this.state.pieChartData} refreshing={this.state.refreshing} _payload={this.state._payload} onRefresh={this.onRefresh}></Tabs>*/}
                 <MainBalance
                     loaded={this.state.loaded}
                     refreshing={this.state.refreshing}

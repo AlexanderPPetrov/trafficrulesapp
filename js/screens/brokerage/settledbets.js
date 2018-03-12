@@ -229,6 +229,8 @@ class SettledBets extends Component {
             this.getListItem(bet, i)
         );
 
+        if(this.state.refreshing) return null;
+
         if (bets.length == 0 && this.state.loaded) {
             return <Text style={Ui.noResults}>{I18n.t('noSettledBets')}</Text>;
         }
@@ -255,7 +257,7 @@ class SettledBets extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex:1}}>
                 <View style={{height:51}}>
                     {this.getFilter()}
                 </View>

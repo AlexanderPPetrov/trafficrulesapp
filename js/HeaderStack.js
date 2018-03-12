@@ -8,27 +8,6 @@ import Accounts from "./screens/accounts/";
 import Brokerage from "./screens/brokerage/";
 import Transactions from "./screens/transactions/";
 
-// const HeaderNavigator = StackNavigator(
-//     {
-//         MyAccount: {
-//             screen: MyAccount,
-//             navigationOptions: {
-//                 gesturesEnabled: false,
-//             }
-//
-//         },
-//         Accounts: {screen: Accounts},
-//         Brokerage: {screen: Brokerage},
-//         Transactions: {screen: Transactions}
-//     },
-//     {
-//         initialRouteName: "MyAccount",
-//         headerMode: "none",
-//     }
-// );
-
-
-
 const HeaderNavigator = (initialRouteName = 'MyAccount') => {
 
     const CustomNavigator = TabNavigator({
@@ -61,9 +40,8 @@ const HeaderNavigator = (initialRouteName = 'MyAccount') => {
         },
         {
             initialRouteName: initialRouteName.initialRouteName,
-            swipeEnabled: false,
-            lazyLoad: true,
-            animationEnabled: false,
+            swipeEnabled: true
+
         });
 
     return <CustomNavigator />;
@@ -83,9 +61,7 @@ class HeaderStack extends React.Component {
                     title={I18n.t(this.props.navigation.state.key)}
                     indicatorRoute={this.props.navigation.state.key}
                 />
-                <HeaderNavigator  initialRouteName={this.props.navigation.state.routeName} ref={navigatorRef => {
-                    Controller.setNavigator(navigatorRef);
-                }}/>
+                <HeaderNavigator initialRouteName={this.props.navigation.state.routeName} />
             </View>
         );
     }

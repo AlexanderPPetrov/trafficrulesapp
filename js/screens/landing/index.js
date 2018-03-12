@@ -258,7 +258,7 @@ class Landing extends Component {
             }
             setTimeout(() => {
                 Controller.hidePinModal();
-            }, 300)
+            }, 500)
 
         } else {
             Expo.SecureStore.setItemAsync('username', this.state.username)

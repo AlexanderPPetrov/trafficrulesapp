@@ -129,8 +129,9 @@ let Api = {
 
                     } else {
 
-                        if(responseJson._payload._message === 'user_not_authorized'){
+                        if(responseJson._payload._message === 'user_not_authorized' || responseJson._payload._message === 'user_not_authorized_memcache'){
                             Controller.navigateTo('Landing')
+                            return;
                         }
 
                         if(opts.error){

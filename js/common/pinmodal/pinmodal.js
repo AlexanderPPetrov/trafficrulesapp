@@ -63,12 +63,13 @@ class PinModal extends Component {
     };
 
     hide = () => {
+        if(this.refs.pinModal === undefined) return
         this.refs.pinModal.fadeOutDown(500)
         setTimeout(() => {
             this.setState({
                 visible: false
             })
-        }, 500)
+        }, 510)
     };
 
     getPinBox = (pinValue, i) => {

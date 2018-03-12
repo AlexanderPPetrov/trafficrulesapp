@@ -19,26 +19,24 @@ import WeeklyStatus from "./screens/weeklystatus/";
 
 import Controller from '../Controller';
 
+import HeaderStack from './HeaderStack'
+
 import SideBar from "./screens/sidebar";
 
 
 const DrawerNavigation = DrawerNavigator(
     {
         MyAccount: {
-            screen: MyAccount,
-            navigationOptions: {
-                gesturesEnabled: false,
-            }
-
+            screen: HeaderStack
         },
         Notifications: {screen: Notifications},
-        Accounts: {screen: Accounts},
+        Accounts: {screen: HeaderStack},
         PreviousBalance: {screen: PreviousBalance},
-        Brokerage: {screen: Brokerage},
+        Brokerage: {screen: HeaderStack},
         Deposit: {screen: Deposit},
         Withdraw: {screen: Withdraw},
         FundsTransfer: {screen: FundsTransfer},
-        Transactions: {screen: Transactions},
+        Transactions: {screen: HeaderStack},
         SendMoney: {screen: SendMoney},
         Settings: {screen: Settings},
         WeeklyStatus: {screen: WeeklyStatus},

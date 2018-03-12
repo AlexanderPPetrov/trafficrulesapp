@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import I18n from '../../../i18n/i18n';
 import {
     Container,
     Title,
@@ -37,6 +36,17 @@ class Accounts extends Component {
 
     componentDidMount = () => {
         this.loadData()
+        Header.setNavigation(this.props.navigation)
+        this.navigationSubscribe = this.props.navigation.addListener(
+            'willFocus',
+            () => {
+                Header.setRoute('Accounts')
+            }
+        );
+    }
+
+    componentWillUnmount = () => {
+        this.navigationSubscribe.remove();
     }
 
     loadData = (loader = true) => {
@@ -67,11 +77,6 @@ class Accounts extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                <Header
-                    title={I18n.t('accounts')}
-                    indicatorRoute={'Accounts'}
-                    navigation={this.props.navigation}
-                />
                 <ScrollView refreshControl={
                     <RefreshControl
                         refreshing={this.state.refreshing}

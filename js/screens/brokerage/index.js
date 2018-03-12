@@ -22,21 +22,23 @@ import Tabs from "./tabs";
 class Brokerage extends Component {
 
     componentDidMount = () => {
-        const navigation = this.props.navigation;
-        if(navigation && navigation.state && navigation.state.params){
-            console.log(navigation.state.params.settledBets)
-        }
+
+        Header.setNavigation(this.props.navigation)
+        this.navigationSubscribe = this.props.navigation.addListener(
+            'willFocus',
+            () => {
+                Header.setRoute('Brokerage')
+            }
+        );
     }
+
+    componentWillUnmount = () => {
+        this.navigationSubscribe.remove();
+    }
+
     render() {
         return (
             <Container style={Ui.container}>
-                <Header
-                    hasTabs
-                    title={I18n.t('brokerage')}
-                    indicatorRoute={'Brokerage'}
-                    navigation={this.props.navigation}
-                />
-
                 <Tabs></Tabs>
             </Container>
         );

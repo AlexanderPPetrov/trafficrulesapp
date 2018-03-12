@@ -22,6 +22,7 @@ class MainBalance extends Component {
                     refreshing={this.props.refreshing}
                     onRefresh={this.props.onRefresh}
                 />
+
             }>
                 <BalanceHeader
                     balanceLeft={this.props._payload._safe_balance}

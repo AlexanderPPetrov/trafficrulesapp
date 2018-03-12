@@ -50,9 +50,11 @@ const Tabs = TabNavigator({
     },
 }, {
     tabBarPosition: 'top',
-    animationEnabled: true,
     tabBarComponent: (props)=> <View style={Ui.dropShadow}><TabBarTop {...props} style={{ backgroundColor:ColorScheme.tabsBackground}} indicatorStyle={indicatorStyle(props, 'flex-end')} /></View>,
-    tabBarOptions: Ui.tabsStyle
+    tabBarOptions: Ui.tabsStyle,
+    swipeEnabled: false,
+    lazyLoad: true,
+    animationEnabled: false
 })
 
 export default () => <Tabs/>;
