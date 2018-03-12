@@ -19,7 +19,7 @@ class CommonDatePicker extends Component {
                     iconComponent={<EvilIcons active name='calendar' style={Ui.calendarIcon}/>}
                     // minDate={new Date('2017-1-1')}
                     maxDate={new Date()}
-                    placeholder={I18n.t('from')}
+                    placeholder={this.props.title}
                     onDateChange={(date) => {
                         this.props.onDateChange(date)
                     }}

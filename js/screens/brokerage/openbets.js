@@ -89,7 +89,7 @@ class OpenBets extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex:1}}>
                 <View style={{height:110}}>
                     <BalanceHeader
                         balanceLeft={Api.accountSettings._brokerage_balance}

@@ -20,11 +20,6 @@
       ]
     },
     "privacy": "unlisted",
-    "androidStatusBarColor": "#222c34",
-    "androidStatusBar": {
-      "barStyle": "dark-content",
-      "backgroundColor": "#000000"
-    },
     "android": {
       "package": "com.apk.prmts"
     }
