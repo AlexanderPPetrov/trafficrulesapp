@@ -41,12 +41,14 @@ class Login extends React.Component {
                             <Label >{I18n.t('username')}</Label>
                             <Input style={styles.inputField}
                                    value={this.props.username}
+                                   returnKeyType="done"
                                    onChangeText={(newValue) => this.props.setValue('username', newValue)}/>
                         </Item>
                         <Item floatingLabel style={Ui.inputContainer}>
                             {/*<Icon active name='ios-lock-outline' style={styles.inputIcon}/>*/}
                             <Label >{I18n.t('password')}</Label>
                             <Input getRef={(input) => this.passwordInput = input} style={styles.inputField} secureTextEntry={true}
+                                   returnKeyType="done"
                                    value={this.props.password}
                                    onChangeText={(newValue) => this.props.setValue('password', newValue)}/>
                         </Item>

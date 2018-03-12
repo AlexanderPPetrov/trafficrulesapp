@@ -1,10 +1,9 @@
 import Expo from "expo";
 import React from "react";
-import {AsyncStorage, Alert} from "react-native";
+import {SafeAreaView} from "react-native";
 import App from "./js/App";
-import I18n from './i18n/i18n';
+import ColorScheme from "./js/common/colorscheme";
 
-import Api from './Api';
 export default class App1 extends React.Component {
     constructor() {
         super();
@@ -53,6 +52,8 @@ export default class App1 extends React.Component {
         if (!this.state.isReady) {
             return <Expo.AppLoading/>;
         }
-        return <App exp={this.props.exp}/>;
-    }
+        return <SafeAreaView style={{flex: 1, backgroundColor: ColorScheme.headerBackground}}>
+            <App exp={this.props.exp}/>
+        </SafeAreaView>
+    };
 }

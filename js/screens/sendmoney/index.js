@@ -114,7 +114,7 @@ class SendMoney extends Component {
     };
 
     getSteps = () => {
-        if(!this.state.loaded || !this.state.isAllowed) return null
+        if(!this.state.loaded || this.state.isAllowed) return null
         return <Steps currentPage={this.state.currentPage} stepCount={this.state.steps} labels={this.state.labels}/>
 
     }
@@ -122,7 +122,7 @@ class SendMoney extends Component {
     getSendMoney = () => {
         if(!this.state.loaded) return null
 
-        if(this.state.isAllowed){
+        if(!this.state.isAllowed){
             return <View style={Ui.formContainer}>
                 <SendMoneySteps currentPage={this.state.currentPage}
                                 onRef={ref => (this.tabs = ref)} {...this.props}
@@ -130,6 +130,7 @@ class SendMoney extends Component {
                                 disableButton={this.setButtonState}/>
 
                 <View style={Ui.buttonsContainer}>
+                    <Chat/>
                     {this.getButton()}
                 </View>
             </View>
@@ -146,7 +147,7 @@ class SendMoney extends Component {
     }
 
     getChat = () => {
-        if(this.state.loaded && !this.state.isAllowed) {
+        if(this.state.loaded && this.state.isAllowed) {
             return <Chat/>
         }
     }
@@ -160,12 +161,11 @@ class SendMoney extends Component {
                         <View style={{flex: 1}}>
                             {this.getSteps()}
                                 {this.getSendMoney()}
-
+                            {this.getChat()}
                         </View>
                     </View>
                 </Content>
 
-                {this.getChat()}
 
             </Container>
         );

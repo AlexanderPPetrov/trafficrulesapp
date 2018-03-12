@@ -45,7 +45,7 @@ class SecureId extends Component {
                 <Text style={Ui.formLabel}>{I18n.t('enterSecureId')}</Text>
                 <Form style={Ui.form}>
                     <Item style={Ui.inputContainer}>
-                        <Input ref="secureIdInput" style={Ui.inputField} value={this.props.secureId} onChangeText={(text) => this.props.changeValue('secureId', text)}/>
+                        <Input ref="secureIdInput" style={Ui.inputField} value={this.props.secureId} returnKeyType="done" onChangeText={(text) => this.props.changeValue('secureId', text)}/>
                     </Item>
                 </Form>
             </View>

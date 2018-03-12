@@ -59,7 +59,7 @@ class Amount extends Component {
                             <Form style={Ui.form}>
                                 <Item style={{borderBottomWidth:0, marginLeft: 0}}>
 
-                                    <Input ref="amountInput"  style={[Ui.inputField, Ui.amountInput]} value={this.props.amount}
+                                    <Input ref="amountInput"  style={[Ui.inputField, Ui.amountInput]} value={this.props.amount} returnKeyType="done"
                                            onChangeText={(text) => this.props.onValueChange('amount', text)}
                                            keyboardType='numeric'/>
                                 </Item>

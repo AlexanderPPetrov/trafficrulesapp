@@ -109,7 +109,7 @@ class AddAccount extends Component {
             return <Form style={[Ui.form, {marginTop: 25}]}>
                 <Text style={Ui.formLabel}>{I18n.t('addMessage')}</Text>
                 <Item style={Ui.inputContainer}>
-                    <Input autoFocus={autoFocus} style={Ui.inputField} multiline={true} numberOfLines={2} blurOnSubmit={false}
+                    <Input autoFocus={autoFocus} style={Ui.inputField} multiline={true} numberOfLines={2} blurOnSubmit={true}
                            value={this.props.notes} onChangeText={(text) => this.props.changeValue('notes', text)}/>
                 </Item>
             </Form>
@@ -136,6 +136,7 @@ class AddAccount extends Component {
                                     <View style={Ui.inputContainer}>
                                         <Input ref="emailInput" style={Ui.inputField} value={this.props.account}
                                                onBlur={() => this.focusNext()}
+                                               returnKeyType="done"
                                                onChangeText={(text) => this.props.changeValue('account', text)}
                                         />
                                     </View>

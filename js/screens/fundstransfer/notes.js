@@ -37,7 +37,7 @@ class Notes extends Component {
                 <Text style={Ui.formLabel}>{I18n.t('additionalInformation')}</Text>
                 <Form style={Ui.form}>
                     <Item style={Ui.inputContainer}>
-                    <Input style={Ui.inputField} multiline={true} numberOfLines={2} blurOnSubmit={false}
+                    <Input style={Ui.inputField} multiline={true} numberOfLines={2} blurOnSubmit={true} returnKeyType="done"
                            value={this.props.notes} onChangeText={(text) => this.props.setNotes(text)} />
                     </Item>
                 </Form>
