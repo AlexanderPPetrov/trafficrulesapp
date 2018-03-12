@@ -46,7 +46,7 @@ class HeaderWrapper extends Component {
     componentDidMount = () =>{
         if(this.props.indicatorRoute) this.setRoute(this.props.indicatorRoute)
         if(this.props.title) this.setState({
-            title: this.camelCase(this.props.title)
+            title: this.props.title
         })
     }
 

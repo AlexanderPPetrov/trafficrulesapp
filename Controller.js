@@ -123,7 +123,7 @@ let Controller = {
 
         setTimeout(function(){
             Controller.navigateTo(routeName, params)
-        }, 500);
+        }, 0);
     },
 
     navigateTo: (routeName, params) => {

@@ -40,7 +40,8 @@ const HeaderNavigator = (initialRouteName = 'MyAccount') => {
         },
         {
             initialRouteName: initialRouteName.initialRouteName,
-            swipeEnabled: true
+            swipeEnabled: true,
+            lazyLoad:true
 
         });
 

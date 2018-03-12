@@ -168,14 +168,14 @@ class Transactions extends Component {
         return <Grid>
             <Row>
                 <Col>
-                    <DatePicker
+                    <DatePicker key={0}
                         date={this.state.dateFrom}
                         title={I18n.t('from')}
                         onDateChange={this.dateFromChange}
                     />
                 </Col>
                 <Col style={Ui.datePickerBorder}>
-                    <DatePicker
+                    <DatePicker key={1}
                         date={this.state.dateTo}
                         title={I18n.t('to')}
                         onDateChange={this.dateToChange}
