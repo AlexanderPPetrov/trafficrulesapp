@@ -38,10 +38,10 @@ class Withdraw extends Component {
 
         this.state = {
             currentPage: 0,
-            steps:4,
+            steps:3,
             buttonDisabled: false,
             paymentData: {},
-            labels:[I18n.t('existing'), I18n.t('new'), I18n.t('notes'), I18n.t('transfer')],
+            labels:[I18n.t('accounts'), I18n.t('notes'), I18n.t('transfer')],
             loaded:false
         }
     }
@@ -76,14 +76,19 @@ class Withdraw extends Component {
     };
 
     getButton = () => {
-        if (this.state.currentPage == this.state.steps) {
+        if (this.state.currentPage === this.state.steps) {
             return null;
         }
-        return (
-                <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
+        if(this.state.currentPage === this.state.steps - 2) {
+            return <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
+                <Text style={Ui.buttonLabel}>{I18n.t('transfer').toUpperCase()}</Text>
+            </Button>
+        }
+
+        return <Button primary rounded style={styles.continueButton} onPress={this.goForward} disabled={this.state.buttonDisabled}>
                     <Text style={Ui.buttonLabel}>{I18n.t('continue').toUpperCase()}</Text>
                 </Button>
-        )
+
     };
 
     getHeader = () => {

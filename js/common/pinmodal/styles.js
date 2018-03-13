@@ -1,4 +1,5 @@
 const React = require("react-native");
+import ColorScheme from '../colorscheme';
 export default {
     container: {
         position: 'absolute',
@@ -9,7 +10,7 @@ export default {
         elevation: 8,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: ColorScheme.mainBackground,
     },
 
 };

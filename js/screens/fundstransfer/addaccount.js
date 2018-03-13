@@ -178,53 +178,16 @@ class AddAccount extends Component {
 
     };
 
-    getRemoveContainerStyle = () => {
-        let style = {width: 50, alignItems:'flex-end', justifyContent:'flex-end', paddingRight:15}
-        return style
-    }
-    getAccount = (account, i) => {
-        return <View key={i} >
-            <Grid>
-                <Row style={styles.accountInList}>
-                    <Col style={{justifyContent:'center'}}>
-                        <Text style={[Ui.itemLabel, styles.accountLabel]}>{account.username}</Text>
-                    </Col>
-                    <Col style={{justifyContent:'center'}}>
-                        <Text
-                            style={[Ui.balanceValue, styles.accountAmount, Ui.bold]}>{account.amount} {this.props.currency}</Text>
-                    </Col>
-                    <Col style={this.getRemoveContainerStyle()}>
-                        <TouchableOpacity onPress={() => this.props.removeAccount(this.props.stateKey, account._id)}>
-                            <Icon name="ios-close-circle-outline" style={styles.removeAccountIcon}/>
-                        </TouchableOpacity>
-                    </Col>
-                </Row>
-            </Grid>
-        </View>;
-    };
-
-    getAccounts = () => {
-        if(this.props.selectedAccounts.length == 0) return null;
-        let accounts = this.props.selectedAccounts.map((account, i) =>
-            this.getAccount(account, i)
-        );
-
-        return <View style={styles.accountsList}>
-            {accounts}
-        </View>
-    };
 
     render() {
         return (
             <View>
-                <Text style={Ui.stepHeader}>{this.props.header}</Text>
-                <Text style={Ui.formLabel}>{this.props.label}</Text>
+                {/*<Text style={Ui.formLabel}>{this.props.label}</Text>*/}
                 <View>
                     <Form style={Ui.form}>
                         {this.getPicker()}
                         {this.getAmountField()}
                     </Form>
-                        {this.getAccounts()}
                         {this.getAddMoreButton()}
                 </View>
             </View>

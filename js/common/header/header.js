@@ -97,7 +97,7 @@ class HeaderWrapper extends Component {
         }
         if(this.props.onBack && !this.props.notifications){
         return <Button transparent small onPress={() => Controller.navigateTo("MyAccount")}>
-                <MaterialCommunityIcons name="close" style={{fontSize: 22, textAlign: 'right', color:'#fff'}}/>
+                <MaterialCommunityIcons name="close" style={{fontSize: 22, textAlign: 'right', color:ColorScheme.headerColor}}/>
             </Button>
         }
         return <NotificationsButton/>
@@ -117,7 +117,7 @@ class HeaderWrapper extends Component {
                     };
 
                     if(this.state.currentRoute === route) {
-                        style.backgroundColor = '#fff';
+                        style.backgroundColor = ColorScheme.headerColor;
                     }
 
                     return <View key={i} style={style}/>

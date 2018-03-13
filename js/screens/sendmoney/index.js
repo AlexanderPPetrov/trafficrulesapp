@@ -135,13 +135,13 @@ class SendMoney extends Component {
             </View>
         }
 
-        return <View style={[Ui.formContainer, {justifyContent: 'flex-start'}]}>
+        return <View style={[Ui.formContainer, {justifyContent: 'flex-start', paddingTop:30}]}>
                     <Text style={Ui.stepHeader}>{I18n.t('transferFundsPro')}</Text>
                     <Text style={Ui.textCenter}>{I18n.t('transferFundsProDescription')}</Text>
                     <Text style={[Ui.textCenter,{marginTop:15}]}>{I18n.t('transferFundsProDescriptionTwo')}</Text>
                     <Text style={[Ui.textCenter,{marginTop:15}]}>{I18n.t('transferFundsProDescriptionThree')}</Text>
-                    <Text style={[Ui.textCenter,{marginTop:15}]}>{I18n.t('transferFundsProDescriptionFour')}</Text>
-
+                    <Text style={[Ui.textCenter,{marginTop:15, marginBottom:15}]}>{I18n.t('transferFundsProDescriptionFour')}</Text>
+            {this.getChat()}
         </View>
     }
 
@@ -156,11 +156,10 @@ class SendMoney extends Component {
             <Container style={Ui.container}>
                 {this.getHeader()}
                 <Content>
-                    <View style={Ui.cardContainer}>
+                    <View style={[Ui.cardContainer, {paddingTop:0}]}>
                         <View style={{flex: 1}}>
                             {this.getSteps()}
-                                {this.getSendMoney()}
-                            {this.getChat()}
+                            {this.getSendMoney()}
                         </View>
                     </View>
                 </Content>

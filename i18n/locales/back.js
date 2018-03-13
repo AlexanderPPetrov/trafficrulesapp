@@ -99,8 +99,6 @@ export default {
     transferFundsProDescriptionThree: "Most easiest, cheapest and reliable method to fund accounts!",
     transferFundsProDescriptionFour: "To join the service, contact our support team.",
     moreAccounts: 'More Accounts',
-    existingAccounts: 'Existing Accounts',
-    transferToExistingAccount: 'Transfer to Existing Account',
     transferToNewAccount: 'New Accounts',
     accountAlreadyAdded: 'Account Already Added',
     existing:'Existing',
@@ -208,5 +206,10 @@ export default {
     statusReportFor:'Status report for',
     weeklyBalanceText: 'Please kindly check and confirm. Thank you for your kind attention.',
     premiumTradingsTeam: 'PremiumTradings team',
-    userPassMandatory:'Username and Password are mandatory'
+    userPassMandatory:'Username and Password are mandatory',
+    select:'Select...',
+    transferTo: 'Transfer to',
+    existingAccounts: 'Existing Accounts',
+
+
 };

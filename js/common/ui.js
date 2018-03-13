@@ -59,7 +59,7 @@ export default {
     },
     listItem: {
         padding: 15,
-        backgroundColor: ColorScheme.neutralLight,
+        backgroundColor: ColorScheme.listItemBackground,
         flex: 1,
         flexDirection: 'row',
         minHeight: 45,
@@ -247,7 +247,10 @@ export default {
         justifyContent: 'space-between',
         padding: 30,
         paddingLeft: 40,
-        paddingRight: 40
+        paddingRight: 40,
+        backgroundColor: '#fff',
+        borderTopWidth: 1,
+        borderTopColor:ColorScheme.listItemBorderColor
     },
     buttonsContainer: {
         alignSelf: 'flex-end',
@@ -285,7 +288,8 @@ export default {
         borderBottomColor: '#f2f2f2',
         borderBottomWidth: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        backgroundColor: ColorScheme.listItemBackground
     },
     betWin: {
         borderLeftColor: ColorScheme.win
@@ -482,6 +486,9 @@ export default {
         padding: 15,
         alignSelf: "stretch",
         fontFamily: 'Roboto_light',
+        backgroundColor:ColorScheme.listItemBackground,
+        borderBottomWidth:1,
+        borderBottomColor:ColorScheme.listItemBorderColor
     },
     tabsStyle: {
         activeTintColor: ColorScheme.tabActiveColor,
@@ -514,8 +521,7 @@ export default {
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: Constants.statusBarHeight,
-        backgroundColor: '#fff',
+        paddingTop: Constants.statusBarHeight
     },
     pinBoxContainer: {
         flex: -1,
@@ -528,10 +534,10 @@ export default {
     pinBox: {
         borderWidth: 1,
         borderColor: ColorScheme.darkest,
-        borderRadius: 18 / 2,
-        height: 18,
-        width: 18,
-        marginRight: 32
+        borderRadius: 16,
+        height: 16,
+        width: 16,
+        marginRight: 28
     },
 
     pinBoxFilled: {
@@ -551,6 +557,7 @@ export default {
         height: 70,
         borderWidth: 1,
         borderColor: '#e5e5e5',
+        backgroundColor:'#fff',
         flexGrow: 1,
         paddingLeft:0,
         paddingRight:0,

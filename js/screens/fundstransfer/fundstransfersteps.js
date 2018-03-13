@@ -12,6 +12,7 @@ import {
     Form,
     Picker,
     Item as FormItem,
+    Text,
     H3,
     Button,
     Icon,
@@ -21,12 +22,21 @@ import {
     Right,
     Body,
 } from "native-base";
-import _ from 'lodash'
+import _ from 'lodash';
+import {TouchableOpacity} from 'react-native';
+import {Grid, Row, Col} from "react-native-easy-grid";
+
 import {Toast} from "native-base";
-import AddAccount from './addaccount'
+import AddAccount from './addaccount';
+import Ui from '../../common/ui';
+import {View} from 'react-native';
 import Notes from './notes'
-import Confirmation from '../../common/confirmation/confirmation'
+import Confirmation from '../../common/confirmation/confirmation';
 import * as Animatable from 'react-native-animatable';
+import CommonPicker from '../../common/picker/picker';
+import styles from './styles';
+
+const Item = Picker.Item;
 
 class FundsTransferSteps extends Component {
 
@@ -52,6 +62,7 @@ class FundsTransferSteps extends Component {
                 _id: 'none',
                 _username: I18n.t('selectAccount')
             }],
+            accountType: 'none',
             minAmount: '1',
             notes: '',
             currency: '',
@@ -84,6 +95,8 @@ class FundsTransferSteps extends Component {
     }
 
     addAccount = (stateKey) => {
+
+        if(stateKey === 'none') return;
 
         this.props.hideChat()
         const current = this.state[stateKey];
@@ -197,16 +210,44 @@ class FundsTransferSteps extends Component {
         this.props.setPage(4)
     }
 
-    renderStep = () => {
+    changeAccountType = (accountType) => {
+        this.setState({
+            accountType
+        })
+    }
 
-        if(!this.state.loaded) return null
+    getAccountTypePicker = () => {
 
-        if (this.props.currentPage == 0) {
+        const types = [{
+            id: 'none',
+            label: I18n.t('select') + '...'
+        }, {
+            id: 'existing',
+            label: I18n.t('existingAccounts')
+        },
+            {
+                id: 'new',
+                label: I18n.t('transferToNewAccount')
+            }
+        ]
 
+        const listItems = types.map((type, i) =>
+            <Item key={i} value={type.id} label={type.label}></Item>
+        );
+        return <CommonPicker
+            title={I18n.t('selectAccount')}
+            selectedValue={this.state.accountType}
+            onValueChange={this.changeAccountType}
+            listItems={listItems}
+        />
+
+    };
+
+    getAccountSelectPicker = () => {
+        if(this.state.accountType === 'existing'){
             return <AddAccount key={0}
                                changeAccountValue={this.changeAccountValue}
-                               header={I18n.t('existingAccounts')}
-                               label={I18n.t('transferToExistingAccount')}
+                               label={I18n.t('existingAccounts')}
                                stateKey='existing'
                                fetchUrl='get-member-accounts'
                                setAccounts={this.setAccounts}
@@ -221,12 +262,9 @@ class FundsTransferSteps extends Component {
                                hideChat={this.props.hideChat}
             />
         }
-        if (this.props.currentPage == 1) {
-            console.log(this.state.new.amount)
-
+        if(this.state.accountType === 'new'){
             return <AddAccount key={1}
                                changeAccountValue={this.changeAccountValue}
-                               header={I18n.t('transferToNewAccount')}
                                label={I18n.t('transferToNewAccount')}
                                stateKey='new'
                                fetchUrl='get-member-accounts'
@@ -242,15 +280,76 @@ class FundsTransferSteps extends Component {
                                hideChat={this.props.hideChat}
             />
         }
-        if (this.props.currentPage == 2) {
+
+        return null
+    }
+
+
+    getAccount = (account, i, type) => {
+        let style = [styles.accountInList, {backgroundColor: 'rgba(255,174,0,0.15)'}]
+        if(type === 'new'){
+            style = [styles.accountInList, {backgroundColor: 'rgba(24,191,119,0.15)'}]
+        }
+        return <View key={i} >
+            <Grid>
+                <Row style={style}>
+                    <Col style={{justifyContent:'center'}}>
+                        <Text style={[Ui.itemLabel, styles.accountLabel]}>{account.username}</Text>
+                    </Col>
+                    <Col style={{justifyContent:'center'}}>
+                        <Text
+                            style={[Ui.balanceValue, styles.accountAmount, Ui.bold]}>{account.amount} {this.state.currency}</Text>
+                    </Col>
+                    <Col style={{width: 50, alignItems:'flex-end', justifyContent:'flex-end', paddingRight:15}}>
+                        <TouchableOpacity onPress={() => this.removeAccount(type, account._id)}>
+                            <Icon name="ios-close-circle-outline" style={styles.removeAccountIcon}/>
+                        </TouchableOpacity>
+                    </Col>
+                </Row>
+            </Grid>
+        </View>;
+    };
+
+    getAccounts = (type) => {
+        if(this.state[type].selectedAccounts.length == 0) return null;
+        let accounts = this.state[type].selectedAccounts.map((account, i) =>
+            this.getAccount(account, i, type)
+        );
+
+        return <View>
+            {accounts}
+        </View>
+    };
+
+    renderStep = () => {
+
+        if (!this.state.loaded) return null
+
+        if (this.props.currentPage == 0) {
+
+            return <View>
+                <Text style={Ui.stepHeader}>{I18n.t('transferTo')}</Text>
+                    {this.getAccountTypePicker()}
+                <View style={{marginTop:15}}>
+                    {this.getAccountSelectPicker()}
+                </View>
+                <View style={styles.accountsList}>
+                    {this.getAccounts('existing')}
+                    {this.getAccounts('new')}
+                </View>
+            </View>
+
+        }
+
+        if (this.props.currentPage == 1) {
 
             return <Notes setNotes={this.setNotes} disableButton={this.props.disableButton}
                           notes={this.state.notes}/>
         }
-        if (this.props.currentPage == 3) {
+        if (this.props.currentPage == 2) {
             console.log('currentPage', this.props.currentPage)
         }
-        if (this.props.currentPage == 4) {
+        if (this.props.currentPage == 3) {
             return <Confirmation
                 status={'success'}
                 statusMessage={I18n.t('fundsTransferConfirmation')}
@@ -272,15 +371,12 @@ class FundsTransferSteps extends Component {
     goForward = () => {
 
         if (this.props.currentPage == 0) {
-            this.addAccount('existing');
+            this.addAccount(this.state.accountType);
+            this.checkButton()
+
         }
 
         if (this.props.currentPage == 1) {
-            this.addAccount('new');
-            this.checkButton()
-        }
-
-        if (this.props.currentPage == 2) {
             this.transferFunds()
 
         } else {
