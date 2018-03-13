@@ -321,6 +321,13 @@ class FundsTransferSteps extends Component {
         </View>
     };
 
+    getAccountList = () => {
+        if(this.state.new.selectedAccounts.length === 0 && this.state.existing.selectedAccounts.length === 0) return null
+        return <View style={styles.accountsList}>
+            {this.getAccounts('existing')}
+            {this.getAccounts('new')}
+        </View>
+    }
     renderStep = () => {
 
         if (!this.state.loaded) return null
@@ -333,10 +340,7 @@ class FundsTransferSteps extends Component {
                 <View style={{marginTop:15}}>
                     {this.getAccountSelectPicker()}
                 </View>
-                <View style={styles.accountsList}>
-                    {this.getAccounts('existing')}
-                    {this.getAccounts('new')}
-                </View>
+                    {this.getAccountList()}
             </View>
 
         }

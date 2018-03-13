@@ -582,7 +582,7 @@ export default {
         justifyContent: 'center',
         width: '100%',
         paddingTop: 25,
-        paddingBottom: 40
+        paddingBottom: 25
     },
     addAccountIcon: {
         fontSize: normalize(26),
