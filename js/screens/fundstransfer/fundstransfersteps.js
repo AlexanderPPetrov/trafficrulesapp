@@ -207,7 +207,7 @@ class FundsTransferSteps extends Component {
     }
 
     fundsTransferSuccess = () => {
-        this.props.setPage(4)
+        this.props.setPage(3)
     }
 
     changeAccountType = (accountType) => {
@@ -346,9 +346,7 @@ class FundsTransferSteps extends Component {
             return <Notes setNotes={this.setNotes} disableButton={this.props.disableButton}
                           notes={this.state.notes}/>
         }
-        if (this.props.currentPage == 2) {
-            console.log('currentPage', this.props.currentPage)
-        }
+
         if (this.props.currentPage == 3) {
             return <Confirmation
                 status={'success'}
