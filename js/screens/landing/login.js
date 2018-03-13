@@ -38,7 +38,7 @@ class Login extends React.Component {
                     <Form>
                         <Item floatingLabel style={Ui.inputContainer}>
                             {/*<Icon active name='ios-person-outline' style={[styles.inputIcon, styles.inputIconUser]}/>*/}
-                            <Label >{I18n.t('username')}</Label>
+                            <Label style={{paddingTop:4}}>{I18n.t('username')}</Label>
                             <Input style={styles.inputField}
                                    value={this.props.username}
                                    returnKeyType="done"
@@ -46,7 +46,7 @@ class Login extends React.Component {
                         </Item>
                         <Item floatingLabel style={Ui.inputContainer}>
                             {/*<Icon active name='ios-lock-outline' style={styles.inputIcon}/>*/}
-                            <Label >{I18n.t('password')}</Label>
+                            <Label style={{paddingTop:4}}>{I18n.t('password')}</Label>
                             <Input getRef={(input) => this.passwordInput = input} style={styles.inputField} secureTextEntry={true}
                                    returnKeyType="done"
                                    value={this.props.password}

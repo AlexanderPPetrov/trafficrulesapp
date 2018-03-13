@@ -105,24 +105,32 @@ class HeaderWrapper extends Component {
 
     getHeaderIndicators = () => {
         if(this.state.currentRoute) {
-            const indicators = activeRoutes.map((route, i) =>
-                <View key={i} style={{
-                    borderRadius: 10 / 2,
-                    height: 6,
-                    width: 6,
-                    marginRight: 10,
-                    backgroundColor:route === this.state.currentRoute ? ColorScheme.info : 'rgba(255,255,255,0.3)',
-                }}/>
-            );
+
+
+            const indicators = activeRoutes.map((route, i) => {
+                    let style = {
+                        borderRadius: 10 / 2,
+                        height: 6,
+                        width: 6,
+                        marginRight: 7,
+                        backgroundColor:'rgba(255,255,255,0.3)',
+                    };
+
+                    if(this.state.currentRoute === route) {
+                        style.backgroundColor = '#fff';
+                    }
+
+                    return <View key={i} style={style}/>
+            });
 
             return <View pointerEvents="none" style={{
                 flexDirection: 'row',
                 alignItems:'center',
-                justifyContent:'center',
+                justifyContent:'flex-end',
                 position:'absolute',
                 width:'100%',
-                height:10,
-                bottom:5
+                height:'100%',
+                right:60
 
             }}>
                 {indicators}

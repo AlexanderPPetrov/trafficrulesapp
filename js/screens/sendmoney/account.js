@@ -22,6 +22,7 @@ import {
     Body,
 } from "native-base";
 import Ui from '../../common/ui';
+import ColorScheme from '../../common/colorscheme';
 
 import {View, TouchableOpacity} from 'react-native';
 import {Grid, Row, Col} from "react-native-easy-grid";
@@ -136,7 +137,9 @@ class AddAccount extends Component {
                                     <View style={Ui.inputContainer}>
                                         <Input ref="emailInput" style={Ui.inputField} value={this.props.account}
                                                onBlur={() => this.focusNext()}
+                                               placeholder={"example@email.com"}
                                                returnKeyType="done"
+                                               placeholderTextColor={ColorScheme.light}
                                                onChangeText={(text) => this.props.changeValue('account', text)}
                                         />
                                     </View>

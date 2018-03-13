@@ -48,27 +48,34 @@ class AccountsList extends Component {
                 <Col size={4} >
                     <Row>
                         <Col size={2} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.itemLabel, Ui.labelSmallest, Ui.itemLabelLight]}>{this.getAccountType(account)}</Text>
+                            <Text style={[Ui.itemLabel, Ui.itemLabelDark, Ui.bold]}>{account._site}</Text>
                         </Col>
                         <Col size={1} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.balanceValue, Ui.labelSmallest, Ui.itemLabelLight]}>{account._last_status.split(' ')[0]}</Text>
+                            <Text style={[Ui.balanceValue, Ui.itemLabelDark, Ui.bold]}>{account._username}</Text>
                         </Col>
                     </Row>
                     <Row style={{marginTop:5}}>
                         <Col size={2} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.itemLabel, Ui.itemLabelDark, Ui.bold]}>{account._site}</Text>
+                            <Text style={Ui.itemLabel}>{I18n.t('_credit')}</Text>
                         </Col>
                         <Col size={1} style={{justifyContent:'center'}}>
-                            <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.itemLabelDark, Ui.bold]}>{account._credit} {account._currency}</Text>
+                            <Text style={[Ui.balanceValue, Ui.profitValue]}>{parseInt(account._credit)} {account._currency}</Text>
                         </Col>
                     </Row>
                     <Row style={{marginTop:5, marginBottom:0}}>
                         <Col size={2} style={{justifyContent:'center'}}>
-                            <Text style={Ui.itemLabel}>{account._username}</Text>
+                            <Text style={[Ui.itemLabel]}>{I18n.t('balance')}</Text>
                         </Col>
                         <Col size={1} style={{justifyContent:'center'}}>
                             <Text style={[Ui.balanceValue, Ui.profitValue]}>{account._balance} {account._currency}</Text>
-
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:5, marginBottom:0}}>
+                        <Col size={2} style={{justifyContent:'center'}}>
+                            <Text style={[Ui.itemLabel, Ui.labelSmallest, Ui.itemLabelLight]}>{I18n.t('_last_status')}</Text>
+                        </Col>
+                        <Col size={1} style={{justifyContent:'center'}}>
+                            <Text style={[Ui.balanceValue, Ui.labelSmallest, Ui.itemLabelLight]}>{account._last_status.split(' ')[0]}</Text>
                         </Col>
                     </Row>
                 </Col>

@@ -64,9 +64,13 @@ class SendMoneySteps extends Component {
             }
         }
 
-        this.setState({ [key]: value });
+        this.setState({ [key]: value }, ()=> {
+            if(key === 'amount' || key === 'account') {
+                this.validateFields()
+            }
+        });
 
-        if(key === 'account' || key === 'secureId'){
+        if(key === 'secureId'){
             if(value !== ''){
                 this.props.disableButton(false)
             }else{
@@ -74,7 +78,24 @@ class SendMoneySteps extends Component {
             }
         }
 
+
+
     };
+
+    validateFields = () => {
+        console.log(this.state.amount)
+
+        if(this.validateEmail(this.state.account) && this.state.amount){
+            this.props.disableButton(false)
+        }else{
+            this.props.disableButton(true)
+        }
+    }
+
+    validateEmail = (email) => {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 
     setFee = (response) => {
         this.setState({

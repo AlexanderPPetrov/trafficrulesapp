@@ -2,6 +2,8 @@ import FormData from 'FormData';
 import CryptoJS from 'crypto-js';
 
 const baseUrl = 'https://api.premiumtradings.com/index.php/v1/';
+// const baseUrl = 'http://api-prmts.dev.cc/v1/';
+
 const translationsUrl = 'https://prmts-translations.dev.cc/'
 
 const appKey = '122$sads1CCssa@$%AScccaas552112';

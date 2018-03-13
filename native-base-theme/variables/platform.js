@@ -183,7 +183,7 @@ export default {
     return this.textColor;
   },
   get inputColorPlaceholder() {
-    return "#575757";
+    return ColorScheme.light;
   },
 
   inputGroupMarginBottom: 10,
