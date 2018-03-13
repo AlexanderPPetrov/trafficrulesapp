@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Alert, Dimensions} from 'react-native';
 import I18n from '../../../i18n/i18n';
-import Ui from '../../common/ui';
 import StatusBar from "../header/statusbar"
 import {
     Container,
@@ -21,8 +20,9 @@ import {
     Toast
 } from "native-base";
 import * as Animatable from 'react-native-animatable';
-import Logo from '../../common/logo/logo';
-import ColorScheme from '../../common/colorscheme';
+import Logo from '../logo/logo';
+import ColorScheme from '../colorscheme';
+import Ui from '../ui';
 import style from "./styles";
 
 const keyBoard = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'reset', '0', 'back'];
