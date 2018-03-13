@@ -110,6 +110,9 @@ class Withdraw extends Component {
         if(page > 0){
             Chat.hide()
         }
+        if(page == 0){
+            this.setButtonState(false)
+        }
     };
 
     hideChat = () => {
