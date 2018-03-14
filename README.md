@@ -13,6 +13,7 @@ Preview App at:
 Download [Expo tools](https://docs.expo.io/versions/latest/introduction/installation.html).
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
+## Api endpoints at
 Dev Api: [http://api-prmts.dev.cc/index.php/v1/](http://api-prmts.dev.cc/index.php/v1/)
 
 > Dev Test User<br />
@@ -25,6 +26,7 @@ Production Api : [https://api.premiumtradings.com/index.php/v1/)
 > Username: `TestTest`<br />
 > Password: `TestTest`
 
+## Translations
 Available languages list: [http://prmts-translations.dev.cc/available_locales.json)
 
 Translations per locale [http://prmts-translations.dev.cc/locales/en.json)
