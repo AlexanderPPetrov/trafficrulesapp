@@ -15,15 +15,15 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 Dev Api: [http://api-prmts.dev.cc/index.php/v1/](http://api-prmts.dev.cc/index.php/v1/)
 
-> Dev Test User<br />
-> Username: `test9070`<br />
-> Password: `test9070`<br />
+> Dev Test User__
+> Username: `test9070`__
+> Password: `test9070`__
 
 Production Api : [https://api.premiumtradings.com/index.php/v1/)
 
-> Production Test User<br />
-> Username: `TestTest`<br />
-> Password: `TestTest`<br />
+> Production Test User__
+> Username: `TestTest`__
+> Password: `TestTest`__
 
 Available languages list: [http://prmts-translations.dev.cc/available_locales.json)
 
