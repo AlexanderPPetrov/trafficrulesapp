@@ -119,7 +119,6 @@ let Api = {
                 .then(response => response.json())
                 .then(responseJson => {
 
-                    console.log(responseJson)
                     if (opts.success && responseJson._status == 'success') {
                         if (opts.url === 'login') {
                             Api.auth = responseJson._payload._userLoginHash;

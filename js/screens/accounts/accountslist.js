@@ -32,7 +32,7 @@ class AccountsList extends Component {
 
     getCard = (account, i) => {
 
-        return <ListItem button key={i} style={Ui.transactionsContainer}    onPress={() => Controller.navigateTo("PreviousBalance", {
+        return <ListItem button key={account._id} style={Ui.transactionsContainer}    onPress={() => Controller.navigateTo("PreviousBalance", {
                                              _id: account._id,
                                             _username: account._username,
                                           _currency: account._currency,

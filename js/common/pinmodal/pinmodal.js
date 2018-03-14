@@ -28,6 +28,7 @@ import style from "./styles";
 const keyBoard = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'reset', '0', 'back'];
 let _success = null;
 let _reset = null;
+import Expo, { Constants } from 'expo';
 
 class PinModal extends Component {
 
@@ -58,6 +59,11 @@ class PinModal extends Component {
             visible: true
         }, () => {
             this.refs.pinModal.slideInUp(500)
+           if(!savedPin){
+               setTimeout(()=>{
+                   this.enableFingerPrint()
+               }, 500)
+           }
         })
 
     };
@@ -72,6 +78,32 @@ class PinModal extends Component {
         }, 510)
     };
 
+
+    enableFingerPrint = async () => {
+        try {
+            let result = await Expo.Fingerprint.authenticateAsync(I18n.t('scanYourFinger'));
+            if(result.success){
+                _success()
+            }else{
+                this.errorScanFinger()
+            }
+        } catch (error) {
+            this.errorScanFinger()
+        }
+    }
+
+    errorScanFinger = async () => {
+        Toast.show({
+            text: I18n.t('unableToScanFinger'),
+            buttonText: I18n.t('ok'),
+            duration:4000
+        })
+        setTimeout(()=> {
+            this.hide();
+            _reset()
+        }, 4000)
+    }
+
     getPinBox = (pinValue, i) => {
         if (pinValue === '-') {
             return <View key={i} style={Ui.pinBox}/>
@@ -81,6 +113,7 @@ class PinModal extends Component {
 
     getPinBoxList = () => {
 
+        if(!this.state.savedPin) return null;
         const pinBoxes = this.state.pinValues.map((pinValue, i) => {
             return this.getPinBox(pinValue, i);
         });
@@ -188,6 +221,8 @@ class PinModal extends Component {
     };
 
     getKeyboard = () => {
+        if(!this.state.savedPin) return null;
+
         const keys = keyBoard.map((keyValue, i) => {
             return this.getKey(keyValue, i);
         });
@@ -198,6 +233,11 @@ class PinModal extends Component {
             </View>
         );
     };
+
+    getLoginPrompt = () => {
+        if(!this.state.savedPin) return <Text style={Ui.pinPromptText}>{I18n .t('scanYourFinger')}</Text>
+        return <Text style={Ui.pinPromptText}>{I18n .t('enterPinMessage')}</Text>
+    }
 
     render() {
 
@@ -212,9 +252,8 @@ class PinModal extends Component {
                 <View style={Ui.pinView}>
                     <View style={Ui.welcomeContainer}>
                         <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.neutralLight} />
-                        <Text style={Ui.pinPromptText}>{I18n .t('enterPinMessage')}</Text>
+                        {this.getLoginPrompt()}
                     </View>
-
                     {this.getPinBoxList()}
                 </View>
                 {this.getKeyboard()}

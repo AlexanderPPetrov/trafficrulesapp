@@ -30,6 +30,7 @@ class Landing extends Component {
             pin: '',
             pinEntered: '',
             setPin: false,
+            fingerPrint: false,
             scale,
             width,
             height
@@ -117,10 +118,19 @@ class Landing extends Component {
     componentDidMount = async () => {
         await this.getAvailableLocales()
         await this.getLocale();
-        this.setDeviceToken()
-        this.readSecureItem('username')
-        this.readSecureItem('password')
-        this.readSecureItem('pin')
+        await this.setDeviceToken();
+        await this.readSecureItem('username');
+        await this.readSecureItem('password');
+        let fingerPrint = await this.readSecureItem('fingerPrint');
+        if(!fingerPrint || fingerPrint === 'false'){
+            let pin = await this.readSecureItem('pin')
+            if(pin){
+                Controller.showPinModal(pin, this.loginHandler, this.resetPin);
+            }
+
+        }else{
+            Controller.showPinModal(false, this.loginHandler, this.resetPin);
+        }
     };
 
     setDeviceToken = async () => {
@@ -129,29 +139,24 @@ class Landing extends Component {
 
     };
 
+    readSecureItem = async (key) => {
+        let result = null;
 
-
-
-    readSecureItem = (key) => {
-        Expo.SecureStore.getItemAsync(key)
-            .then((value) => {
-                this.setState({
-                    [key]: value
-                }, () => {
-                    if (key === 'pin' && value) {
-                        Controller.showPinModal(this.state.pin, this.loginHandler, this.resetPin);
-                    }
-                })
-
+        try {
+            result = await Expo.SecureStore.getItemAsync(key);
+            this.setState({
+                [key]: result
             })
-            .catch((error) => {
-                this.errorMessage(error)
-            })
+        } catch (error) {
+            result = false;
+        }
+        return result
 
     };
 
     resetPin = () => {
         this.deleteSecureItem('pin');
+        this.deleteSecureItem('fingerPrint');
         this.deleteSecureItem('password');
 
     };
@@ -248,7 +253,7 @@ class Landing extends Component {
 
         NotificationsHandler.startListen();
 
-        if (this.state.pin) {
+        if (this.state.pin || this.state.fingerPrint) {
             // Controller.selectedNotification
             if (Controller.selectedNotification) {
                 console.log(Controller.selectedNotification)

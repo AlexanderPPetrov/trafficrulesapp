@@ -221,7 +221,7 @@ class Transactions extends Component {
         let amount = parseFloat(transaction._fee) + parseFloat(transaction._amount);
         amount = parseFloat(amount).toFixed(2)
 
-        return <View key={i} style={Ui.transactionsContainer}>
+        return <View key={transaction._id} style={Ui.transactionsContainer}>
                     <Grid>
                         <Col size={1} style={{alignItems:'center', minWidth:15}}>
                             <View style={Ui.iconContainer}>

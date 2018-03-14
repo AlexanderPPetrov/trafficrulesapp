@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
-import {View, Dimensions, TouchableOpacity} from "react-native";
+import {View, Dimensions, TouchableOpacity, Alert} from "react-native";
 import ColorScheme from "../../common/colorscheme";
-import Expo from "expo";
+import Expo, { Constants } from 'expo';
 import {
     Container,
     Header,
@@ -40,7 +40,10 @@ class Pin extends React.Component {
             confirmPin: '',
             currentIndex: 0,
             visible: false,
-            scale
+            scale,
+            compatible: false,
+            fingerprints: false,
+            result: ''
         }
     }
 
@@ -197,12 +200,42 @@ class Pin extends React.Component {
     setPin = () => {
 
         Expo.SecureStore.setItemAsync('pin', this.state.pin)
-            .then(() => Controller.navigateTo("MyAccount"))
+            .then(() => {
+                this.checkDeviceForHardware()
+
+            })
             .catch((error) => {
-                console.log(error, 'pin not saved');
                 Controller.navigateTo("MyAccount")
             })
 
+    }
+
+    checkDeviceForHardware = async () => {
+        let compatible = await Expo.Fingerprint.hasHardwareAsync();
+        this.setState({compatible})
+
+        if(compatible){
+                Alert.alert(
+                    I18n.t('confirm'),
+                    I18n.t('fingerPrintPrompt'),
+                    [
+                        {text:I18n.t('cancel'), onPress:()=> Controller.navigateTo("MyAccount")},
+                        {text:I18n.t('ok'), onPress:() => this.enableFingerPrint()}
+                    ]
+                )
+        }else{
+            Controller.navigateTo("MyAccount")
+        }
+
+    }
+
+    enableFingerPrint = async () => {
+        try {
+            await Expo.SecureStore.setItemAsync('fingerPrint', 'true')
+            Controller.navigateTo("MyAccount")
+        } catch (error) {
+            Controller.navigateTo("MyAccount")
+        }
     }
 
     getMessages = () => {

@@ -210,6 +210,8 @@ export default {
     select:'Select',
     transferTo: 'Transfer to',
     existingAccounts: 'Existing Accounts',
-
+    fingerPrintPrompt: 'Do you want to use fingerprint as a login on that device?',
+    scanYourFinger: 'Scan your finger',
+    unableToScanFinger: 'Unable to scan your finger',
 
 };
