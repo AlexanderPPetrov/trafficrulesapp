@@ -2,11 +2,10 @@
   "expo": {
     "sdkVersion": "25.0.0",
     "icon": "./img/app_icon.png",
-
-    "loading": {
+    "splash": {
       "hideExponentText": true,
-      "backgroundColor": "#ffffff",
-      "icon": "./img/logo.png"
+      "image": "./img/logo.png",
+      "backgroundColor": "#ffffff"
     },
     "notification": {
       "icon": "./img/notification_icon.png",

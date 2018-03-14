@@ -12,7 +12,6 @@ export default class App1 extends React.Component {
         };
     }
 
-
     cacheImages = (images) =>{
         return images.map(image => {
             if (typeof image === 'string') {
@@ -22,7 +21,6 @@ export default class App1 extends React.Component {
             }
         });
     }
-
 
     componentDidMount = async () => {
 

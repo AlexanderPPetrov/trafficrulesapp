@@ -21,17 +21,25 @@ const AppNavigator = StackNavigator(
             screen: Landing,
             navigationOptions: {
                 gesturesEnabled: false,
+                disabledBackGesture: true,
             }
         },
         Drawer: {
             screen: Drawer,
-            navigationOptions: { header: null }
+            navigationOptions: {
+                header: null,
+                disabledBackGesture: true
+            }
         }
 
     },
     {
         initialRouteName: "Landing",
         headerMode: "none",
+        navigationOptions: {
+            gesturesEnabled: false,
+            disabledBackGesture: true
+        }
     }
 );
 
