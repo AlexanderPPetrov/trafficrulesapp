@@ -207,7 +207,7 @@ export default {
     weeklyBalanceText: 'Please kindly check and confirm. Thank you for your kind attention.',
     premiumTradingsTeam: 'PremiumTradings team',
     userPassMandatory:'Username and Password are mandatory',
-    select:'Select...',
+    select:'Select',
     transferTo: 'Transfer to',
     existingAccounts: 'Existing Accounts',
 
