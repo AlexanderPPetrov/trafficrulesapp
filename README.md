@@ -34,12 +34,5 @@ Available languages list: [http://prmts-translations.dev.cc/available_locales.js
 
 Translations per locale [http://prmts-translations.dev.cc/locales/en.json)
 
-
-
-```
-npm install
-```
-
-### Further docs to be written
-
+## Project Structure
 

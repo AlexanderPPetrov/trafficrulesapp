@@ -187,7 +187,7 @@ class FundsTransferSteps extends Component {
                 return account._id
             });
             data.existing_accounts_amount = existingAccounts.map((account) => {
-                return account._id
+                return account.amount
             });
         }
 

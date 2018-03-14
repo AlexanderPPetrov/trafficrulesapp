@@ -47,7 +47,7 @@ class OpenBets extends Component {
             url: 'get-brokerage-open-bets',
             success: this.dataLoaded,
             always: this.setRefreshing,
-            loader:loader
+            loader
         })
     };
 
@@ -68,15 +68,15 @@ class OpenBets extends Component {
         this.loadData(false)
     };
 
-    getListItem = (bet, i) => {
-        return  <BetDetails key={i} bet={bet}/>
+    getListItem = (bet) => {
+        return  <BetDetails key={bet._id} bet={bet}/>
     };
 
-    getBetList = (bets) => {
-        let betList = bets.map((bet, i) =>
-            this.getListItem(bet, i)
+    getBetList = () => {
+        let betList = this.state._payload.bets.map((bet) =>
+            this.getListItem(bet)
         );
-        if (bets.length == 0 && this.state.loaded) {
+        if (this.state._payload.bets.length == 0 && this.state.loaded) {
             return <Text style={styles.noBets}>{I18n.t('noRunningBets')}</Text>;
         }
         return (
@@ -108,7 +108,7 @@ class OpenBets extends Component {
                     />
                 }>
 
-                    {this.getBetList(this.state._payload.bets)}
+                    {this.getBetList()}
                 </ScrollView>
             </View>
 

@@ -164,7 +164,7 @@ class Landing extends Component {
                     [key]: value
                 }, () => {
                     if(key === 'password'){
-                        this.refs.login.focusPassword();
+                        // this.refs.login.focusPassword();
                     }
                 })
             })
