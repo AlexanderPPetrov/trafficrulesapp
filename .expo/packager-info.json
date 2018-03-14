@@ -1,8 +1,17 @@
 {
+<<<<<<< Updated upstream
   "packagerPort": 19001,
   "packagerPid": 26860,
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://hc-dty.alexppetrov.premium-tradings-mobile.exp.direct",
   "packagerNgrokUrl": "https://packager.hc-dty.alexppetrov.premium-tradings-mobile.exp.direct",
   "ngrokPid": 33196
+=======
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
+>>>>>>> Stashed changes
 }
