@@ -221,7 +221,7 @@ class PinModal extends Component {
     };
 
     getKeyboard = () => {
-        if(!this.state.savedPin) return null;
+        if(!this.state.savedPin) return <View style={{flex:1}}></View>
 
         const keys = keyBoard.map((keyValue, i) => {
             return this.getKey(keyValue, i);
@@ -235,7 +235,7 @@ class PinModal extends Component {
     };
 
     getLoginPrompt = () => {
-        if(!this.state.savedPin) return <Text style={Ui.pinPromptText}>{I18n .t('scanYourFinger')}</Text>
+        if(!this.state.savedPin) return <Text style={[Ui.pinPromptText,]}>{I18n .t('scanYourFinger')}</Text>
         return <Text style={Ui.pinPromptText}>{I18n .t('enterPinMessage')}</Text>
     }
 
