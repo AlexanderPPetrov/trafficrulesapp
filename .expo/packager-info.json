@@ -1,8 +1,8 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 34140,
+  "packagerPid": 36256,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://hc-dty.alexppetrov.premium-tradings-mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.hc-dty.alexppetrov.premium-tradings-mobile.exp.direct",
-  "ngrokPid": 7564
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
