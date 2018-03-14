@@ -7,7 +7,14 @@
     "splash": {
       "hideExponentText": true,
       "image": "./img/logo.png",
-      "backgroundColor": "#ffffff"
+      "resizeMode":"contain",
+      "backgroundColor": "#ffffff",
+      "ldpi":"./img/ldpi/screen.png",
+      "mdpi":"./img/mdpi/screen.png",
+      "hdpi":"./img/hdpi/screen.png",
+      "xhdpi":"./img/xhdpi/screen.png",
+      "xxhdpi":"./img/xxhdpi/screen.png",
+      "xxxhdpi":"./img/xxxhdpi/screen.png"
     },
     "notification": {
       "icon": "./img/notification_icon.png",
