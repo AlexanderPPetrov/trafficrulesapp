@@ -11,8 +11,7 @@ export default {
     loginContainer: {
         flex:1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:ColorScheme.mainBackground
+        alignItems: 'center'
     },
     imageContainer: {
 

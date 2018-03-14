@@ -521,6 +521,7 @@ export default {
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor:ColorScheme.mainBackground,
         paddingTop: Constants.statusBarHeight
     },
     pinBoxContainer: {

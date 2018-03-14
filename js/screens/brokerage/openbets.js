@@ -61,6 +61,8 @@ class OpenBets extends Component {
             loaded:true
         })
 
+        console.log(response)
+
     };
 
     onRefresh = () => {

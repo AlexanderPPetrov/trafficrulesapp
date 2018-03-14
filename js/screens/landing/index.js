@@ -164,7 +164,7 @@ class Landing extends Component {
                     [key]: value
                 }, () => {
                     if(key === 'password'){
-                        // this.refs.login.focusPassword();
+                         this.refs.login.focusPassword();
                     }
                 })
             })
@@ -214,10 +214,10 @@ class Landing extends Component {
     loginError = (message) => {
 
         if (message === 'wrong_user_name_or_password' || message === 'invalid_or_missing_credetials') {
-            if (this.state.pin) {
-                this.deleteSecureItem('pin')
-                this.deleteSecureItem('password')
-            }
+            // if (this.state.pin) {
+            //     this.deleteSecureItem('pin')
+            //     this.deleteSecureItem('password')
+            // }
         }
         Toast.show({
             text: I18n.t(message),
@@ -310,9 +310,17 @@ class Landing extends Component {
 
     }
 
+    getContentContainerStyle = () => {
+        let style = {flex:1,alignItems:'center', backgroundColor:'#fff'}
+        if (this.state.setPin) {
+            style.backgroundColor = ColorScheme.mainBackground
+        }
+        return style
+    }
+
     render() {
 
-        return <ScrollView contentContainerStyle={{flex:1,alignItems:'center', backgroundColor:ColorScheme.mainBackground}} keyboardShouldPersistTaps="never">
+        return <ScrollView contentContainerStyle={this.getContentContainerStyle()} keyboardShouldPersistTaps="never">
             <StatusBar/>
             {this.getLandingScreen()}
             {this.getImage()}
