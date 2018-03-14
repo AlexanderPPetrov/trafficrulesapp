@@ -1,6 +1,8 @@
 {
   "expo": {
+    "name": "PremiumTradings",
     "sdkVersion": "25.0.0",
+    "version": "1.0.0",
     "icon": "./img/app_icon.png",
     "splash": {
       "hideExponentText": true,
@@ -25,8 +27,12 @@
       "barStyle": "dark-content",
       "backgroundColor": "#000000"
     },
+    "ios": {
+      "bundleIdentifier": "com.delasport.premiumtradings",
+      "loadJSInBackgroundExperimental": true
+    },
     "android": {
-      "package": "com.apk.prmts"
+      "package": "com.delasport.premiumtradings"
     }
   }
 }
