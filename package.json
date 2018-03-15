@@ -32,7 +32,7 @@
     "native-base": "2.3.1",
     "react": "16.2.0",
     "react-motion": "^0.5.2",
-    "react-native": "0.52.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-animatable": "^1.2.4",
     "react-native-datepicker": "^1.6.0",
     "react-native-exception-handler": "^2.6.0",
