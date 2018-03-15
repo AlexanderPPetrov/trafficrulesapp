@@ -42,7 +42,7 @@ class Landing extends Component {
     getAvailableLocales = async () => {
         try {
             let response = await fetch(
-                'http://prmts-translations.dev.cc/available_locales.json'
+                'https://api.premiumtradings.com/translations/available_locales.json'
             );
             let responseJson = await response.json();
             I18n.availableLocales = responseJson;
@@ -69,7 +69,7 @@ class Landing extends Component {
 
         try {
             let response = await fetch(
-                'http://prmts-translations.dev.cc/locales/' + locale + '.json'
+                'https://api.premiumtradings.com/translations/locales/' + locale + '.json'
             );
             let responseJson = await response.json();
             I18n.translations[locale] = responseJson;
