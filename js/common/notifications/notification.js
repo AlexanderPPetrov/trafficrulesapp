@@ -29,7 +29,11 @@ class Notification extends Component {
     }
     componentDidMount = async () => {
 
-        moment.locale(I18n.locale)
+        let locale = I18n.locale;
+        if(locale === 'back'){
+            locale = 'en'
+        }
+        moment.locale(locale)
 
         if(this.props.data.received_date){
             this.setState({
