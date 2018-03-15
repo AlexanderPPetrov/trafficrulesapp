@@ -31,7 +31,10 @@ class OpenBets extends Component {
         super(props);
         this.state = {
             _payload: {
-                bets: []
+                bets: [],
+                _brokerage_balance:'',
+                _brokerage_outstanding:'',
+                _brokerage_currency:'',
             },
             refreshing: false,
             loaded:false
@@ -56,6 +59,12 @@ class OpenBets extends Component {
     };
 
     dataLoaded = (response) => {
+        if(!response._brokerage_balance) {
+            response._brokerage_balance = '-'
+        }
+        if(!response._brokerage_outstanding){
+            response._brokerage_outstanding = '-'
+        }
         this.setState({
             _payload: response,
             loaded:true
@@ -94,11 +103,11 @@ class OpenBets extends Component {
             <View style={{flex:1}}>
                 <View style={{height:110}}>
                     <BalanceHeader
-                        balanceLeft={Api.accountSettings._brokerage_balance}
-                        currencyLeft={Api.accountSettings._brokerage_currency}
+                        balanceLeft={this.state._payload._brokerage_balance}
+                        currencyLeft={this.state._payload._brokerage_currency}
                         titleLeft={I18n.t('brokerageBalance')}
-                        balanceRight={Api.accountSettings._brokerage_outstanding}
-                        currencyRight={Api.accountSettings._brokerage_currency}
+                        balanceRight={this.state._payload._brokerage_outstanding}
+                        currencyRight={this.state._payload._brokerage_currency}
                         titleRight={I18n.t('totalOutstanding')}
                     />
                 </View>

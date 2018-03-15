@@ -28,17 +28,16 @@ class NotificationsHandler extends Component {
         this.state = {
             renderNotificationsContainer: false,
             notifications: [],
-            receivedNotification: null,
-            lastNotificationId: null
+            receivedNotification: null
 
         };
         notificationsInstance = this;
 
     }
 
-    static startListen = () => {
+    static startListen = async () => {
         if(notificationsInstance){
-            notificationsInstance.registerForPushNotificationsAsync()
+            await notificationsInstance.registerForPushNotificationsAsync()
             notificationsInstance.setState({
                 renderNotificationsContainer:true
             })
@@ -73,7 +72,6 @@ class NotificationsHandler extends Component {
                 this.state.notifications.push(receivedNotification);
                 this.setState({
                     receivedNotification,
-                    lastNotificationId: receivedNotification.notificationId,
                     notifications: this.state.notifications
                 });
             }
@@ -123,20 +121,20 @@ class NotificationsHandler extends Component {
         // });
     };
 
-
-    onPressDismissAllNotifications = () => {
-        Notifications.dismissAllNotificationsAsync();
-        this.setState({
-            lastNotificationId: null,
-        });
-    };
-
-    onPressDismissOneNotification = () => {
-        Notifications.dismissNotificationAsync(this.state.lastNotificationId);
-        this.setState({
-            lastNotificationId: null,
-        });
-    };
+    //
+    // onPressDismissAllNotifications = () => {
+    //     Notifications.dismissAllNotificationsAsync();
+    //     this.setState({
+    //         lastNotificationId: null,
+    //     });
+    // };
+    //
+    // onPressDismissOneNotification = () => {
+    //     Notifications.dismissNotificationAsync(this.state.lastNotificationId);
+    //     this.setState({
+    //         lastNotificationId: null,
+    //     });
+    // };
 
     dismissNotification = (fadeOutEffect, notificationId, delay = 300, callback) => {
         if(!this.refs['notification' + notificationId]) return;

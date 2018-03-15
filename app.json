@@ -1,8 +1,12 @@
 {
   "expo": {
     "name": "PremiumTradings",
+    "slug": "premiumtradings",
+    "privacy": "unlisted",
     "sdkVersion": "25.0.0",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
     "icon": "./img/app_icon.png",
     "splash": {
       "hideExponentText": true,
@@ -20,14 +24,11 @@
       "icon": "./img/notification_icon.png",
       "color": "#000000"
     },
-    "orientation": "portrait",
-    "primaryColor": "#cccccc",
     "packagerOpts": {
       "assetExts": [
         "ttf"
       ]
     },
-    "privacy": "unlisted",
     "androidStatusBarColor": "#222c34",
     "androidStatusBar": {
       "hidden":true,

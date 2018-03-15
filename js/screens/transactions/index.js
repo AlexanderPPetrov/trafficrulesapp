@@ -245,14 +245,6 @@ class Transactions extends Component {
                                     <Text style={[Ui.balanceValue, Ui.balanceValueSmall, Ui.itemLabelDark, Ui.bold]}>{amount} {transaction._currency}</Text>
                                 </Col>
                             </Row>
-                            {/*<Row>*/}
-                                {/*<Col size={2} style={{justifyContent:'center'}}>*/}
-                                    {/*<Text style={[Ui.itemLabel, styles.paymentTypeLabel]}>{I18n.t('fee').toUpperCase()}</Text>*/}
-                                {/*</Col>*/}
-                                {/*<Col size={1} style={{justifyContent:'center'}}>*/}
-                                    {/*<Text style={[Ui.balanceValue, Ui.balanceValueSmall]}>{transaction._fee} {transaction._currency}</Text>*/}
-                                {/*</Col>*/}
-                            {/*</Row>*/}
                             <Row style={{marginTop:5, marginBottom:0}}>
                                 <Col size={2} style={{justifyContent:'center'}}>
                                     <Text style={Ui.itemLabel}>{transaction._account}</Text>
@@ -285,10 +277,6 @@ class Transactions extends Component {
     render() {
         return (
             <Container style={Ui.container}>
-                {/*<Header*/}
-                    {/*title={I18n.t('transactions')}*/}
-                    {/*indicatorRoute={'Transactions'}*/}
-                {/*/>*/}
                 <View style={{height:51}}>
                     {this.getFilter()}
                 </View>
