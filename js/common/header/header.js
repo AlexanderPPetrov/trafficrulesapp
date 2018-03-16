@@ -54,6 +54,13 @@ class HeaderWrapper extends Component {
         navigationInstance = navigation
     }
 
+    static navigateTo = (route) => {
+        if(navigationInstance){
+            navigationInstance.navigate(route)
+            console.log('navigate to ', route)
+        }
+    }
+
     static setRoute = (route) => {
         if(headerInstance) headerInstance.setRoute(route)
     }

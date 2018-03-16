@@ -1,12 +1,14 @@
 import { NavigationActions } from 'react-navigation';
 import _ from "lodash";
-import NotificationsButton from './js/common/notifications/notificationsbutton'
+import NotificationsButton from './js/common/notifications/notificationsbutton';
+import Header from './js/common/header/header';
 let _navigator;
 let _pinModal;
 let _sidebar;
+const headerScreens = ['MyAccount','Accounts','Brokerage','Transactions'];
 
-import ColorScheme from './js/common/colorscheme'
-import BetDetailsModal from './js/common/betdetails/betdetailsmodal'
+import ColorScheme from './js/common/colorscheme';
+import BetDetailsModal from './js/common/betdetails/betdetailsmodal';
 import Api from "./Api";
 
 let Controller = {
@@ -121,17 +123,27 @@ let Controller = {
     drawerNavigateTo: (routeName, params) => {
         Controller.navigateTo('DrawerClose')
 
-        setTimeout(function(){
-            Controller.navigateTo(routeName, params)
-        }, 0);
+        console.log('previous route:', Controller.previousRoute, 'current route:', Controller.currentRoute, 'navigateTo: ', routeName)
+        if(headerScreens.indexOf(Controller.currentRoute) !== -1 && headerScreens.indexOf(routeName) !== -1){
+            Controller.previousRoute = Controller.currentRoute;
+            Controller.currentRoute = routeName;
+            Header.navigateTo(routeName)
+        }else{
+            setTimeout(function(){
+                Controller.navigateTo(routeName, params)
+            }, 0);
+        }
+
+
     },
 
     navigateTo: (routeName, params) => {
         //Skip drawer open
-        if(routeName !== 'DrawerOpen') {
+        if(routeName !== 'DrawerOpen' && routeName !== 'DrawerClose') {
             Controller.previousRoute = Controller.currentRoute;
             Controller.currentRoute = routeName;
         }
+        console.log('navigate to: ',routeName)
 
         _navigator.dispatch(
             NavigationActions.navigate({

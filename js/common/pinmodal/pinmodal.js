@@ -251,7 +251,7 @@ class PinModal extends Component {
 
                 <View style={Ui.pinView}>
                     <View style={Ui.welcomeContainer}>
-                        <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.neutralLight} />
+                        <Logo scale={this.state.scale} primary={ColorScheme.logoPrimary} secondary={ColorScheme.logoSecondary} slogan={ColorScheme.mainBackground} />
                         {this.getLoginPrompt()}
                     </View>
                     {this.getPinBoxList()}
