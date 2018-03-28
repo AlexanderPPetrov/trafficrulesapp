@@ -1,9 +1,9 @@
 import Expo from "expo";
 import React from "react";
-import {SafeAreaView} from "react-native";
+import {SafeAreaView, I18nManager} from "react-native";
 import App from "./js/App";
 import ColorScheme from "./js/common/colorscheme";
-
+I18nManager.allowRTL(false);
 export default class App1 extends React.Component {
     constructor() {
         super();

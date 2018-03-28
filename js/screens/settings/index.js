@@ -154,7 +154,7 @@ class Settings extends Component {
 
         try {
             let response = await fetch(
-                'http://prmts-translations.dev.cc/locales/' + value + '.json'
+                'https://api.premiumtradings.com/translations/locales/' + value + '.json'
             );
             let responseJson = await response.json();
             I18n.translations[value] = responseJson;
