@@ -8,6 +8,10 @@ const {
 } = Dimensions.get('window');
 import {Constants} from 'expo';
 
+
+if(Platform.OS == 'ios' && Constants.platform.ios.model.toLowerCase() == 'iphone x') {
+    deviceHeight = deviceHeight - 70
+}
 const scale = deviceWidth / 320;
 
 export function normalize(size) {
