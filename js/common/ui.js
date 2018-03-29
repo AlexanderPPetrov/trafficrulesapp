@@ -431,6 +431,7 @@ export default {
         paddingBottom: 5,
         paddingRight: 0,
         lineHeight: 24,
+        textAlign:'left',
         color: ColorScheme.darkest
     },
     amountInput: {

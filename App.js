@@ -3,7 +3,13 @@ import React from "react";
 import {SafeAreaView, I18nManager} from "react-native";
 import App from "./js/App";
 import ColorScheme from "./js/common/colorscheme";
-I18nManager.allowRTL(false);
+
+if(I18nManager.isRTL){
+    I18nManager.allowRTL(false);
+    I18nManager.forceRTL(false);
+    Expo.Util.reload()
+}
+
 export default class App1 extends React.Component {
     constructor() {
         super();
@@ -45,6 +51,8 @@ export default class App1 extends React.Component {
         await Promise.all([...imageAssets]);
 
        this.setState({isReady: true});
+
+
     }
 
     render() {

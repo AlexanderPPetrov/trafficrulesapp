@@ -219,7 +219,9 @@ I18n.translations = {
         existingAccounts: 'Existing Accounts',
         fingerPrintPrompt: 'Do you want to use fingerprint as a login on that device?',
         scanYourFinger: 'Scan your finger',
-        unableToScanFinger: 'Unable to scan your finger'
+        unableToScanFinger: 'Unable to scan your finger',
+        error:'Error',
+        tryAgain:'Try Again'
     }
 };
 export default I18n;
