@@ -18,6 +18,7 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {View, ScrollView, RefreshControl, TouchableWithoutFeedback, Modal} from "react-native";
 import Ui from '../../common/ui';
+import ColorScheme from '../../common/colorscheme';
 
 import DatePicker from '../../common/datepicker/datepicker'
 import BetDetailsModal from "../../common/betdetails/betdetailsmodal";
@@ -235,7 +236,7 @@ class SettledBets extends Component {
             return <Text style={Ui.noResults}>{I18n.t('noSettledBets')}</Text>;
         }
         return (
-            <View>
+            <View style={{backgroundColor:'#fff'}}>
                 <View style={Ui.listItem}>
                     <Grid>
                         <Col size={2}>
@@ -266,7 +267,8 @@ class SettledBets extends Component {
                         refreshing={this.state.refreshing}
                         onRefresh={this.onRefresh}
                     />
-                }>
+
+                } style={{backgroundColor:ColorScheme.mainBackground}}>
                     {this.getBetList(this.state._payload.bets)}
                 </ScrollView>
             </View>

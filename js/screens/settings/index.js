@@ -20,11 +20,14 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 import {AsyncStorage} from "react-native";
 import Ui from '../../common/ui';
+import ColorScheme from '../../common/colorscheme';
 import CommonPicker from '../../common/picker/picker';
 import Header from '../../common/header/header';
 import styles from "./styles";
 import Controller from "../../../Controller";
 import Api from "../../../Api";
+import Expo from 'expo';
+
 
 const Item = Picker.Item;
 const switches = ['withdraw_and_deposit', 'funds_transfer', 'weekly_status', 'brokerage_activity', 'betting_tips', 'ad_hoc_messages']
@@ -142,7 +145,6 @@ class Settings extends Component {
 
         AsyncStorage.setItem('locale', value);
 
-        console.log(I18n.locale)
         Api.post({
             url: 'set-member-language',
             success: (response)=> console.log('language changed to', response._language),
@@ -166,6 +168,28 @@ class Settings extends Component {
         }
     };
 
+    logOut = () => {
+        this.deleteSecureItem('pin');
+        this.deleteSecureItem('fingerPrint');
+        this.deleteSecureItem('password');
+    };
+
+    deleteSecureItem = (key) => {
+
+        Expo.SecureStore.deleteItemAsync(key)
+            .then((value) => {
+                this.setState({
+                    [key]: value
+                }, () => {
+                    if(key === 'password'){
+                        Controller.navigateTo('Landing')
+                    }
+                })
+            })
+            .catch((error) => {
+                this.errorMessage(error)
+            })
+    };
 
     getLanguagePicker = () => {
 
@@ -189,7 +213,7 @@ class Settings extends Component {
                     title={I18n.t('settings')}
                 />
                 <Content>
-                    <List>
+                    <List style={{backgroundColor:'#fff'}}>
                         <ListItem style={[Ui.listItem,Ui.listHeader]}>
                             <Text>{I18n.t('language')}</Text>
                         </ListItem>
@@ -202,10 +226,17 @@ class Settings extends Component {
                             <Text>{I18n.t('notifications')}</Text>
                         </ListItem>
                         {this.getSwitches()}
+                        <ListItem button noBorder style={{borderBottomColor:ColorScheme.listItemBorderColor, borderBottomWidth:1}} onPress={() => this.logOut() }>
+                            <Left >
+                                <Icon active name={'ios-log-out-outline'} style={ {color: ColorScheme.dark, fontSize: 26, width: 25}}/>
+                                <Text style={styles.text}>
+                                    {I18n.t('logOut')}
+                                </Text>
+                            </Left>
+                        </ListItem>
                     </List>
                 </Content>
             </Container>
-
         );
     }
 }

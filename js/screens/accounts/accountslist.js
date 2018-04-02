@@ -32,7 +32,7 @@ class AccountsList extends Component {
 
     getCard = (account, i) => {
 
-        return <ListItem button key={account._id} style={Ui.transactionsContainer}    onPress={() => Controller.navigateTo("PreviousBalance", {
+        return <ListItem button key={account._id} style={[Ui.transactionsContainer, {backgroundColor:'transparent'}]} onPress={() => Controller.navigateTo("PreviousBalance", {
                                              _id: account._id,
                                             _username: account._username,
                                           _currency: account._currency,
@@ -78,7 +78,6 @@ class AccountsList extends Component {
                             <Text style={[Ui.balanceValue, Ui.profitValue]}>{account._balance} {account._currency}</Text>
                         </Col>
                     </Row>
-
                 </Col>
             </Grid>
         </ListItem>
@@ -89,7 +88,7 @@ class AccountsList extends Component {
             this.getCard(account, i)
         );
         return (
-            <List>
+            <List style={{backgroundColor:'#fff'}}>
                 {cardsList}
             </List>
         );

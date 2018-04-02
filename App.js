@@ -1,14 +1,10 @@
 import Expo from "expo";
 import React from "react";
-import {SafeAreaView, I18nManager} from "react-native";
+import {SafeAreaView, I18nManager, Platform} from "react-native";
 import App from "./js/App";
 import ColorScheme from "./js/common/colorscheme";
+import RestartAndroid from "react-native-restart-android";
 
-if(I18nManager.isRTL){
-    I18nManager.allowRTL(false);
-    I18nManager.forceRTL(false);
-    Expo.Util.reload()
-}
 
 export default class App1 extends React.Component {
     constructor() {
@@ -16,6 +12,11 @@ export default class App1 extends React.Component {
         this.state = {
             isReady: false
         };
+        //Fix for android crappy auto RTL behaviour
+        if(I18nManager.isRTL && Platform.OS === "android"){
+            I18nManager.allowRTL(false);
+            I18nManager.forceRTL(false);
+        }
     }
 
     cacheImages = (images) =>{

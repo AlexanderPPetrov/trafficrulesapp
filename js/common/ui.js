@@ -2,7 +2,7 @@ const React = require("react-native");
 import ColorScheme from "./colorscheme";
 
 const {StyleSheet, Dimensions, Platform, PixelRatio} = React;
-const {
+let {
     width: deviceWidth,
     height: deviceHeight,
 } = Dimensions.get('window');
@@ -394,6 +394,7 @@ export default {
     },
     formLabel: {
         fontFamily: 'Roboto_light',
+        textAlign:'left',
         fontSize: normalize(13)
     },
     cardContainer: {

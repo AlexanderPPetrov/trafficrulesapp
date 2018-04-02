@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import {View, Dimensions, ScrollView, Modal} from 'react-native';
+import {View, Dimensions, ScrollView, Modal, SafeAreaView} from 'react-native';
 import I18n from '../../../i18n/i18n';
 import {
     Container,
@@ -18,8 +18,9 @@ import {
     CardItem
 } from "native-base";
 import Header from '../../common/header/header';
-import Ui from '../ui'
-import Api from '../../../Api'
+import Ui from '../ui';
+import ColorScheme from '../colorscheme';
+import Api from '../../../Api';
 import {Grid, Row, Col} from "react-native-easy-grid";
 
 import BetDetails from "./betdetails";
@@ -99,7 +100,7 @@ class BetDetailsModal extends Component {
     getBetsDetails = () => {
 
         return (
-            <View>
+            <View style={{backgroundColor:ColorScheme.listItemBackground}}>
                 <View style={Ui.listItem}>
                     <Col>
                         <Text style={Ui.itemLabel}>{I18n.t('betDetailsFor')}</Text>
@@ -121,15 +122,17 @@ class BetDetailsModal extends Component {
                     animationType={'slide'}
                     onRequestClose={() => this.closeModal()}
                 >
+            <SafeAreaView style={{flex: 1, backgroundColor: ColorScheme.headerBackground}}>
                 <Header
                     onBack={this.closeModal}
                     title={I18n.t('settledBets')}
                     cancel={false}
                 />
 
-                <ScrollView>
+                <ScrollView style={{backgroundColor:ColorScheme.mainBackground}}>
                     {this.getBetsDetails()}
                 </ScrollView>
+            </SafeAreaView>
             </Modal>
         </View>
 

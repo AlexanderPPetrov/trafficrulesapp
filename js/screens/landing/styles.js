@@ -32,6 +32,7 @@ export default {
     inputField: {
         flex:1,
         borderBottomWidth: 0,
+        textAlign:'left'
         // fontSize:18,
         // lineHeight: 24
     },
