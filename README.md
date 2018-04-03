@@ -76,12 +76,3 @@ Styling the Application:
 •	Explicit styling of a component is done within the same directory of the component with a file named styles.js or directly within the style property of the component
 
 
-
-
-
-Edited node_modules for RTL
-
-react-native-drawer-layout-polyfill > index.android.js
-
-Object.defineProperty(exports, "__esModule", { value: true });var _reactNative = require('react-native');exports.default = _reactNative.DrawerLayoutAndroid;
-Object.defineProperty(exports, "__esModule", { value: true });var _reactNativeDrawerLayout = require('react-native-drawer-layout');var _reactNativeDrawerLayout2 = _interopRequireDefault(_reactNativeDrawerLayout);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default = _reactNativeDrawerLayout2.default;
