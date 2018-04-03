@@ -3,7 +3,6 @@ import React from "react";
 import {SafeAreaView, I18nManager, Platform} from "react-native";
 import App from "./js/App";
 import ColorScheme from "./js/common/colorscheme";
-import RestartAndroid from "react-native-restart-android";
 
 
 export default class App1 extends React.Component {
@@ -12,11 +11,7 @@ export default class App1 extends React.Component {
         this.state = {
             isReady: false
         };
-        //Fix for android crappy auto RTL behaviour
-        if(I18nManager.isRTL && Platform.OS === "android"){
-            I18nManager.allowRTL(false);
-            I18nManager.forceRTL(false);
-        }
+
     }
 
     cacheImages = (images) =>{
@@ -30,6 +25,12 @@ export default class App1 extends React.Component {
     }
 
     componentDidMount = async () => {
+
+        if(I18nManager.isRTL && Platform.OS === "android"){
+            I18nManager.allowRTL(false);
+            I18nManager.forceRTL(false);
+            Expo.Util.reload()
+        }
 
         //suppress warnings and errors
         console.disableYellowBox = true;
