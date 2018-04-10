@@ -1,9 +1,9 @@
 {
-  "name": "PremiumTradings",
+  "name": "18bet",
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
-    "jest-expo": "19.0.5",
+    "jest-expo": "^26.0.0",
     "react-native-debugger-open": "^0.3.15",
     "react-native-scripts": "1.1.0",
     "react-test-renderer": "16.0.0-alpha.12"
@@ -23,27 +23,11 @@
   "dependencies": {
     "@expo/vector-icons": "^6.2.1",
     "color": "1.0.3",
-    "crypto-js": "^3.1.9-1",
-    "ex-react-native-i18n": "0.0.3",
-    "expo": "25.0.0",
+    "expo": "^26.0.0",
     "expo-analytics": "^1.0.7",
-    "lodash": "4.13.1",
-    "moment": "^2.18.0",
-    "native-base": "2.3.1",
-    "react": "16.2.0",
+    "react": "16.3.0-alpha.1",
     "react-motion": "^0.5.2",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
-    "react-native-animatable": "^1.2.4",
-    "react-native-datepicker": "^1.6.0",
-    "react-native-exception-handler": "^2.6.0",
-    "react-native-exit-app": "^1.0.0",
-    "react-native-fetch-polyfill": "^1.1.2",
-    "react-native-linear-gradient": "2.3.0",
-    "react-native-modal-selector": "0.0.24",
-    "react-native-modalbox": "1.4.2",
-    "react-native-restart": "0.0.6",
-    "react-native-restart-android": "0.0.6",
-    "react-navigation": "1.0.0",
-    "victory-native": "^0.15.0"
+    "react-native": "0.54.0-rc.4",
+    "react-native-exception-handler": "^2.6.0"
   }
 }

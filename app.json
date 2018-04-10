@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "PremiumTradings",
-    "description": "PremiumTradings",
-    "slug": "premiumtradings",
+    "name": "18bet",
+    "description": "18bet",
+    "slug": "18bet",
     "privacy": "unlisted",
-    "sdkVersion": "25.0.0",
-    "version": "1.1.0",
+    "sdkVersion": "26.0.0",
+    "version": "1.2.1",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./img/ios_icon.png",
@@ -38,8 +38,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.delasport.prmts",
-      "buildNumber":"1.1.1",
-      "loadJSInBackgroundExperimental": true
+      "buildNumber":"1.2.2"
     },
     "android": {
       "package": "com.delasport.premiumtradings"

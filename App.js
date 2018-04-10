@@ -1,6 +1,6 @@
 import Expo from "expo";
 import React from "react";
-import {SafeAreaView, I18nManager, Platform} from "react-native";
+import {SafeAreaView, I18nManager, Platform, WebView} from "react-native";
 import App from "./js/App";
 import ColorScheme from "./js/common/colorscheme";
 
@@ -29,7 +29,7 @@ export default class App1 extends React.Component {
         if(I18nManager.isRTL && Platform.OS === "android"){
             I18nManager.allowRTL(false);
             I18nManager.forceRTL(false);
-            Expo.Util.reload()
+            Expo.Updates.reload();
         }
 
         //suppress warnings and errors
