@@ -5,7 +5,7 @@
     "slug": "18bet",
     "privacy": "unlisted",
     "sdkVersion": "26.0.0",
-    "version": "1.2.1",
+    "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#000000",
     "icon": "./img/ios_icon.png",
@@ -31,11 +31,11 @@
       "backgroundColor": "#000000"
     },
     "ios": {
-      "bundleIdentifier": "com.delasport.prmts",
-      "buildNumber":"1.2.2"
+      "bundleIdentifier": "com.eighteen.bet",
+      "buildNumber":"1.0.0"
     },
     "android": {
-      "package": "com.delasport.premiumtradings"
+      "package": "com.eighteen.bet"
     }
   }
 }
