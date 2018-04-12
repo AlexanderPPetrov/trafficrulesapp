@@ -1,5 +1,5 @@
 import React from "react";
-import {SafeAreaView, WebView, StatusBar, StyleSheet, View} from "react-native";
+import {SafeAreaView, WebView, StatusBar, StyleSheet, View, AppState} from "react-native";
 import {CircleSnail} from 'react-native-progress';
 import { Constants } from 'expo';
 
@@ -18,7 +18,8 @@ export default class App extends React.Component {
         super();
         this.state = {
             opacity:0,
-            isReady: false
+            isReady: false,
+            appState: AppState.currentState
         }
     }
 
@@ -27,6 +28,23 @@ export default class App extends React.Component {
         console.disableYellowBox = true;
         this.setState({isReady: true});
 
+        AppState.addEventListener('change', this._handleAppStateChange);
+
+    }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+
+    _handleAppStateChange = (nextAppState) => {
+        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+            this.refs.webview.reload();
+            this.setState({
+                opacity:0
+            })
+
+        }
+        this.setState({appState: nextAppState});
 
     }
 
@@ -43,7 +61,8 @@ export default class App extends React.Component {
             elevation: 9,
             zIndex:999,
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            backgroundColor:'black'
         }}>
             <CircleSnail size={60}  color={['#f5b906']} thickness={3} />
         </View>
@@ -58,12 +77,19 @@ export default class App extends React.Component {
             <StatusBar barStyle="light-content" backgroundColor={'#000'}/>
             <View style={styles.statusBar} />
             <WebView bounces={false}
+                 ref={ 'webview' }
                 source={{uri: "http://www.18bet.com/"}}
                 style={{
                     flex:1,
                     width:'100%',
                     opacity: this.state.opacity
                 }}
+                     startInLoadingState={false}
+                     onLoadStart={()=>{
+                         this.setState({
+                             opacity:0
+                         })
+                     }}
                 onLoadEnd={()=> {
                     this.setState({
                         opacity:1
