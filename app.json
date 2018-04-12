@@ -7,19 +7,13 @@
     "sdkVersion": "26.0.0",
     "version": "1.2.1",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
+    "primaryColor": "#000000",
     "icon": "./img/ios_icon.png",
     "splash": {
       "hideExponentText": true,
       "image": "./img/logo.png",
       "resizeMode":"contain",
-      "backgroundColor": "#ffffff",
-      "ldpi":"./img/ldpi/screen.png",
-      "mdpi":"./img/mdpi/screen.png",
-      "hdpi":"./img/hdpi/screen.png",
-      "xhdpi":"./img/xhdpi/screen.png",
-      "xxhdpi":"./img/xxhdpi/screen.png",
-      "xxxhdpi":"./img/xxxhdpi/screen.png"
+      "backgroundColor": "#000000"
     },
     "notification": {
       "icon": "./img/notification_icon.png",
@@ -30,7 +24,7 @@
         "ttf"
       ]
     },
-    "androidStatusBarColor": "#222c34",
+    "androidStatusBarColor": "#000000",
     "androidStatusBar": {
       "hidden":true,
       "barStyle": "dark-content",
