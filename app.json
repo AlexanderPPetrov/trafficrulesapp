@@ -11,7 +11,7 @@
     "icon": "./img/ios_icon.png",
     "splash": {
       "hideExponentText": true,
-      "image": "./img/logo.png",
+      "image": "./img/splash.png",
       "resizeMode":"contain",
       "backgroundColor": "#000000"
     },
