@@ -146,11 +146,7 @@ export default class App extends React.Component {
                     opacity: this.state.opacity
                 }}
                  startInLoadingState={false}
-                 onLoadStart={()=>{
-                     this.setState({
-                         opacity:0
-                     })
-                 }}
+
                 onLoad={()=> {
                     this.setState({
                         errorLoading:false,
