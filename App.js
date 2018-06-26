@@ -31,6 +31,13 @@ const {
     height: deviceHeight,
 } = Dimensions.get('window');
 
+const addOnload = `
+          function WebViewLoaded() {
+              document.body.classList.add("webview");
+          }
+          window.onload = WebViewLoaded
+    `;
+
 export default class App extends React.Component {
     constructor() {
         super();
@@ -145,8 +152,8 @@ export default class App extends React.Component {
                     width:'100%',
                     opacity: this.state.opacity
                 }}
-                 startInLoadingState={false}
-
+                startInLoadingState={false}
+                injectedJavaScript={addOnload}
                 onLoad={()=> {
                     this.setState({
                         errorLoading:false,
