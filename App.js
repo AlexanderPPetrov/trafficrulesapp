@@ -32,10 +32,7 @@ const {
 } = Dimensions.get('window');
 
 const addOnload = `
-          function WebViewLoaded() {
-              document.body.classList.add("webview");
-          }
-          window.onload = WebViewLoaded
+        document.body.classList.add("webview");
     `;
 
 export default class App extends React.Component {
@@ -49,7 +46,6 @@ export default class App extends React.Component {
             width:deviceWidth*0.4
         }
     }
-
     cacheImages = (images) =>{
         return images.map(image => {
             if (typeof image === 'string') {
@@ -147,6 +143,8 @@ export default class App extends React.Component {
             <WebView bounces={false}
                  ref={ 'webview' }
                 source={{uri: "http://www.18bet.com/"}}
+                javaScriptEnabled={true}
+
                 style={{
                     flex:1,
                     width:'100%',
