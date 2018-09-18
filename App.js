@@ -57,7 +57,6 @@ export default class App extends React.Component {
     }
 
     componentDidMount = async () => {
-
         console.disableYellowBox = true;
 
         await Expo.Font.loadAsync({
@@ -81,11 +80,10 @@ export default class App extends React.Component {
     }
 
     _handleAppStateChange = (nextAppState) => {
-        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-            this.reloadWebView();
-        }
-        this.setState({appState: nextAppState});
-
+        // if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+        //     this.reloadWebView();
+        // }
+        // this.setState({appState: nextAppState});
     }
 
     reloadWebView = () => {
@@ -118,17 +116,17 @@ export default class App extends React.Component {
                 >
 
                     <Image style={{
-                        width: this.state.width,
-                        height: this.state.width*0.2411764705882353}}
+                        width: this.state.width * 0.5,
+                        height: this.state.width * 0.5}}
                            source={require('./img/logo.png')}
                     />
-                    <Text style={{fontFamily:'Roboto_light', fontSize:18, color:'#f5b906', textAlign:'center', marginTop:20}}>Check your connection and try again</Text>
+                    <Text style={{fontFamily:'Roboto_light', fontSize:18, color:'#ffffff', textAlign:'center', marginTop:45}}>Провери своята връзка с интернет!</Text>
                 </TouchableOpacity>
 
             </View>
         }
         return  <View pointerEvents="none" style={styles.blackOverlay}>
-            <CircleSnail size={60}  color={['#f5b906']} thickness={3} />
+            <CircleSnail size={60}  color={['#00f569']} thickness={3} />
         </View>
 
     }
@@ -142,7 +140,7 @@ export default class App extends React.Component {
             <View style={styles.statusBar} />
             <WebView bounces={false}
                  ref={ 'webview' }
-                source={{uri: "http://www.18bet.com/"}}
+                source={{uri: "http://trafficrules.herokuapp.com/"}}
                 javaScriptEnabled={true}
 
                 style={{
